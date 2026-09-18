@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="page_title">أولويات الحساب - رياضيات السنة السابعة أساسي</title>
+
+    <!-- External Stylesheets -->
+    <link rel="stylesheet" href="maths_shared.css">
+    <link rel="stylesheet" href="maths_lessons.css">
+
+    <!-- KaTeX -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+
+    <!-- JSXGraph (optional, not used in this lesson) -->
+    <script src="https://cdn.jsdelivr.net/npm/jsxgraph@1.4.0/distrib/jsxgraphcore.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jsxgraph@1.4.0/distrib/jsxgraph.css">
+
+    <!-- External Script -->
+    <script src="maths_lessons.js" defer></script>
+</head>
+<body>
+    <div class="container">
+        <main>
+            <!-- Print-only header -->
+            <div class="print-header" data-i18n="print_header">السنة السابعة أساسي - الوحدة الأولى - الدرس الأول - الجزء 1 - هـ</div>
+
+            <!-- Site Header -->
+            <div class="site-header">
+                <div class="header-icon">
+                    <img src="assets/icons/icon-152x152.png" alt="أيقونة الموقع">
+                </div>
+                <h1 data-i18n="site_header">Educational Dashboard - Mathematics</h1>
+            </div>
+
+            <!-- Top Navigation -->
+            <nav class="top-nav">
+                <a href="maths_y7.html" class="nav-link" data-i18n="back_to_index">← العودة للفهرس</a>
+                <span class="nav-badge" data-i18n="nav_badge">الدرس 1 | جزء 1 | هـ</span>
+                <a href="maths_y7_alg_module1_lesson1_part2_sub1.html" class="nav-link" data-i18n="next_part">التالي ←</a>
+            </nav>
+
+            <!-- Print Controls -->
+            <div class="print-controls">
+                <label for="print-section" data-i18n="print_label">اختر القسم للطباعة:</label>
+                <select id="print-section" name="print-section">
+                    <option value="all" data-i18n="print_all">الدرس كاملاً</option>
+                    <option value="rules" data-i18n="print_rules">القواعد</option>
+                    <option value="exercises" data-i18n="print_exercises">التمارين</option>
+                    <option value="problems" data-i18n="print_problems">المسائل</option>
+                    <option value="solutions" data-i18n="print_solutions">الحلول</option>
+                </select>
+                <button class="print-button" onclick="printSelected()" data-i18n="print_button">🖨️ طباعة</button>
+                <button id="theme-toggle" class="theme-toggle" aria-label="تبديل الوضع الليلي/النهاري">
+                    <span class="theme-icon">🌙</span>
+                </button>
+
+                <!-- Language Selector -->
+                <div class="language-selector">
+                    <label for="language-select" class="sr-only" data-i18n="language_label">اللغة</label>
+                    <select id="language-select" name="language-select">
+                        <option value="ar" data-i18n="lang_ar">العربية</option>
+                        <option value="en" data-i18n="lang_en">English</option>
+                        <option value="fr" data-i18n="lang_fr">Français</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Lesson Header -->
+            <header class="lesson-header">
+                <span class="module-tag" data-i18n="module_tag">📘 الجبر والحساب | الدرس 1 | الجزء 1 | هـ</span>
+                <h1 class="lesson-title" data-i18n="lesson_title">أولويات الحساب</h1>
+                <p class="lesson-subtitle" data-i18n="lesson_subtitle">ترتيب العمليات الحسابية مع الأقواس وبدونها</p>
+            </header>
+
+            <!-- Section 1: Rules -->
+            <div class="section" id="rules-section">
+                <div class="section-header" onclick="toggleSection('rules-body', 'rules-toggle')" role="button"
+                     tabindex="0" aria-expanded="true" aria-controls="rules-body"
+                     onkeydown="if(event.key==='Enter'||event.key===' ') toggleSection('rules-body', 'rules-toggle')">
+                    <div class="section-icon rules-icon">📐</div>
+                    <div class="section-title">
+                        <h2 data-i18n="rules_title">القواعد</h2>
+                        <p data-i18n="rules_subtitle">تذكير سريع بأولويات العمليات الحسابية</p>
+                    </div>
+                    <span class="section-toggle open" id="rules-toggle">▼</span>
+                </div>
+                <div class="section-body" id="rules-body">
+                    <div class="rule-card">
+                        <div class="rule-title" data-i18n="rule1_title">قاعدة 1: الأولوية للضرب والقسمة</div>
+                        <div class="rule-text" data-i18n="rule1_text">في غياب الأقواس، تُنجز عمليتا الضرب والقسمة قبل الجمع والطرح، من اليسار إلى اليمين.</div>
+                        <div class="example-box">\(8 + 4 \times 3 = 8 + 12 = 20\) &nbsp;|&nbsp; \(15 - 6 \div 2 = 15 - 3 = 12\)</div>
+                    </div>
+                    <div class="rule-card">
+                        <div class="rule-title" data-i18n="rule2_title">قاعدة 2: الأقواس أولاً</div>
+                        <div class="rule-text" data-i18n="rule2_text">ما داخل الأقواس يُحسب أولاً، بدءًا من الأقواس الداخلية إذا كانت متداخلة.</div>
+                        <div class="example-box">\((5 + 3) \times 2 = 8 \times 2 = 16\) &nbsp;|&nbsp; \(2 \times (3 + (4 - 1)) = 2 \times (3 + 3) = 2 \times 6 = 12\)</div>
+                    </div>
+                    <div class="rule-card">
+                        <div class="rule-title" data-i18n="rule3_title">قاعدة 3: الجمع والطرح من اليسار إلى اليمين</div>
+                        <div class="rule-text" data-i18n="rule3_text">بعد إنجاز الضرب والقسمة والأقواس، تُجرى عمليتا الجمع والطرح بالترتيب من اليسار إلى اليمين.</div>
+                        <div class="example-box">\(10 - 3 + 2 = 7 + 2 = 9\) &nbsp;|&nbsp; \(6 + 4 - 5 = 10 - 5 = 5\)</div>
+                    </div>
+                    <div class="rule-card">
+                        <div class="rule-title" data-i18n="rule4_title">قاعدة 4: أولويات متساوية</div>
+                        <div class="rule-text" data-i18n="rule4_text">إذا تساوت الأولوية (مثل الضرب والقسمة أو الجمع والطرح)، نعمل من اليسار إلى اليمين.</div>
+                        <div class="example-box">\(12 \div 3 \times 2 = 4 \times 2 = 8\) &nbsp;|&nbsp; \(10 - 4 + 2 = 6 + 2 = 8\)</div>
+                    </div>
+                    <div class="rule-card">
+                        <div class="rule-title" data-i18n="rule5_title">قاعدة 5: ملاحظة</div>
+                        <div class="rule-text" data-i18n="rule5_text">عندما لا يوجد رمز بين عدد وقوس، فهذا يعني ضربًا ضمنيًا: \(2(3+4) = 2 \times 7 = 14\).</div>
+                        <div class="example-box">\(3(2+1) = 3 \times 3 = 9\)</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 2: Exercises -->
+            <div class="section" id="exercises-section">
+                <div class="section-header" onclick="toggleSection('exercises-body', 'exercises-toggle')" role="button"
+                     tabindex="0" aria-expanded="true" aria-controls="exercises-body"
+                     onkeydown="if(event.key==='Enter'||event.key===' ') toggleSection('exercises-body', 'exercises-toggle')">
+                    <div class="section-icon exercises-icon">✏️</div>
+                    <div class="section-title">
+                        <h2 data-i18n="exercises_title">تمارين</h2>
+                        <p data-i18n="exercises_subtitle">تدرب على ترتيب العمليات الحسابية</p>
+                    </div>
+                    <span class="section-toggle open" id="exercises-toggle">▼</span>
+                </div>
+                <div class="section-body" id="exercises-body">
+                    <!-- Exercise 1 -->
+                    <div class="exercise-item">
+                        <div class="exercise-question">
+                            <span class="exercise-number">1</span>
+                            <span data-i18n="exercise1_q">احسب العمليات التالية بدون أقواس:</span>
+                        </div>
+                        <div class="exercise-sub"><span class="sub-label" data-i18n="sub_label_a">أ)</span><span class="sub-math">\(7 + 2 \times 5 =\)</span></div>
+                        <div class="exercise-sub"><span class="sub-label" data-i18n="sub_label_b">ب)</span><span class="sub-math">\(20 - 3 \times 4 =\)</span></div>
+                        <div class="exercise-sub"><span class="sub-label" data-i18n="sub_label_c">ج)</span><span class="sub-math">\(16 \div 4 + 3 =\)</span></div>
+                        <textarea id="answer-ex1" name="answer-ex1" class="answer-textarea" placeholder="اكتب إجابتك هنا..." data-i18n-placeholder="answer_placeholder"></textarea>
+                        <div class="exercise-hint" data-i18n="exercise1_hint">💡 الضرب والقسمة قبل الجمع والطرح.</div>
+                    </div>
+                    <!-- Exercise 2 -->
+                    <div class="exercise-item">
+                        <div class="exercise-question">
+                            <span class="exercise-number">2</span>
+                            <span data-i18n="exercise2_q">احسب مع الأقواس:</span>
+                        </div>
+                        <div class="exercise-sub"><span class="sub-label" data-i18n="sub_label_a">أ)</span><span class="sub-math">\((7 + 2) \times 5 =\)</span></div>
+                        <div class="exercise-sub"><span class="sub-label" data-i18n="sub_label_b">ب)</span><span class="sub-math">\(20 - (3 \times 4) =\)</span></div>
+                        <div class="exercise-sub"><span class="sub-label" data-i18n="sub_label_c">ج)</span><span class="sub-math">\((16 \div 4) + 3 =\)</span></div>
+                        <textarea id="answer-ex2" name="answer-ex2" class="answer-textarea" placeholder="اكتب إجابتك هنا..." data-i18n-placeholder="answer_placeholder"></textarea>
+                        <div class="exercise-hint" data-i18n="exercise2_hint">💡 الأقواس تُحسب أولاً.</div>
+                    </div>
+                    <!-- Exercise 3 -->
+                    <div class="exercise-item">
+                        <div class="exercise-question">
+                            <span class="exercise-number">3</span>
+                            <span data-i18n="exercise3_q">احسب السلاسل التالية:</span>
+                        </div>
+                        <div class="exercise-sub"><span class="sub-label" data-i18n="sub_label_a">أ)</span><span class="sub-math">\(10 - 2 \times 3 + 4 =\)</span></div>
+                        <div class="exercise-sub"><span class="sub-label" data-i18n="sub_label_b">ب)</span><span class="sub-math">\(5 + 2 \times (6 - 2) =\)</span></div>
+                        <div class="exercise-sub"><span class="sub-label" data-i18n="sub_label_c">ج)</span><span class="sub-math">\(4 \times 2 + 6 \div 3 =\)</span></div>
+                        <div class="exercise-sub"><span class="sub-label" data-i18n="sub_label_d">د)</span><span class="sub-math">\((12 + 6) \div 3 - 2 =\)</span></div>
+                        <textarea id="answer-ex3" name="answer-ex3" class="answer-textarea" placeholder="اكتب إجابتك هنا..." data-i18n-placeholder="answer_placeholder"></textarea>
+                    </div>
+                    <!-- Exercise 4 -->
+                    <div class="exercise-item">
+                        <div class="exercise-question">
+                            <span class="exercise-number">4</span>
+                            <span data-i18n="exercise4_q">استعمل أولويات الحساب لتبسيط:</span>
+                        </div>
+                        <div class="exercise-sub"><span class="sub-label" data-i18n="sub_label_a">أ)</span><span class="sub-math">\(2(3 + 4) - 5 =\)</span></div>
+                        <div class="exercise-sub"><span class="sub-label" data-i18n="sub_label_b">ب)</span><span class="sub-math">\(3(5 - 2) + 6 \div 2 =\)</span></div>
+                        <div class="exercise-sub"><span class="sub-label" data-i18n="sub_label_c">ج)</span><span class="sub-math">\(4 \times 2 + 3(2 + 1) =\)</span></div>
+                        <textarea id="answer-ex4" name="answer-ex4" class="answer-textarea" placeholder="اكتب إجابتك هنا..." data-i18n-placeholder="answer_placeholder"></textarea>
+                        <div class="exercise-hint" data-i18n="exercise4_hint">💡 تذكر الضرب الضمني مع الأقواس.</div>
+                    </div>
+                    <!-- Exercise 5 -->
+                    <div class="exercise-item">
+                        <div class="exercise-question">
+                            <span class="exercise-number">5</span>
+                            <span data-i18n="exercise5_q">تحدٍ: احسب مع الأقواس المتداخلة:</span>
+                        </div>
+                        <div class="exercise-sub"><span class="sub-label" data-i18n="sub_label_a">أ)</span><span class="sub-math">\(2 \times (3 + (4 - 1)) =\)</span></div>
+                        <div class="exercise-sub"><span class="sub-label" data-i18n="sub_label_b">ب)</span><span class="sub-math">\(5 + (6 \div 2) \times (3 - 1) =\)</span></div>
+                        <textarea id="answer-ex5" name="answer-ex5" class="answer-textarea" placeholder="اكتب إجابتك هنا..." data-i18n-placeholder="answer_placeholder"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 3: Problems -->
+            <div class="section" id="problems-section">
+                <div class="section-header" onclick="toggleSection('problems-body', 'problems-toggle')" role="button"
+                     tabindex="0" aria-expanded="true" aria-controls="problems-body"
+                     onkeydown="if(event.key==='Enter'||event.key===' ') toggleSection('problems-body', 'problems-toggle')">
+                    <div class="section-icon problems-icon">🧩</div>
+                    <div class="section-title">
+                        <h2 data-i18n="problems_title">مسائل</h2>
+                        <p data-i18n="problems_subtitle">مسائل حياتية لتطبيق أولويات الحساب</p>
+                    </div>
+                    <span class="section-toggle open" id="problems-toggle">▼</span>
+                </div>
+                <div class="section-body" id="problems-body">
+                    <div class="problem-card">
+                        <div class="problem-title" data-i18n="problem1_title">🧾 مسألة 1: فاتورة مشتريات</div>
+                        <div class="problem-text" data-i18n="problem1_text">اشترى تلميذ 3 كراريس ثمن الواحد 2 دنانير، وقلمين ثمن الواحد 1.5 دينار. اكتب العملية الحسابية ثم احسب الجملة.</div>
+                    </div>
+                    <div class="problem-card">
+                        <div class="problem-title" data-i18n="problem2_title">🏫 مسألة 2: توزيع التلاميذ</div>
+                        <div class="problem-text" data-i18n="problem2_text">في قسم 32 تلميذًا، غاب 5. قسمت المعلمة الحاضرين إلى 3 مجموعات متساوية. اكتب العملية واحسب عدد تلاميذ كل مجموعة.</div>
+                    </div>
+                    <div class="problem-card">
+                        <div class="problem-title" data-i18n="problem3_title">📦 مسألة 3: صناديق الفواكه</div>
+                        <div class="problem-text" data-i18n="problem3_text">عند فلاح 4 صناديق بها 12 تفاحة لكل صندوق، و5 صناديق بها 8 برتقالات لكل صندوق. احسب العدد الجملي للفواكه باستعمال العمليات المناسبة.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 4: Solutions -->
+            <div class="section" id="solutions-section">
+                <div class="section-header" onclick="toggleSection('solutions-body', 'solutions-toggle')" role="button"
+                     tabindex="0" aria-expanded="true" aria-controls="solutions-body"
+                     onkeydown="if(event.key==='Enter'||event.key===' ') toggleSection('solutions-body', 'solutions-toggle')">
+                    <div class="section-icon solutions-icon">✅</div>
+                    <div class="section-title">
+                        <h2 data-i18n="solutions_title">حلول</h2>
+                        <p data-i18n="solutions_subtitle">الحلول الكاملة لجميع التمارين والمسائل</p>
+                    </div>
+                    <span class="section-toggle open" id="solutions-toggle">▼</span>
+                </div>
+                <div class="section-body" id="solutions-body">
+                    <div style="margin-bottom: 1.5rem;">
+                        <h3 data-i18n="solutions_exercises_heading">📝 حلول التمارين</h3>
+                        <!-- Exercise 1 -->
+                        <div class="solution-item">
+                            <div class="solution-question" data-i18n="sol_ex1_q">التمرين 1:</div>
+                            <div class="solution-answer-rtl">
+                                <span data-i18n="sub_label_a">أ)</span> \(17\) &nbsp;|&nbsp;
+                                <span data-i18n="sub_label_b">ب)</span> \(8\) &nbsp;|&nbsp;
+                                <span data-i18n="sub_label_c">ج)</span> \(7\)
+                            </div>
+                            <div class="solution-steps">
+                                <ol>
+                                    <li><span class="solution-step-math">\(7 + 2 \times 5 = 7 + 10 = 17\)</span></li>
+                                    <li><span class="solution-step-math">\(20 - 3 \times 4 = 20 - 12 = 8\)</span></li>
+                                    <li><span class="solution-step-math">\(16 \div 4 + 3 = 4 + 3 = 7\)</span></li>
+                                </ol>
+                            </div>
+                        </div>
+                        <!-- Exercise 2 -->
+                        <div class="solution-item">
+                            <div class="solution-question" data-i18n="sol_ex2_q">التمرين 2:</div>
+                            <div class="solution-answer-rtl">
+                                <span data-i18n="sub_label_a">أ)</span> \(45\) &nbsp;|&nbsp;
+                                <span data-i18n="sub_label_b">ب)</span> \(8\) &nbsp;|&nbsp;
+                                <span data-i18n="sub_label_c">ج)</span> \(7\)
+                            </div>
+                            <div class="solution-steps">
+                                <ol>
+                                    <li><span class="solution-step-math">\((7 + 2) \times 5 = 9 \times 5 = 45\)</span></li>
+                                    <li><span class="solution-step-math">\(20 - (3 \times 4) = 20 - 12 = 8\)</span></li>
+                                    <li><span class="solution-step-math">\((16 \div 4) + 3 = 4 + 3 = 7\)</span></li>
+                                </ol>
+                            </div>
+                        </div>
+                        <!-- Exercise 3 -->
+                        <div class="solution-item">
+                            <div class="solution-question" data-i18n="sol_ex3_q">التمرين 3:</div>
+                            <div class="solution-answer-rtl">
+                                <span data-i18n="sub_label_a">أ)</span> \(8\) &nbsp;|&nbsp;
+                                <span data-i18n="sub_label_b">ب)</span> \(13\) &nbsp;|&nbsp;
+                                <span data-i18n="sub_label_c">ج)</span> \(10\) &nbsp;|&nbsp;
+                                <span data-i18n="sub_label_d">د)</span> \(4\)
+                            </div>
+                            <div class="solution-steps">
+                                <ol>
+                                    <li><span class="solution-step-math">\(10 - 2 \times 3 + 4 = 10 - 6 + 4 = 4 + 4 = 8\)</span></li>
+                                    <li><span class="solution-step-math">\(5 + 2 \times (6 - 2) = 5 + 2 \times 4 = 5 + 8 = 13\)</span></li>
+                                    <li><span class="solution-step-math">\(4 \times 2 + 6 \div 3 = 8 + 2 = 10\)</span></li>
+                                    <li><span class="solution-step-math">\((12 + 6) \div 3 - 2 = 18 \div 3 - 2 = 6 - 2 = 4\)</span></li>
+                                </ol>
+                            </div>
+                        </div>
+                        <!-- Exercise 4 -->
+                        <div class="solution-item">
+                            <div class="solution-question" data-i18n="sol_ex4_q">التمرين 4:</div>
+                            <div class="solution-answer-rtl">
+                                <span data-i18n="sub_label_a">أ)</span> \(9\) &nbsp;|&nbsp;
+                                <span data-i18n="sub_label_b">ب)</span> \(12\) &nbsp;|&nbsp;
+                                <span data-i18n="sub_label_c">ج)</span> \(17\)
+                            </div>
+                            <div class="solution-steps">
+                                <ol>
+                                    <li><span class="solution-step-math">\(2(3 + 4) - 5 = 2 \times 7 - 5 = 14 - 5 = 9\)</span></li>
+                                    <li><span class="solution-step-math">\(3(5 - 2) + 6 \div 2 = 3 \times 3 + 3 = 9 + 3 = 12\)</span></li>
+                                    <li><span class="solution-step-math">\(4 \times 2 + 3(2 + 1) = 8 + 3 \times 3 = 8 + 9 = 17\)</span></li>
+                                </ol>
+                            </div>
+                        </div>
+                        <!-- Exercise 5 -->
+                        <div class="solution-item">
+                            <div class="solution-question" data-i18n="sol_ex5_q">التمرين 5 (تحدٍ):</div>
+                            <div class="solution-answer-rtl">
+                                <span data-i18n="sub_label_a">أ)</span> \(12\) &nbsp;|&nbsp;
+                                <span data-i18n="sub_label_b">ب)</span> \(11\)
+                            </div>
+                            <div class="solution-steps">
+                                <ol>
+                                    <li><span class="solution-step-math">\(2 \times (3 + (4 - 1)) = 2 \times (3 + 3) = 2 \times 6 = 12\)</span></li>
+                                    <li><span class="solution-step-math">\(5 + (6 \div 2) \times (3 - 1) = 5 + 3 \times 2 = 5 + 6 = 11\)</span></li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 data-i18n="solutions_problems_heading">🧩 حلول المسائل</h3>
+                        <!-- Problem 1 -->
+                        <div class="solution-item">
+                            <div class="solution-question" data-i18n="sol_prob1_q">المسألة 1:</div>
+                            <div class="solution-answer-rtl" data-i18n="sol_prob1_answer">الجملة = \(10.5\) دينار</div>
+                            <div class="solution-steps">
+                                <ol>
+                                    <li><span class="solution-step-math">\(3 \times 2 + 2 \times 1.5 = 6 + 3 = 9\)</span></li>
+                                </ol>
+                            </div>
+                        </div>
+                        <!-- Problem 2 -->
+                        <div class="solution-item">
+                            <div class="solution-question" data-i18n="sol_prob2_q">المسألة 2:</div>
+                            <div class="solution-answer-rtl" data-i18n="sol_prob2_answer">كل مجموعة = \(9\) تلاميذ</div>
+                            <div class="solution-steps">
+                                <ol>
+                                    <li><span class="solution-step-math">\((32 - 5) \div 3 = 27 \div 3 = 9\)</span></li>
+                                </ol>
+                            </div>
+                        </div>
+                        <!-- Problem 3 -->
+                        <div class="solution-item">
+                            <div class="solution-question" data-i18n="sol_prob3_q">المسألة 3:</div>
+                            <div class="solution-answer-rtl" data-i18n="sol_prob3_answer">العدد الجملي = \(88\) فاكهة</div>
+                            <div class="solution-steps">
+                                <ol>
+                                    <li><span class="solution-step-math">\(4 \times 12 + 5 \times 8 = 48 + 40 = 88\)</span></li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="site-footer">
+            <div class="footer-col">
+                <h4 data-i18n="footer_dev">معلومات المطوّر</h4>
+                <p data-i18n="footer_dev_name">طور بواسطة: ماجري زياد</p>
+                <p data-i18n="footer_hosting">الاستضافة: Github, Netlify, Supabase</p>
+            </div>
+            <div class="footer-col">
+                <h4 data-i18n="footer_links">روابط</h4>
+                <a href="#" data-i18n="footer_contact">اتصل بنا</a>
+                <a href="#" data-i18n="footer_policies">السياسات</a>
+            </div>
+            <div class="footer-col">
+                <h4 data-i18n="footer_version">الإصدار</h4>
+                <p data-i18n="footer_version_num">الإصدار: 0.0.2</p>
+                <p data-i18n="footer_rights">جميع الحقوق محفوظة &copy; 2025</p>
+            </div>
+        </footer>
+
+        <!-- Print-only custom footer -->
+        <div class="print-footer">
+            <p data-i18n="print_footer_dev">طور بواسطة: ماجري زياد</p>
+            <p data-i18n="print_footer_version">الإصدار: 0.0.2</p>
+            <p data-i18n="print_footer_page">عنوان الصفحة: maths_y7_alg_module1_lesson1_part1_sub5.html</p>
+        </div>
+    </div>
+
+    <!-- Inline Translation Object (corrected) -->
+    <script>
+        const translations = {
+            ar: {
+                page_title: "أولويات الحساب - رياضيات السنة السابعة أساسي",
+                print_header: "السنة السابعة أساسي - الوحدة الأولى - الدرس الأول - الجزء 1 - هـ",
+                site_header: "Educational Dashboard - Mathematics",
+                back_to_index: "← العودة للفهرس",
+                nav_badge: "الدرس 1 | جزء 1 | هـ",
+                next_part: "التالي ←",
+                language_label: "اللغة",
+                lang_ar: "العربية",
+                lang_en: "English",
+                lang_fr: "Français",
+                print_label: "اختر القسم للطباعة:",
+                print_all: "الدرس كاملاً",
+                print_rules: "القواعد",
+                print_exercises: "التمارين",
+                print_problems: "المسائل",
+                print_solutions: "الحلول",
+                print_button: "🖨️ طباعة",
+                module_tag: "📘 الجبر والحساب | الدرس 1 | الجزء 1 | هـ",
+                lesson_title: "أولويات الحساب",
+                lesson_subtitle: "ترتيب العمليات الحسابية مع الأقواس وبدونها",
+                rules_title: "القواعد",
+                rules_subtitle: "تذكير سريع بأولويات العمليات الحسابية",
+                rule1_title: "قاعدة 1: الأولوية للضرب والقسمة",
+                rule1_text: "في غياب الأقواس، تُنجز عمليتا الضرب والقسمة قبل الجمع والطرح، من اليسار إلى اليمين.",
+                rule2_title: "قاعدة 2: الأقواس أولاً",
+                rule2_text: "ما داخل الأقواس يُحسب أولاً، بدءًا من الأقواس الداخلية إذا كانت متداخلة.",
+                rule3_title: "قاعدة 3: الجمع والطرح من اليسار إلى اليمين",
+                rule3_text: "بعد إنجاز الضرب والقسمة والأقواس، تُجرى عمليتا الجمع والطرح بالترتيب من اليسار إلى اليمين.",
+                rule4_title: "قاعدة 4: أولويات متساوية",
+                rule4_text: "إذا تساوت الأولوية (مثل الضرب والقسمة أو الجمع والطرح)، نعمل من اليسار إلى اليمين.",
+                rule5_title: "قاعدة 5: ملاحظة",
+                rule5_text: "عندما لا يوجد رمز بين عدد وقوس، فهذا يعني ضربًا ضمنيًا: \\(2(3+4) = 2 \\times 7 = 14\\).",
+                exercises_title: "تمارين",
+                exercises_subtitle: "تدرب على ترتيب العمليات الحسابية",
+                exercise1_q: "احسب العمليات التالية بدون أقواس:",
+                exercise1_hint: "💡 الضرب والقسمة قبل الجمع والطرح.",
+                exercise2_q: "احسب مع الأقواس:",
+                exercise2_hint: "💡 الأقواس تُحسب أولاً.",
+                exercise3_q: "احسب السلاسل التالية:",
+                exercise4_q: "استعمل أولويات الحساب لتبسيط:",
+                exercise4_hint: "💡 تذكر الضرب الضمني مع الأقواس.",
+                exercise5_q: "تحدٍ: احسب مع الأقواس المتداخلة:",
+                answer_placeholder: "اكتب إجابتك هنا...",
+                problems_title: "مسائل",
+                problems_subtitle: "مسائل حياتية لتطبيق أولويات الحساب",
+                problem1_title: "🧾 مسألة 1: فاتورة مشتريات",
+                problem1_text: "اشترى تلميذ 3 كراريس ثمن الواحد 2 دنانير، وقلمين ثمن الواحد 1.5 دينار. اكتب العملية الحسابية ثم احسب الجملة.",
+                problem2_title: "🏫 مسألة 2: توزيع التلاميذ",
+                problem2_text: "في قسم 32 تلميذًا، غاب 5. قسمت المعلمة الحاضرين إلى 3 مجموعات متساوية. اكتب العملية واحسب عدد تلاميذ كل مجموعة.",
+                problem3_title: "📦 مسألة 3: صناديق الفواكه",
+                problem3_text: "عند فلاح 4 صناديق بها 12 تفاحة لكل صندوق، و5 صناديق بها 8 برتقالات لكل صندوق. احسب العدد الجملي للفواكه باستعمال العمليات المناسبة.",
+                solutions_title: "حلول",
+                solutions_subtitle: "الحلول الكاملة لجميع التمارين والمسائل",
+                solutions_exercises_heading: "📝 حلول التمارين",
+                solutions_problems_heading: "🧩 حلول المسائل",
+                sol_ex1_q: "التمرين 1:",
+                sol_ex2_q: "التمرين 2:",
+                sol_ex3_q: "التمرين 3:",
+                sol_ex4_q: "التمرين 4:",
+                sol_ex5_q: "التمرين 5 (تحدٍ):",
+                sol_prob1_q: "المسألة 1:",
+                sol_prob2_q: "المسألة 2:",
+                sol_prob3_q: "المسألة 3:",
+                sol_prob1_answer: "الجملة = \\(10.5\\) دينار",
+                sol_prob2_answer: "كل مجموعة = \\(9\\) تلاميذ",
+                sol_prob3_answer: "العدد الجملي = \\(88\\) فاكهة",
+                sub_label_a: "أ)",
+                sub_label_b: "ب)",
+                sub_label_c: "ج)",
+                sub_label_d: "د)",
+                currency: "دينار",
+                footer_dev: "معلومات المطوّر",
+                footer_dev_name: "طور بواسطة: ماجري زياد",
+                footer_hosting: "الاستضافة: Github, Netlify, Supabase",
+                footer_links: "روابط",
+                footer_contact: "اتصل بنا",
+                footer_policies: "السياسات",
+                footer_version: "الإصدار",
+                footer_version_num: "الإصدار: 0.0.2",
+                footer_rights: "جميع الحقوق محفوظة © 2025",
+                print_footer_dev: "طور بواسطة: ماجري زياد",
+                print_footer_version: "الإصدار: 0.0.2",
+                print_footer_page: "عنوان الصفحة: maths_y7_alg_module1_lesson1_part1_sub5.html"
+            },
+            en: {
+                page_title: "Order of Operations - Math Year 7",
+                print_header: "Year 7 – Unit 1 – Lesson 1 – Part 1 – e",
+                site_header: "Educational Dashboard - Mathematics",
+                back_to_index: "← Back to Index",
+                nav_badge: "Lesson 1 | Part 1 | e",
+                next_part: "Next →",
+                language_label: "Language",
+                lang_ar: "العربية",
+                lang_en: "English",
+                lang_fr: "Français",
+                print_label: "Select section to print:",
+                print_all: "Full lesson",
+                print_rules: "Rules",
+                print_exercises: "Exercises",
+                print_problems: "Problems",
+                print_solutions: "Solutions",
+                print_button: "🖨️ Print",
+                module_tag: "📘 Algebra & Arithmetic | Lesson 1 | Part 1 | e",
+                lesson_title: "Order of Operations",
+                lesson_subtitle: "Order of arithmetic operations with and without parentheses",
+                rules_title: "Rules",
+                rules_subtitle: "Quick reminder of order of operations",
+                rule1_title: "Rule 1: Priority of multiplication and division",
+                rule1_text: "In the absence of parentheses, multiplication and division are performed before addition and subtraction, from left to right.",
+                rule2_title: "Rule 2: Parentheses first",
+                rule2_text: "What is inside parentheses is calculated first, starting with the innermost parentheses if nested.",
+                rule3_title: "Rule 3: Addition and subtraction left to right",
+                rule3_text: "After performing multiplication, division, and parentheses, addition and subtraction are done from left to right.",
+                rule4_title: "Rule 4: Equal priority",
+                rule4_text: "If the priority is equal (like multiplication and division or addition and subtraction), work from left to right.",
+                rule5_title: "Rule 5: Note",
+                rule5_text: "When there is no symbol between a number and parentheses, it means implicit multiplication: \\(2(3+4) = 2 \\times 7 = 14\\).",
+                exercises_title: "Exercises",
+                exercises_subtitle: "Practice order of operations",
+                exercise1_q: "Calculate the following operations without parentheses:",
+                exercise1_hint: "💡 Multiplication and division before addition and subtraction.",
+                exercise2_q: "Calculate with parentheses:",
+                exercise2_hint: "💡 Parentheses are calculated first.",
+                exercise3_q: "Calculate the following chains:",
+                exercise4_q: "Use order of operations to simplify:",
+                exercise4_hint: "💡 Remember implicit multiplication with parentheses.",
+                exercise5_q: "Challenge: Calculate with nested parentheses:",
+                answer_placeholder: "Write your answer here...",
+                problems_title: "Problems",
+                problems_subtitle: "Real-life problems applying order of operations",
+                problem1_title: "🧾 Problem 1: Purchase receipt",
+                problem1_text: "A student bought 3 notebooks each costing 2 dinars, and 2 pens each costing 1.5 dinars. Write the arithmetic expression and calculate the total.",
+                problem2_title: "🏫 Problem 2: Distributing students",
+                problem2_text: "In a class of 32 students, 5 are absent. The teacher divided those present into 3 equal groups. Write the operation and calculate the number of students per group.",
+                problem3_title: "📦 Problem 3: Fruit boxes",
+                problem3_text: "A farmer has 4 boxes with 12 apples each, and 5 boxes with 8 oranges each. Calculate the total number of fruits using appropriate operations.",
+                solutions_title: "Solutions",
+                solutions_subtitle: "Complete solutions for all exercises and problems",
+                solutions_exercises_heading: "📝 Exercise Solutions",
+                solutions_problems_heading: "🧩 Problem Solutions",
+                sol_ex1_q: "Exercise 1:",
+                sol_ex2_q: "Exercise 2:",
+                sol_ex3_q: "Exercise 3:",
+                sol_ex4_q: "Exercise 4:",
+                sol_ex5_q: "Exercise 5 (Challenge):",
+                sol_prob1_q: "Problem 1:",
+                sol_prob2_q: "Problem 2:",
+                sol_prob3_q: "Problem 3:",
+                sol_prob1_answer: "Total = \\(10.5\\) dinars",
+                sol_prob2_answer: "Each group = \\(9\\) students",
+                sol_prob3_answer: "Total fruits = \\(88\\)",
+                sub_label_a: "a)",
+                sub_label_b: "b)",
+                sub_label_c: "c)",
+                sub_label_d: "d)",
+                currency: "dinars",
+                footer_dev: "Developer Info",
+                footer_dev_name: "Developed by: Majri Zied",
+                footer_hosting: "Hosting: Github, Netlify, Supabase",
+                footer_links: "Links",
+                footer_contact: "Contact us",
+                footer_policies: "Policies",
+                footer_version: "Version",
+                footer_version_num: "Version: 0.0.2",
+                footer_rights: "All rights reserved © 2025",
+                print_footer_dev: "Developed by: Majri Zied",
+                print_footer_version: "Version: 0.0.2",
+                print_footer_page: "Page address: maths_y7_alg_module1_lesson1_part1_sub5.html"
+            },
+            fr: {
+                page_title: "Priorité des opérations - Math 7ème année",
+                print_header: "7ème année – Unité 1 – Leçon 1 – Partie 1 – e",
+                site_header: "Educational Dashboard - Mathematics",
+                back_to_index: "← Retour à l'index",
+                nav_badge: "Leçon 1 | Partie 1 | e",
+                next_part: "Suivant →",
+                language_label: "Langue",
+                lang_ar: "العربية",
+                lang_en: "English",
+                lang_fr: "Français",
+                print_label: "Choisir la section à imprimer :",
+                print_all: "Leçon complète",
+                print_rules: "Règles",
+                print_exercises: "Exercices",
+                print_problems: "Problèmes",
+                print_solutions: "Solutions",
+                print_button: "🖨️ Imprimer",
+                module_tag: "📘 Algèbre et arithmétique | Leçon 1 | Partie 1 | e",
+                lesson_title: "Priorité des opérations",
+                lesson_subtitle: "Ordre des opérations arithmétiques avec et sans parenthèses",
+                rules_title: "Règles",
+                rules_subtitle: "Rappel rapide de la priorité des opérations",
+                rule1_title: "Règle 1 : Priorité de la multiplication et de la division",
+                rule1_text: "En l'absence de parenthèses, la multiplication et la division sont effectuées avant l'addition et la soustraction, de gauche à droite.",
+                rule2_title: "Règle 2 : Parenthèses d'abord",
+                rule2_text: "Ce qui est à l'intérieur des parenthèses est calculé en premier, en commençant par les parenthèses les plus internes si elles sont imbriquées.",
+                rule3_title: "Règle 3 : Addition et soustraction de gauche à droite",
+                rule3_text: "Après avoir effectué multiplication, division et parenthèses, l'addition et la soustraction se font de gauche à droite.",
+                rule4_title: "Règle 4 : Priorité égale",
+                rule4_text: "Si la priorité est égale (comme multiplication et division ou addition et soustraction), on procède de gauche à droite.",
+                rule5_title: "Règle 5 : Remarque",
+                rule5_text: "Lorsqu'il n'y a pas de symbole entre un nombre et une parenthèse, cela signifie une multiplication implicite : \\(2(3+4) = 2 \\times 7 = 14\\).",
+                exercises_title: "Exercices",
+                exercises_subtitle: "Entraînez-vous à la priorité des opérations",
+                exercise1_q: "Calculez les opérations suivantes sans parenthèses :",
+                exercise1_hint: "💡 Multiplication et division avant addition et soustraction.",
+                exercise2_q: "Calculez avec parenthèses :",
+                exercise2_hint: "💡 Les parenthèses sont calculées en premier.",
+                exercise3_q: "Calculez les chaînes suivantes :",
+                exercise4_q: "Utilisez la priorité des opérations pour simplifier :",
+                exercise4_hint: "💡 Rappelez-vous de la multiplication implicite avec parenthèses.",
+                exercise5_q: "Défi : Calculez avec des parenthèses imbriquées :",
+                answer_placeholder: "Écrivez votre réponse ici...",
+                problems_title: "Problèmes",
+                problems_subtitle: "Problèmes de la vie réelle appliquant la priorité des opérations",
+                problem1_title: "🧾 Problème 1 : Reçu d'achat",
+                problem1_text: "Un élève a acheté 3 cahiers coûtant chacun 2 dinars, et 2 stylos coûtant chacun 1,5 dinar. Écrivez l'expression arithmétique et calculez le total.",
+                problem2_title: "🏫 Problème 2 : Répartition des élèves",
+                problem2_text: "Dans une classe de 32 élèves, 5 sont absents. L'enseignante a réparti les présents en 3 groupes égaux. Écrivez l'opération et calculez le nombre d'élèves par groupe.",
+                problem3_title: "📦 Problème 3 : Boîtes de fruits",
+                problem3_text: "Un fermier a 4 boîtes contenant 12 pommes chacune, et 5 boîtes contenant 8 oranges chacune. Calculez le nombre total de fruits en utilisant les opérations appropriées.",
+                solutions_title: "Solutions",
+                solutions_subtitle: "Solutions complètes pour tous les exercices et problèmes",
+                solutions_exercises_heading: "📝 Solutions des exercices",
+                solutions_problems_heading: "🧩 Solutions des problèmes",
+                sol_ex1_q: "Exercice 1 :",
+                sol_ex2_q: "Exercice 2 :",
+                sol_ex3_q: "Exercice 3 :",
+                sol_ex4_q: "Exercice 4 :",
+                sol_ex5_q: "Exercice 5 (Défi) :",
+                sol_prob1_q: "Problème 1 :",
+                sol_prob2_q: "Problème 2 :",
+                sol_prob3_q: "Problème 3 :",
+                sol_prob1_answer: "Total = \\(10,5\\) dinars",
+                sol_prob2_answer: "Chaque groupe = \\(9\\) élèves",
+                sol_prob3_answer: "Total fruits = \\(88\\)",
+                sub_label_a: "a)",
+                sub_label_b: "b)",
+                sub_label_c: "c)",
+                sub_label_d: "d)",
+                currency: "dinars",
+                footer_dev: "Informations du développeur",
+                footer_dev_name: "Développé par : Majri Zied",
+                footer_hosting: "Hébergement : Github, Netlify, Supabase",
+                footer_links: "Liens",
+                footer_contact: "Contactez-nous",
+                footer_policies: "Politiques",
+                footer_version: "Version",
+                footer_version_num: "Version : 0.0.2",
+                footer_rights: "Tous droits réservés © 2025",
+                print_footer_dev: "Développé par : Majri Zied",
+                print_footer_version: "Version : 0.0.2",
+                print_footer_page: "Adresse de la page : maths_y7_alg_module1_lesson1_part1_sub5.html"
+            }
+        };
+    </script>
+</body>
+</html>

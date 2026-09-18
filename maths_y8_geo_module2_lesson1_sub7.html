@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="page_title">التناظر المركزي و المنتصف - رياضيات السنة الثامنة أساسي</title>
+
+    <!-- External Stylesheets -->
+    <link rel="stylesheet" href="maths_shared.css">
+    <link rel="stylesheet" href="maths_lessons.css">
+
+    <!-- KaTeX -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+
+    <!-- JSXGraph -->
+    <script src="https://cdn.jsdelivr.net/npm/jsxgraph@1.4.0/distrib/jsxgraphcore.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jsxgraph@1.4.0/distrib/jsxgraph.css">
+
+    <script src="maths_lessons.js" defer></script>
+
+    <style>
+        .rule-diagram, .exercise-diagram {
+            margin: 1rem 0;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 0.5rem;
+            background: var(--card-bg);
+        }
+        .diagram-caption {
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-top: 0.3rem;
+            font-style: italic;
+        }
+        .math, .katex, .katex-display {
+            direction: ltr !important;
+            unicode-bidi: isolate;
+        }
+        .example-box, .solution-step-math {
+            direction: rtl !important;
+            text-align: right !important;
+            unicode-bidi: normal !important;
+            white-space: normal !important;
+            overflow-wrap: break-word;
+            word-break: break-word;
+        }
+        .drawing-board {
+            width: 100%;
+            max-width: 500px;
+            height: 300px;
+            margin: 0 auto 0.5rem auto;
+        }
+        .board-controls {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: center;
+            margin-top: 0.5rem;
+        }
+        .board-btn {
+            padding: 0.4rem 1rem;
+            background: var(--secondary);
+            color: var(--white);
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        .board-btn:hover {
+            background: var(--primary);
+        }
+        .check-result {
+            text-align: center;
+            font-weight: 700;
+            margin-top: 0.5rem;
+            min-height: 1.5em;
+        }
+        .check-result.correct { color: var(--success); }
+        .check-result.incorrect { color: var(--error); }
+        .solution-diagram {
+            width: 100%;
+            max-width: 350px;
+            height: 200px;
+            margin: 0 auto;
+        }
+        .coord-input-group {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 0.8rem;
+            flex-wrap: wrap;
+        }
+        .coord-input-group label {
+            font-weight: 600;
+            margin-left: 0.5rem;
+        }
+        .coord-input {
+            width: 70px;
+            padding: 0.3rem;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            text-align: center;
+            font-family: var(--mono);
+        }
+        .coord-display {
+            background: var(--bg-alt);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <main>
+            <!-- Print-only header -->
+            <div class="print-header" data-i18n="print_header">السنة الثامنة أساسي - الهندسة - الدرس 1 - الجزء 7 - ز</div>
+
+            <!-- Site Header -->
+            <div class="site-header">
+                <div class="header-icon">
+                    <img src="assets/icons/icon-152x152.png" alt="أيقونة الموقع">
+                </div>
+                <h1 data-i18n="site_header">Educational Dashboard - Mathematics</h1>
+            </div>
+
+            <!-- Top Navigation -->
+            <nav class="top-nav">
+                <a href="maths_y8.html" class="nav-link" data-i18n="back_to_index">← العودة للفهرس</a>
+                <span class="nav-badge" data-i18n="nav_badge">الدرس 1 | الجزء 7 | ز</span>
+                <a href="maths_y8_geo_module2_lesson1_sub8.html" class="nav-link" data-i18n="next_lesson">التالي ←</a>
+            </nav>
+
+            <!-- Print Controls -->
+            <div class="print-controls">
+                <label for="print-section" data-i18n="print_label">اختر القسم للطباعة:</label>
+                <select id="print-section" name="print-section">
+                    <option value="all" data-i18n="print_all">الدرس كاملاً</option>
+                    <option value="rules" data-i18n="print_rules">القواعد</option>
+                    <option value="exercises" data-i18n="print_exercises">التمارين</option>
+                    <option value="problems" data-i18n="print_problems">المسائل</option>
+                    <option value="solutions" data-i18n="print_solutions">الحلول</option>
+                </select>
+                <button class="print-button" onclick="printSelected()" data-i18n="print_button">🖨️ طباعة</button>
+                <button id="theme-toggle" class="theme-toggle" aria-label="تبديل الوضع الليلي/النهاري">
+                    <span class="theme-icon">🌙</span>
+                </button>
+
+                <!-- Language Selector -->
+                <div class="language-selector">
+                    <label for="language-select" class="sr-only" data-i18n="language_label">اللغة</label>
+                    <select id="language-select" name="language-select">
+                        <option value="ar" data-i18n="lang_ar">العربية</option>
+                        <option value="en" data-i18n="lang_en">English</option>
+                        <option value="fr" data-i18n="lang_fr">Français</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Lesson Header -->
+            <header class="lesson-header">
+                <span class="module-tag" data-i18n="module_tag">📘 الهندسة | الدرس 1 | الجزء 7 | ز</span>
+                <h1 class="lesson-title" data-i18n="lesson_title">التناظر المركزي و المنتصف</h1>
+                <p class="lesson-subtitle" data-i18n="lesson_subtitle">حفظ المنتصف بالتناظر المركزي وتحديد مركز التناظر</p>
+            </header>
+
+            <!-- Section 1: Rules -->
+            <div class="section" id="rules-section">
+                <div class="section-header" onclick="toggleSection('rules-body', 'rules-toggle')" role="button"
+                     tabindex="0" aria-expanded="true" aria-controls="rules-body"
+                     onkeydown="if(event.key==='Enter'||event.key===' ') toggleSection('rules-body', 'rules-toggle')">
+                    <div class="section-icon rules-icon">📐</div>
+                    <div class="section-title">
+                        <h2 data-i18n="rules_title">القواعد</h2>
+                        <p data-i18n="rules_subtitle">المنتصف ومركز التناظر المركزي</p>
+                    </div>
+                    <span class="section-toggle open" id="rules-toggle">▼</span>
+                </div>
+                <div class="section-body" id="rules-body">
+                    <!-- Rule 1: Midpoint of image -->
+                    <div class="rule-card">
+                        <div class="rule-title" data-i18n="rule1_title">قاعدة 1: صورة المنتصف هي منتصف الصورة</div>
+                        <div class="rule-text" data-i18n="rule1_text">
+                            إذا كانت \(M\) منتصف القطعة \([AB]\)، و \(A'\) و \(B'\) و \(M'\) هي صور \(A\) و \(B\) و \(M\) على التوالي بالتناظر المركزي الذي مركزه \(O\)، فإن \(M'\) تكون <strong>منتصف</strong> القطعة \([A'B']\).
+                        </div>
+                        <div class="example-box" data-i18n="rule1_example">
+                            نكتب باختصار: <strong>التناظر المركزي يحافظ على المنتصف</strong>. بعبارة أخرى، منتصف \([A'B']\) هو صورة منتصف \([AB]\).
+                        </div>
+                        <div class="rule-diagram">
+                            <div id="diagram-rule1" class="jxgbox" style="width:100%; max-width:500px; height:300px;"></div>
+                            <div class="diagram-caption" data-i18n="rule1_caption">اسحب النقطة A أو B أو المركز O لترى أن M' هي منتصف [A'B']</div>
+                        </div>
+                    </div>
+
+                    <!-- Rule 2: The center O is the midpoint of [MM'] -->
+                    <div class="rule-card">
+                        <div class="rule-title" data-i18n="rule2_title">قاعدة 2: مركز التناظر منتصف [MM']</div>
+                        <div class="rule-text" data-i18n="rule2_text">
+                            إذا كانت \(M'\) صورة \(M\) بالتناظر المركزي الذي مركزه \(O\)، فإن \(O\) هي <strong>منتصف</strong> القطعة \([MM']\). هذه هي الخاصية المميِّزة للتناظر المركزي: \(O\) منتصف \([MM']\).
+                        </div>
+                        <div class="example-box" data-i18n="rule2_example">
+                            \(M' = 2O - M\) و \(M = 2O - M'\)، و \(O\) هي منتصف \([MM']\). وبالمثل فإن \(OM = OM'\) و \(M\) و \(M'\) و \(O\) على استقامة واحدة.
+                        </div>
+                    </div>
+
+                    <!-- Rule 3: Finding the center of symmetry -->
+                    <div class="rule-card">
+                        <div class="rule-title" data-i18n="rule3_title">قاعدة 3: تحديد مركز التناظر</div>
+                        <div class="rule-text" data-i18n="rule3_text">
+                            لمعرفة مركز التناظر الذي يربط نقطتين \(M\) و \(M'\) (أي \(M'\) هي صورة \(M\)):
+                            <ul>
+                                <li>نرسم القطعة \([MM']\).</li>
+                                <li>نحدّد منتصف هذه القطعة: هذا المنتصف هو مركز التناظر \(O\).</li>
+                            </ul>
+                            ويمكن حساب إحداثياته بالعلاقة: \(O\left(\dfrac{x_M + x_{M'}}{2},\, \dfrac{y_M + y_{M'}}{2}\right)\).
+                        </div>
+                        <div class="example-box" data-i18n="rule3_example">
+                            إذا كانت \(M(-2, 1)\) و \(M'(4, -3)\)، فإن \(O\left(\dfrac{-2 + 4}{2},\, \dfrac{1 + (-3)}{2}\right) = O(1, -1)\).
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 2: Exercises -->
+            <div class="section" id="exercises-section">
+                <div class="section-header" onclick="toggleSection('exercises-body', 'exercises-toggle')" role="button"
+                     tabindex="0" aria-expanded="true" aria-controls="exercises-body"
+                     onkeydown="if(event.key==='Enter'||event.key===' ') toggleSection('exercises-body', 'exercises-toggle')">
+                    <div class="section-icon exercises-icon">✏️</div>
+                    <div class="section-title">
+                        <h2 data-i18n="exercises_title">تمارين</h2>
+                        <p data-i18n="exercises_subtitle">تمرّن على حفظ المنتصف وتحديد مركز التناظر</p>
+                    </div>
+                    <span class="section-toggle open" id="exercises-toggle">▼</span>
+                </div>
+                <div class="section-body" id="exercises-body">
+                    <!-- Exercise 1: Interactive -->
+                    <div class="exercise-item">
+                        <div class="exercise-question">
+                            <span class="exercise-number">1</span>
+                            <span data-i18n="exercise1_q">القطعة \([AB]\) لها \(A(-3, 1)\) و \(B(1, 3)\)، والمركز \(O(0, 0)\). \(M\) منتصف \([AB]\). عيّن \(M'\) صورة \(M\) بإدخال إحداثياتها.</span>
+                        </div>
+                        <div class="coord-display" data-i18n="ex1_coords_display">
+                            \(A(-3, 1)\) | \(B(1, 3)\) | \(O(0, 0)\)
+                        </div>
+                        <div class="exercise-diagram">
+                            <div id="exercise1-board" class="jxgbox drawing-board"></div>
+                            <div class="board-controls">
+                                <button class="board-btn" onclick="checkEx1()" data-i18n="check_btn">تحقق</button>
+                                <button class="board-btn" onclick="resetEx1()" data-i18n="reset_btn">إعادة</button>
+                            </div>
+                            <div class="coord-input-group">
+                                <span data-i18n="coord_label_M_prime">\(M'\):</span>
+                                <label for="ex1-mx" data-i18n="coord_label_x">x:</label>
+                                <input type="number" id="ex1-mx" class="coord-input" step="any" value="1" dir="ltr">
+                                <label for="ex1-my" data-i18n="coord_label_y">y:</label>
+                                <input type="number" id="ex1-my" class="coord-input" step="any" value="-2" dir="ltr">
+                                <button class="board-btn" onclick="applyCoordsEx1()" data-i18n="apply_coords_btn">تعيين</button>
+                            </div>
+                            <div id="ex1-result" class="check-result"></div>
+                            <div class="diagram-caption" data-i18n="exercise1_caption">اسحب النقطة أو أدخل إحداثياتها.</div>
+                        </div>
+                    </div>
+
+                    <!-- Exercise 2: Find center -->
+                    <div class="exercise-item">
+                        <div class="exercise-question">
+                            <span class="exercise-number">2</span>
+                            <span data-i18n="exercise2_q">إذا كانت \(A(2, 5)\) و \(A'(-4, 1)\) متناظرتين بالنسبة إلى نقطة \(O\)، فما إحداثيات \(O\)؟ بيّن أن \(O\) منتصف \([AA']\).</span>
+                        </div>
+                        <textarea id="answer-ex2" name="answer-ex2" class="answer-textarea" placeholder="اكتب إجابتك هنا..." data-i18n-placeholder="answer_placeholder"></textarea>
+                    </div>
+
+                    <!-- Exercise 3: Midpoint of image -->
+                    <div class="exercise-item">
+                        <div class="exercise-question">
+                            <span class="exercise-number">3</span>
+                            <span data-i18n="exercise3_q">لتكن \(A(1, 2)\) و \(B(5, 4)\) و \(O(0, 0)\). \(M\) منتصف \([AB]\). عيّن \(A'\) و \(B'\) و \(M'\) بالتناظر المركزي الذي مركزه \(O\)، ثم تحقّق من أن \(M'\) منتصف \([A'B']\).</span>
+                        </div>
+                        <textarea id="answer-ex3" name="answer-ex3" class="answer-textarea" placeholder="اكتب إجابتك هنا..." data-i18n-placeholder="answer_placeholder"></textarea>
+                    </div>
+
+                    <!-- Exercise 4: True/False -->
+                    <div class="exercise-item">
+                        <div class="exercise-question">
+                            <span class="exercise-number">4</span>
+                            <span data-i18n="exercise4_q">أجب بصحيح أو خطأ مع التعليل: إذا كانت \(M'\) صورة \(M\) بالتناظر المركزي الذي مركزه \(O\)، فإن \(M\) منتصف \([OM']\).</span>
+                        </div>
+                        <textarea id="answer-ex4" name="answer-ex4" class="answer-textarea" placeholder="اكتب إجابتك هنا..." data-i18n-placeholder="answer_placeholder"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 3: Problems -->
+            <div class="section" id="problems-section">
+                <div class="section-header" onclick="toggleSection('problems-body', 'problems-toggle')" role="button"
+                     tabindex="0" aria-expanded="true" aria-controls="problems-body"
+                     onkeydown="if(event.key==='Enter'||event.key===' ') toggleSection('problems-body', 'problems-toggle')">
+                    <div class="section-icon problems-icon">🧩</div>
+                    <div class="section-title">
+                        <h2 data-i18n="problems_title">مسائل</h2>
+                        <p data-i18n="problems_subtitle">مسائل تطبيقية على المنتصف ومركز التناظر</p>
+                    </div>
+                    <span class="section-toggle open" id="problems-toggle">▼</span>
+                </div>
+                <div class="section-body" id="problems-body">
+                    <!-- Problem 1 -->
+                    <div class="problem-card">
+                        <div class="problem-title" data-i18n="problem1_title">🗺️ مسألة 1: تحديد مركز التناظر</div>
+                        <div class="problem-text" data-i18n="problem1_text">
+                            على خريطة، وُضعت نقطتان \(A(-2, 3)\) و \(B(6, -1)\) تمثّلان مدخلين لمتحف. إذا كان مدخل المتحف الرئيسي هو مركز التناظر الذي يربط \(A\) بـ \(B\) (أي \(A\) و \(B\) متناظرتان بالنسبة للمدخل)، فحدّد إحداثيات هذا المدخل \(O\). ثم بيّن أن \(OA = OB\).
+                        </div>
+                    </div>
+                    <!-- Problem 2 -->
+                    <div class="problem-card">
+                        <div class="problem-title" data-i18n="problem2_title">🏛️ مسألة 2: تصميم معماري</div>
+                        <div class="problem-text" data-i18n="problem2_text">
+                            صمّم مهندس معماري بهواً يتوسط مدخلاً للقصر. القطعة \([AB]\) تمثّل الجدار الأيمن للمدخل، والقطعة \([A'B']\) هي صورتها بالتناظر المركزي الذي مركزه \(O\) (نقطة البهو). \(M\) منتصف \([AB]\). أثبت أن \(M'\) (صورة \(M\)) هي منتصف \([A'B']\)، معتمداً على أن التناظر المركزي يحافظ على المنتصف.
+                        </div>
+                    </div>
+                    <!-- Problem 3 -->
+                    <div class="problem-card">
+                        <div class="problem-title" data-i18n="problem3_title">🎯 مسألة 3: ملعب ومركزه</div>
+                        <div class="problem-text" data-i18n="problem3_text">
+                            في ملعب رياضي، الخط الأوسط يربط النقطتين \(A(-5, 0)\) و \(B(5, 0)\). أراد المسؤول تعيين مركز الملعب \(O\) ليكون مركز التناظر الذي يربط \(A\) بـ \(B\). احسب إحداثيات \(O\)، ثم عيّن صورة نقطة \(C(3, 4)\) بالتناظر المركزي الذي مركزه \(O\)، وأثبت أن \(C'\) تحقّق \(OC' = OC\).
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 4: Solutions -->
+            <div class="section" id="solutions-section">
+                <div class="section-header" onclick="toggleSection('solutions-body', 'solutions-toggle')" role="button"
+                     tabindex="0" aria-expanded="true" aria-controls="solutions-body"
+                     onkeydown="if(event.key==='Enter'||event.key===' ') toggleSection('solutions-body', 'solutions-toggle')">
+                    <div class="section-icon solutions-icon">✅</div>
+                    <div class="section-title">
+                        <h2 data-i18n="solutions_title">حلول</h2>
+                        <p data-i18n="solutions_subtitle">الحلول المفصلة خطوة بخطوة</p>
+                    </div>
+                    <span class="section-toggle open" id="solutions-toggle">▼</span>
+                </div>
+                <div class="section-body" id="solutions-body">
+                    <div style="margin-bottom: 1.5rem;">
+                        <h3 data-i18n="solutions_exercises_heading">📝 حلول التمارين</h3>
+                        <!-- Solution Exercise 1 -->
+                        <div class="solution-item">
+                            <div class="solution-question" data-i18n="sol_ex1_q">التمرين 1 — صورة المنتصف M':</div>
+                            <div class="solution-answer-rtl">
+                                <span data-i18n="sol_ex1_answer">\(M' = (1, -2)\).</span>
+                            </div>
+                            <div class="solution-steps">
+                                <ol>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_line_1">الخطوة 1:</span> <span class="solution-step-math" data-i18n="step_ex1_1">نحسب إحداثيات \(M\) منتصف \([AB]\): \(M\left(\dfrac{-3+1}{2}, \dfrac{1+3}{2}\right) = M(-1, 2)\).</span></span></li>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_line_2">الخطوة 2:</span> <span class="solution-step-math" data-i18n="step_ex1_2">\(O(0, 0)\)، إذن \(M' = -M = (1, -2)\).</span></span></li>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_line_3">الخطوة 3:</span> <span class="solution-step-math" data-i18n="step_ex1_3">تحقق: \(A' = (3, -1)\) و \(B' = (-1, -3)\)، ومنتصف \([A'B']\) هو \(\left(\dfrac{3-1}{2}, \dfrac{-1-3}{2}\right) = (1, -2) = M'\). إذن \(M'\) منتصف \([A'B']\).</span></span></li>
+                                </ol>
+                            </div>
+                            <div class="solution-diagram">
+                                <div id="solution-ex1-board" class="jxgbox" style="width:100%; height:200px;"></div>
+                            </div>
+                        </div>
+                        <!-- Solution Exercise 2 -->
+                        <div class="solution-item">
+                            <div class="solution-question" data-i18n="sol_ex2_q">التمرين 2 — إحداثيات المركز O:</div>
+                            <div class="solution-answer-rtl">
+                                <span data-i18n="sol_ex2_answer">\(O(-1, 3)\).</span>
+                            </div>
+                            <div class="solution-steps">
+                                <ol>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_line_1">الخطوة 1:</span> <span class="solution-step-math" data-i18n="step_ex2_1">بما أن \(A\) و \(A'\) متناظرتان بالنسبة إلى \(O\)، فإن \(O\) منتصف \([AA']\).</span></span></li>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_line_2">الخطوة 2:</span> <span class="solution-step-math" data-i18n="step_ex2_2">\(O\left(\dfrac{2 + (-4)}{2}, \dfrac{5 + 1}{2}\right) = O\left(\dfrac{-2}{2}, \dfrac{6}{2}\right) = O(-1, 3)\).</span></span></li>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_line_3">الخطوة 3:</span> <span class="solution-step-math" data-i18n="step_ex2_3">تحقق: \(2O - A = 2(-1, 3) - (2, 5) = (-4, 1) = A'\). إذن \(O\) منتصف \([AA']\) فعلاً.</span></span></li>
+                                </ol>
+                            </div>
+                        </div>
+                        <!-- Solution Exercise 3 -->
+                        <div class="solution-item">
+                            <div class="solution-question" data-i18n="sol_ex3_q">التمرين 3 — حفظ المنتصف:</div>
+                            <div class="solution-answer-rtl">
+                                <span data-i18n="sol_ex3_answer">\(A'(-1, -2)\)، \(B'(-5, -4)\)، \(M(3, 3)\)، \(M'(-3, -3)\)، و \(M'\) منتصف \([A'B']\).</span>
+                            </div>
+                            <div class="solution-steps">
+                                <ol>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_line_1">الخطوة 1:</span> <span class="solution-step-math" data-i18n="step_ex3_1">\(M\) منتصف \([AB]\): \(M\left(\dfrac{1+5}{2}, \dfrac{2+4}{2}\right) = M(3, 3)\).</span></span></li>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_line_2">الخطوة 2:</span> <span class="solution-step-math" data-i18n="step_ex3_2">\(A' = -A = (-1, -2)\)، \(B' = -B = (-5, -4)\)، \(M' = -M = (-3, -3)\).</span></span></li>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_line_3">الخطوة 3:</span> <span class="solution-step-math" data-i18n="step_ex3_3">منتصف \([A'B']\) = \(\left(\dfrac{-1-5}{2}, \dfrac{-2-4}{2}\right) = (-3, -3) = M'\). إذن \(M'\) منتصف \([A'B']\).</span></span></li>
+                                </ol>
+                            </div>
+                        </div>
+                        <!-- Solution Exercise 4 -->
+                        <div class="solution-item">
+                            <div class="solution-question" data-i18n="sol_ex4_q">التمرين 4 — صحيح أم خطأ:</div>
+                            <div class="solution-answer-rtl">
+                                <span data-i18n="sol_ex4_answer">خطأ. \(O\) هي التي تكون منتصف \([MM']\)، لا \(M\).</span>
+                            </div>
+                            <div class="solution-steps">
+                                <ol>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_line_1">التعليل:</span> <span class="solution-step-math" data-i18n="step_ex4_1">حسب تعريف التناظر المركزي، \(O\) منتصف \([MM']\). وبالتالي \(OM = OM'\)، لا \(MO = OM'\). فالعبارة خاطئة.</span></span></li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 data-i18n="solutions_problems_heading">🧩 حلول المسائل</h3>
+                        <!-- Solution Problem 1 -->
+                        <div class="solution-item">
+                            <div class="solution-question" data-i18n="sol_prob1_q">المسألة 1 — تحديد مركز التناظر:</div>
+                            <div class="solution-answer-rtl">
+                                <span data-i18n="sol_prob1_answer">\(O(2, 1)\) و \(OA = OB\).</span>
+                            </div>
+                            <div class="solution-steps">
+                                <ol>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_line_1">الخطوة 1:</span> <span class="solution-step-math" data-i18n="step_prob1_1">بما أن \(A\) و \(B\) متناظرتان بالنسبة إلى \(O\)، فإن \(O\) منتصف \([AB]\).</span></span></li>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_line_2">الخطوة 2:</span> <span class="solution-step-math" data-i18n="step_prob1_2">\(O\left(\dfrac{-2+6}{2}, \dfrac{3+(-1)}{2}\right) = O(2, 1)\).</span></span></li>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_line_3">الخطوة 3:</span> <span class="solution-step-math" data-i18n="step_prob1_3">\(OA = \sqrt{(2-(-2))^2 + (1-3)^2} = \sqrt{16+4} = \sqrt{20}\). \(OB = \sqrt{(6-2)^2 + (-1-1)^2} = \sqrt{16+4} = \sqrt{20}\). إذن \(OA = OB\).</span></span></li>
+                                </ol>
+                            </div>
+                        </div>
+                        <!-- Solution Problem 2 -->
+                        <div class="solution-item">
+                            <div class="solution-question" data-i18n="sol_prob2_q">المسألة 2 — تصميم معماري:</div>
+                            <div class="solution-answer-rtl">
+                                <span data-i18n="sol_prob2_answer">\(M'\) منتصف \([A'B']\).</span>
+                            </div>
+                            <div class="solution-steps">
+                                <ol>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_line_1">الخطوة 1:</span> <span class="solution-step-math" data-i18n="step_prob2_1">\(A'\) و \(B'\) هما صورتا \(A\) و \(B\) بالتناظر المركزي الذي مركزه \(O\).</span></span></li>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_line_2">الخطوة 2:</span> <span class="solution-step-math" data-i18n="step_prob2_2">\(M\) منتصف \([AB]\)، وحسب قاعدة حفظ المنتصف، فإن \(M'\) صورة \(M\) هي منتصف \([A'B']\).</span></span></li>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_line_3">الخطوة 3:</span> <span class="solution-step-math" data-i18n="step_prob2_3">حسابياً: \(M' = 2O - M\)، و \(2 \cdot \text{منتصف}[A'B'] = 2 \cdot \dfrac{A' + B'}{2} = A' + B'\). لكن \(A' + B' = (2O - A) + (2O - B) = 4O - (A + B) = 4O - 2M = 2(2O - M) = 2M'\). إذن منتصف \([A'B']\) هو \(M'\).</span></span></li>
+                                </ol>
+                            </div>
+                        </div>
+                        <!-- Solution Problem 3 -->
+                        <div class="solution-item">
+                            <div class="solution-question" data-i18n="sol_prob3_q">المسألة 3 — ملعب ومركزه:</div>
+                            <div class="solution-answer-rtl">
+                                <span data-i18n="sol_prob3_answer">\(O(0, 0)\)، \(C'(-3, -4)\)، و \(OC' = OC = 5\).</span>
+                            </div>
+                            <div class="solution-steps">
+                                <ol>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_line_1">الخطوة 1:</span> <span class="solution-step-math" data-i18n="step_prob3_1">\(O\) منتصف \([AB]\): \(O\left(\dfrac{-5+5}{2}, \dfrac{0+0}{2}\right) = O(0, 0)\).</span></span></li>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_line_2">الخطوة 2:</span> <span class="solution-step-math" data-i18n="step_prob3_2">\(C' = 2O - C = -C = (-3, -4)\).</span></span></li>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_line_3">الخطوة 3:</span> <span class="solution-step-math" data-i18n="step_prob3_3">\(OC = \sqrt{3^2 + 4^2} = \sqrt{9 + 16} = \sqrt{25} = 5\). و \(OC' = \sqrt{(-3)^2 + (-4)^2} = 5\). إذن \(OC' = OC\).</span></span></li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="site-footer">
+            <div class="footer-col">
+                <h4 data-i18n="footer_dev">معلومات المطوّر</h4>
+                <p data-i18n="footer_dev_name">طور بواسطة: ماجري زياد</p>
+                <p data-i18n="footer_hosting">الاستضافة: Github, Netlify, Supabase</p>
+            </div>
+            <div class="footer-col">
+                <h4 data-i18n="footer_links">روابط</h4>
+                <a href="#" data-i18n="footer_contact">اتصل بنا</a>
+                <a href="#" data-i18n="footer_policies">السياسات</a>
+            </div>
+            <div class="footer-col">
+                <h4 data-i18n="footer_version">الإصدار</h4>
+                <p data-i18n="footer_version_num">الإصدار: 0.0.2</p>
+                <p data-i18n="footer_rights">جميع الحقوق محفوظة &copy; 2025</p>
+            </div>
+        </footer>
+
+        <!-- Print-only custom footer -->
+        <div class="print-footer">
+            <p data-i18n="print_footer_dev">طور بواسطة: ماجري زياد</p>
+            <p data-i18n="print_footer_version">الإصدار: 0.0.2</p>
+            <p data-i18n="print_footer_page">عنوان الصفحة: maths_y8_geo_module2_lesson1_sub7.html</p>
+        </div>
+    </div>
+
+    <!-- JSXGraph Diagrams and Interactive Exercises -->
+    <script>
+        function t(key) {
+            const lang = document.documentElement.lang || 'ar';
+            return (translations[lang] && translations[lang][key]) || key;
+        }
+
+        // Helper: create coordinate grid (O, I, J)
+        function createCoordinateGrid(board, options = {}) {
+            board.create('axis', [[0,0], [1,0]], { name: 'x', withLabel: true, label: { position: 'rt', offset: [-10, 10] } });
+            board.create('axis', [[0,0], [0,1]], { name: 'y', withLabel: true, label: { position: 'rt', offset: [10, -10] } });
+            board.create('point', [0,0], { name: 'O', size: 2, color: '#333', fixed: true });
+            board.create('point', [1,0], { name: 'I', size: 2, color: '#333', fixed: true });
+            board.create('point', [0,1], { name: 'J', size: 2, color: '#333', fixed: true });
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // ---------- Rule 1: Midpoint of image (interactive) ----------
+            const boardRule1 = initJSXGraph('diagram-rule1', {
+                boundingbox: [-6, 6, 6, -6], axis: false, showNavigation: false, showCopyright: false
+            });
+            if (boardRule1) {
+                createCoordinateGrid(boardRule1);
+
+                // Center O (draggable, initially not at origin to see nontrivial case)
+                const O = boardRule1.create('point', [0, 0], { name: 'O', size: 4, color: '#3498db' });
+
+                // Segment endpoints A, B (draggable)
+                const A = boardRule1.create('point', [-3, 1], { name: 'A', size: 3, color: '#e74c3c' });
+                const B = boardRule1.create('point', [1, 3], { name: 'B', size: 3, color: '#e74c3c' });
+
+                // Segment [AB]
+                boardRule1.create('segment', [A, B], { strokeWidth: 3, strokeColor: '#e74c3c' });
+
+                // Midpoint M of [AB]
+                const M = boardRule1.create('midpoint', [A, B], { name: 'M', size: 3, color: '#8e44ad' });
+
+                // Images
+                const A_prime = boardRule1.create('point', [
+                    function() { return 2*O.X() - A.X(); },
+                    function() { return 2*O.Y() - A.Y(); }
+                ], { name: "A'", size: 3, color: '#2ecc71', fixed: true });
+                const B_prime = boardRule1.create('point', [
+                    function() { return 2*O.X() - B.X(); },
+                    function() { return 2*O.Y() - B.Y(); }
+                ], { name: "B'", size: 3, color: '#2ecc71', fixed: true });
+                const M_prime = boardRule1.create('point', [
+                    function() { return 2*O.X() - M.X(); },
+                    function() { return 2*O.Y() - M.Y(); }
+                ], { name: "M'", size: 3, color: '#16a085', fixed: true });
+
+                // Segment [A'B']
+                boardRule1.create('segment', [A_prime, B_prime], { strokeWidth: 3, strokeColor: '#2ecc71', dash: 2 });
+
+                // Segments [AA'], [BB'], [MM']
+                boardRule1.create('segment', [A, A_prime], { strokeWidth: 1, strokeColor: '#95a5a6', dash: 3 });
+                boardRule1.create('segment', [B, B_prime], { strokeWidth: 1, strokeColor: '#95a5a6', dash: 3 });
+                boardRule1.create('segment', [M, M_prime], { strokeWidth: 1, strokeColor: '#95a5a6', dash: 3 });
+
+                // Legend
+                boardRule1.create('text', [-5.5, 5.3, () => t('graph_legend')], { fontSize: 12, color: '#1a5276' });
+            }
+
+            // ---------- Exercise 1: Interactive ----------
+            const boardEx1 = initJSXGraph('exercise1-board', {
+                boundingbox: [-5, 5, 5, -5], axis: false, showNavigation: false, showCopyright: false
+            });
+            if (boardEx1) {
+                createCoordinateGrid(boardEx1);
+
+                const Oex = boardEx1.create('point', [0, 0], { name: 'O', size: 4, color: '#3498db', fixed: true });
+
+                const Aex = boardEx1.create('point', [-3, 1], { name: 'A', size: 3, color: '#e74c3c', fixed: true });
+                const Bex = boardEx1.create('point', [1, 3], { name: 'B', size: 3, color: '#e74c3c', fixed: true });
+                boardEx1.create('segment', [Aex, Bex], { strokeWidth: 3, strokeColor: '#e74c3c' });
+
+                const Mex = boardEx1.create('midpoint', [Aex, Bex], { name: 'M', size: 3, color: '#8e44ad', fixed: true });
+
+                const Ap = boardEx1.create('point', [3, -1], { name: "A'", size: 3, color: '#2ecc71', fixed: true });
+                const Bp = boardEx1.create('point', [-1, -3], { name: "B'", size: 3, color: '#2ecc71', fixed: true });
+                boardEx1.create('segment', [Ap, Bp], { strokeWidth: 3, strokeColor: '#2ecc71', dash: 2 });
+
+                const M_user = boardEx1.create('point', [1, -2], { name: "M'?", size: 3, color: '#f39c12' });
+
+                window.checkEx1 = function() {
+                    const expected = [2*Oex.X() - Mex.X(), 2*Oex.Y() - Mex.Y()];
+                    const user = [M_user.X(), M_user.Y()];
+                    const dist = Math.sqrt((user[0]-expected[0])**2 + (user[1]-expected[1])**2);
+                    const resultDiv = document.getElementById('ex1-result');
+                    if (dist < 0.3) {
+                        resultDiv.textContent = t('correct_msg');
+                        resultDiv.className = 'check-result correct';
+                    } else {
+                        resultDiv.textContent = t('incorrect_msg');
+                        resultDiv.className = 'check-result incorrect';
+                    }
+                };
+                window.resetEx1 = function() {
+                    M_user.moveTo([1, -2]);
+                    document.getElementById('ex1-result').textContent = '';
+                    document.getElementById('ex1-mx').value = 1;
+                    document.getElementById('ex1-my').value = -2;
+                };
+                window.applyCoordsEx1 = function() {
+                    const x = parseFloat(document.getElementById('ex1-mx').value);
+                    const y = parseFloat(document.getElementById('ex1-my').value);
+                    if (isNaN(x) || isNaN(y)) {
+                        alert(t('invalid_coords'));
+                        return;
+                    }
+                    M_user.moveTo([x, y]);
+                    document.getElementById('ex1-result').textContent = '';
+                };
+            }
+
+            // ---------- Solution diagram for Exercise 1 (static) ----------
+            const boardSolEx1 = initJSXGraph('solution-ex1-board', {
+                boundingbox: [-5, 5, 5, -5], axis: false, showNavigation: false, showCopyright: false
+            });
+            if (boardSolEx1) {
+                createCoordinateGrid(boardSolEx1);
+                const O = boardSolEx1.create('point', [0, 0], { name: 'O', size: 3, color: '#3498db', fixed: true });
+                const A = boardSolEx1.create('point', [-3, 1], { name: 'A', size: 3, color: '#e74c3c', fixed: true });
+                const B = boardSolEx1.create('point', [1, 3], { name: 'B', size: 3, color: '#e74c3c', fixed: true });
+                boardSolEx1.create('segment', [A, B], { strokeWidth: 3, strokeColor: '#e74c3c' });
+                const M = boardSolEx1.create('midpoint', [A, B], { name: 'M', size: 3, color: '#8e44ad', fixed: true });
+                const Ap = boardSolEx1.create('point', [3, -1], { name: "A'", size: 3, color: '#2ecc71', fixed: true });
+                const Bp = boardSolEx1.create('point', [-1, -3], { name: "B'", size: 3, color: '#2ecc71', fixed: true });
+                const Mp = boardSolEx1.create('point', [1, -2], { name: "M'", size: 3, color: '#16a085', fixed: true });
+                boardSolEx1.create('segment', [Ap, Bp], { strokeWidth: 3, strokeColor: '#2ecc71', dash: 2 });
+                boardSolEx1.create('segment', [A, Ap], { strokeWidth: 1, strokeColor: '#95a5a6', dash: 3 });
+                boardSolEx1.create('segment', [B, Bp], { strokeWidth: 1, strokeColor: '#95a5a6', dash: 3 });
+                boardSolEx1.create('segment', [M, Mp], { strokeWidth: 1, strokeColor: '#95a5a6', dash: 3 });
+            }
+
+            // Observe language changes
+            const observer = new MutationObserver(() => {
+                [boardRule1, boardEx1, boardSolEx1].forEach(b => {
+                    if (b) b.update();
+                });
+            });
+            observer.observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
+        });
+    </script>
+
+    <!-- TRANSLATION OBJECT (full trilingual) -->
+    <script>
+        const translations = {
+            ar: {
+                page_title: "التناظر المركزي و المنتصف - رياضيات السنة الثامنة أساسي",
+                print_header: "السنة الثامنة أساسي - الهندسة - الدرس 1 - الجزء 7 - ز",
+                site_header: "Educational Dashboard - Mathematics",
+                back_to_index: "← العودة للفهرس",
+                nav_badge: "الدرس 1 | الجزء 7 | ز",
+                next_lesson: "التالي ←",
+                language_label: "اللغة",
+                lang_ar: "العربية",
+                lang_en: "English",
+                lang_fr: "Français",
+                print_label: "اختر القسم للطباعة:",
+                print_all: "الدرس كاملاً",
+                print_rules: "القواعد",
+                print_exercises: "التمارين",
+                print_problems: "المسائل",
+                print_solutions: "الحلول",
+                print_button: "🖨️ طباعة",
+                module_tag: "📘 الهندسة | الدرس 1 | الجزء 7 | ز",
+                lesson_title: "التناظر المركزي و المنتصف",
+                lesson_subtitle: "حفظ المنتصف بالتناظر المركزي وتحديد مركز التناظر",
+                rules_title: "القواعد",
+                rules_subtitle: "المنتصف ومركز التناظر المركزي",
+                rule1_title: "قاعدة 1: صورة المنتصف هي منتصف الصورة",
+                rule1_text: "إذا كانت M منتصف القطعة [AB]، و A' و B' و M' هي صور A و B و M على التوالي بالتناظر المركزي الذي مركزه O، فإن M' تكون منتصف القطعة [A'B'].",
+                rule1_example: "نكتب باختصار: التناظر المركزي يحافظ على المنتصف. بعبارة أخرى، منتصف [A'B'] هو صورة منتصف [AB].",
+                rule1_caption: "اسحب النقطة A أو B أو المركز O لترى أن M' هي منتصف [A'B']",
+                rule2_title: "قاعدة 2: مركز التناظر منتصف [MM']",
+                rule2_text: "إذا كانت M' صورة M بالتناظر المركزي الذي مركزه O، فإن O هي منتصف القطعة [MM']. هذه هي الخاصية المميِّزة للتناظر المركزي: O منتصف [MM'].",
+                rule2_example: "M' = 2O - M و M = 2O - M'، و O هي منتصف [MM']. وبالمثل فإن OM = OM' و M و M' و O على استقامة واحدة.",
+                rule3_title: "قاعدة 3: تحديد مركز التناظر",
+                rule3_text: "لمعرفة مركز التناظر الذي يربط نقطتين M و M' (أي M' هي صورة M): نرسم القطعة [MM']، ثم نحدّد منتصف هذه القطعة: هذا المنتصف هو مركز التناظر O. ويمكن حساب إحداثياته بالعلاقة: O = ((xM + xM')/2, (yM + yM')/2).",
+                rule3_example: "إذا كانت M(-2, 1) و M'(4, -3)، فإن O = ((-2 + 4)/2, (1 + (-3))/2) = O(1, -1).",
+                graph_legend: "M منتصف [AB]، و M' منتصف [A'B'] (صورتها بالتناظر المركزي)",
+                exercises_title: "تمارين",
+                exercises_subtitle: "تمرّن على حفظ المنتصف وتحديد مركز التناظر",
+                exercise1_q: "القطعة [AB] لها A(-3, 1) و B(1, 3)، والمركز O(0, 0). M منتصف [AB]. عيّن M' صورة M بإدخال إحداثياتها.",
+                exercise1_caption: "اسحب النقطة أو أدخل إحداثياتها.",
+                exercise2_q: "إذا كانت A(2, 5) و A'(-4, 1) متناظرتين بالنسبة إلى نقطة O، فما إحداثيات O؟ بيّن أن O منتصف [AA'].",
+                exercise3_q: "لتكن A(1, 2) و B(5, 4) و O(0, 0). M منتصف [AB]. عيّن A' و B' و M' بالتناظر المركزي الذي مركزه O، ثم تحقّق من أن M' منتصف [A'B'].",
+                exercise4_q: "أجب بصحيح أو خطأ مع التعليل: إذا كانت M' صورة M بالتناظر المركزي الذي مركزه O، فإن M منتصف [OM'].",
+                answer_placeholder: "اكتب إجابتك هنا...",
+                check_btn: "تحقق",
+                reset_btn: "إعادة",
+                correct_msg: "أحسنت! إجابة صحيحة.",
+                incorrect_msg: "حاول مرة أخرى.",
+                ex1_coords_display: "\\(A(-3, 1)\\) | \\(B(1, 3)\\) | \\(O(0, 0)\\)",
+                coord_label_M_prime: "\\(M'\\):",
+                coord_label_x: "x:",
+                coord_label_y: "y:",
+                apply_coords_btn: "تعيين",
+                invalid_coords: "يرجى إدخال قيم صحيحة للإحداثيات.",
+                problems_title: "مسائل",
+                problems_subtitle: "مسائل تطبيقية على المنتصف ومركز التناظر",
+                problem1_title: "🗺️ مسألة 1: تحديد مركز التناظر",
+                problem1_text: "على خريطة، وُضعت نقطتان A(-2, 3) و B(6, -1) تمثّلان مدخلين لمتحف. إذا كان مدخل المتحف الرئيسي هو مركز التناظر الذي يربط A بـ B (أي A و B متناظرتان بالنسبة للمدخل)، فحدّد إحداثيات هذا المدخل O. ثم بيّن أن OA = OB.",
+                problem2_title: "🏛️ مسألة 2: تصميم معماري",
+                problem2_text: "صمّم مهندس معماري بهواً يتوسط مدخلاً للقصر. القطعة [AB] تمثّل الجدار الأيمن للمدخل، والقطعة [A'B'] هي صورتها بالتناظر المركزي الذي مركزه O (نقطة البهو). M منتصف [AB]. أثبت أن M' (صورة M) هي منتصف [A'B']، معتمداً على أن التناظر المركزي يحافظ على المنتصف.",
+                problem3_title: "🎯 مسألة 3: ملعب ومركزه",
+                problem3_text: "في ملعب رياضي، الخط الأوسط يربط النقطتين A(-5, 0) و B(5, 0). أراد المسؤول تعيين مركز الملعب O ليكون مركز التناظر الذي يربط A بـ B. احسب إحداثيات O، ثم عيّن صورة نقطة C(3, 4) بالتناظر المركزي الذي مركزه O، وأثبت أن C' تحقّق OC' = OC.",
+                solutions_title: "حلول",
+                solutions_subtitle: "الحلول المفصلة خطوة بخطوة",
+                solutions_exercises_heading: "📝 حلول التمارين",
+                solutions_problems_heading: "🧩 حلول المسائل",
+                sol_ex1_q: "التمرين 1 — صورة المنتصف M':",
+                sol_ex1_answer: "M' = (1, -2).",
+                sol_ex2_q: "التمرين 2 — إحداثيات المركز O:",
+                sol_ex2_answer: "O(-1, 3).",
+                sol_ex3_q: "التمرين 3 — حفظ المنتصف:",
+                sol_ex3_answer: "A'(-1, -2)، B'(-5, -4)، M(3, 3)، M'(-3, -3)، و M' منتصف [A'B'].",
+                sol_ex4_q: "التمرين 4 — صحيح أم خطأ:",
+                sol_ex4_answer: "خطأ. O هي التي تكون منتصف [MM']، لا M.",
+                sol_prob1_q: "المسألة 1 — تحديد مركز التناظر:",
+                sol_prob2_q: "المسألة 2 — تصميم معماري:",
+                sol_prob3_q: "المسألة 3 — ملعب ومركزه:",
+                sol_prob1_answer: "O(2, 1) و OA = OB.",
+                sol_prob2_answer: "M' منتصف [A'B'].",
+                sol_prob3_answer: "O(0, 0)، C'(-3, -4)، و OC' = OC = 5.",
+                step_line_1: "الخطوة 1:",
+                step_line_2: "الخطوة 2:",
+                step_line_3: "الخطوة 3:",
+                step_ex1_1: "نحسب إحداثيات M منتصف [AB]: M((-3+1)/2, (1+3)/2) = M(-1, 2).",
+                step_ex1_2: "O(0, 0)، إذن M' = -M = (1, -2).",
+                step_ex1_3: "تحقق: A' = (3, -1) و B' = (-1, -3)، ومنتصف [A'B'] هو ((3-1)/2, (-1-3)/2) = (1, -2) = M'. إذن M' منتصف [A'B'].",
+                step_ex2_1: "بما أن A و A' متناظرتان بالنسبة إلى O، فإن O منتصف [AA'].",
+                step_ex2_2: "O((2 + (-4))/2, (5 + 1)/2) = O(-1, 3).",
+                step_ex2_3: "تحقق: 2O - A = 2(-1, 3) - (2, 5) = (-4, 1) = A'. إذن O منتصف [AA'] فعلاً.",
+                step_ex3_1: "M منتصف [AB]: M((1+5)/2, (2+4)/2) = M(3, 3).",
+                step_ex3_2: "A' = -A = (-1, -2)، B' = -B = (-5, -4)، M' = -M = (-3, -3).",
+                step_ex3_3: "منتصف [A'B'] = ((-1-5)/2, (-2-4)/2) = (-3, -3) = M'. إذن M' منتصف [A'B'].",
+                step_ex4_1: "حسب تعريف التناظر المركزي، O منتصف [MM']. وبالتالي OM = OM'، لا MO = OM'. فالعبارة خاطئة.",
+                step_prob1_1: "بما أن A و B متناظرتان بالنسبة إلى O، فإن O منتصف [AB].",
+                step_prob1_2: "O((-2+6)/2, (3+(-1))/2) = O(2, 1).",
+                step_prob1_3: "OA = √((2-(-2))² + (1-3)²) = √20. OB = √((6-2)² + (-1-1)²) = √20. إذن OA = OB.",
+                step_prob2_1: "A' و B' هما صورتا A و B بالتناظر المركزي الذي مركزه O.",
+                step_prob2_2: "M منتصف [AB]، وحسب قاعدة حفظ المنتصف، فإن M' صورة M هي منتصف [A'B'].",
+                step_prob2_3: "حسابياً: M' = 2O - M، و 2 × منتصف[A'B'] = A' + B' = (2O - A) + (2O - B) = 4O - (A+B) = 4O - 2M = 2(2O - M) = 2M'. إذن منتصف [A'B'] هو M'.",
+                step_prob3_1: "O منتصف [AB]: O((-5+5)/2, (0+0)/2) = O(0, 0).",
+                step_prob3_2: "C' = 2O - C = -C = (-3, -4).",
+                step_prob3_3: "OC = √(3² + 4²) = √25 = 5. و OC' = √((-3)² + (-4)²) = 5. إذن OC' = OC.",
+                cm_unit: "cm",
+                footer_dev: "معلومات المطوّر",
+                footer_dev_name: "طور بواسطة: ماجري زياد",
+                footer_hosting: "الاستضافة: Github, Netlify, Supabase",
+                footer_links: "روابط",
+                footer_contact: "اتصل بنا",
+                footer_policies: "السياسات",
+                footer_version: "الإصدار",
+                footer_version_num: "الإصدار: 0.0.2",
+                footer_rights: "جميع الحقوق محفوظة © 2025",
+                print_footer_dev: "طور بواسطة: ماجري زياد",
+                print_footer_version: "الإصدار: 0.0.2",
+                print_footer_page: "عنوان الصفحة: maths_y8_geo_module2_lesson1_sub7.html"
+            },
+            en: {
+                page_title: "Central Symmetry and Midpoint - Math Year 8",
+                print_header: "Year 8 – Geometry – Lesson 1 – Part 7 – g",
+                site_header: "Educational Dashboard - Mathematics",
+                back_to_index: "← Back to Index",
+                nav_badge: "Lesson 1 | Part 7 | g",
+                next_lesson: "Next →",
+                language_label: "Language",
+                lang_ar: "العربية",
+                lang_en: "English",
+                lang_fr: "Français",
+                print_label: "Select section to print:",
+                print_all: "Full lesson",
+                print_rules: "Rules",
+                print_exercises: "Exercises",
+                print_problems: "Problems",
+                print_solutions: "Solutions",
+                print_button: "🖨️ Print",
+                module_tag: "📘 Geometry | Lesson 1 | Part 7 | g",
+                lesson_title: "Central Symmetry and Midpoint",
+                lesson_subtitle: "Preservation of midpoint under central symmetry and finding the center",
+                rules_title: "Rules",
+                rules_subtitle: "Midpoint and center of central symmetry",
+                rule1_title: "Rule 1: The image of a midpoint is the midpoint of the image",
+                rule1_text: "If M is the midpoint of segment [AB], and A', B', M' are the images of A, B, M respectively under central symmetry with center O, then M' is the midpoint of segment [A'B'].",
+                rule1_example: "In short: central symmetry preserves midpoints. In other words, the midpoint of [A'B'] is the image of the midpoint of [AB].",
+                rule1_caption: "Drag point A or B or the center O to see that M' is the midpoint of [A'B']",
+                rule2_title: "Rule 2: The center O is the midpoint of [MM']",
+                rule2_text: "If M' is the image of M under central symmetry with center O, then O is the midpoint of segment [MM']. This is the defining property of central symmetry: O is the midpoint of [MM'].",
+                rule2_example: "M' = 2O - M and M = 2O - M', and O is the midpoint of [MM']. Also, OM = OM' and M, M', O are collinear.",
+                rule3_title: "Rule 3: Finding the center of symmetry",
+                rule3_text: "To find the center of symmetry that maps M to M' (i.e., M' is the image of M): draw segment [MM'], then locate its midpoint: that midpoint is the center of symmetry O. Its coordinates are given by: O = ((xM + xM')/2, (yM + yM')/2).",
+                rule3_example: "If M(-2, 1) and M'(4, -3), then O = ((-2 + 4)/2, (1 + (-3))/2) = O(1, -1).",
+                graph_legend: "M is the midpoint of [AB], M' is the midpoint of [A'B'] (its image under central symmetry)",
+                exercises_title: "Exercises",
+                exercises_subtitle: "Practice midpoint preservation and finding the center of symmetry",
+                exercise1_q: "Segment [AB] has A(-3, 1) and B(1, 3), with center O(0, 0). M is the midpoint of [AB]. Place M', the image of M, by entering its coordinates.",
+                exercise1_caption: "Drag the point or enter its coordinates.",
+                exercise2_q: "If A(2, 5) and A'(-4, 1) are symmetric with respect to a point O, what are the coordinates of O? Show that O is the midpoint of [AA'].",
+                exercise3_q: "Let A(1, 2), B(5, 4), O(0, 0). M is the midpoint of [AB]. Find A', B', M' under central symmetry with center O, then verify that M' is the midpoint of [A'B'].",
+                exercise4_q: "Answer true or false with justification: if M' is the image of M under central symmetry with center O, then M is the midpoint of [OM'].",
+                answer_placeholder: "Write your answer here...",
+                check_btn: "Check",
+                reset_btn: "Reset",
+                correct_msg: "Well done! Correct answer.",
+                incorrect_msg: "Try again.",
+                ex1_coords_display: "\\(A(-3, 1)\\) | \\(B(1, 3)\\) | \\(O(0, 0)\\)",
+                coord_label_M_prime: "\\(M'\\):",
+                coord_label_x: "x:",
+                coord_label_y: "y:",
+                apply_coords_btn: "Apply",
+                invalid_coords: "Please enter valid coordinates.",
+                problems_title: "Problems",
+                problems_subtitle: "Applied problems on midpoint and center of symmetry",
+                problem1_title: "🗺️ Problem 1: Finding the center of symmetry",
+                problem1_text: "On a map, two points A(-2, 3) and B(6, -1) represent two entrances to a museum. If the museum's main entrance is the center of symmetry that maps A to B (i.e., A and B are symmetric with respect to the entrance), determine the coordinates of this entrance O. Then show that OA = OB.",
+                problem2_title: "🏛️ Problem 2: Architectural design",
+                problem2_text: "An architect designed a lobby at the entrance of a palace. Segment [AB] is the right wall of the entrance, and segment [A'B'] is its image under central symmetry with center O (the lobby point). M is the midpoint of [AB]. Prove that M' (the image of M) is the midpoint of [A'B'], based on the fact that central symmetry preserves midpoints.",
+                problem3_title: "🎯 Problem 3: Stadium and its center",
+                problem3_text: "In a sports stadium, the middle line connects points A(-5, 0) and B(5, 0). The manager wants to place the stadium center O as the center of symmetry that maps A to B. Compute the coordinates of O, then find the image of point C(3, 4) under central symmetry with center O, and prove that C' satisfies OC' = OC.",
+                solutions_title: "Solutions",
+                solutions_subtitle: "Detailed step-by-step solutions",
+                solutions_exercises_heading: "📝 Exercise Solutions",
+                solutions_problems_heading: "🧩 Problem Solutions",
+                sol_ex1_q: "Exercise 1 — Image of midpoint M':",
+                sol_ex1_answer: "M' = (1, -2).",
+                sol_ex2_q: "Exercise 2 — Coordinates of center O:",
+                sol_ex2_answer: "O(-1, 3).",
+                sol_ex3_q: "Exercise 3 — Midpoint preservation:",
+                sol_ex3_answer: "A'(-1, -2), B'(-5, -4), M(3, 3), M'(-3, -3), and M' is the midpoint of [A'B'].",
+                sol_ex4_q: "Exercise 4 — True or false:",
+                sol_ex4_answer: "False. O is the midpoint of [MM'], not M.",
+                sol_prob1_q: "Problem 1 — Finding the center of symmetry:",
+                sol_prob2_q: "Problem 2 — Architectural design:",
+                sol_prob3_q: "Problem 3 — Stadium and its center:",
+                sol_prob1_answer: "O(2, 1) and OA = OB.",
+                sol_prob2_answer: "M' is the midpoint of [A'B'].",
+                sol_prob3_answer: "O(0, 0), C'(-3, -4), and OC' = OC = 5.",
+                step_line_1: "Step 1:",
+                step_line_2: "Step 2:",
+                step_line_3: "Step 3:",
+                step_ex1_1: "Compute M, the midpoint of [AB]: M((-3+1)/2, (1+3)/2) = M(-1, 2).",
+                step_ex1_2: "O(0, 0), so M' = -M = (1, -2).",
+                step_ex1_3: "Verify: A' = (3, -1), B' = (-1, -3), and the midpoint of [A'B'] is ((3-1)/2, (-1-3)/2) = (1, -2) = M'. So M' is the midpoint of [A'B'].",
+                step_ex2_1: "Since A and A' are symmetric with respect to O, O is the midpoint of [AA'].",
+                step_ex2_2: "O((2 + (-4))/2, (5 + 1)/2) = O(-1, 3).",
+                step_ex2_3: "Check: 2O - A = 2(-1, 3) - (2, 5) = (-4, 1) = A'. So O is indeed the midpoint of [AA'].",
+                step_ex3_1: "M, midpoint of [AB]: M((1+5)/2, (2+4)/2) = M(3, 3).",
+                step_ex3_2: "A' = -A = (-1, -2), B' = -B = (-5, -4), M' = -M = (-3, -3).",
+                step_ex3_3: "Midpoint of [A'B'] = ((-1-5)/2, (-2-4)/2) = (-3, -3) = M'. So M' is the midpoint of [A'B'].",
+                step_ex4_1: "By definition of central symmetry, O is the midpoint of [MM']. Therefore OM = OM', not MO = OM'. The statement is false.",
+                step_prob1_1: "Since A and B are symmetric with respect to O, O is the midpoint of [AB].",
+                step_prob1_2: "O((-2+6)/2, (3+(-1))/2) = O(2, 1).",
+                step_prob1_3: "OA = √((2-(-2))² + (1-3)²) = √20. OB = √((6-2)² + (-1-1)²) = √20. So OA = OB.",
+                step_prob2_1: "A' and B' are the images of A and B under central symmetry with center O.",
+                step_prob2_2: "M is the midpoint of [AB], so by the midpoint preservation rule, M' (the image of M) is the midpoint of [A'B'].",
+                step_prob2_3: "Computationally: M' = 2O - M, and 2 × midpoint[A'B'] = A' + B' = (2O - A) + (2O - B) = 4O - (A+B) = 4O - 2M = 2(2O - M) = 2M'. So the midpoint of [A'B'] is M'.",
+                step_prob3_1: "O is the midpoint of [AB]: O((-5+5)/2, (0+0)/2) = O(0, 0).",
+                step_prob3_2: "C' = 2O - C = -C = (-3, -4).",
+                step_prob3_3: "OC = √(3² + 4²) = √25 = 5. And OC' = √((-3)² + (-4)²) = 5. So OC' = OC.",
+                cm_unit: "cm",
+                footer_dev: "Developer Info",
+                footer_dev_name: "Developed by: Majri Zied",
+                footer_hosting: "Hosting: Github, Netlify, Supabase",
+                footer_links: "Links",
+                footer_contact: "Contact us",
+                footer_policies: "Policies",
+                footer_version: "Version",
+                footer_version_num: "Version: 0.0.2",
+                footer_rights: "All rights reserved © 2025",
+                print_footer_dev: "Developed by: Majri Zied",
+                print_footer_version: "Version: 0.0.2",
+                print_footer_page: "Page address: maths_y8_geo_module2_lesson1_sub7.html"
+            },
+            fr: {
+                page_title: "Symétrie centrale et milieu - Math 8ème année",
+                print_header: "8ème année – Géométrie – Leçon 1 – Partie 7 – g",
+                site_header: "Educational Dashboard - Mathematics",
+                back_to_index: "← Retour à l'index",
+                nav_badge: "Leçon 1 | Partie 7 | g",
+                next_lesson: "Suivant →",
+                language_label: "Langue",
+                lang_ar: "العربية",
+                lang_en: "English",
+                lang_fr: "Français",
+                print_label: "Choisir la section à imprimer :",
+                print_all: "Leçon complète",
+                print_rules: "Règles",
+                print_exercises: "Exercices",
+                print_problems: "Problèmes",
+                print_solutions: "Solutions",
+                print_button: "🖨️ Imprimer",
+                module_tag: "📘 Géométrie | Leçon 1 | Partie 7 | g",
+                lesson_title: "Symétrie centrale et milieu",
+                lesson_subtitle: "Conservation du milieu par symétrie centrale et détermination du centre",
+                rules_title: "Règles",
+                rules_subtitle: "Milieu et centre de la symétrie centrale",
+                rule1_title: "Règle 1 : L'image d'un milieu est le milieu de l'image",
+                rule1_text: "Si M est le milieu du segment [AB], et A', B', M' sont les images de A, B, M respectivement par la symétrie centrale de centre O, alors M' est le milieu du segment [A'B'].",
+                rule1_example: "En bref : la symétrie centrale conserve les milieux. Autrement dit, le milieu de [A'B'] est l'image du milieu de [AB].",
+                rule1_caption: "Faites glisser le point A ou B ou le centre O pour voir que M' est le milieu de [A'B']",
+                rule2_title: "Règle 2 : Le centre O est le milieu de [MM']",
+                rule2_text: "Si M' est l'image de M par la symétrie centrale de centre O, alors O est le milieu du segment [MM']. C'est la propriété caractéristique de la symétrie centrale : O est le milieu de [MM'].",
+                rule2_example: "M' = 2O - M et M = 2O - M', et O est le milieu de [MM']. De plus, OM = OM' et M, M', O sont alignés.",
+                rule3_title: "Règle 3 : Détermination du centre de symétrie",
+                rule3_text: "Pour déterminer le centre de symétrie qui relie deux points M et M' (c'est-à-dire M' est l'image de M) : tracer le segment [MM'], puis localiser son milieu : ce milieu est le centre de symétrie O. Ses coordonnées sont données par : O = ((xM + xM')/2, (yM + yM')/2).",
+                rule3_example: "Si M(-2, 1) et M'(4, -3), alors O = ((-2 + 4)/2, (1 + (-3))/2) = O(1, -1).",
+                graph_legend: "M est le milieu de [AB], M' est le milieu de [A'B'] (son image par symétrie centrale)",
+                exercises_title: "Exercices",
+                exercises_subtitle: "Entraînez-vous sur la conservation du milieu et la détermination du centre",
+                exercise1_q: "Le segment [AB] a A(-3, 1) et B(1, 3), avec le centre O(0, 0). M est le milieu de [AB]. Placez M', image de M, en saisissant ses coordonnées.",
+                exercise1_caption: "Faites glisser le point ou entrez ses coordonnées.",
+                exercise2_q: "Si A(2, 5) et A'(-4, 1) sont symétriques par rapport à un point O, quelles sont les coordonnées de O ? Montrez que O est le milieu de [AA'].",
+                exercise3_q: "Soient A(1, 2), B(5, 4), O(0, 0). M est le milieu de [AB]. Déterminez A', B', M' par symétrie centrale de centre O, puis vérifiez que M' est le milieu de [A'B'].",
+                exercise4_q: "Répondez vrai ou faux avec justification : si M' est l'image de M par la symétrie centrale de centre O, alors M est le milieu de [OM'].",
+                answer_placeholder: "Écrivez votre réponse ici...",
+                check_btn: "Vérifier",
+                reset_btn: "Réinitialiser",
+                correct_msg: "Bravo ! Bonne réponse.",
+                incorrect_msg: "Essayez encore.",
+                ex1_coords_display: "\\(A(-3, 1)\\) | \\(B(1, 3)\\) | \\(O(0, 0)\\)",
+                coord_label_M_prime: "\\(M'\\) :",
+                coord_label_x: "x :",
+                coord_label_y: "y :",
+                apply_coords_btn: "Appliquer",
+                invalid_coords: "Veuillez entrer des coordonnées valides.",
+                problems_title: "Problèmes",
+                problems_subtitle: "Problèmes appliqués sur le milieu et le centre de symétrie",
+                problem1_title: "🗺️ Problème 1 : Déterminer le centre de symétrie",
+                problem1_text: "Sur une carte, deux points A(-2, 3) et B(6, -1) représentent deux entrées d'un musée. Si l'entrée principale du musée est le centre de symétrie qui relie A à B (c'est-à-dire A et B sont symétriques par rapport à l'entrée), déterminez les coordonnées de cette entrée O. Puis montrez que OA = OB.",
+                problem2_title: "🏛️ Problème 2 : Conception architecturale",
+                problem2_text: "Un architecte a conçu un hall à l'entrée d'un palais. Le segment [AB] représente le mur droit de l'entrée, et le segment [A'B'] est son image par la symétrie centrale de centre O (point du hall). M est le milieu de [AB]. Prouvez que M' (image de M) est le milieu de [A'B'], en vous appuyant sur le fait que la symétrie centrale conserve les milieux.",
+                problem3_title: "🎯 Problème 3 : Stade et son centre",
+                problem3_text: "Dans un stade de sport, la ligne médiane relie les points A(-5, 0) et B(5, 0). Le gestionnaire veut placer le centre du stade O comme centre de symétrie qui relie A à B. Calculez les coordonnées de O, puis trouvez l'image du point C(3, 4) par la symétrie centrale de centre O, et prouvez que C' satisfait OC' = OC.",
+                solutions_title: "Solutions",
+                solutions_subtitle: "Solutions détaillées étape par étape",
+                solutions_exercises_heading: "📝 Solutions des exercices",
+                solutions_problems_heading: "🧩 Solutions des problèmes",
+                sol_ex1_q: "Exercice 1 — Image du milieu M' :",
+                sol_ex1_answer: "M' = (1, -2).",
+                sol_ex2_q: "Exercice 2 — Coordonnées du centre O :",
+                sol_ex2_answer: "O(-1, 3).",
+                sol_ex3_q: "Exercice 3 — Conservation du milieu :",
+                sol_ex3_answer: "A'(-1, -2), B'(-5, -4), M(3, 3), M'(-3, -3), et M' est le milieu de [A'B'].",
+                sol_ex4_q: "Exercice 4 — Vrai ou faux :",
+                sol_ex4_answer: "Faux. C'est O qui est le milieu de [MM'], pas M.",
+                sol_prob1_q: "Problème 1 — Déterminer le centre de symétrie :",
+                sol_prob2_q: "Problème 2 — Conception architecturale :",
+                sol_prob3_q: "Problème 3 — Stade et son centre :",
+                sol_prob1_answer: "O(2, 1) et OA = OB.",
+                sol_prob2_answer: "M' est le milieu de [A'B'].",
+                sol_prob3_answer: "O(0, 0), C'(-3, -4), et OC' = OC = 5.",
+                step_line_1: "Étape 1 :",
+                step_line_2: "Étape 2 :",
+                step_line_3: "Étape 3 :",
+                step_ex1_1: "Calculer M, milieu de [AB] : M((-3+1)/2, (1+3)/2) = M(-1, 2).",
+                step_ex1_2: "O(0, 0), donc M' = -M = (1, -2).",
+                step_ex1_3: "Vérifier : A' = (3, -1), B' = (-1, -3), et le milieu de [A'B'] est ((3-1)/2, (-1-3)/2) = (1, -2) = M'. Donc M' est le milieu de [A'B'].",
+                step_ex2_1: "Puisque A et A' sont symétriques par rapport à O, O est le milieu de [AA'].",
+                step_ex2_2: "O((2 + (-4))/2, (5 + 1)/2) = O(-1, 3).",
+                step_ex2_3: "Vérification : 2O - A = 2(-1, 3) - (2, 5) = (-4, 1) = A'. Donc O est bien le milieu de [AA'].",
+                step_ex3_1: "M, milieu de [AB] : M((1+5)/2, (2+4)/2) = M(3, 3).",
+                step_ex3_2: "A' = -A = (-1, -2), B' = -B = (-5, -4), M' = -M = (-3, -3).",
+                step_ex3_3: "Milieu de [A'B'] = ((-1-5)/2, (-2-4)/2) = (-3, -3) = M'. Donc M' est le milieu de [A'B'].",
+                step_ex4_1: "Par définition de la symétrie centrale, O est le milieu de [MM']. Donc OM = OM', pas MO = OM'. L'énoncé est faux.",
+                step_prob1_1: "Puisque A et B sont symétriques par rapport à O, O est le milieu de [AB].",
+                step_prob1_2: "O((-2+6)/2, (3+(-1))/2) = O(2, 1).",
+                step_prob1_3: "OA = √((2-(-2))² + (1-3)²) = √20. OB = √((6-2)² + (-1-1)²) = √20. Donc OA = OB.",
+                step_prob2_1: "A' et B' sont les images de A et B par la symétrie centrale de centre O.",
+                step_prob2_2: "M est le milieu de [AB], donc par la règle de conservation du milieu, M' (image de M) est le milieu de [A'B'].",
+                step_prob2_3: "Par le calcul : M' = 2O - M, et 2 × milieu[A'B'] = A' + B' = (2O - A) + (2O - B) = 4O - (A+B) = 4O - 2M = 2(2O - M) = 2M'. Donc le milieu de [A'B'] est M'.",
+                step_prob3_1: "O est le milieu de [AB] : O((-5+5)/2, (0+0)/2) = O(0, 0).",
+                step_prob3_2: "C' = 2O - C = -C = (-3, -4).",
+                step_prob3_3: "OC = √(3² + 4²) = √25 = 5. Et OC' = √((-3)² + (-4)²) = 5. Donc OC' = OC.",
+                cm_unit: "cm",
+                footer_dev: "Informations du développeur",
+                footer_dev_name: "Développé par : Majri Zied",
+                footer_hosting: "Hébergement : Github, Netlify, Supabase",
+                footer_links: "Liens",
+                footer_contact: "Contactez-nous",
+                footer_policies: "Politiques",
+                footer_version: "Version",
+                footer_version_num: "Version : 0.0.2",
+                footer_rights: "Tous droits réservés © 2025",
+                print_footer_dev: "Développé par : Majri Zied",
+                print_footer_version: "Version : 0.0.2",
+                print_footer_page: "Adresse de la page : maths_y8_geo_module2_lesson1_sub7.html"
+            }
+        };
+    </script>
+</body>
+</html>

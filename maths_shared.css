@@ -1,0 +1,461 @@
+/* ============================================================
+   maths_shared.css — Shared styles for Mathematics Dashboard
+   Used by: maths_y7.html (index) and lesson pages
+   ============================================================ */
+
+/* ===== CSS Variables ===== */
+:root {
+    --primary: #1a5276;
+    --secondary: #2e86c1;
+    --accent: #f39c12;
+    --bg: #f4f6f8;
+    --card-bg: #ffffff;
+    --text: #2c3e50;
+    --border: #d5dbdf;
+    --hover: #eaf2f8;
+    --geometry: #1e8449;
+    --algebra: #8e44ad;
+    --success: #27ae60;
+    --error: #e74c3c;
+    --warning: #f39c12;
+    --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    --radius: 14px;
+    --transition: 0.3s ease;
+    --mono: 'Courier New', monospace;
+
+    /* Additional variables for previously hardcoded colors */
+    --text-muted: #5d6d7e;
+    --text-faint: #7f8c8d;
+    --text-secondary: #34495e;
+    --bg-alt: #f8f9fa;
+    --bg-light: #fefefe;
+    --bg-sub: #f4f6f8;
+    --border-light: #e0e6ed;
+    --example-bg: #eaf2f8;
+    --solution-bg: #f0faf4;
+    --solution-border: #d5f5e3;
+    --white: #ffffff;
+    --arrow-color: #bdc3c7;
+}
+
+/* Dark theme variables */
+[data-theme="dark"] {
+    --primary: #2980b9;
+    --secondary: #5dade2;
+    --accent: #f39c12;
+    --bg: #1a1a1a;
+    --card-bg: #2c2c2c;
+    --text: #ecf0f1;
+    --border: #444;
+    --hover: #3a3a3a;
+    --geometry: #27ae60;
+    --algebra: #9b59b6;
+    --success: #27ae60;
+    --error: #e74c3c;
+    --warning: #f39c12;
+    --shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+
+    --text-muted: #b0bec5;
+    --text-faint: #95a5a6;
+    --text-secondary: #d5d8dc;
+    --bg-alt: #3a3a3a;
+    --bg-light: #2c2c2c;
+    --bg-sub: #3a3a3a;
+    --border-light: #555;
+    --example-bg: #1a1a1a;
+    --solution-bg: #2c2c2c;
+    --solution-border: #444;
+    --white: #ffffff;
+    --arrow-color: #777;
+}
+
+/* ===== Global Reset ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ===== Body ===== */
+body {
+    font-family: 'Segoe UI', 'Tahoma', 'Arial', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+    font-feature-settings: "tnum" 0, "lnum" 1;
+    font-variant-numeric: lining-nums;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* ===== Container ===== */
+.container {
+    max-width: 100%;   /* or remove this line entirely */
+    width: 100%;
+    margin: 0 auto;
+    padding: 0;        /* optional, body already has padding */
+}
+
+/* ===== Screen reader only ===== */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* ===== Site Header ===== */
+.site-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.2rem;
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 1rem 2rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid var(--border);
+}
+
+.site-header .header-icon img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--secondary);
+}
+
+.site-header h1 {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--primary);
+    margin: 0;
+}
+
+/* ===== Print-only Header ===== */
+.print-header {
+    display: none;
+}
+
+/* ===== Top Navigation Bar ===== */
+.top-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 0.8rem 1.5rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid var(--border);
+    flex-wrap: wrap;
+    gap: 0.8rem;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: var(--primary);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: color var(--transition);
+    font-size: 0.95rem;
+}
+
+.nav-link:hover {
+    color: var(--accent);
+}
+
+.nav-badge {
+    background: var(--algebra);
+    color: var(--white);
+    padding: 0.3rem 0.9rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+/* ===== Print Controls ===== */
+.print-controls {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 0.8rem 1.5rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid var(--border);
+    flex-wrap: wrap;
+}
+
+.print-controls select {
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    font-family: inherit;
+    font-size: 0.95rem;
+    background: var(--card-bg);
+    color: var(--text);
+    cursor: pointer;
+    min-width: 180px;
+}
+
+.print-button {
+    background: var(--secondary);
+    color: var(--white);
+    border: none;
+    padding: 0.5rem 1.5rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 0.95rem;
+    transition: background var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.print-button:hover {
+    background: var(--primary);
+}
+
+/* ===== Theme Toggle Button ===== */
+.theme-toggle {
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: background var(--transition), transform var(--transition);
+    color: var(--text);
+}
+
+.theme-toggle:hover {
+    background: var(--hover);
+    transform: scale(1.1);
+}
+
+/* ===== Site Footer ===== */
+.site-footer {
+    display: flex;
+    justify-content: space-between;
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 1.5rem 2rem;
+    margin-top: 2rem;
+    border: 1px solid var(--border);
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.footer-col {
+    flex: 1;
+    min-width: 200px;
+}
+
+.footer-col h4 {
+    color: var(--primary);
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+}
+
+.footer-col p,
+.footer-col a {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    line-height: 1.6;
+    text-decoration: none;
+    display: block;
+    margin-bottom: 0.3rem;
+}
+
+.footer-col a:hover {
+    color: var(--secondary);
+    text-decoration: underline;
+}
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 1rem;
+    color: var(--text-faint);
+    font-size: 0.85rem;
+}
+
+/* ===== Print-Only Custom Footer ===== */
+.print-footer {
+    display: none;
+}
+
+/* ===== Responsive (shared components) ===== */
+@media (max-width: 640px) {
+    .site-header h1 {
+        font-size: 1.4rem;
+    }
+    .site-header {
+        padding: 0.8rem 1rem;
+        gap: 0.8rem;
+    }
+    .site-header .header-icon img {
+        width: 45px;
+        height: 45px;
+    }
+    .top-nav,
+    .print-controls {
+        padding: 0.8rem 1rem;
+        font-size: 0.85rem;
+    }
+    .site-footer {
+        flex-direction: column;
+        padding: 1.2rem;
+    }
+    .footer-col {
+        min-width: 100%;
+    }
+}
+
+@media (max-width: 400px) {
+    .print-controls select {
+        min-width: 100%;
+    }
+}
+
+/* ===== Print (shared) ===== */
+@media print {
+    /* Force black text on white background for readability */
+    :root {
+        --primary: #000;
+        --secondary: #000;
+        --accent: #000;
+        --text: #000;
+        --text-muted: #000;
+        --text-faint: #000;
+        --text-secondary: #000;
+        --bg: #fff;
+        --card-bg: #fff;
+        --bg-alt: #fff;
+        --bg-light: #fff;
+        --bg-sub: #f0f0f0;
+        --border: #ccc;
+        --border-light: #ccc;
+        --hover: #f0f0f0;
+        --example-bg: #f0f0f0;
+        --solution-bg: #f0f0f0;
+        --solution-border: #ccc;
+        --shadow: none;
+        --white: #fff;
+    }
+
+    body {
+        background: #fff;
+        padding: 0.5in;
+        font-size: 12pt;
+    }
+
+    .site-header,
+    .top-nav,
+    .print-controls,
+    .theme-toggle {
+        display: none !important;
+    }
+
+    .print-header {
+        display: block;
+        text-align: center;
+        margin-bottom: 1rem;
+        font-weight: 800;
+        font-size: 1.2rem;
+        color: var(--primary);
+    }
+
+    /* Hide original footer, show custom print footer */
+    .site-footer,
+    .footer-bottom {
+        display: none !important;
+    }
+
+    .print-footer {
+        display: block;
+        text-align: center;
+        margin-top: 2rem;
+        padding-top: 1rem;
+        border-top: 1px solid var(--border);
+        font-size: 0.9rem;
+        color: var(--text);
+        page-break-inside: avoid;
+    }
+
+    .print-footer p {
+        margin: 0.2rem 0;
+        line-height: 1.5;
+        color: var(--text);
+    }
+
+    /* Ensure any element with background that could hide text is overridden */
+    .example-box,
+    .answer-textarea {
+        background: #fff !important;
+        color: #000 !important;
+        border: 1px solid #ccc !important;
+    }
+
+    /* For any remaining hardcoded backgrounds (like icons, badges) force black on white */
+    .module-icon,
+    .lesson-number,
+    .section-icon,
+    .nav-badge,
+    .print-button,
+    .exercise-number {
+        background: #ccc !important;
+        color: #000 !important;
+    }
+}
+/* ===== KaTeX & JSXGraph Integration ===== */
+/* Force LTR for math elements */
+.math-ltr,
+.katex,
+.katex-display,
+.jxgbox {
+    direction: ltr !important;
+    unicode-bidi: isolate;
+}
+
+/* Ensure KaTeX displays inline properly */
+.katex {
+    font-size: 1.1em;
+}
+
+/* Adjust KaTeX display style in example boxes */
+.example-box .katex-display {
+    margin: 0.4rem 0;
+}
+
+/* JSXGraph board container */
+.jxgbox {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    margin: 1rem auto;
+    max-width: 100%;
+    overflow: hidden;
+}

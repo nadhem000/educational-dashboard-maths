@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="page_title">مناظرة قطعة مستقيم بتناظر مركزي - رياضيات السنة الثامنة أساسي</title>
+
+    <!-- External Stylesheets -->
+    <link rel="stylesheet" href="maths_shared.css">
+    <link rel="stylesheet" href="maths_lessons.css">
+
+    <!-- KaTeX -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+
+    <!-- JSXGraph -->
+    <script src="https://cdn.jsdelivr.net/npm/jsxgraph@1.4.0/distrib/jsxgraphcore.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jsxgraph@1.4.0/distrib/jsxgraph.css">
+
+    <script src="maths_lessons.js" defer></script>
+
+    <style>
+        .rule-diagram, .exercise-diagram {
+            margin: 1rem 0;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 0.5rem;
+            background: var(--card-bg);
+        }
+        .diagram-caption {
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-top: 0.3rem;
+            font-style: italic;
+        }
+        .math, .katex, .katex-display {
+            direction: ltr !important;
+            unicode-bidi: isolate;
+        }
+        .example-box, .solution-step-math {
+            direction: rtl !important;
+            text-align: right !important;
+            unicode-bidi: normal !important;
+            white-space: normal !important;
+            overflow-wrap: break-word;
+            word-break: break-word;
+        }
+        .drawing-board {
+            width: 100%;
+            max-width: 500px;
+            height: 300px;
+            margin: 0 auto 0.5rem auto;
+        }
+        .board-controls {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: center;
+            margin-top: 0.5rem;
+        }
+        .board-btn {
+            padding: 0.4rem 1rem;
+            background: var(--secondary);
+            color: var(--white);
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        .board-btn:hover {
+            background: var(--primary);
+        }
+        .check-result {
+            text-align: center;
+            font-weight: 700;
+            margin-top: 0.5rem;
+            min-height: 1.5em;
+        }
+        .check-result.correct { color: var(--success); }
+        .check-result.incorrect { color: var(--error); }
+        .solution-diagram {
+            width: 100%;
+            max-width: 350px;
+            height: 200px;
+            margin: 0 auto;
+        }
+        .coord-input-group {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 0.8rem;
+            flex-wrap: wrap;
+        }
+        .coord-input-group label {
+            font-weight: 600;
+            margin-left: 0.5rem;
+        }
+        .coord-input {
+            width: 70px;
+            padding: 0.3rem;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            text-align: center;
+            font-family: var(--mono);
+        }
+        .coord-display {
+            background: var(--bg-alt);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <main>
+            <!-- Print-only header -->
+            <div class="print-header" data-i18n="print_header">السنة الثامنة أساسي - الهندسة - الدرس 1 - الجزء 6 - و</div>
+
+            <!-- Site Header -->
+            <div class="site-header">
+                <div class="header-icon">
+                    <img src="assets/icons/icon-152x152.png" alt="أيقونة الموقع">
+                </div>
+                <h1 data-i18n="site_header">Educational Dashboard - Mathematics</h1>
+            </div>
+
+            <!-- Top Navigation -->
+            <nav class="top-nav">
+                <a href="maths_y8.html" class="nav-link" data-i18n="back_to_index">← العودة للفهرس</a>
+                <span class="nav-badge" data-i18n="nav_badge">الدرس 1 | الجزء 6 | و</span>
+                <a href="maths_y8_geo_module2_lesson1_sub7.html" class="nav-link" data-i18n="next_lesson">التالي ←</a>
+            </nav>
+
+            <!-- Print Controls -->
+            <div class="print-controls">
+                <label for="print-section" data-i18n="print_label">اختر القسم للطباعة:</label>
+                <select id="print-section" name="print-section">
+                    <option value="all" data-i18n="print_all">الدرس كاملاً</option>
+                    <option value="rules" data-i18n="print_rules">القواعد</option>
+                    <option value="exercises" data-i18n="print_exercises">التمارين</option>
+                    <option value="problems" data-i18n="print_problems">المسائل</option>
+                    <option value="solutions" data-i18n="print_solutions">الحلول</option>
+                </select>
+                <button class="print-button" onclick="printSelected()" data-i18n="print_button">🖨️ طباعة</button>
+                <button id="theme-toggle" class="theme-toggle" aria-label="تبديل الوضع الليلي/النهاري">
+                    <span class="theme-icon">🌙</span>
+                </button>
+
+                <!-- Language Selector -->
+                <div class="language-selector">
+                    <label for="language-select" class="sr-only" data-i18n="language_label">اللغة</label>
+                    <select id="language-select" name="language-select">
+                        <option value="ar" data-i18n="lang_ar">العربية</option>
+                        <option value="en" data-i18n="lang_en">English</option>
+                        <option value="fr" data-i18n="lang_fr">Français</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Lesson Header -->
+            <header class="lesson-header">
+                <span class="module-tag" data-i18n="module_tag">📘 الهندسة | الدرس 1 | الجزء 6 | و</span>
+                <h1 class="lesson-title" data-i18n="lesson_title">مناظرة قطعة مستقيم بتناظر مركزي</h1>
+                <p class="lesson-subtitle" data-i18n="lesson_subtitle">صورة قطعة مستقيم بالتناظر المركزي وحالاتها</p>
+            </header>
+
+            <!-- Section 1: Rules -->
+            <div class="section" id="rules-section">
+                <div class="section-header" onclick="toggleSection('rules-body', 'rules-toggle')" role="button"
+                     tabindex="0" aria-expanded="true" aria-controls="rules-body"
+                     onkeydown="if(event.key==='Enter'||event.key===' ') toggleSection('rules-body', 'rules-toggle')">
+                    <div class="section-icon rules-icon">📐</div>
+                    <div class="section-title">
+                        <h2 data-i18n="rules_title">القواعد</h2>
+                        <p data-i18n="rules_subtitle">صورة قطعة مستقيم بالتناظر المركزي</p>
+                    </div>
+                    <span class="section-toggle open" id="rules-toggle">▼</span>
+                </div>
+                <div class="section-body" id="rules-body">
+                    <!-- Rule 1: Definition -->
+                    <div class="rule-card">
+                        <div class="rule-title" data-i18n="rule1_title">قاعدة 1: تعريف</div>
+                        <div class="rule-text" data-i18n="rule1_text">
+                            صورة القطعة \([AB]\) بالتناظر المركزي الذي مركزه \(O\) هي القطعة \([A'B']\)، حيث \(A'\) و \(B'\) هما صورتا \(A\) و \(B\) على التوالي. أي:
+                            \[ A' = 2O - A \quad \text{و} \quad B' = 2O - B. \]
+                        </div>
+                        <div class="example-box" data-i18n="rule1_example">
+                            إذا كانت \(A(1, 2)\) و \(B(3, 1)\) و \(O(0, 0)\)، فإن \(A'(-1, -2)\) و \(B'(-3, -1)\)، والقطعة \([A'B']\) هي صورة \([AB]\).
+                        </div>
+                        <div class="rule-diagram">
+                            <div id="diagram-rule1" class="jxgbox" style="width:100%; max-width:500px; height:300px;"></div>
+                            <div class="diagram-caption" data-i18n="rule1_caption">اسحب النقطة A أو B أو المركز O لترى القطعة [A'B'] صورتها</div>
+                        </div>
+                    </div>
+
+                    <!-- Rule 2: Distance preserved -->
+                    <div class="rule-card">
+                        <div class="rule-title" data-i18n="rule2_title">قاعدة 2: حفظ الطول</div>
+                        <div class="rule-text" data-i18n="rule2_text">
+                            التناظر المركزي <strong>يحافظ على المسافات</strong>، إذن:
+                            \[ A'B' = AB. \]
+                            أي أن القطعة وصورتها لهما نفس الطول، و \([A'B'] \parallel [AB]\) إذا كان المستقيم \((AB)\) لا يشمل \(O\).
+                        </div>
+                        <div class="example-box" data-i18n="rule2_example">
+                            إذا كان \(AB = 5\text{ cm}\)، فإن \(A'B' = 5\text{ cm}\).
+                        </div>
+                    </div>
+
+                    <!-- Rule 3: Special cases -->
+                    <div class="rule-card">
+                        <div class="rule-title" data-i18n="rule3_title">قاعدة 3: حالات خاصة</div>
+                        <div class="rule-text" data-i18n="rule3_text">
+                            <ul>
+                                <li>إذا كان مركز التناظر \(O\) <strong>منتصف</strong> القطعة \([AB]\)، فإن صورتها \([A'B']\) تنطبق على \([AB]\) مع تبديل الطرفين: \(A' = B\) و \(B' = A\). نقول إن القطعة <strong>صامدة</strong>.</li>
+                                <li>إذا كان \(O\) ينتمي إلى المستقيم \((AB)\) بدون أن يكون منتصف \([AB]\)، فإن \([A'B']\) تقع على المستقيم \((AB)\) نفسه مع انعكاس الاتجاه، ولها نفس الطول \(AB\).</li>
+                                <li>إذا كان \(O\) لا ينتمي إلى \((AB)\)، فإن \([A'B'] \parallel [AB]\) وبنفس الطول.</li>
+                            </ul>
+                        </div>
+                        <div class="example-box" data-i18n="rule3_example">
+                            إذا كانت \(A(-2, 0)\) و \(B(2, 0)\) و \(O(0, 0)\) منتصف \([AB]\)، فإن \(A' = B = (2, 0)\) و \(B' = A = (-2, 0)\)، والقطعة صامدة (تنطبق على نفسها مع تبديل الطرفين).
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 2: Exercises -->
+            <div class="section" id="exercises-section">
+                <div class="section-header" onclick="toggleSection('exercises-body', 'exercises-toggle')" role="button"
+                     tabindex="0" aria-expanded="true" aria-controls="exercises-body"
+                     onkeydown="if(event.key==='Enter'||event.key===' ') toggleSection('exercises-body', 'exercises-toggle')">
+                    <div class="section-icon exercises-icon">✏️</div>
+                    <div class="section-title">
+                        <h2 data-i18n="exercises_title">تمارين</h2>
+                        <p data-i18n="exercises_subtitle">تمرّن على إيجاد صورة قطعة مستقيم بالتناظر المركزي</p>
+                    </div>
+                    <span class="section-toggle open" id="exercises-toggle">▼</span>
+                </div>
+                <div class="section-body" id="exercises-body">
+                    <!-- Exercise 1: Interactive -->
+                    <div class="exercise-item">
+                        <div class="exercise-question">
+                            <span class="exercise-number">1</span>
+                            <span data-i18n="exercise1_q">القطعة \([AB]\) محددة بـ \(A(-2, 1)\) و \(B(1, 2)\)، والمركز \(O(0, 0)\). أنشئ صورتها \([A'B']\) بإدخال إحداثيات \(A'\) و \(B'\).</span>
+                        </div>
+                        <div class="coord-display" data-i18n="ex1_coords_display">
+                            \(A(-2, 1)\) | \(B(1, 2)\) | \(O(0, 0)\)
+                        </div>
+                        <div class="exercise-diagram">
+                            <div id="exercise1-board" class="jxgbox drawing-board"></div>
+                            <div class="board-controls">
+                                <button class="board-btn" onclick="checkEx1()" data-i18n="check_btn">تحقق</button>
+                                <button class="board-btn" onclick="resetEx1()" data-i18n="reset_btn">إعادة</button>
+                            </div>
+                            <div class="coord-input-group">
+                                <span data-i18n="coord_label_A_prime">\(A'\):</span>
+                                <label for="ex1-ax" data-i18n="coord_label_x">x:</label>
+                                <input type="number" id="ex1-ax" class="coord-input" step="any" value="2" dir="ltr">
+                                <label for="ex1-ay" data-i18n="coord_label_y">y:</label>
+                                <input type="number" id="ex1-ay" class="coord-input" step="any" value="-1" dir="ltr">
+                            </div>
+                            <div class="coord-input-group">
+                                <span data-i18n="coord_label_B_prime">\(B'\):</span>
+                                <label for="ex1-bx" data-i18n="coord_label_x">x:</label>
+                                <input type="number" id="ex1-bx" class="coord-input" step="any" value="-1" dir="ltr">
+                                <label for="ex1-by" data-i18n="coord_label_y">y:</label>
+                                <input type="number" id="ex1-by" class="coord-input" step="any" value="-2" dir="ltr">
+                            </div>
+                            <button class="board-btn" onclick="applyCoordsEx1()" data-i18n="apply_coords_btn">تعيين</button>
+                            <div id="ex1-result" class="check-result"></div>
+                            <div class="diagram-caption" data-i18n="exercise1_caption">اسحب النقطتين أو أدخل إحداثياتهما.</div>
+                        </div>
+                    </div>
+
+                    <!-- Exercise 2: Length preservation -->
+                    <div class="exercise-item">
+                        <div class="exercise-question">
+                            <span class="exercise-number">2</span>
+                            <span data-i18n="exercise2_q">القطعة \([AB]\) طولها \(6\text{ cm}\). ما هو طول صورتها \([A'B']\) بالتناظر المركزي؟ علّل.</span>
+                        </div>
+                        <textarea id="answer-ex2" name="answer-ex2" class="answer-textarea" placeholder="اكتب إجابتك هنا..." data-i18n-placeholder="answer_placeholder"></textarea>
+                    </div>
+
+                    <!-- Exercise 3: Compute length -->
+                    <div class="exercise-item">
+                        <div class="exercise-question">
+                            <span class="exercise-number">3</span>
+                            <span data-i18n="exercise3_q">إذا كانت \(A(1, 0)\) و \(B(4, 0)\) و \(O(0, 0)\)، احسب \(AB\) ثم استنتج \(A'B'\) وأعط إحداثيات \(A'\) و \(B'\).</span>
+                        </div>
+                        <textarea id="answer-ex3" name="answer-ex3" class="answer-textarea" placeholder="اكتب إجابتك هنا..." data-i18n-placeholder="answer_placeholder"></textarea>
+                    </div>
+
+                    <!-- Exercise 4: Special case -->
+                    <div class="exercise-item">
+                        <div class="exercise-question">
+                            <span class="exercise-number">4</span>
+                            <span data-i18n="exercise4_q">إذا كان مركز التناظر \(O\) منتصف القطعة \([AB]\)، فما هي صورة \([AB]\)؟ علّل مع مثال عددي.</span>
+                        </div>
+                        <textarea id="answer-ex4" name="answer-ex4" class="answer-textarea" placeholder="اكتب إجابتك هنا..." data-i18n-placeholder="answer_placeholder"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 3: Problems -->
+            <div class="section" id="problems-section">
+                <div class="section-header" onclick="toggleSection('problems-body', 'problems-toggle')" role="button"
+                     tabindex="0" aria-expanded="true" aria-controls="problems-body"
+                     onkeydown="if(event.key==='Enter'||event.key===' ') toggleSection('problems-body', 'problems-toggle')">
+                    <div class="section-icon problems-icon">🧩</div>
+                    <div class="section-title">
+                        <h2 data-i18n="problems_title">مسائل</h2>
+                        <p data-i18n="problems_subtitle">مسائل تطبيقية على صورة قطعة مستقيم</p>
+                    </div>
+                    <span class="section-toggle open" id="problems-toggle">▼</span>
+                </div>
+                <div class="section-body" id="problems-body">
+                    <div class="problem-card">
+                        <div class="problem-title" data-i18n="problem1_title">🏗️ مسألة 1: تصميم حديقة</div>
+                        <div class="problem-text" data-i18n="problem1_text">
+                            أراد مهندس وضع سور مستقيم بطول \(12\text{ m}\) يمثّل القطعة \([AB]\)، وقطعة ثانية \([A'B']\) صورتها بالتناظر المركزي الذي مركزه عمود كهربائي \(O\) لا ينتمي إلى المستقيم \((AB)\). ما هو طول السور الثاني \([A'B']\)؟ وما العلاقة بين السورين؟
+                        </div>
+                    </div>
+                    <div class="problem-card">
+                        <div class="problem-title" data-i18n="problem2_title">🚧 مسألة 2: علامات الطريق</div>
+                        <div class="problem-text" data-i18n="problem2_text">
+                            على طريق مستقيم، وُضعت علامتان \(A(1, 2)\) و \(B(4, 6)\). قرر المهندس إنشاء علامتين \(A'\) و \(B'\) متناظرتين مع \(A\) و \(B\) بالنسبة إلى نقطة \(O(0, 0)\). حدّد إحداثيات \(A'\) و \(B'\)، وتحقّق من أن \(A'B' = AB\)، ثم حدّد العلاقة بين \([A'B']\) و \([AB]\).
+                        </div>
+                    </div>
+                    <div class="problem-card">
+                        <div class="problem-title" data-i18n="problem3_title">📏 مسألة 3: القطعة الصامدة</div>
+                        <div class="problem-text" data-i18n="problem3_text">
+                            لتكن القطعة \([AB]\) بحيث \(A(-3, 0)\) و \(B(3, 0)\)، والمركز \(O(0, 0)\). أثبت أن \(O\) منتصف \([AB]\)، ثم استنتج أن صورة \([AB]\) هي \([AB]\) نفسها مع تبديل الطرفين. بيّن ذلك حسابياً.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 4: Solutions -->
+            <div class="section" id="solutions-section">
+                <div class="section-header" onclick="toggleSection('solutions-body', 'solutions-toggle')" role="button"
+                     tabindex="0" aria-expanded="true" aria-controls="solutions-body"
+                     onkeydown="if(event.key==='Enter'||event.key===' ') toggleSection('solutions-body', 'solutions-toggle')">
+                    <div class="section-icon solutions-icon">✅</div>
+                    <div class="section-title">
+                        <h2 data-i18n="solutions_title">حلول</h2>
+                        <p data-i18n="solutions_subtitle">الحلول المفصلة خطوة بخطوة</p>
+                    </div>
+                    <span class="section-toggle open" id="solutions-toggle">▼</span>
+                </div>
+                <div class="section-body" id="solutions-body">
+                    <div style="margin-bottom: 1.5rem;">
+                        <h3 data-i18n="solutions_exercises_heading">📝 حلول التمارين</h3>
+                        <!-- Solution Exercise 1 -->
+                        <div class="solution-item">
+                            <div class="solution-question" data-i18n="sol_ex1_q">التمرين 1 — صورة القطعة [AB]:</div>
+                            <div class="solution-answer-rtl">
+                                <span data-i18n="sol_ex1_answer">\(A'(2, -1)\) و \(B'(-1, -2)\)، و \(A'B' = AB\).</span>
+                            </div>
+                            <div class="solution-steps">
+                                <ol>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_line_1">الخطوة 1:</span> <span class="solution-step-math" data-i18n="step_ex1_1">بما أن \(O(0, 0)\)، فإن الصورة تُحسب بالعلاقة \(M' = -M\).</span></span></li>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_line_2">الخطوة 2:</span> <span class="solution-step-math" data-i18n="step_ex1_2">\(A' = -A = (2, -1)\) و \(B' = -B = (-1, -2)\).</span></span></li>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_line_3">الخطوة 3:</span> <span class="solution-step-math" data-i18n="step_ex1_3">نحسب \(AB = \sqrt{(1-(-2))^2 + (2-1)^2} = \sqrt{9 + 1} = \sqrt{10}\)، و \(A'B' = \sqrt{(-1-2)^2 + (-2-(-1))^2} = \sqrt{9 + 1} = \sqrt{10}\). إذن \(A'B' = AB\).</span></span></li>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_line_4">الخطوة 4:</span> <span class="solution-step-math" data-i18n="step_ex1_4">ميل \([AB]\) = \(\dfrac{2-1}{1-(-2)} = \dfrac{1}{3}\)، وميل \([A'B']\) = \(\dfrac{-2-(-1)}{-1-2} = \dfrac{1}{3}\)، إذن \([A'B'] \parallel [AB]\).</span></span></li>
+                                </ol>
+                            </div>
+                            <div class="solution-diagram">
+                                <div id="solution-ex1-board" class="jxgbox" style="width:100%; height:200px;"></div>
+                            </div>
+                        </div>
+                        <!-- Solution Exercise 2 -->
+                        <div class="solution-item">
+                            <div class="solution-question" data-i18n="sol_ex2_q">التمرين 2 — طول الصورة:</div>
+                            <div class="solution-answer-rtl">
+                                <span data-i18n="sol_ex2_answer">\(A'B' = 6\text{ cm}\).</span>
+                            </div>
+                            <div class="solution-steps">
+                                <ol>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_line_1">الخطوة 1:</span> <span class="solution-step-math" data-i18n="step_ex2_1">التناظر المركزي يحافظ على المسافات، إذن \(A'B' = AB\).</span></span></li>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_line_2">الخطوة 2:</span> <span class="solution-step-math" data-i18n="step_ex2_2">وبما أن \(AB = 6\text{ cm}\)، فإن \(A'B' = 6\text{ cm}\).</span></span></li>
+                                </ol>
+                            </div>
+                        </div>
+                        <!-- Solution Exercise 3 -->
+                        <div class="solution-item">
+                            <div class="solution-question" data-i18n="sol_ex3_q">التمرين 3 — الحساب والاستنتاج:</div>
+                            <div class="solution-answer-rtl">
+                                <span data-i18n="sol_ex3_answer">\(AB = 3\)، \(A'(-1, 0)\)، \(B'(-4, 0)\)، و \(A'B' = 3\).</span>
+                            </div>
+                            <div class="solution-steps">
+                                <ol>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_line_1">الخطوة 1:</span> <span class="solution-step-math" data-i18n="step_ex3_1">\(AB = |4 - 1| = 3\).</span></span></li>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_line_2">الخطوة 2:</span> <span class="solution-step-math" data-i18n="step_ex3_2">\(A' = -A = (-1, 0)\) و \(B' = -B = (-4, 0)\).</span></span></li>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_line_3">الخطوة 3:</span> <span class="solution-step-math" data-i18n="step_ex3_3">\(A'B' = |-4 - (-1)| = |-3| = 3\)، إذن \(A'B' = AB = 3\).</span></span></li>
+                                </ol>
+                            </div>
+                        </div>
+                        <!-- Solution Exercise 4 -->
+                        <div class="solution-item">
+                            <div class="solution-question" data-i18n="sol_ex4_q">التمرين 4 — حالة خاصة:</div>
+                            <div class="solution-answer-rtl">
+                                <span data-i18n="sol_ex4_answer">صورة \([AB]\) هي \([AB]\) نفسها مع تبديل الطرفين: \(A' = B\) و \(B' = A\).</span>
+                            </div>
+                            <div class="solution-steps">
+                                <ol>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_line_1">الخطوة 1:</span> <span class="solution-step-math" data-i18n="step_ex4_1">\(O\) منتصف \([AB]\)، إذن \(B = 2O - A\)، أي \(B\) هو صورة \(A\).</span></span></li>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_line_2">الخطوة 2:</span> <span class="solution-step-math" data-i18n="step_ex4_2">وبالمثل \(A = 2O - B\)، أي \(A\) هي صورة \(B\).</span></span></li>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_line_3">الخطوة 3:</span> <span class="solution-step-math" data-i18n="step_ex4_3">مثال: \(A(-2, 0)\)، \(B(2, 0)\)، \(O(0, 0)\). \(A' = 2O - A = (2, 0) = B\)، و \(B' = 2O - B = (-2, 0) = A\). إذن \([A'B'] = [BA] = [AB]\).</span></span></li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 data-i18n="solutions_problems_heading">🧩 حلول المسائل</h3>
+                        <!-- Solution Problem 1 -->
+                        <div class="solution-item">
+                            <div class="solution-question" data-i18n="sol_prob1_q">المسألة 1 — تصميم حديقة:</div>
+                            <div class="solution-answer-rtl">
+                                <span data-i18n="sol_prob1_answer">طول السور الثاني \(12\text{ m}\)، والسوران متوازيان ولهما نفس الطول.</span>
+                            </div>
+                            <div class="solution-steps">
+                                <ol>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_line_1">الخطوة 1:</span> <span class="solution-step-math" data-i18n="step_prob1_1">التناظر المركزي يحافظ على المسافات، إذن \(A'B' = AB = 12\text{ m}\).</span></span></li>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_line_2">الخطوة 2:</span> <span class="solution-step-math" data-i18n="step_prob1_2">وبما أن \(O\) لا ينتمي إلى \((AB)\)، فحسب قاعدة صورة مستقيم: \((A'B') \parallel (AB)\)، أي \([A'B'] \parallel [AB]\).</span></span></li>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_line_3">الخطوة 3:</span> <span class="solution-step-math" data-i18n="step_prob1_3">النتيجة: السوران متوازيان ولهما نفس الطول، ويتماثلان بالنسبة إلى العمود \(O\).</span></span></li>
+                                </ol>
+                            </div>
+                        </div>
+                        <!-- Solution Problem 2 -->
+                        <div class="solution-item">
+                            <div class="solution-question" data-i18n="sol_prob2_q">المسألة 2 — علامات الطريق:</div>
+                            <div class="solution-answer-rtl">
+                                <span data-i18n="sol_prob2_answer">\(A'(-1, -2)\) و \(B'(-4, -6)\)، و \(A'B' = AB = 5\)، و \([A'B'] \parallel [AB]\).</span>
+                            </div>
+                            <div class="solution-steps">
+                                <ol>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_line_1">الخطوة 1:</span> <span class="solution-step-math" data-i18n="step_prob2_1">\(O(0, 0)\)، إذن \(M' = -M\): \(A'(-1, -2)\) و \(B'(-4, -6)\).</span></span></li>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_line_2">الخطوة 2:</span> <span class="solution-step-math" data-i18n="step_prob2_2">\(AB = \sqrt{(4-1)^2 + (6-2)^2} = \sqrt{9 + 16} = \sqrt{25} = 5\). و \(A'B' = \sqrt{(-4-(-1))^2 + (-6-(-2))^2} = \sqrt{9 + 16} = 5\). إذن \(A'B' = AB\).</span></span></li>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_line_3">الخطوة 3:</span> <span class="solution-step-math" data-i18n="step_prob2_3">ميل \([AB]\) = \(\dfrac{6-2}{4-1} = \dfrac{4}{3}\)، وميل \([A'B']\) = \(\dfrac{-6-(-2)}{-4-(-1)} = \dfrac{4}{3}\). الميلان متساويان إذن \([A'B'] \parallel [AB]\).</span></span></li>
+                                </ol>
+                            </div>
+                        </div>
+                        <!-- Solution Problem 3 -->
+                        <div class="solution-item">
+                            <div class="solution-question" data-i18n="sol_prob3_q">المسألة 3 — القطعة الصامدة:</div>
+                            <div class="solution-answer-rtl">
+                                <span data-i18n="sol_prob3_answer">\(O\) منتصف \([AB]\)، والصورة هي \([AB]\) نفسها مع \(A' = B\) و \(B' = A\).</span>
+                            </div>
+                            <div class="solution-steps">
+                                <ol>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_line_1">الخطوة 1:</span> <span class="solution-step-math" data-i18n="step_prob3_1">إحداثيات منتصف \([AB]\): \(\left(\dfrac{-3+3}{2}, \dfrac{0+0}{2}\right) = (0, 0) = O\). إذن \(O\) منتصف \([AB]\).</span></span></li>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_line_2">الخطوة 2:</span> <span class="solution-step-math" data-i18n="step_prob3_2">\(A' = 2O - A = -(-3, 0) = (3, 0) = B\)، و \(B' = 2O - B = -(3, 0) = (-3, 0) = A\).</span></span></li>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_line_3">الخطوة 3:</span> <span class="solution-step-math" data-i18n="step_prob3_3">إذن \([A'B'] = [BA] = [AB]\) (القطعة نفسها مع تبديل الطرفين). القطعة صامدة.</span></span></li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="site-footer">
+            <div class="footer-col">
+                <h4 data-i18n="footer_dev">معلومات المطوّر</h4>
+                <p data-i18n="footer_dev_name">طور بواسطة: ماجري زياد</p>
+                <p data-i18n="footer_hosting">الاستضافة: Github, Netlify, Supabase</p>
+            </div>
+            <div class="footer-col">
+                <h4 data-i18n="footer_links">روابط</h4>
+                <a href="#" data-i18n="footer_contact">اتصل بنا</a>
+                <a href="#" data-i18n="footer_policies">السياسات</a>
+            </div>
+            <div class="footer-col">
+                <h4 data-i18n="footer_version">الإصدار</h4>
+                <p data-i18n="footer_version_num">الإصدار: 0.0.2</p>
+                <p data-i18n="footer_rights">جميع الحقوق محفوظة &copy; 2025</p>
+            </div>
+        </footer>
+
+        <!-- Print-only custom footer -->
+        <div class="print-footer">
+            <p data-i18n="print_footer_dev">طور بواسطة: ماجري زياد</p>
+            <p data-i18n="print_footer_version">الإصدار: 0.0.2</p>
+            <p data-i18n="print_footer_page">عنوان الصفحة: maths_y8_geo_module2_lesson1_sub6.html</p>
+        </div>
+    </div>
+
+    <!-- JSXGraph Diagrams and Interactive Exercises -->
+    <script>
+        function t(key) {
+            const lang = document.documentElement.lang || 'ar';
+            return (translations[lang] && translations[lang][key]) || key;
+        }
+
+        // Helper: create coordinate grid (O, I, J)
+        function createCoordinateGrid(board, options = {}) {
+            board.create('axis', [[0,0], [1,0]], { name: 'x', withLabel: true, label: { position: 'rt', offset: [-10, 10] } });
+            board.create('axis', [[0,0], [0,1]], { name: 'y', withLabel: true, label: { position: 'rt', offset: [10, -10] } });
+            board.create('point', [0,0], { name: 'O', size: 2, color: '#333', fixed: true });
+            board.create('point', [1,0], { name: 'I', size: 2, color: '#333', fixed: true });
+            board.create('point', [0,1], { name: 'J', size: 2, color: '#333', fixed: true });
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // ---------- Rule 1: Image of a segment (interactive) ----------
+            const boardRule1 = initJSXGraph('diagram-rule1', {
+                boundingbox: [-6, 6, 6, -6], axis: false, showNavigation: false, showCopyright: false
+            });
+            if (boardRule1) {
+                createCoordinateGrid(boardRule1);
+
+                // Center O (draggable)
+                const O = boardRule1.create('point', [0, 0], { name: 'O', size: 4, color: '#3498db' });
+
+                // Segment endpoints A, B (draggable)
+                const A = boardRule1.create('point', [-2, 1], { name: 'A', size: 3, color: '#e74c3c' });
+                const B = boardRule1.create('point', [1, 2], { name: 'B', size: 3, color: '#e74c3c' });
+
+                // Segment [AB]
+                boardRule1.create('segment', [A, B], { strokeWidth: 3, strokeColor: '#e74c3c' });
+
+                // Images A' = 2O - A, B' = 2O - B
+                const A_prime = boardRule1.create('point', [
+                    function() { return 2*O.X() - A.X(); },
+                    function() { return 2*O.Y() - A.Y(); }
+                ], { name: "A'", size: 3, color: '#2ecc71', fixed: true });
+                const B_prime = boardRule1.create('point', [
+                    function() { return 2*O.X() - B.X(); },
+                    function() { return 2*O.Y() - B.Y(); }
+                ], { name: "B'", size: 3, color: '#2ecc71', fixed: true });
+
+                // Segment [A'B']
+                boardRule1.create('segment', [A_prime, B_prime], { strokeWidth: 3, strokeColor: '#2ecc71', dash: 2 });
+
+                // Segments [AA'] and [BB']
+                boardRule1.create('segment', [A, A_prime], { strokeWidth: 1, strokeColor: '#95a5a6', dash: 3 });
+                boardRule1.create('segment', [B, B_prime], { strokeWidth: 1, strokeColor: '#95a5a6', dash: 3 });
+
+                // Legend
+                boardRule1.create('text', [-5.5, 5.3, () => t('graph_legend')], { fontSize: 13, color: '#1a5276' });
+            }
+
+            // ---------- Exercise 1: Interactive ----------
+            const boardEx1 = initJSXGraph('exercise1-board', {
+                boundingbox: [-6, 6, 6, -6], axis: false, showNavigation: false, showCopyright: false
+            });
+            if (boardEx1) {
+                createCoordinateGrid(boardEx1);
+
+                const Oex = boardEx1.create('point', [0, 0], { name: 'O', size: 4, color: '#3498db', fixed: true });
+
+                const Aex = boardEx1.create('point', [-2, 1], { name: 'A', size: 3, color: '#e74c3c', fixed: true });
+                const Bex = boardEx1.create('point', [1, 2], { name: 'B', size: 3, color: '#e74c3c', fixed: true });
+
+                boardEx1.create('segment', [Aex, Bex], { strokeWidth: 3, strokeColor: '#e74c3c' });
+
+                const A_user = boardEx1.create('point', [2, -1], { name: "A'?", size: 3, color: '#f39c12' });
+                const B_user = boardEx1.create('point', [-1, -2], { name: "B'?", size: 3, color: '#f39c12' });
+
+                boardEx1.create('segment', [A_user, B_user], { strokeWidth: 3, strokeColor: '#f39c12', dash: 2 });
+
+                function expectedImage(M) {
+                    return [2*Oex.X() - M.X(), 2*Oex.Y() - M.Y()];
+                }
+
+                window.checkEx1 = function() {
+                    const expA = expectedImage(Aex);
+                    const expB = expectedImage(Bex);
+                    const userPts = [A_user, B_user];
+                    const expPts = [expA, expB];
+                    let allCorrect = true;
+                    for (let i = 0; i < 2; i++) {
+                        const dist = Math.sqrt((userPts[i].X()-expPts[i][0])**2 + (userPts[i].Y()-expPts[i][1])**2);
+                        if (dist > 0.5) { allCorrect = false; break; }
+                    }
+                    const resultDiv = document.getElementById('ex1-result');
+                    if (allCorrect) {
+                        resultDiv.textContent = t('correct_msg');
+                        resultDiv.className = 'check-result correct';
+                    } else {
+                        resultDiv.textContent = t('incorrect_msg');
+                        resultDiv.className = 'check-result incorrect';
+                    }
+                };
+                window.resetEx1 = function() {
+                    A_user.moveTo([2, -1]);
+                    B_user.moveTo([-1, -2]);
+                    document.getElementById('ex1-result').textContent = '';
+                    document.getElementById('ex1-ax').value = 2;
+                    document.getElementById('ex1-ay').value = -1;
+                    document.getElementById('ex1-bx').value = -1;
+                    document.getElementById('ex1-by').value = -2;
+                };
+                window.applyCoordsEx1 = function() {
+                    const ax = parseFloat(document.getElementById('ex1-ax').value);
+                    const ay = parseFloat(document.getElementById('ex1-ay').value);
+                    const bx = parseFloat(document.getElementById('ex1-bx').value);
+                    const by = parseFloat(document.getElementById('ex1-by').value);
+                    if ([ax, ay, bx, by].some(isNaN)) {
+                        alert(t('invalid_coords'));
+                        return;
+                    }
+                    A_user.moveTo([ax, ay]);
+                    B_user.moveTo([bx, by]);
+                    document.getElementById('ex1-result').textContent = '';
+                };
+            }
+
+            // ---------- Solution diagram for Exercise 1 (static) ----------
+            const boardSolEx1 = initJSXGraph('solution-ex1-board', {
+                boundingbox: [-5, 5, 5, -5], axis: false, showNavigation: false, showCopyright: false
+            });
+            if (boardSolEx1) {
+                createCoordinateGrid(boardSolEx1);
+                const O = boardSolEx1.create('point', [0, 0], { name: 'O', size: 3, color: '#3498db', fixed: true });
+                const A = boardSolEx1.create('point', [-2, 1], { name: 'A', size: 3, color: '#e74c3c', fixed: true });
+                const B = boardSolEx1.create('point', [1, 2], { name: 'B', size: 3, color: '#e74c3c', fixed: true });
+                boardSolEx1.create('segment', [A, B], { strokeWidth: 3, strokeColor: '#e74c3c' });
+                const Ap = boardSolEx1.create('point', [2, -1], { name: "A'", size: 3, color: '#2ecc71', fixed: true });
+                const Bp = boardSolEx1.create('point', [-1, -2], { name: "B'", size: 3, color: '#2ecc71', fixed: true });
+                boardSolEx1.create('segment', [Ap, Bp], { strokeWidth: 3, strokeColor: '#2ecc71', dash: 2 });
+                boardSolEx1.create('segment', [A, Ap], { strokeWidth: 1, strokeColor: '#95a5a6', dash: 3 });
+                boardSolEx1.create('segment', [B, Bp], { strokeWidth: 1, strokeColor: '#95a5a6', dash: 3 });
+            }
+
+            // Observe language changes
+            const observer = new MutationObserver(() => {
+                [boardRule1, boardEx1, boardSolEx1].forEach(b => {
+                    if (b) b.update();
+                });
+            });
+            observer.observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
+        });
+    </script>
+
+    <!-- TRANSLATION OBJECT (full trilingual) -->
+    <script>
+        const translations = {
+            ar: {
+                page_title: "مناظرة قطعة مستقيم بتناظر مركزي - رياضيات السنة الثامنة أساسي",
+                print_header: "السنة الثامنة أساسي - الهندسة - الدرس 1 - الجزء 6 - و",
+                site_header: "Educational Dashboard - Mathematics",
+                back_to_index: "← العودة للفهرس",
+                nav_badge: "الدرس 1 | الجزء 6 | و",
+                next_lesson: "التالي ←",
+                language_label: "اللغة",
+                lang_ar: "العربية",
+                lang_en: "English",
+                lang_fr: "Français",
+                print_label: "اختر القسم للطباعة:",
+                print_all: "الدرس كاملاً",
+                print_rules: "القواعد",
+                print_exercises: "التمارين",
+                print_problems: "المسائل",
+                print_solutions: "الحلول",
+                print_button: "🖨️ طباعة",
+                module_tag: "📘 الهندسة | الدرس 1 | الجزء 6 | و",
+                lesson_title: "مناظرة قطعة مستقيم بتناظر مركزي",
+                lesson_subtitle: "صورة قطعة مستقيم بالتناظر المركزي وحالاتها",
+                rules_title: "القواعد",
+                rules_subtitle: "صورة قطعة مستقيم بالتناظر المركزي",
+                rule1_title: "قاعدة 1: تعريف",
+                rule1_text: "صورة القطعة [AB] بالتناظر المركزي الذي مركزه O هي القطعة [A'B']، حيث A' و B' هما صورتا A و B على التوالي. أي: A' = 2O - A و B' = 2O - B.",
+                rule1_example: "إذا كانت A(1, 2) و B(3, 1) و O(0, 0)، فإن A'(-1, -2) و B'(-3, -1)، والقطعة [A'B'] هي صورة [AB].",
+                rule1_caption: "اسحب النقطة A أو B أو المركز O لترى القطعة [A'B'] صورتها",
+                rule2_title: "قاعدة 2: حفظ الطول",
+                rule2_text: "التناظر المركزي يحافظ على المسافات، إذن A'B' = AB. أي أن القطعة وصورتها لهما نفس الطول، و [A'B'] يوازي [AB] إذا كان المستقيم (AB) لا يشمل O.",
+                rule2_example: "إذا كان \\(AB = 5\\text{ cm}\\)، فإن \\(A'B' = 5\\text{ cm}\\).",
+                rule3_title: "قاعدة 3: حالات خاصة",
+                rule3_text: "إذا كان مركز التناظر O منتصف القطعة [AB]، فإن صورتها [A'B'] تنطبق على [AB] مع تبديل الطرفين: A' = B و B' = A. نقول إن القطعة صامدة. إذا كان O ينتمي إلى المستقيم (AB) بدون أن يكون منتصف [AB]، فإن [A'B'] تقع على المستقيم (AB) نفسه مع انعكاس الاتجاه، ولها نفس الطول AB. إذا كان O لا ينتمي إلى (AB)، فإن [A'B'] يوازي [AB] وبنفس الطول.",
+                rule3_example: "إذا كانت A(-2, 0) و B(2, 0) و O(0, 0) منتصف [AB]، فإن A' = B = (2, 0) و B' = A = (-2, 0)، والقطعة صامدة.",
+                graph_legend: "الأحمر [AB]، الأخضر [A'B'] صورتها بالتناظر المركزي",
+                exercises_title: "تمارين",
+                exercises_subtitle: "تمرّن على إيجاد صورة قطعة مستقيم بالتناظر المركزي",
+                exercise1_q: "القطعة [AB] محددة بـ A(-2, 1) و B(1, 2)، والمركز O(0, 0). أنشئ صورتها [A'B'] بإدخال إحداثيات A' و B'.",
+                exercise1_caption: "اسحب النقطتين أو أدخل إحداثياتهما.",
+                exercise2_q: "القطعة [AB] طولها \\(6\\text{ cm}\\). ما هو طول صورتها [A'B'] بالتناظر المركزي؟ علّل.",
+                exercise3_q: "إذا كانت A(1, 0) و B(4, 0) و O(0, 0)، احسب AB ثم استنتج A'B' وأعط إحداثيات A' و B'.",
+                exercise4_q: "إذا كان مركز التناظر O منتصف القطعة [AB]، فما هي صورة [AB]؟ علّل مع مثال عددي.",
+                answer_placeholder: "اكتب إجابتك هنا...",
+                check_btn: "تحقق",
+                reset_btn: "إعادة",
+                correct_msg: "أحسنت! إجابة صحيحة.",
+                incorrect_msg: "حاول مرة أخرى.",
+                ex1_coords_display: "\\(A(-2, 1)\\) | \\(B(1, 2)\\) | \\(O(0, 0)\\)",
+                coord_label_A_prime: "\\(A'\\):",
+                coord_label_B_prime: "\\(B'\\):",
+                coord_label_x: "x:",
+                coord_label_y: "y:",
+                apply_coords_btn: "تعيين",
+                invalid_coords: "يرجى إدخال قيم صحيحة للإحداثيات.",
+                problems_title: "مسائل",
+                problems_subtitle: "مسائل تطبيقية على صورة قطعة مستقيم",
+                problem1_title: "🏗️ مسألة 1: تصميم حديقة",
+                problem1_text: "أراد مهندس وضع سور مستقيم بطول \\(12\\text{ m}\\) يمثّل القطعة [AB]، وقطعة ثانية [A'B'] صورتها بالتناظر المركزي الذي مركزه عمود كهربائي O لا ينتمي إلى المستقيم (AB). ما هو طول السور الثاني [A'B']؟ وما العلاقة بين السورين؟",
+                problem2_title: "🚧 مسألة 2: علامات الطريق",
+                problem2_text: "على طريق مستقيم، وُضعت علامتان A(1, 2) و B(4, 6). قرر المهندس إنشاء علامتين A' و B' متناظرتين مع A و B بالنسبة إلى نقطة O(0, 0). حدّد إحداثيات A' و B'، وتحقّق من أن A'B' = AB، ثم حدّد العلاقة بين [A'B'] و [AB].",
+                problem3_title: "📏 مسألة 3: القطعة الصامدة",
+                problem3_text: "لتكن القطعة [AB] بحيث A(-3, 0) و B(3, 0)، والمركز O(0, 0). أثبت أن O منتصف [AB]، ثم استنتج أن صورة [AB] هي [AB] نفسها مع تبديل الطرفين. بيّن ذلك حسابياً.",
+                solutions_title: "حلول",
+                solutions_subtitle: "الحلول المفصلة خطوة بخطوة",
+                solutions_exercises_heading: "📝 حلول التمارين",
+                solutions_problems_heading: "🧩 حلول المسائل",
+                sol_ex1_q: "التمرين 1 — صورة القطعة [AB]:",
+                sol_ex1_answer: "A'(2, -1) و B'(-1, -2)، و A'B' = AB.",
+                sol_ex2_q: "التمرين 2 — طول الصورة:",
+                sol_ex2_answer: "\\(A'B' = 6\\text{ cm}\\).",
+                sol_ex3_q: "التمرين 3 — الحساب والاستنتاج:",
+                sol_ex3_answer: "\\(AB = 3\\)، A'(-1, 0)، B'(-4, 0)، و \\(A'B' = 3\\).",
+                sol_ex4_q: "التمرين 4 — حالة خاصة:",
+                sol_ex4_answer: "صورة [AB] هي [AB] نفسها مع تبديل الطرفين: A' = B و B' = A.",
+                sol_prob1_q: "المسألة 1 — تصميم حديقة:",
+                sol_prob2_q: "المسألة 2 — علامات الطريق:",
+                sol_prob3_q: "المسألة 3 — القطعة الصامدة:",
+                sol_prob1_answer: "طول السور الثاني \\(12\\text{ m}\\)، والسوران متوازيان ولهما نفس الطول.",
+                sol_prob2_answer: "A'(-1, -2) و B'(-4, -6)، و \\(A'B' = AB = 5\\)، و [A'B'] يوازي [AB].",
+                sol_prob3_answer: "O منتصف [AB]، والصورة هي [AB] نفسها مع A' = B و B' = A.",
+                step_line_1: "الخطوة 1:",
+                step_line_2: "الخطوة 2:",
+                step_line_3: "الخطوة 3:",
+                step_line_4: "الخطوة 4:",
+                step_ex1_1: "بما أن O(0, 0)، فإن الصورة تُحسب بالعلاقة M' = -M.",
+                step_ex1_2: "A' = -A = (2, -1) و B' = -B = (-1, -2).",
+                step_ex1_3: "نحسب AB = √((1-(-2))² + (2-1)²) = √10، و A'B' = √((-1-2)² + (-2-(-1))²) = √10. إذن A'B' = AB.",
+                step_ex1_4: "ميل [AB] = (2-1)/(1-(-2)) = 1/3، وميل [A'B'] = (-2-(-1))/(-1-2) = 1/3، إذن [A'B'] يوازي [AB].",
+                step_ex2_1: "التناظر المركزي يحافظ على المسافات، إذن A'B' = AB.",
+                step_ex2_2: "وبما أن AB = 6 cm، فإن A'B' = 6 cm.",
+                step_ex3_1: "AB = |4 - 1| = 3.",
+                step_ex3_2: "A' = -A = (-1, 0) و B' = -B = (-4, 0).",
+                step_ex3_3: "A'B' = |-4 - (-1)| = |-3| = 3، إذن A'B' = AB = 3.",
+                step_ex4_1: "O منتصف [AB]، إذن B = 2O - A، أي B هو صورة A.",
+                step_ex4_2: "وبالمثل A = 2O - B، أي A هي صورة B.",
+                step_ex4_3: "مثال: A(-2, 0)، B(2, 0)، O(0, 0). A' = 2O - A = (2, 0) = B، و B' = 2O - B = (-2, 0) = A. إذن [A'B'] = [BA] = [AB].",
+                step_prob1_1: "التناظر المركزي يحافظ على المسافات، إذن A'B' = AB = 12 m.",
+                step_prob1_2: "وبما أن O لا ينتمي إلى (AB)، فحسب قاعدة صورة مستقيم: (A'B') يوازي (AB)، أي [A'B'] يوازي [AB].",
+                step_prob1_3: "النتيجة: السوران متوازيان ولهما نفس الطول، ويتماثلان بالنسبة إلى العمود O.",
+                step_prob2_1: "O(0, 0)، إذن M' = -M: A'(-1, -2) و B'(-4, -6).",
+                step_prob2_2: "AB = √((4-1)² + (6-2)²) = √25 = 5. و A'B' = √((-4-(-1))² + (-6-(-2))²) = √25 = 5. إذن A'B' = AB.",
+                step_prob2_3: "ميل [AB] = (6-2)/(4-1) = 4/3، وميل [A'B'] = (-6-(-2))/(-4-(-1)) = 4/3. الميلان متساويان إذن [A'B'] يوازي [AB].",
+                step_prob3_1: "إحداثيات منتصف [AB]: ((-3+3)/2, (0+0)/2) = (0, 0) = O. إذن O منتصف [AB].",
+                step_prob3_2: "A' = 2O - A = -(-3, 0) = (3, 0) = B، و B' = 2O - B = -(3, 0) = (-3, 0) = A.",
+                step_prob3_3: "إذن [A'B'] = [BA] = [AB] (القطعة نفسها مع تبديل الطرفين). القطعة صامدة.",
+                cm_unit: "cm",
+                footer_dev: "معلومات المطوّر",
+                footer_dev_name: "طور بواسطة: ماجري زياد",
+                footer_hosting: "الاستضافة: Github, Netlify, Supabase",
+                footer_links: "روابط",
+                footer_contact: "اتصل بنا",
+                footer_policies: "السياسات",
+                footer_version: "الإصدار",
+                footer_version_num: "الإصدار: 0.0.2",
+                footer_rights: "جميع الحقوق محفوظة © 2025",
+                print_footer_dev: "طور بواسطة: ماجري زياد",
+                print_footer_version: "الإصدار: 0.0.2",
+                print_footer_page: "عنوان الصفحة: maths_y8_geo_module2_lesson1_sub6.html"
+            },
+            en: {
+                page_title: "Image of a Segment under Central Symmetry - Math Year 8",
+                print_header: "Year 8 – Geometry – Lesson 1 – Part 6 – f",
+                site_header: "Educational Dashboard - Mathematics",
+                back_to_index: "← Back to Index",
+                nav_badge: "Lesson 1 | Part 6 | f",
+                next_lesson: "Next →",
+                language_label: "Language",
+                lang_ar: "العربية",
+                lang_en: "English",
+                lang_fr: "Français",
+                print_label: "Select section to print:",
+                print_all: "Full lesson",
+                print_rules: "Rules",
+                print_exercises: "Exercises",
+                print_problems: "Problems",
+                print_solutions: "Solutions",
+                print_button: "🖨️ Print",
+                module_tag: "📘 Geometry | Lesson 1 | Part 6 | f",
+                lesson_title: "Image of a Segment under Central Symmetry",
+                lesson_subtitle: "Image of a segment under central symmetry and its cases",
+                rules_title: "Rules",
+                rules_subtitle: "Image of a segment under central symmetry",
+                rule1_title: "Rule 1: Definition",
+                rule1_text: "The image of segment [AB] under central symmetry with center O is segment [A'B'], where A' and B' are the images of A and B respectively. That is: A' = 2O - A and B' = 2O - B.",
+                rule1_example: "If A(1, 2), B(3, 1), and O(0, 0), then A'(-1, -2) and B'(-3, -1), and [A'B'] is the image of [AB].",
+                rule1_caption: "Drag point A or B or the center O to see the image segment [A'B']",
+                rule2_title: "Rule 2: Length is preserved",
+                rule2_text: "Central symmetry preserves distances, so A'B' = AB. The segment and its image have the same length, and [A'B'] is parallel to [AB] if line (AB) does not contain O.",
+                rule2_example: "If \\(AB = 5\\text{ cm}\\), then \\(A'B' = 5\\text{ cm}\\).",
+                rule3_title: "Rule 3: Special cases",
+                rule3_text: "If the center of symmetry O is the midpoint of segment [AB], its image [A'B'] coincides with [AB] with endpoints swapped: A' = B and B' = A. The segment is invariant. If O belongs to line (AB) but is not the midpoint, [A'B'] lies on the same line (AB) with reversed direction, with the same length AB. If O does not belong to (AB), [A'B'] is parallel to [AB] with the same length.",
+                rule3_example: "If A(-2, 0), B(2, 0), and O(0, 0) is the midpoint of [AB], then A' = B = (2, 0) and B' = A = (-2, 0); the segment is invariant.",
+                graph_legend: "Red [AB], green [A'B'] its image under central symmetry",
+                exercises_title: "Exercises",
+                exercises_subtitle: "Practice finding the image of a segment under central symmetry",
+                exercise1_q: "Segment [AB] is defined by A(-2, 1) and B(1, 2), with center O(0, 0). Construct its image [A'B'] by entering the coordinates of A' and B'.",
+                exercise1_caption: "Drag the points or enter their coordinates.",
+                exercise2_q: "Segment [AB] has length \\(6\\text{ cm}\\). What is the length of its image [A'B'] under central symmetry? Justify.",
+                exercise3_q: "If A(1, 0), B(4, 0), and O(0, 0), compute AB, deduce A'B', and give the coordinates of A' and B'.",
+                exercise4_q: "If the center of symmetry O is the midpoint of segment [AB], what is the image of [AB]? Justify with a numerical example.",
+                answer_placeholder: "Write your answer here...",
+                check_btn: "Check",
+                reset_btn: "Reset",
+                correct_msg: "Well done! Correct answer.",
+                incorrect_msg: "Try again.",
+                ex1_coords_display: "\\(A(-2, 1)\\) | \\(B(1, 2)\\) | \\(O(0, 0)\\)",
+                coord_label_A_prime: "\\(A'\\):",
+                coord_label_B_prime: "\\(B'\\):",
+                coord_label_x: "x:",
+                coord_label_y: "y:",
+                apply_coords_btn: "Apply",
+                invalid_coords: "Please enter valid coordinates.",
+                problems_title: "Problems",
+                problems_subtitle: "Applied problems on the image of a segment",
+                problem1_title: "🏗️ Problem 1: Garden design",
+                problem1_text: "An engineer wants to place a straight fence of length \\(12\\text{ m}\\) as segment [AB], and a second segment [A'B'] as its image under central symmetry with center O (an electric pole) not on line (AB). What is the length of the second fence [A'B']? What is the relationship between the two fences?",
+                problem2_title: "🚧 Problem 2: Road markers",
+                problem2_text: "On a straight road, two markers A(1, 2) and B(4, 6) are placed. The engineer decides to create two markers A' and B' symmetric to A and B with respect to point O(0, 0). Determine the coordinates of A' and B', verify that A'B' = AB, then state the relationship between [A'B'] and [AB].",
+                problem3_title: "📏 Problem 3: Invariant segment",
+                problem3_text: "Let segment [AB] have A(-3, 0) and B(3, 0), with center O(0, 0). Prove that O is the midpoint of [AB], then deduce that the image of [AB] is [AB] itself with endpoints swapped. Show this computationally.",
+                solutions_title: "Solutions",
+                solutions_subtitle: "Detailed step-by-step solutions",
+                solutions_exercises_heading: "📝 Exercise Solutions",
+                solutions_problems_heading: "🧩 Problem Solutions",
+                sol_ex1_q: "Exercise 1 — Image of segment [AB]:",
+                sol_ex1_answer: "A'(2, -1) and B'(-1, -2), and A'B' = AB.",
+                sol_ex2_q: "Exercise 2 — Length of the image:",
+                sol_ex2_answer: "\\(A'B' = 6\\text{ cm}\\).",
+                sol_ex3_q: "Exercise 3 — Computation and deduction:",
+                sol_ex3_answer: "\\(AB = 3\\), A'(-1, 0), B'(-4, 0), and \\(A'B' = 3\\).",
+                sol_ex4_q: "Exercise 4 — Special case:",
+                sol_ex4_answer: "The image of [AB] is [AB] itself with endpoints swapped: A' = B and B' = A.",
+                sol_prob1_q: "Problem 1 — Garden design:",
+                sol_prob2_q: "Problem 2 — Road markers:",
+                sol_prob3_q: "Problem 3 — Invariant segment:",
+                sol_prob1_answer: "The second fence has length \\(12\\text{ m}\\), and both fences are parallel with the same length.",
+                sol_prob2_answer: "A'(-1, -2) and B'(-4, -6), and \\(A'B' = AB = 5\\), and [A'B'] is parallel to [AB].",
+                sol_prob3_answer: "O is the midpoint of [AB], and the image is [AB] itself with A' = B and B' = A.",
+                step_line_1: "Step 1:",
+                step_line_2: "Step 2:",
+                step_line_3: "Step 3:",
+                step_line_4: "Step 4:",
+                step_ex1_1: "Since O(0, 0), the image is computed by M' = -M.",
+                step_ex1_2: "A' = -A = (2, -1) and B' = -B = (-1, -2).",
+                step_ex1_3: "Compute AB = √((1-(-2))² + (2-1)²) = √10, and A'B' = √((-1-2)² + (-2-(-1))²) = √10. So A'B' = AB.",
+                step_ex1_4: "Slope of [AB] = (2-1)/(1-(-2)) = 1/3, slope of [A'B'] = (-2-(-1))/(-1-2) = 1/3. So [A'B'] is parallel to [AB].",
+                step_ex2_1: "Central symmetry preserves distances, so A'B' = AB.",
+                step_ex2_2: "Since AB = 6 cm, A'B' = 6 cm.",
+                step_ex3_1: "AB = |4 - 1| = 3.",
+                step_ex3_2: "A' = -A = (-1, 0) and B' = -B = (-4, 0).",
+                step_ex3_3: "A'B' = |-4 - (-1)| = 3, so A'B' = AB = 3.",
+                step_ex4_1: "O is the midpoint of [AB], so B = 2O - A, i.e., B is the image of A.",
+                step_ex4_2: "Similarly A = 2O - B, i.e., A is the image of B.",
+                step_ex4_3: "Example: A(-2, 0), B(2, 0), O(0, 0). A' = 2O - A = (2, 0) = B, and B' = 2O - B = (-2, 0) = A. So [A'B'] = [BA] = [AB].",
+                step_prob1_1: "Central symmetry preserves distances, so A'B' = AB = 12 m.",
+                step_prob1_2: "Since O does not belong to (AB), by the line-image rule: (A'B') is parallel to (AB), i.e., [A'B'] is parallel to [AB].",
+                step_prob1_3: "Result: both fences are parallel with the same length, symmetric with respect to pole O.",
+                step_prob2_1: "O(0, 0), so M' = -M: A'(-1, -2) and B'(-4, -6).",
+                step_prob2_2: "AB = √((4-1)² + (6-2)²) = √25 = 5. And A'B' = √((-4-(-1))² + (-6-(-2))²) = √25 = 5. So A'B' = AB.",
+                step_prob2_3: "Slope of [AB] = (6-2)/(4-1) = 4/3, slope of [A'B'] = (-6-(-2))/(-4-(-1)) = 4/3. Equal slopes, so [A'B'] is parallel to [AB].",
+                step_prob3_1: "Midpoint of [AB]: ((-3+3)/2, (0+0)/2) = (0, 0) = O. So O is the midpoint of [AB].",
+                step_prob3_2: "A' = 2O - A = -(-3, 0) = (3, 0) = B, and B' = 2O - B = -(3, 0) = (-3, 0) = A.",
+                step_prob3_3: "So [A'B'] = [BA] = [AB] (the segment itself with endpoints swapped). The segment is invariant.",
+                cm_unit: "cm",
+                footer_dev: "Developer Info",
+                footer_dev_name: "Developed by: Majri Zied",
+                footer_hosting: "Hosting: Github, Netlify, Supabase",
+                footer_links: "Links",
+                footer_contact: "Contact us",
+                footer_policies: "Policies",
+                footer_version: "Version",
+                footer_version_num: "Version: 0.0.2",
+                footer_rights: "All rights reserved © 2025",
+                print_footer_dev: "Developed by: Majri Zied",
+                print_footer_version: "Version: 0.0.2",
+                print_footer_page: "Page address: maths_y8_geo_module2_lesson1_sub6.html"
+            },
+            fr: {
+                page_title: "Image d'un segment par symétrie centrale - Math 8ème année",
+                print_header: "8ème année – Géométrie – Leçon 1 – Partie 6 – f",
+                site_header: "Educational Dashboard - Mathematics",
+                back_to_index: "← Retour à l'index",
+                nav_badge: "Leçon 1 | Partie 6 | f",
+                next_lesson: "Suivant →",
+                language_label: "Langue",
+                lang_ar: "العربية",
+                lang_en: "English",
+                lang_fr: "Français",
+                print_label: "Choisir la section à imprimer :",
+                print_all: "Leçon complète",
+                print_rules: "Règles",
+                print_exercises: "Exercices",
+                print_problems: "Problèmes",
+                print_solutions: "Solutions",
+                print_button: "🖨️ Imprimer",
+                module_tag: "📘 Géométrie | Leçon 1 | Partie 6 | f",
+                lesson_title: "Image d'un segment par symétrie centrale",
+                lesson_subtitle: "Image d'un segment par symétrie centrale et ses cas",
+                rules_title: "Règles",
+                rules_subtitle: "Image d'un segment par symétrie centrale",
+                rule1_title: "Règle 1 : Définition",
+                rule1_text: "L'image du segment [AB] par la symétrie centrale de centre O est le segment [A'B'], où A' et B' sont les images de A et B respectivement. Soit : A' = 2O - A et B' = 2O - B.",
+                rule1_example: "Si A(1, 2), B(3, 1) et O(0, 0), alors A'(-1, -2) et B'(-3, -1), et [A'B'] est l'image de [AB].",
+                rule1_caption: "Faites glisser le point A ou B ou le centre O pour voir le segment image [A'B']",
+                rule2_title: "Règle 2 : Longueur conservée",
+                rule2_text: "La symétrie centrale conserve les distances, donc A'B' = AB. Le segment et son image ont la même longueur, et [A'B'] est parallèle à [AB] si la droite (AB) ne contient pas O.",
+                rule2_example: "Si \\(AB = 5\\text{ cm}\\), alors \\(A'B' = 5\\text{ cm}\\).",
+                rule3_title: "Règle 3 : Cas particuliers",
+                rule3_text: "Si le centre de symétrie O est le milieu du segment [AB], son image [A'B'] coïncide avec [AB] avec les extrémités échangées : A' = B et B' = A. Le segment est invariant. Si O appartient à la droite (AB) sans être le milieu, [A'B'] se trouve sur la même droite (AB) avec direction inversée, et a la même longueur AB. Si O n'appartient pas à (AB), [A'B'] est parallèle à [AB] avec la même longueur.",
+                rule3_example: "Si A(-2, 0), B(2, 0) et O(0, 0) est le milieu de [AB], alors A' = B = (2, 0) et B' = A = (-2, 0) ; le segment est invariant.",
+                graph_legend: "Rouge [AB], vert [A'B'] son image par symétrie centrale",
+                exercises_title: "Exercices",
+                exercises_subtitle: "Entraînez-vous à trouver l'image d'un segment par symétrie centrale",
+                exercise1_q: "Le segment [AB] est défini par A(-2, 1) et B(1, 2), avec le centre O(0, 0). Construisez son image [A'B'] en saisissant les coordonnées de A' et B'.",
+                exercise1_caption: "Faites glisser les points ou entrez leurs coordonnées.",
+                exercise2_q: "Le segment [AB] a une longueur de \\(6\\text{ cm}\\). Quelle est la longueur de son image [A'B'] par symétrie centrale ? Justifiez.",
+                exercise3_q: "Si A(1, 0), B(4, 0) et O(0, 0), calculez AB, déduisez A'B', et donnez les coordonnées de A' et B'.",
+                exercise4_q: "Si le centre de symétrie O est le milieu du segment [AB], quelle est l'image de [AB] ? Justifiez avec un exemple numérique.",
+                answer_placeholder: "Écrivez votre réponse ici...",
+                check_btn: "Vérifier",
+                reset_btn: "Réinitialiser",
+                correct_msg: "Bravo ! Bonne réponse.",
+                incorrect_msg: "Essayez encore.",
+                ex1_coords_display: "\\(A(-2, 1)\\) | \\(B(1, 2)\\) | \\(O(0, 0)\\)",
+                coord_label_A_prime: "\\(A'\\) :",
+                coord_label_B_prime: "\\(B'\\) :",
+                coord_label_x: "x :",
+                coord_label_y: "y :",
+                apply_coords_btn: "Appliquer",
+                invalid_coords: "Veuillez entrer des coordonnées valides.",
+                problems_title: "Problèmes",
+                problems_subtitle: "Problèmes appliqués sur l'image d'un segment",
+                problem1_title: "🏗️ Problème 1 : Conception de jardin",
+                problem1_text: "Un ingénieur veut placer une clôture rectiligne de \\(12\\text{ m}\\) représentant le segment [AB], et un second segment [A'B'] son image par la symétrie centrale de centre O (un poteau électrique) n'appartenant pas à la droite (AB). Quelle est la longueur de la seconde clôture [A'B'] ? Quelle est la relation entre les deux clôtures ?",
+                problem2_title: "🚧 Problème 2 : Marqueurs routiers",
+                problem2_text: "Sur une route rectiligne, deux marqueurs A(1, 2) et B(4, 6) sont placés. L'ingénieur décide de créer deux marqueurs A' et B' symétriques de A et B par rapport au point O(0, 0). Déterminez les coordonnées de A' et B', vérifiez que A'B' = AB, puis énoncez la relation entre [A'B'] et [AB].",
+                problem3_title: "📏 Problème 3 : Segment invariant",
+                problem3_text: "Soit le segment [AB] avec A(-3, 0) et B(3, 0), et le centre O(0, 0). Prouvez que O est le milieu de [AB], puis déduisez que l'image de [AB] est [AB] lui-même avec les extrémités échangées. Montrez-le par le calcul.",
+                solutions_title: "Solutions",
+                solutions_subtitle: "Solutions détaillées étape par étape",
+                solutions_exercises_heading: "📝 Solutions des exercices",
+                solutions_problems_heading: "🧩 Solutions des problèmes",
+                sol_ex1_q: "Exercice 1 — Image du segment [AB] :",
+                sol_ex1_answer: "A'(2, -1) et B'(-1, -2), et A'B' = AB.",
+                sol_ex2_q: "Exercice 2 — Longueur de l'image :",
+                sol_ex2_answer: "\\(A'B' = 6\\text{ cm}\\).",
+                sol_ex3_q: "Exercice 3 — Calcul et déduction :",
+                sol_ex3_answer: "\\(AB = 3\\), A'(-1, 0), B'(-4, 0), et \\(A'B' = 3\\).",
+                sol_ex4_q: "Exercice 4 — Cas particulier :",
+                sol_ex4_answer: "L'image de [AB] est [AB] lui-même avec les extrémités échangées : A' = B et B' = A.",
+                sol_prob1_q: "Problème 1 — Conception de jardin :",
+                sol_prob2_q: "Problème 2 — Marqueurs routiers :",
+                sol_prob3_q: "Problème 3 — Segment invariant :",
+                sol_prob1_answer: "La seconde clôture a une longueur de \\(12\\text{ m}\\), et les deux clôtures sont parallèles avec la même longueur.",
+                sol_prob2_answer: "A'(-1, -2) et B'(-4, -6), et \\(A'B' = AB = 5\\), et [A'B'] est parallèle à [AB].",
+                sol_prob3_answer: "O est le milieu de [AB], et l'image est [AB] lui-même avec A' = B et B' = A.",
+                step_line_1: "Étape 1 :",
+                step_line_2: "Étape 2 :",
+                step_line_3: "Étape 3 :",
+                step_line_4: "Étape 4 :",
+                step_ex1_1: "Puisque O(0, 0), l'image se calcule par M' = -M.",
+                step_ex1_2: "A' = -A = (2, -1) et B' = -B = (-1, -2).",
+                step_ex1_3: "Calculer AB = √((1-(-2))² + (2-1)²) = √10, et A'B' = √((-1-2)² + (-2-(-1))²) = √10. Donc A'B' = AB.",
+                step_ex1_4: "Pente de [AB] = (2-1)/(1-(-2)) = 1/3, pente de [A'B'] = (-2-(-1))/(-1-2) = 1/3. Donc [A'B'] est parallèle à [AB].",
+                step_ex2_1: "La symétrie centrale conserve les distances, donc A'B' = AB.",
+                step_ex2_2: "Puisque AB = 6 cm, A'B' = 6 cm.",
+                step_ex3_1: "AB = |4 - 1| = 3.",
+                step_ex3_2: "A' = -A = (-1, 0) et B' = -B = (-4, 0).",
+                step_ex3_3: "A'B' = |-4 - (-1)| = 3, donc A'B' = AB = 3.",
+                step_ex4_1: "O est le milieu de [AB], donc B = 2O - A, c'est-à-dire B est l'image de A.",
+                step_ex4_2: "De même A = 2O - B, c'est-à-dire A est l'image de B.",
+                step_ex4_3: "Exemple : A(-2, 0), B(2, 0), O(0, 0). A' = 2O - A = (2, 0) = B, et B' = 2O - B = (-2, 0) = A. Donc [A'B'] = [BA] = [AB].",
+                step_prob1_1: "La symétrie centrale conserve les distances, donc A'B' = AB = 12 m.",
+                step_prob1_2: "Puisque O n'appartient pas à (AB), par la règle de l'image d'une droite : (A'B') est parallèle à (AB), donc [A'B'] est parallèle à [AB].",
+                step_prob1_3: "Résultat : les deux clôtures sont parallèles avec la même longueur, symétriques par rapport au poteau O.",
+                step_prob2_1: "O(0, 0), donc M' = -M : A'(-1, -2) et B'(-4, -6).",
+                step_prob2_2: "AB = √((4-1)² + (6-2)²) = √25 = 5. Et A'B' = √((-4-(-1))² + (-6-(-2))²) = √25 = 5. Donc A'B' = AB.",
+                step_prob2_3: "Pente de [AB] = (6-2)/(4-1) = 4/3, pente de [A'B'] = (-6-(-2))/(-4-(-1)) = 4/3. Pentes égales, donc [A'B'] est parallèle à [AB].",
+                step_prob3_1: "Milieu de [AB] : ((-3+3)/2, (0+0)/2) = (0, 0) = O. Donc O est le milieu de [AB].",
+                step_prob3_2: "A' = 2O - A = -(-3, 0) = (3, 0) = B, et B' = 2O - B = -(3, 0) = (-3, 0) = A.",
+                step_prob3_3: "Donc [A'B'] = [BA] = [AB] (le segment lui-même avec les extrémités échangées). Le segment est invariant.",
+                cm_unit: "cm",
+                footer_dev: "Informations du développeur",
+                footer_dev_name: "Développé par : Majri Zied",
+                footer_hosting: "Hébergement : Github, Netlify, Supabase",
+                footer_links: "Liens",
+                footer_contact: "Contactez-nous",
+                footer_policies: "Politiques",
+                footer_version: "Version",
+                footer_version_num: "Version : 0.0.2",
+                footer_rights: "Tous droits réservés © 2025",
+                print_footer_dev: "Développé par : Majri Zied",
+                print_footer_version: "Version : 0.0.2",
+                print_footer_page: "Adresse de la page : maths_y8_geo_module2_lesson1_sub6.html"
+            }
+        };
+    </script>
+</body>
+</html>

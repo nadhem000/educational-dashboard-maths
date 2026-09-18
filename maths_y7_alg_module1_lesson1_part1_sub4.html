@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="page_title">الإختصار - رياضيات السنة السابعة أساسي</title>
+
+    <!-- External Stylesheets -->
+    <link rel="stylesheet" href="maths_shared.css">
+    <link rel="stylesheet" href="maths_lessons.css">
+
+    <!-- KaTeX -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+
+    <!-- JSXGraph (not used in this lesson, but kept for consistency) -->
+    <script src="https://cdn.jsdelivr.net/npm/jsxgraph@1.4.0/distrib/jsxgraphcore.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jsxgraph@1.4.0/distrib/jsxgraph.css">
+
+    <!-- External Script -->
+    <script src="maths_lessons.js" defer></script>
+</head>
+<body>
+    <div class="container">
+        <main>
+            <!-- Print-only header -->
+            <div class="print-header" data-i18n="print_header">السنة السابعة أساسي - الوحدة الأولى - الدرس الأول - الجزء 1 - د</div>
+
+            <!-- Site Header -->
+            <div class="site-header">
+                <div class="header-icon">
+                    <img src="assets/icons/icon-152x152.png" alt="أيقونة الموقع">
+                </div>
+                <h1 data-i18n="site_header">Educational Dashboard - Mathematics</h1>
+            </div>
+
+            <!-- Top Navigation -->
+            <nav class="top-nav">
+                <a href="maths_y7.html" class="nav-link" data-i18n="back_to_index">← العودة للفهرس</a>
+                <span class="nav-badge" data-i18n="nav_badge">الدرس 1 | جزء 1 | د</span>
+                <a href="maths_y7_alg_module1_lesson1_part1_sub5.html" class="nav-link" data-i18n="next_part">التالي ←</a>
+            </nav>
+
+            <!-- Print Controls -->
+            <div class="print-controls">
+                <label for="print-section" data-i18n="print_label">اختر القسم للطباعة:</label>
+                <select id="print-section" name="print-section">
+                    <option value="all" data-i18n="print_all">الدرس كاملاً</option>
+                    <option value="rules" data-i18n="print_rules">القواعد</option>
+                    <option value="exercises" data-i18n="print_exercises">التمارين</option>
+                    <option value="problems" data-i18n="print_problems">المسائل</option>
+                    <option value="solutions" data-i18n="print_solutions">الحلول</option>
+                </select>
+                <button class="print-button" onclick="printSelected()" data-i18n="print_button">🖨️ طباعة</button>
+                <button id="theme-toggle" class="theme-toggle" aria-label="تبديل الوضع الليلي/النهاري">
+                    <span class="theme-icon">🌙</span>
+                </button>
+
+                <!-- Language Selector -->
+                <div class="language-selector">
+                    <label for="language-select" class="sr-only" data-i18n="language_label">اللغة</label>
+                    <select id="language-select" name="language-select">
+                        <option value="ar" data-i18n="lang_ar">العربية</option>
+                        <option value="en" data-i18n="lang_en">English</option>
+                        <option value="fr" data-i18n="lang_fr">Français</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Lesson Header -->
+            <header class="lesson-header">
+                <span class="module-tag" data-i18n="module_tag">📘 الجبر والحساب | الدرس 1 | الجزء 1 | د</span>
+                <h1 class="lesson-title" data-i18n="lesson_title">الإختصار</h1>
+                <p class="lesson-subtitle" data-i18n="lesson_subtitle">جمع الحدود المتشابهة وتبسيط التعابير الجبرية</p>
+            </header>
+
+            <!-- Section 1: Rules -->
+            <div class="section" id="rules-section">
+                <div class="section-header" onclick="toggleSection('rules-body', 'rules-toggle')" role="button"
+                     tabindex="0" aria-expanded="true" aria-controls="rules-body"
+                     onkeydown="if(event.key==='Enter'||event.key===' ') toggleSection('rules-body', 'rules-toggle')">
+                    <div class="section-icon rules-icon">📐</div>
+                    <div class="section-title">
+                        <h2 data-i18n="rules_title">القواعد</h2>
+                        <p data-i18n="rules_subtitle">تذكير سريع بقواعد الإختصار</p>
+                    </div>
+                    <span class="section-toggle open" id="rules-toggle">▼</span>
+                </div>
+                <div class="section-body" id="rules-body">
+                    <div class="rule-card">
+                        <div class="rule-title" data-i18n="rule1_title">قاعدة 1: الحدود المتشابهة</div>
+                        <div class="rule-text" data-i18n="rule1_text">الحدود المتشابهة هي التي تحتوي على نفس المتغير ونفس الأس. الأعداد الثابتة تعتبر متشابهة مع بعضها.</div>
+                        <div class="example-box" data-i18n="rule1_example">\(3x\) و \(5x\) متشابهان &nbsp;|&nbsp; \(2y\) و \(-4y\) متشابهان &nbsp;|&nbsp; \(7\) و \(2\) متشابهان</div>
+                    </div>
+                    <div class="rule-card">
+                        <div class="rule-title" data-i18n="rule2_title">قاعدة 2: جمع الحدود المتشابهة</div>
+                        <div class="rule-text" data-i18n="rule2_text">لجمع الحدود المتشابهة، نجمع معاملاتها (الأعداد) ونُبقي الجزء المتغير كما هو.</div>
+                        <div class="example-box">\(4a + 3a = 7a\) &nbsp;|&nbsp; \(6b - 2b = 4b\)</div>
+                    </div>
+                    <div class="rule-card">
+                        <div class="rule-title" data-i18n="rule3_title">قاعدة 3: إزالة الأقواس المسبوقة بـ + أو -</div>
+                        <div class="rule-text" data-i18n="rule3_text">إذا كان القوس مسبوقًا بـ + نحذف القوس مع إبقاء الإشارات داخله. إذا كان مسبوقًا بـ - نعكس إشارات جميع الحدود داخله.</div>
+                        <div class="example-box">\(3x + (2x - 5) = 3x + 2x - 5 = 5x - 5\)<br>\(4y - (2y + 3) = 4y - 2y - 3 = 2y - 3\)</div>
+                    </div>
+                    <div class="rule-card">
+                        <div class="rule-title" data-i18n="rule4_title">قاعدة 4: الإختصار بعد النشر</div>
+                        <div class="rule-text" data-i18n="rule4_text">إذا كان في العبارة ضرب (نشر)، ننشر أولاً ثم نجمع الحدود المتشابهة.</div>
+                        <div class="example-box">\(2(x + 3) + 4x = 2x + 6 + 4x = 6x + 6\)</div>
+                    </div>
+                    <div class="rule-card">
+                        <div class="rule-title" data-i18n="rule5_title">قاعدة 5: تبسيط العبارات</div>
+                        <div class="rule-text" data-i18n="rule5_text">الهدف من الإختصار هو كتابة العبارة في أبسط صورة ممكنة بعدد أقل من الحدود.</div>
+                        <div class="example-box">\(5a + 3b + 2a - b = 7a + 2b\)</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 2: Exercises -->
+            <div class="section" id="exercises-section">
+                <div class="section-header" onclick="toggleSection('exercises-body', 'exercises-toggle')" role="button"
+                     tabindex="0" aria-expanded="true" aria-controls="exercises-body"
+                     onkeydown="if(event.key==='Enter'||event.key===' ') toggleSection('exercises-body', 'exercises-toggle')">
+                    <div class="section-icon exercises-icon">✏️</div>
+                    <div class="section-title">
+                        <h2 data-i18n="exercises_title">تمارين</h2>
+                        <p data-i18n="exercises_subtitle">تدرب على اختصار التعابير الجبرية</p>
+                    </div>
+                    <span class="section-toggle open" id="exercises-toggle">▼</span>
+                </div>
+                <div class="section-body" id="exercises-body">
+                    <!-- Exercise 1 -->
+                    <div class="exercise-item">
+                        <div class="exercise-question">
+                            <span class="exercise-number">1</span>
+                            <span data-i18n="exercise1_q">اجمع الحدود المتشابهة:</span>
+                        </div>
+                        <div class="exercise-sub"><span class="sub-label" data-i18n="sub_label_a">أ)</span><span class="sub-math">\(3x + 5x =\)</span></div>
+                        <div class="exercise-sub"><span class="sub-label" data-i18n="sub_label_b">ب)</span><span class="sub-math">\(7y - 4y =\)</span></div>
+                        <div class="exercise-sub"><span class="sub-label" data-i18n="sub_label_c">ج)</span><span class="sub-math">\(2a + 3a - a =\)</span></div>
+                        <textarea id="answer-ex1" name="answer-ex1" class="answer-textarea" placeholder="اكتب إجابتك هنا..." data-i18n-placeholder="answer_placeholder"></textarea>
+                        <div class="exercise-hint" data-i18n="exercise1_hint">💡 اجمع المعاملات واترك المتغير كما هو.</div>
+                    </div>
+                    <!-- Exercise 2 -->
+                    <div class="exercise-item">
+                        <div class="exercise-question">
+                            <span class="exercise-number">2</span>
+                            <span data-i18n="exercise2_q">بسّط بإزالة الأقواس:</span>
+                        </div>
+                        <div class="exercise-sub"><span class="sub-label" data-i18n="sub_label_a">أ)</span><span class="sub-math">\(5 + (2x - 3) =\)</span></div>
+                        <div class="exercise-sub"><span class="sub-label" data-i18n="sub_label_b">ب)</span><span class="sub-math">\(8 - (3y + 2) =\)</span></div>
+                        <div class="exercise-sub"><span class="sub-label" data-i18n="sub_label_c">ج)</span><span class="sub-math">\(4a + (2a - 5) - (a + 1) =\)</span></div>
+                        <textarea id="answer-ex2" name="answer-ex2" class="answer-textarea" placeholder="اكتب إجابتك هنا..." data-i18n-placeholder="answer_placeholder"></textarea>
+                        <div class="exercise-hint" data-i18n="exercise2_hint">💡 تذكر: القوس المسبوق بـ - يقلب إشارات حدوده.</div>
+                    </div>
+                    <!-- Exercise 3 -->
+                    <div class="exercise-item">
+                        <div class="exercise-question">
+                            <span class="exercise-number">3</span>
+                            <span data-i18n="exercise3_q">بسّط العبارات التالية:</span>
+                        </div>
+                        <div class="exercise-sub"><span class="sub-label" data-i18n="sub_label_a">أ)</span><span class="sub-math">\(2x + 3y + 4x - y =\)</span></div>
+                        <div class="exercise-sub"><span class="sub-label" data-i18n="sub_label_b">ب)</span><span class="sub-math">\(5m - 2n + 3m + 4n =\)</span></div>
+                        <div class="exercise-sub"><span class="sub-label" data-i18n="sub_label_c">ج)</span><span class="sub-math">\(6p + 2q - 3p + q =\)</span></div>
+                        <textarea id="answer-ex3" name="answer-ex3" class="answer-textarea" placeholder="اكتب إجابتك هنا..." data-i18n-placeholder="answer_placeholder"></textarea>
+                    </div>
+                    <!-- Exercise 4 -->
+                    <div class="exercise-item">
+                        <div class="exercise-question">
+                            <span class="exercise-number">4</span>
+                            <span data-i18n="exercise4_q">انشر ثم اختصر:</span>
+                        </div>
+                        <div class="exercise-sub"><span class="sub-label" data-i18n="sub_label_a">أ)</span><span class="sub-math">\(2(x + 3) + 4x =\)</span></div>
+                        <div class="exercise-sub"><span class="sub-label" data-i18n="sub_label_b">ب)</span><span class="sub-math">\(3(2y - 1) - 2y =\)</span></div>
+                        <div class="exercise-sub"><span class="sub-label" data-i18n="sub_label_c">ج)</span><span class="sub-math">\(5a + 2(3a - 4) =\)</span></div>
+                        <textarea id="answer-ex4" name="answer-ex4" class="answer-textarea" placeholder="اكتب إجابتك هنا..." data-i18n-placeholder="answer_placeholder"></textarea>
+                        <div class="exercise-hint" data-i18n="exercise4_hint">💡 وزّع أولاً ثم اجمع المتشابهات.</div>
+                    </div>
+                    <!-- Exercise 5 -->
+                    <div class="exercise-item">
+                        <div class="exercise-question">
+                            <span class="exercise-number">5</span>
+                            <span data-i18n="exercise5_q">تحدٍ: بسّط العبارات الأكثر تعقيدًا:</span>
+                        </div>
+                        <div class="exercise-sub"><span class="sub-label" data-i18n="sub_label_a">أ)</span><span class="sub-math">\(3x + 2(x - 1) - (x + 4) =\)</span></div>
+                        <div class="exercise-sub"><span class="sub-label" data-i18n="sub_label_b">ب)</span><span class="sub-math">\(4(2m + n) - 3(m - 2n) =\)</span></div>
+                        <textarea id="answer-ex5" name="answer-ex5" class="answer-textarea" placeholder="اكتب إجابتك هنا..." data-i18n-placeholder="answer_placeholder"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 3: Problems -->
+            <div class="section" id="problems-section">
+                <div class="section-header" onclick="toggleSection('problems-body', 'problems-toggle')" role="button"
+                     tabindex="0" aria-expanded="true" aria-controls="problems-body"
+                     onkeydown="if(event.key==='Enter'||event.key===' ') toggleSection('problems-body', 'problems-toggle')">
+                    <div class="section-icon problems-icon">🧩</div>
+                    <div class="section-title">
+                        <h2 data-i18n="problems_title">مسائل</h2>
+                        <p data-i18n="problems_subtitle">مسائل تطبيقية على الإختصار</p>
+                    </div>
+                    <span class="section-toggle open" id="problems-toggle">▼</span>
+                </div>
+                <div class="section-body" id="problems-body">
+                    <div class="problem-card">
+                        <div class="problem-title" data-i18n="problem1_title">🧑‍🏫 مسألة 1: عدد التلاميذ</div>
+                        <div class="problem-text" data-i18n="problem1_text">في قسم عدد البنات \(x\) وعدد البنين \(2x + 3\). اكتب عبارة مبسطة لعدد التلاميذ الكلي.</div>
+                    </div>
+                    <div class="problem-card">
+                        <div class="problem-title" data-i18n="problem2_title">🐔 مسألة 2: مزرعة</div>
+                        <div class="problem-text" data-i18n="problem2_text">عند فلاح \(2x\) دجاجة و \(x + 3\) أرنبًا. اكتب عبارة مبسطة للعدد الجملي للحيوانات.</div>
+                    </div>
+                    <div class="problem-card">
+                        <div class="problem-title" data-i18n="problem3_title">🛒 مسألة 3: مشتريات</div>
+                        <div class="problem-text" data-i18n="problem3_text">اشترى تلميذ 3 أقلام ثمن الواحد \(x\) دينار، ودفترًا ثمنه 5 دنانير. ثم أعاد قلمين. اكتب عبارة مبسطة للمبلغ المتبقي.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 4: Solutions -->
+            <div class="section" id="solutions-section">
+                <div class="section-header" onclick="toggleSection('solutions-body', 'solutions-toggle')" role="button"
+                     tabindex="0" aria-expanded="true" aria-controls="solutions-body"
+                     onkeydown="if(event.key==='Enter'||event.key===' ') toggleSection('solutions-body', 'solutions-toggle')">
+                    <div class="section-icon solutions-icon">✅</div>
+                    <div class="section-title">
+                        <h2 data-i18n="solutions_title">حلول</h2>
+                        <p data-i18n="solutions_subtitle">الحلول الكاملة لجميع التمارين والمسائل</p>
+                    </div>
+                    <span class="section-toggle open" id="solutions-toggle">▼</span>
+                </div>
+                <div class="section-body" id="solutions-body">
+                    <div style="margin-bottom: 1.5rem;">
+                        <h3 data-i18n="solutions_exercises_heading">📝 حلول التمارين</h3>
+                        <!-- Exercise 1 -->
+                        <div class="solution-item">
+                            <div class="solution-question" data-i18n="sol_ex1_q">التمرين 1:</div>
+                            <div class="solution-answer-rtl">
+                                <span data-i18n="sub_label_a">أ)</span> \(8x\) &nbsp;|&nbsp;
+                                <span data-i18n="sub_label_b">ب)</span> \(3y\) &nbsp;|&nbsp;
+                                <span data-i18n="sub_label_c">ج)</span> \(4a\)
+                            </div>
+                            <div class="solution-steps">
+                                <ol>
+                                    <li><span class="solution-step-math">\(3x + 5x = (3+5)x = 8x\)</span></li>
+                                    <li><span class="solution-step-math">\(7y - 4y = (7-4)y = 3y\)</span></li>
+                                    <li><span class="solution-step-math">\(2a + 3a - a = (2+3-1)a = 4a\)</span></li>
+                                </ol>
+                            </div>
+                        </div>
+                        <!-- Exercise 2 -->
+                        <div class="solution-item">
+                            <div class="solution-question" data-i18n="sol_ex2_q">التمرين 2:</div>
+                            <div class="solution-answer-rtl">
+                                <span data-i18n="sub_label_a">أ)</span> \(2x + 2\) &nbsp;|&nbsp;
+                                <span data-i18n="sub_label_b">ب)</span> \(6 - 3y\) &nbsp;|&nbsp;
+                                <span data-i18n="sub_label_c">ج)</span> \(5a - 6\)
+                            </div>
+                            <div class="solution-steps">
+                                <ol>
+                                    <li><span class="solution-step-math">\(5 + (2x - 3) = 5 + 2x - 3 = 2x + 2\)</span></li>
+                                    <li><span class="solution-step-math">\(8 - (3y + 2) = 8 - 3y - 2 = 6 - 3y\)</span></li>
+                                    <li><span class="solution-step-math">\(4a + (2a - 5) - (a + 1) = 4a + 2a - 5 - a - 1 = 5a - 6\)</span></li>
+                                </ol>
+                            </div>
+                        </div>
+                        <!-- Exercise 3 -->
+                        <div class="solution-item">
+                            <div class="solution-question" data-i18n="sol_ex3_q">التمرين 3:</div>
+                            <div class="solution-answer-rtl">
+                                <span data-i18n="sub_label_a">أ)</span> \(6x + 2y\) &nbsp;|&nbsp;
+                                <span data-i18n="sub_label_b">ب)</span> \(8m + 2n\) &nbsp;|&nbsp;
+                                <span data-i18n="sub_label_c">ج)</span> \(3p + 3q\)
+                            </div>
+                            <div class="solution-steps">
+                                <ol>
+                                    <li><span class="solution-step-math">\(2x + 3y + 4x - y = (2+4)x + (3-1)y = 6x + 2y\)</span></li>
+                                    <li><span class="solution-step-math">\(5m - 2n + 3m + 4n = (5+3)m + (-2+4)n = 8m + 2n\)</span></li>
+                                    <li><span class="solution-step-math">\(6p + 2q - 3p + q = (6-3)p + (2+1)q = 3p + 3q\)</span></li>
+                                </ol>
+                            </div>
+                        </div>
+                        <!-- Exercise 4 -->
+                        <div class="solution-item">
+                            <div class="solution-question" data-i18n="sol_ex4_q">التمرين 4:</div>
+                            <div class="solution-answer-rtl">
+                                <span data-i18n="sub_label_a">أ)</span> \(6x + 6\) &nbsp;|&nbsp;
+                                <span data-i18n="sub_label_b">ب)</span> \(4y - 3\) &nbsp;|&nbsp;
+                                <span data-i18n="sub_label_c">ج)</span> \(11a - 8\)
+                            </div>
+                            <div class="solution-steps">
+                                <ol>
+                                    <li><span class="solution-step-math">\(2(x+3)+4x = 2x + 6 + 4x = 6x + 6\)</span></li>
+                                    <li><span class="solution-step-math">\(3(2y-1)-2y = 6y - 3 - 2y = 4y - 3\)</span></li>
+                                    <li><span class="solution-step-math">\(5a + 2(3a-4) = 5a + 6a - 8 = 11a - 8\)</span></li>
+                                </ol>
+                            </div>
+                        </div>
+                        <!-- Exercise 5 -->
+                        <div class="solution-item">
+                            <div class="solution-question" data-i18n="sol_ex5_q">التمرين 5 (تحدٍ):</div>
+                            <div class="solution-answer-rtl">
+                                <span data-i18n="sub_label_a">أ)</span> \(4x - 6\) &nbsp;|&nbsp;
+                                <span data-i18n="sub_label_b">ب)</span> \(5m + 10n\)
+                            </div>
+                            <div class="solution-steps">
+                                <ol>
+                                    <li><span class="solution-step-math">\(3x + 2(x-1) - (x+4) = 3x + 2x - 2 - x - 4 = 4x - 6\)</span></li>
+                                    <li><span class="solution-step-math">\(4(2m+n) - 3(m-2n) = 8m + 4n - 3m + 6n = 5m + 10n\)</span></li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 data-i18n="solutions_problems_heading">🧩 حلول المسائل</h3>
+                        <!-- Problem 1 -->
+                        <div class="solution-item">
+                            <div class="solution-question" data-i18n="sol_prob1_q">المسألة 1:</div>
+                            <div class="solution-answer-rtl" data-i18n="sol_prob1_answer">\(3x + 3\) تلميذًا</div>
+                            <div class="solution-steps">
+                                <ol>
+                                    <li><span class="solution-step-math">\(x + (2x + 3) = x + 2x + 3 = 3x + 3\)</span></li>
+                                </ol>
+                            </div>
+                        </div>
+                        <!-- Problem 2 -->
+                        <div class="solution-item">
+                            <div class="solution-question" data-i18n="sol_prob2_q">المسألة 2:</div>
+                            <div class="solution-answer-rtl" data-i18n="sol_prob2_answer">\(3x + 3\) حيوانًا</div>
+                            <div class="solution-steps">
+                                <ol>
+                                    <li><span class="solution-step-math">\(2x + (x + 3) = 2x + x + 3 = 3x + 3\)</span></li>
+                                </ol>
+                            </div>
+                        </div>
+                        <!-- Problem 3 -->
+                        <div class="solution-item">
+                            <div class="solution-question" data-i18n="sol_prob3_q">المسألة 3:</div>
+                            <div class="solution-answer-rtl" data-i18n="sol_prob3_answer">\(x + 5\) دينار</div>
+                            <div class="solution-steps">
+                                <ol>
+                                    <li><span class="solution-step-math">\(3x + 5 - 2x = x + 5\)</span></li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="site-footer">
+            <div class="footer-col">
+                <h4 data-i18n="footer_dev">معلومات المطوّر</h4>
+                <p data-i18n="footer_dev_name">طور بواسطة: ماجري زياد</p>
+                <p data-i18n="footer_hosting">الاستضافة: Github, Netlify, Supabase</p>
+            </div>
+            <div class="footer-col">
+                <h4 data-i18n="footer_links">روابط</h4>
+                <a href="#" data-i18n="footer_contact">اتصل بنا</a>
+                <a href="#" data-i18n="footer_policies">السياسات</a>
+            </div>
+            <div class="footer-col">
+                <h4 data-i18n="footer_version">الإصدار</h4>
+                <p data-i18n="footer_version_num">الإصدار: 0.0.2</p>
+                <p data-i18n="footer_rights">جميع الحقوق محفوظة &copy; 2025</p>
+            </div>
+        </footer>
+
+        <!-- Print-only custom footer -->
+        <div class="print-footer">
+            <p data-i18n="print_footer_dev">طور بواسطة: ماجري زياد</p>
+            <p data-i18n="print_footer_version">الإصدار: 0.0.2</p>
+            <p data-i18n="print_footer_page">عنوان الصفحة: maths_y7_alg_module1_lesson1_part1_sub4.html</p>
+        </div>
+    </div>
+
+    <!-- Inline Translation Object (corrected) -->
+    <script>
+        const translations = {
+            ar: {
+                page_title: "الإختصار - رياضيات السنة السابعة أساسي",
+                print_header: "السنة السابعة أساسي - الوحدة الأولى - الدرس الأول - الجزء 1 - د",
+                site_header: "Educational Dashboard - Mathematics",
+                back_to_index: "← العودة للفهرس",
+                nav_badge: "الدرس 1 | جزء 1 | د",
+                next_part: "التالي ←",
+                language_label: "اللغة",
+                lang_ar: "العربية",
+                lang_en: "English",
+                lang_fr: "Français",
+                print_label: "اختر القسم للطباعة:",
+                print_all: "الدرس كاملاً",
+                print_rules: "القواعد",
+                print_exercises: "التمارين",
+                print_problems: "المسائل",
+                print_solutions: "الحلول",
+                print_button: "🖨️ طباعة",
+                module_tag: "📘 الجبر والحساب | الدرس 1 | الجزء 1 | د",
+                lesson_title: "الإختصار",
+                lesson_subtitle: "جمع الحدود المتشابهة وتبسيط التعابير الجبرية",
+                rules_title: "القواعد",
+                rules_subtitle: "تذكير سريع بقواعد الإختصار",
+                rule1_title: "قاعدة 1: الحدود المتشابهة",
+                rule1_text: "الحدود المتشابهة هي التي تحتوي على نفس المتغير ونفس الأس. الأعداد الثابتة تعتبر متشابهة مع بعضها.",
+				rule1_example: "\\(3x\\) و \\(5x\\) متشابهان | \\(2y\\) و \\(-4y\\) متشابهان | \\(7\\) و \\(2\\) متشابهان",
+                rule2_title: "قاعدة 2: جمع الحدود المتشابهة",
+                rule2_text: "لجمع الحدود المتشابهة، نجمع معاملاتها (الأعداد) ونُبقي الجزء المتغير كما هو.",
+                rule3_title: "قاعدة 3: إزالة الأقواس المسبوقة بـ + أو -",
+                rule3_text: "إذا كان القوس مسبوقًا بـ + نحذف القوس مع إبقاء الإشارات داخله. إذا كان مسبوقًا بـ - نعكس إشارات جميع الحدود داخله.",
+                rule4_title: "قاعدة 4: الإختصار بعد النشر",
+                rule4_text: "إذا كان في العبارة ضرب (نشر)، ننشر أولاً ثم نجمع الحدود المتشابهة.",
+                rule5_title: "قاعدة 5: تبسيط العبارات",
+                rule5_text: "الهدف من الإختصار هو كتابة العبارة في أبسط صورة ممكنة بعدد أقل من الحدود.",
+                exercises_title: "تمارين",
+                exercises_subtitle: "تدرب على اختصار التعابير الجبرية",
+                exercise1_q: "اجمع الحدود المتشابهة:",
+                exercise1_hint: "💡 اجمع المعاملات واترك المتغير كما هو.",
+                exercise2_q: "بسّط بإزالة الأقواس:",
+                exercise2_hint: "💡 تذكر: القوس المسبوق بـ - يقلب إشارات حدوده.",
+                exercise3_q: "بسّط العبارات التالية:",
+                exercise4_q: "انشر ثم اختصر:",
+                exercise4_hint: "💡 وزّع أولاً ثم اجمع المتشابهات.",
+                exercise5_q: "تحدٍ: بسّط العبارات الأكثر تعقيدًا:",
+                answer_placeholder: "اكتب إجابتك هنا...",
+                problems_title: "مسائل",
+                problems_subtitle: "مسائل تطبيقية على الإختصار",
+                problem1_title: "🧑‍🏫 مسألة 1: عدد التلاميذ",
+                problem1_text: "في قسم عدد البنات \\(x\\) وعدد البنين \\(2x + 3\\). اكتب عبارة مبسطة لعدد التلاميذ الكلي.",
+                problem2_title: "🐔 مسألة 2: مزرعة",
+                problem2_text: "عند فلاح \\(2x\\) دجاجة و \\(x + 3\\) أرنبًا. اكتب عبارة مبسطة للعدد الجملي للحيوانات.",
+                problem3_title: "🛒 مسألة 3: مشتريات",
+                problem3_text: "اشترى تلميذ 3 أقلام ثمن الواحد \\(x\\) دينار، ودفترًا ثمنه 5 دنانير. ثم أعاد قلمين. اكتب عبارة مبسطة للمبلغ المتبقي.",
+                solutions_title: "حلول",
+                solutions_subtitle: "الحلول الكاملة لجميع التمارين والمسائل",
+                solutions_exercises_heading: "📝 حلول التمارين",
+                solutions_problems_heading: "🧩 حلول المسائل",
+                sol_ex1_q: "التمرين 1:",
+                sol_ex2_q: "التمرين 2:",
+                sol_ex3_q: "التمرين 3:",
+                sol_ex4_q: "التمرين 4:",
+                sol_ex5_q: "التمرين 5 (تحدٍ):",
+                sol_prob1_q: "المسألة 1:",
+                sol_prob2_q: "المسألة 2:",
+                sol_prob3_q: "المسألة 3:",
+                sol_prob1_answer: "\\(3x + 3\\) تلميذًا",
+                sol_prob2_answer: "\\(3x + 3\\) حيوانًا",
+                sol_prob3_answer: "\\(x + 5\\) دينار",
+                sub_label_a: "أ)",
+                sub_label_b: "ب)",
+                sub_label_c: "ج)",
+                sub_label_d: "د)",
+                currency: "دينار",
+                footer_dev: "معلومات المطوّر",
+                footer_dev_name: "طور بواسطة: ماجري زياد",
+                footer_hosting: "الاستضافة: Github, Netlify, Supabase",
+                footer_links: "روابط",
+                footer_contact: "اتصل بنا",
+                footer_policies: "السياسات",
+                footer_version: "الإصدار",
+                footer_version_num: "الإصدار: 0.0.2",
+                footer_rights: "جميع الحقوق محفوظة © 2025",
+                print_footer_dev: "طور بواسطة: ماجري زياد",
+                print_footer_version: "الإصدار: 0.0.2",
+                print_footer_page: "عنوان الصفحة: maths_y7_alg_module1_lesson1_part1_sub4.html"
+            },
+            en: {
+                page_title: "Simplification - Math Year 7",
+                print_header: "Year 7 – Unit 1 – Lesson 1 – Part 1 – d",
+                site_header: "Educational Dashboard - Mathematics",
+                back_to_index: "← Back to Index",
+                nav_badge: "Lesson 1 | Part 1 | d",
+                next_part: "Next →",
+                language_label: "Language",
+                lang_ar: "العربية",
+                lang_en: "English",
+                lang_fr: "Français",
+                print_label: "Select section to print:",
+                print_all: "Full lesson",
+                print_rules: "Rules",
+                print_exercises: "Exercises",
+                print_problems: "Problems",
+                print_solutions: "Solutions",
+                print_button: "🖨️ Print",
+                module_tag: "📘 Algebra & Arithmetic | Lesson 1 | Part 1 | d",
+                lesson_title: "Simplification",
+                lesson_subtitle: "Combining like terms and simplifying algebraic expressions",
+                rules_title: "Rules",
+                rules_subtitle: "Quick reminder of simplification rules",
+                rule1_title: "Rule 1: Like terms",
+                rule1_text: "Like terms are those that contain the same variable(s) with the same exponent(s). Constants are like terms with each other.",
+				rule1_example: "\\(3x\\) and \\(5x\\) are like terms | \\(2y\\) and \\(-4y\\) are like terms | \\(7\\) and \\(2\\) are like terms",
+                rule2_title: "Rule 2: Combining like terms",
+                rule2_text: "To combine like terms, add or subtract their coefficients (numbers) and keep the variable part unchanged.",
+                rule3_title: "Rule 3: Removing parentheses preceded by + or -",
+                rule3_text: "If parentheses are preceded by +, remove them and keep the signs inside. If preceded by -, reverse the signs of all terms inside.",
+                rule4_title: "Rule 4: Simplification after expansion",
+                rule4_text: "If there is multiplication (expansion) in the expression, expand first then combine like terms.",
+                rule5_title: "Rule 5: Simplifying expressions",
+                rule5_text: "The goal of simplification is to write the expression in its simplest form with fewer terms.",
+                exercises_title: "Exercises",
+                exercises_subtitle: "Practice simplifying algebraic expressions",
+                exercise1_q: "Combine like terms:",
+                exercise1_hint: "💡 Add the coefficients and keep the variable as is.",
+                exercise2_q: "Simplify by removing parentheses:",
+                exercise2_hint: "💡 Remember: parentheses preceded by - reverse signs.",
+                exercise3_q: "Simplify the following expressions:",
+                exercise4_q: "Expand then simplify:",
+                exercise4_hint: "💡 Distribute first, then combine like terms.",
+                exercise5_q: "Challenge: Simplify more complex expressions:",
+                answer_placeholder: "Write your answer here...",
+                problems_title: "Problems",
+                problems_subtitle: "Applied problems on simplification",
+                problem1_title: "🧑‍🏫 Problem 1: Number of students",
+                problem1_text: "In a class, there are \\(x\\) girls and \\(2x + 3\\) boys. Write a simplified expression for the total number of students.",
+                problem2_title: "🐔 Problem 2: Farm",
+                problem2_text: "A farmer has \\(2x\\) chickens and \\(x + 3\\) rabbits. Write a simplified expression for the total number of animals.",
+                problem3_title: "🛒 Problem 3: Purchases",
+                problem3_text: "A student bought 3 pens each costing \\(x\\) dinars, and a notebook costing 5 dinars. Then he returned 2 pens. Write a simplified expression for the remaining amount.",
+                solutions_title: "Solutions",
+                solutions_subtitle: "Complete solutions for all exercises and problems",
+                solutions_exercises_heading: "📝 Exercise Solutions",
+                solutions_problems_heading: "🧩 Problem Solutions",
+                sol_ex1_q: "Exercise 1:",
+                sol_ex2_q: "Exercise 2:",
+                sol_ex3_q: "Exercise 3:",
+                sol_ex4_q: "Exercise 4:",
+                sol_ex5_q: "Exercise 5 (Challenge):",
+                sol_prob1_q: "Problem 1:",
+                sol_prob2_q: "Problem 2:",
+                sol_prob3_q: "Problem 3:",
+                sol_prob1_answer: "\\(3x + 3\\) students",
+                sol_prob2_answer: "\\(3x + 3\\) animals",
+                sol_prob3_answer: "\\(x + 5\\) dinars",
+                sub_label_a: "a)",
+                sub_label_b: "b)",
+                sub_label_c: "c)",
+                sub_label_d: "d)",
+                currency: "dinars",
+                footer_dev: "Developer Info",
+                footer_dev_name: "Developed by: Majri Zied",
+                footer_hosting: "Hosting: Github, Netlify, Supabase",
+                footer_links: "Links",
+                footer_contact: "Contact us",
+                footer_policies: "Policies",
+                footer_version: "Version",
+                footer_version_num: "Version: 0.0.2",
+                footer_rights: "All rights reserved © 2025",
+                print_footer_dev: "Developed by: Majri Zied",
+                print_footer_version: "Version: 0.0.2",
+                print_footer_page: "Page address: maths_y7_alg_module1_lesson1_part1_sub4.html"
+            },
+            fr: {
+                page_title: "Simplification - Math 7ème année",
+                print_header: "7ème année – Unité 1 – Leçon 1 – Partie 1 – d",
+                site_header: "Educational Dashboard - Mathematics",
+                back_to_index: "← Retour à l'index",
+                nav_badge: "Leçon 1 | Partie 1 | d",
+                next_part: "Suivant →",
+                language_label: "Langue",
+                lang_ar: "العربية",
+                lang_en: "English",
+                lang_fr: "Français",
+                print_label: "Choisir la section à imprimer :",
+                print_all: "Leçon complète",
+                print_rules: "Règles",
+                print_exercises: "Exercices",
+                print_problems: "Problèmes",
+                print_solutions: "Solutions",
+                print_button: "🖨️ Imprimer",
+                module_tag: "📘 Algèbre et arithmétique | Leçon 1 | Partie 1 | d",
+                lesson_title: "Simplification",
+                lesson_subtitle: "Combiner les termes semblables et simplifier les expressions algébriques",
+                rules_title: "Règles",
+                rules_subtitle: "Rappel rapide des règles de simplification",
+                rule1_title: "Règle 1 : Termes semblables",
+                rule1_text: "Les termes semblables sont ceux qui contiennent la même variable avec le même exposant. Les constantes sont semblables entre elles.",
+				rule1_example: "\\(3x\\) et \\(5x\\) sont semblables | \\(2y\\) et \\(-4y\\) sont semblables | \\(7\\) et \\(2\\) sont semblables",
+                rule2_title: "Règle 2 : Combiner les termes semblables",
+                rule2_text: "Pour combiner des termes semblables, on additionne ou soustrait leurs coefficients (nombres) et on garde la partie variable inchangée.",
+                rule3_title: "Règle 3 : Suppression des parenthèses précédées de + ou -",
+                rule3_text: "Si les parenthèses sont précédées de +, on les supprime et on garde les signes internes. Si elles sont précédées de -, on inverse les signes de tous les termes internes.",
+                rule4_title: "Règle 4 : Simplification après développement",
+                rule4_text: "S'il y a une multiplication (développement) dans l'expression, on développe d'abord puis on combine les termes semblables.",
+                rule5_title: "Règle 5 : Simplifier les expressions",
+                rule5_text: "Le but de la simplification est d'écrire l'expression sous sa forme la plus simple avec moins de termes.",
+                exercises_title: "Exercices",
+                exercises_subtitle: "Entraînez-vous à simplifier des expressions algébriques",
+                exercise1_q: "Combinez les termes semblables :",
+                exercise1_hint: "💡 Additionnez les coefficients et gardez la variable telle quelle.",
+                exercise2_q: "Simplifiez en supprimant les parenthèses :",
+                exercise2_hint: "💡 Rappel : les parenthèses précédées de - inversent les signes.",
+                exercise3_q: "Simplifiez les expressions suivantes :",
+                exercise4_q: "Développez puis simplifiez :",
+                exercise4_hint: "💡 Distribuez d'abord, puis combinez les termes semblables.",
+                exercise5_q: "Défi : Simplifiez des expressions plus complexes :",
+                answer_placeholder: "Écrivez votre réponse ici...",
+                problems_title: "Problèmes",
+                problems_subtitle: "Problèmes appliqués sur la simplification",
+                problem1_title: "🧑‍🏫 Problème 1 : Nombre d'élèves",
+                problem1_text: "Dans une classe, il y a \\(x\\) filles et \\(2x + 3\\) garçons. Écrivez une expression simplifiée pour le nombre total d'élèves.",
+                problem2_title: "🐔 Problème 2 : Ferme",
+                problem2_text: "Un fermier a \\(2x\\) poules et \\(x + 3\\) lapins. Écrivez une expression simplifiée pour le nombre total d'animaux.",
+                problem3_title: "🛒 Problème 3 : Achats",
+                problem3_text: "Un élève a acheté 3 stylos coûtant chacun \\(x\\) dinars, et un cahier coûtant 5 dinars. Puis il a rendu 2 stylos. Écrivez une expression simplifiée pour le montant restant.",
+                solutions_title: "Solutions",
+                solutions_subtitle: "Solutions complètes pour tous les exercices et problèmes",
+                solutions_exercises_heading: "📝 Solutions des exercices",
+                solutions_problems_heading: "🧩 Solutions des problèmes",
+                sol_ex1_q: "Exercice 1 :",
+                sol_ex2_q: "Exercice 2 :",
+                sol_ex3_q: "Exercice 3 :",
+                sol_ex4_q: "Exercice 4 :",
+                sol_ex5_q: "Exercice 5 (Défi) :",
+                sol_prob1_q: "Problème 1 :",
+                sol_prob2_q: "Problème 2 :",
+                sol_prob3_q: "Problème 3 :",
+                sol_prob1_answer: "\\(3x + 3\\) élèves",
+                sol_prob2_answer: "\\(3x + 3\\) animaux",
+                sol_prob3_answer: "\\(x + 5\\) dinars",
+                sub_label_a: "a)",
+                sub_label_b: "b)",
+                sub_label_c: "c)",
+                sub_label_d: "d)",
+                currency: "dinars",
+                footer_dev: "Informations du développeur",
+                footer_dev_name: "Développé par : Majri Zied",
+                footer_hosting: "Hébergement : Github, Netlify, Supabase",
+                footer_links: "Liens",
+                footer_contact: "Contactez-nous",
+                footer_policies: "Politiques",
+                footer_version: "Version",
+                footer_version_num: "Version : 0.0.2",
+                footer_rights: "Tous droits réservés © 2025",
+                print_footer_dev: "Développé par : Majri Zied",
+                print_footer_version: "Version : 0.0.2",
+                print_footer_page: "Adresse de la page : maths_y7_alg_module1_lesson1_part1_sub4.html"
+            }
+        };
+    </script>
+</body>
+</html>

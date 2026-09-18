@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="page_title">الدرس 1: المستقيم وأجزاؤه - رياضيات السنة السابعة أساسي</title>
+
+    <link rel="stylesheet" href="maths_shared.css">
+    <link rel="stylesheet" href="maths_lessons.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/jsxgraph@1.4.0/distrib/jsxgraphcore.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jsxgraph@1.4.0/distrib/jsxgraph.css">
+
+    <script src="maths_lessons.js" defer></script>
+
+    <style>
+        .rule-diagram, .exercise-diagram {
+            margin: 1rem 0;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 0.5rem;
+            background: var(--card-bg);
+        }
+        .diagram-caption {
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-top: 0.3rem;
+            font-style: italic;
+        }
+        /* Fix overflow: allow solution step math to wrap */
+        .solution-step-math {
+            white-space: normal !important;
+            overflow-wrap: break-word;
+            word-break: break-word;
+        }
+        .solution-step-line {
+            flex-wrap: wrap;
+        }
+        .example-box {
+            white-space: normal !important;
+            overflow-wrap: break-word;
+            word-break: break-word;
+        }
+        /* تجاوز الخصائص الخاطئة من الملفات الخارجية */
+        .example-box {
+            direction: rtl !important;
+            text-align: right !important;
+            unicode-bidi: normal !important;
+        }
+        .solution-step-math {
+            direction: rtl !important;
+            text-align: right !important;
+            unicode-bidi: normal !important;
+            white-space: normal !important;
+        }
+        /* عزل المقاطع اللاتينية */
+        .math {
+            direction: ltr;
+            unicode-bidi: isolate;
+        }
+        /* تنسيق إضافي للرسوم */
+        .rule-diagram, .exercise-diagram {
+            margin: 1rem 0;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 0.5rem;
+            background: var(--card-bg);
+        }
+        .diagram-caption {
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-top: 0.3rem;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <main>
+            <!-- Print-only header -->
+            <div class="print-header" data-i18n="print_header">السنة السابعة أساسي - الوحدة الثانية - الدرس الأول</div>
+
+            <!-- Site Header -->
+            <div class="site-header">
+                <div class="header-icon">
+                    <img src="assets/icons/icon-152x152.png" alt="أيقونة الموقع">
+                </div>
+                <h1 data-i18n="site_header">Educational Dashboard - Mathematics</h1>
+            </div>
+
+            <!-- Top Navigation -->
+            <nav class="top-nav">
+                <a href="maths_y7.html" class="nav-link" data-i18n="back_to_index">← العودة للفهرس</a>
+                <span class="nav-badge" data-i18n="nav_badge">الدرس 1 | الجزء 1</span>
+                <a href="maths_y7_module2_lesson2_part1.html" class="nav-link" data-i18n="next_lesson">الدرس التالي ←</a>
+            </nav>
+
+            <!-- Print Controls -->
+            <div class="print-controls">
+                <label for="print-section" data-i18n="print_label">اختر القسم للطباعة:</label>
+                <select id="print-section" name="print-section">
+                    <option value="all" data-i18n="print_all">الدرس كاملاً</option>
+                    <option value="rules" data-i18n="print_rules">القواعد</option>
+                    <option value="exercises" data-i18n="print_exercises">التمارين</option>
+                    <option value="problems" data-i18n="print_problems">المسائل</option>
+                    <option value="solutions" data-i18n="print_solutions">الحلول</option>
+                </select>
+                <button class="print-button" onclick="printSelected()" data-i18n="print_button">🖨️ طباعة</button>
+                <button id="theme-toggle" class="theme-toggle" aria-label="تبديل الوضع الليلي/النهاري">
+                    <span class="theme-icon">🌙</span>
+                </button>
+
+                <!-- Language Selector -->
+                <div class="language-selector">
+                    <label for="language-select" class="sr-only" data-i18n="language_label">اللغة</label>
+                    <select id="language-select" name="language-select">
+                        <option value="ar" data-i18n="lang_ar">العربية</option>
+                        <option value="en" data-i18n="lang_en">English</option>
+                        <option value="fr" data-i18n="lang_fr">Français</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Lesson Header -->
+            <header class="lesson-header">
+                <span class="module-tag" data-i18n="module_tag">📘 الهندسة | الدرس 1</span>
+                <h1 class="lesson-title" data-i18n="lesson_title">المستقيم وأجزاؤه</h1>
+                <p class="lesson-subtitle" data-i18n="lesson_subtitle">المنتصف، القطعة المستقيمة، والمستقيمات المتعامدة والمتوازية</p>
+            </header>
+
+            <!-- Section 1: Rules -->
+            <div class="section" id="rules-section">
+                <div class="section-header" onclick="toggleSection('rules-body', 'rules-toggle')" role="button"
+                     tabindex="0" aria-expanded="true" aria-controls="rules-body"
+                     onkeydown="if(event.key==='Enter'||event.key===' ') toggleSection('rules-body', 'rules-toggle')">
+                    <div class="section-icon rules-icon">📐</div>
+                    <div class="section-title">
+                        <h2 data-i18n="rules_title">القواعد</h2>
+                        <p data-i18n="rules_subtitle">الأساسيات والمبادئ الهندسية للمستقيم وأجزائه</p>
+                    </div>
+                    <span class="section-toggle open" id="rules-toggle">▼</span>
+                </div>
+                <div class="section-body" id="rules-body">
+                    <!-- Rule 1 -->
+                    <div class="rule-card">
+                        <div class="rule-title" data-i18n="rule1_title">قاعدة 1: المستقيم</div>
+                        <div class="rule-text" data-i18n="rule1_text">المستقيم هو مجموعة غير منتهية من النقاط المتصلة في اتجاهين متعاكسين، وليس له بداية ولا نهاية. يُرمز له بحرف أو بحرفين بين قوسين مثل \((AB)\).</div>
+                        <div class="example-box" data-i18n="example_rule1">\((AB)\) مستقيم يمر بالنقطتين \(A\) و \(B\)</div>
+                        <div class="rule-diagram">
+                            <div id="diagram-rule1" class="jxgbox" style="width:100%; max-width:450px; height:220px;"></div>
+                            <div class="diagram-caption" data-i18n="rule1_caption">اسحب النقطتين A و B لتحريك المستقيم</div>
+                        </div>
+                    </div>
+
+                    <!-- Rule 2 -->
+                    <div class="rule-card">
+                        <div class="rule-title" data-i18n="rule2_title">قاعدة 2: القطعة المستقيمة</div>
+                        <div class="rule-text" data-i18n="rule2_text">القطعة المستقيمة هي جزء من مستقيم محصور بين نقطتين تُسمّيان طرفيها، ولها طول محدود يمكن قياسه. نرمز لها بـ \([AB]\).</div>
+                        <div class="example-box" data-i18n="example_rule2">\([AB]\) قطعة مستقيمة طرفاها \(A\) و \(B\)</div>
+                        <div class="rule-diagram">
+                            <div id="diagram-rule2" class="jxgbox" style="width:100%; max-width:450px; height:220px;"></div>
+                            <div class="diagram-caption" data-i18n="rule2_caption">اسحب النقطتين لتغيير طول القطعة</div>
+                        </div>
+                    </div>
+
+                    <!-- Rule 3 -->
+                    <div class="rule-card">
+                        <div class="rule-title" data-i18n="rule3_title">قاعدة 3: منتصف قطعة مستقيمة</div>
+                        <div class="rule-text" data-i18n="rule3_text">منتصف قطعة مستقيمة هو النقطة التي تقسمها إلى قطعتين متساويتين في الطول. إذا كانت \(M\) منتصف \([AB]\) فإن \(AM = MB = \frac{1}{2}AB\).</div>
+                        <div class="example-box" data-i18n="example_rule3">إذا كانت \(M\) منتصف \([AB]\) فإن \(AM = MB\)</div>
+                        <div class="rule-diagram">
+                            <div id="diagram-rule3" class="jxgbox" style="width:100%; max-width:450px; height:220px;"></div>
+                            <div class="diagram-caption" data-i18n="rule3_caption">اسحب A أو B، وستبقى M في المنتصف</div>
+                        </div>
+                    </div>
+
+                    <!-- Rule 4 -->
+                    <div class="rule-card">
+                        <div class="rule-title" data-i18n="rule4_title">قاعدة 4: المستقيمات المتوازية</div>
+                        <div class="rule-text" data-i18n="rule4_text">مستقيمان متوازيان إذا كانا لا يتقاطعان أبداً مهما امتدّا، ولهما نفس الاتجاه. نرمز للتوازي بـ \(\parallel\).</div>
+                        <div class="example-box" data-i18n="example_rule4">\((AB) \parallel (CD)\)</div>
+                        <div class="rule-diagram">
+                            <div id="diagram-rule4" class="jxgbox" style="width:100%; max-width:450px; height:220px;"></div>
+                            <div class="diagram-caption" data-i18n="rule4_caption">اسحب النقطة C لتغيير المسافة بين المستقيمين مع بقائهما متوازيين</div>
+                        </div>
+                    </div>
+
+                    <!-- Rule 5 -->
+                    <div class="rule-card">
+                        <div class="rule-title" data-i18n="rule5_title">قاعدة 5: المستقيمات المتعامدة</div>
+                        <div class="rule-text" data-i18n="rule5_text">مستقيمان متعامدان إذا تقاطعا وشكّلا زاوية قائمة (\(90^\circ\)). نرمز للتعامد بـ \(\perp\).</div>
+                        <div class="example-box" data-i18n="example_rule5">\((AB) \perp (CD)\)</div>
+                        <div class="rule-diagram">
+                            <div id="diagram-rule5" class="jxgbox" style="width:100%; max-width:450px; height:220px;"></div>
+                            <div class="diagram-caption" data-i18n="rule5_caption">اسحب نقطة التقاطع، سيبقى المستقيمان متعامدين</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 2: Exercises -->
+            <div class="section" id="exercises-section">
+                <div class="section-header" onclick="toggleSection('exercises-body', 'exercises-toggle')" role="button"
+                     tabindex="0" aria-expanded="true" aria-controls="exercises-body"
+                     onkeydown="if(event.key==='Enter'||event.key===' ') toggleSection('exercises-body', 'exercises-toggle')">
+                    <div class="section-icon exercises-icon">✏️</div>
+                    <div class="section-title">
+                        <h2 data-i18n="exercises_title">تمارين</h2>
+                        <p data-i18n="exercises_subtitle">تمرّن على تحديد المستقيمات والقطاعات والمنتصفات</p>
+                    </div>
+                    <span class="section-toggle open" id="exercises-toggle">▼</span>
+                </div>
+                <div class="section-body" id="exercises-body">
+                    <!-- Exercise 1 -->
+                    <div class="exercise-item">
+                        <div class="exercise-question">
+                            <span class="exercise-number">1</span>
+                            <span data-i18n="exercise1_q">حدّد نوع كل شكل هندسي:</span>
+                        </div>
+                        <div class="exercise-diagram">
+                            <div id="diagram-ex1" class="jxgbox" style="width:100%; max-width:450px; height:200px;"></div>
+                        </div>
+                        <div class="exercise-sub"><span class="sub-label" data-i18n="sub_label_a">أ)</span><span class="sub-math">\((AB)\)</span></div>
+                        <div class="exercise-sub"><span class="sub-label" data-i18n="sub_label_b">ب)</span><span class="sub-math">\([CD]\)</span></div>
+                        <div class="exercise-sub"><span class="sub-label" data-i18n="sub_label_c">ج)</span><span class="sub-math">\([EF)\)</span></div>
+                        <textarea id="answer-ex1" name="answer-ex1" class="answer-textarea" placeholder="اكتب إجابتك هنا..." data-i18n-placeholder="answer_placeholder"></textarea>
+                    </div>
+
+                    <!-- Exercise 2 -->
+                    <div class="exercise-item">
+                        <div class="exercise-question">
+                            <span class="exercise-number">2</span>
+                            <span data-i18n="exercise2_q">إذا كانت \(M\) منتصف \([AB]\) و \(AB = 8\) cm، فما طول \(AM\)؟</span>
+                        </div>
+                        <div class="exercise-diagram">
+                            <div id="diagram-ex2" class="jxgbox" style="width:100%; max-width:450px; height:200px;"></div>
+                        </div>
+                        <textarea id="answer-ex2" name="answer-ex2" class="answer-textarea" placeholder="اكتب إجابتك هنا..." data-i18n-placeholder="answer_placeholder"></textarea>
+                    </div>
+
+                    <!-- Exercise 3 -->
+                    <div class="exercise-item">
+                        <div class="exercise-question">
+                            <span class="exercise-number">3</span>
+                            <span data-i18n="exercise3_q">أكمل بالرموز المناسبة:</span>
+                        </div>
+                        <div class="exercise-diagram">
+                            <div id="diagram-ex3" class="jxgbox" style="width:100%; max-width:450px; height:250px;"></div>
+                        </div>
+                        <div class="exercise-sub"><span class="sub-label" data-i18n="sub_label_a">أ)</span><span class="sub-math">\((AB)\) و \((CD)\) بزاوية \(90^\circ\) ⇒ \((AB) \dots (CD)\)</span></div>
+                        <div class="exercise-sub"><span class="sub-label" data-i18n="sub_label_b">ب)</span><span class="sub-math">\((EF)\) و \((GH)\) لا يلتقيان ⇒ \((EF) \dots (GH)\)</span></div>
+                        <textarea id="answer-ex3" name="answer-ex3" class="answer-textarea" placeholder="اكتب إجابتك هنا..." data-i18n-placeholder="answer_placeholder"></textarea>
+                    </div>
+
+                    <!-- Exercise 4 -->
+                    <div class="exercise-item">
+                        <div class="exercise-question">
+                            <span class="exercise-number">4</span>
+                            <span data-i18n="exercise4_q">ارسم قطعة \([PQ]\) طولها \(6\) cm، ثم عيّن منتصفها \(R\). احسب \(PR\) و \(RQ\).</span>
+                        </div>
+                        <div class="exercise-diagram">
+                            <div id="diagram-ex4" class="jxgbox" style="width:100%; max-width:450px; height:200px;"></div>
+                        </div>
+                        <textarea id="answer-ex4" name="answer-ex4" class="answer-textarea" placeholder="اكتب إجابتك هنا..." data-i18n-placeholder="answer_placeholder"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 3: Problems -->
+            <div class="section" id="problems-section">
+                <div class="section-header" onclick="toggleSection('problems-body', 'problems-toggle')" role="button"
+                     tabindex="0" aria-expanded="true" aria-controls="problems-body"
+                     onkeydown="if(event.key==='Enter'||event.key===' ') toggleSection('problems-body', 'problems-toggle')">
+                    <div class="section-icon problems-icon">🧩</div>
+                    <div class="section-title">
+                        <h2 data-i18n="problems_title">مسائل</h2>
+                        <p data-i18n="problems_subtitle">مسائل حياتية وسياقية لتطبيق المفاهيم الهندسية</p>
+                    </div>
+                    <span class="section-toggle open" id="problems-toggle">▼</span>
+                </div>
+                <div class="section-body" id="problems-body">
+                    <div class="problem-card">
+                        <div class="problem-title" data-i18n="problem1_title">🏙️ مسألة 1: شارعان متوازيان</div>
+                        <div class="problem-text" data-i18n="problem1_text">في مدينة، شارعان رئيسيان متوازيان يقطعهما شارع ثالث عمودي عليهما. إذا كان طول الجزء الواقع بين الشارعين المتوازيين على الشارع الثالث هو \(120\) متراً، فما المسافة بين الشارعين المتوازيين؟</div>
+                    </div>
+                    <div class="problem-card">
+                        <div class="problem-title" data-i18n="problem2_title">📏 مسألة 2: سور حديقة</div>
+                        <div class="problem-text" data-i18n="problem2_text">حديقة مستطيلة الشكل طولها \(20\) متراً وعرضها \(10\) أمتار. نريد وضع عمود إنارة في منتصف الضلع الطويل. كم يبعد العمود عن كل طرف من طرفي الضلع؟</div>
+                    </div>
+                    <div class="problem-card">
+                        <div class="problem-title" data-i18n="problem3_title">🛤️ مسألة 3: مساران متعامدان</div>
+                        <div class="problem-text" data-i18n="problem3_text">مساران في منتزه يتقاطعان بزاوية قائمة. إذا كان أحد المسارين يمر بالنقطتين \(A(0,0)\) و \(B(4,0)\)، والآخر يمر بالنقطتين \(C(2,1)\) و \(D(2,5)\)، فهل هما متعامدان؟ وضّح إجابتك.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 4: Solutions -->
+            <div class="section" id="solutions-section">
+                <div class="section-header" onclick="toggleSection('solutions-body', 'solutions-toggle')" role="button"
+                     tabindex="0" aria-expanded="true" aria-controls="solutions-body"
+                     onkeydown="if(event.key==='Enter'||event.key===' ') toggleSection('solutions-body', 'solutions-toggle')">
+                    <div class="section-icon solutions-icon">✅</div>
+                    <div class="section-title">
+                        <h2 data-i18n="solutions_title">حلول</h2>
+                        <p data-i18n="solutions_subtitle">الحلول المفصلة خطوة بخطوة لكل التمارين والمسائل</p>
+                    </div>
+                    <span class="section-toggle open" id="solutions-toggle">▼</span>
+                </div>
+                <div class="section-body" id="solutions-body">
+                    <div style="margin-bottom: 1.5rem;">
+                        <h3 data-i18n="solutions_exercises_heading">📝 حلول التمارين</h3>
+
+                        <!-- Solution Exercise 1 -->
+                        <div class="solution-item">
+                            <div class="solution-question" data-i18n="sol_ex1_q">التمرين 1 — تحديد الأنواع:</div>
+                            <div class="solution-answer-rtl">
+                                <span data-i18n="sub_label_a">أ)</span> <span data-i18n="answer_type_line">مستقيم</span> &nbsp;|&nbsp;
+                                <span data-i18n="sub_label_b">ب)</span> <span data-i18n="answer_type_segment">قطعة مستقيمة</span> &nbsp;|&nbsp;
+                                <span data-i18n="sub_label_c">ج)</span> <span data-i18n="answer_type_ray">نصف مستقيم</span>
+                            </div>
+                        </div>
+
+                        <!-- Solution Exercise 2 -->
+                        <div class="solution-item">
+                            <div class="solution-question" data-i18n="sol_ex2_q">التمرين 2 — طول \(AM\):</div>
+                            <div class="solution-answer-rtl">\(AM = 4\) <span data-i18n="cm_unit">cm</span></div>
+                            <div class="solution-steps">
+                                <ol>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_line_1">الخطوة 1:</span> <span class="solution-step-math" data-i18n="step_ex2_1">\(M\) <span data-i18n="midpoint_of">منتصف</span> \([AB]\) <span data-i18n="then">إذن</span> \(AM = \frac{1}{2} AB\)</span></span></li>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_line_2">الخطوة 2:</span> <span class="solution-step-math" data-i18n="step_ex2_2">\(AM = \frac{1}{2} \times 8 = 4\) <span data-i18n="cm_unit">cm</span></span></span></li>
+                                </ol>
+                            </div>
+                        </div>
+
+                        <!-- Solution Exercise 3 -->
+                        <div class="solution-item">
+                            <div class="solution-question" data-i18n="sol_ex3_q">التمرين 3 — الرموز:</div>
+                            <div class="solution-answer-rtl">
+                                <span data-i18n="sub_label_a">أ)</span> \(\perp\) &nbsp;|&nbsp;
+                                <span data-i18n="sub_label_b">ب)</span> \(\parallel\)
+                            </div>
+                        </div>
+
+                        <!-- Solution Exercise 4 -->
+                        <div class="solution-item">
+                            <div class="solution-question" data-i18n="sol_ex4_q">التمرين 4 — منتصف قطعة:</div>
+                            <div class="solution-answer-rtl">\(PR = RQ = 3\) <span data-i18n="cm_unit">cm</span></div>
+                            <div class="solution-steps">
+                                <ol>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_line_1">الخطوة 1:</span> <span class="solution-step-math" data-i18n="step_ex4_1">\(R\) <span data-i18n="midpoint_of">منتصف</span> \([PQ]\) <span data-i18n="then">إذن</span> \(PR = RQ = \frac{1}{2} PQ\)</span></span></li>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_line_2">الخطوة 2:</span> <span class="solution-step-math" data-i18n="step_ex4_2">\(PR = RQ = \frac{1}{2} \times 6 = 3\) <span data-i18n="cm_unit">cm</span></span></span></li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 data-i18n="solutions_problems_heading">🧩 حلول المسائل</h3>
+
+                        <!-- Solution Problem 1 -->
+                        <div class="solution-item">
+                            <div class="solution-question" data-i18n="sol_prob1_q">المسألة 1 — شارعان متوازيان:</div>
+                            <div class="solution-answer-rtl" data-i18n="sol_prob1_answer">المسافة بين الشارعين المتوازيين هي \(120\) متراً</div>
+                            <div class="solution-steps">
+                                <ol>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_explanation">الشرح:</span> <span class="solution-step-math" data-i18n="step_prob1_1">بما أن الشارع الثالث عمودي على الشارعين المتوازيين، فإن طول الجزء بينهما هو المسافة بينهما.</span></span></li>
+                                </ol>
+                            </div>
+                        </div>
+
+                        <!-- Solution Problem 2 -->
+                        <div class="solution-item">
+                            <div class="solution-question" data-i18n="sol_prob2_q">المسألة 2 — سور حديقة:</div>
+                            <div class="solution-answer-rtl" data-i18n="sol_prob2_answer">يبعد العمود \(10\) أمتار عن كل طرف</div>
+                            <div class="solution-steps">
+                                <ol>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_line_1">الخطوة 1:</span> <span class="solution-step-math" data-i18n="step_prob2_1">منتصف الضلع الطويل يقسمه إلى جزأين متساويين.</span></span></li>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_line_2">الخطوة 2:</span> <span class="solution-step-math" data-i18n="step_prob2_2">الطول الكلي \(20\) م، نصفه \(= 20 \div 2 = 10\) م.</span></span></li>
+                                </ol>
+                            </div>
+                        </div>
+
+                        <!-- Solution Problem 3 -->
+                        <div class="solution-item">
+                            <div class="solution-question" data-i18n="sol_prob3_q">المسألة 3 — مساران متعامدان:</div>
+                            <div class="solution-answer-rtl" data-i18n="sol_prob3_answer">نعم، المساران متعامدان</div>
+                            <div class="solution-steps">
+                                <ol>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_explanation">الشرح:</span> <span class="solution-step-math" data-i18n="step_prob3_1">المسار الأول أفقي (يوازي محور السينات)، والمسار الثاني عمودي (يوازي محور الصادات)، لذا فهما متعامدان.</span></span></li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="site-footer">
+            <div class="footer-col">
+                <h4 data-i18n="footer_dev">معلومات المطوّر</h4>
+                <p data-i18n="footer_dev_name">طور بواسطة: ماجري زياد</p>
+                <p data-i18n="footer_hosting">الاستضافة: Github, Netlify, Supabase</p>
+            </div>
+            <div class="footer-col">
+                <h4 data-i18n="footer_links">روابط</h4>
+                <a href="#" data-i18n="footer_contact">اتصل بنا</a>
+                <a href="#" data-i18n="footer_policies">السياسات</a>
+            </div>
+            <div class="footer-col">
+                <h4 data-i18n="footer_version">الإصدار</h4>
+                <p data-i18n="footer_version_num">الإصدار: 0.0.2</p>
+                <p data-i18n="footer_rights">جميع الحقوق محفوظة &copy; 2025</p>
+            </div>
+        </footer>
+
+        <!-- Print-only custom footer -->
+        <div class="print-footer">
+            <p data-i18n="print_footer_dev">طور بواسطة: ماجري زياد</p>
+            <p data-i18n="print_footer_version">الإصدار: 0.0.2</p>
+            <p data-i18n="print_footer_page">عنوان الصفحة: maths_y7_module2_lesson1_part1.html</p>
+        </div>
+    </div>
+
+    <!-- JSXGraph Diagrams -->
+    <script>
+        function t(key) {
+            const lang = document.documentElement.lang || 'ar';
+            return (translations[lang] && translations[lang][key]) || key;
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // ---------- Rule 1: Line ----------
+            const board1 = initJSXGraph('diagram-rule1', {
+                boundingbox: [-2, 3, 3, -1], axis: false, showNavigation: false, showCopyright: false
+            });
+            if (board1) {
+                const A1 = board1.create('point', [-1, 1], { name: 'A', size: 3, color: '#e74c3c' });
+                const B1 = board1.create('point', [2, 1], { name: 'B', size: 3, color: '#2ecc71' });
+                board1.create('line', [A1, B1], { strokeWidth: 2, strokeColor: '#34495e', lastArrow: true, firstArrow: true });
+                board1.create('text', [-0.5, 2.5, () => t('graph_line_label')], { fontSize: 14, color: '#1a5276' });
+            }
+
+            // ---------- Rule 2: Segment ----------
+            const board2 = initJSXGraph('diagram-rule2', {
+                boundingbox: [-2, 3, 3, -1], axis: false, showNavigation: false, showCopyright: false
+            });
+            if (board2) {
+                const A2 = board2.create('point', [-1, 1], { name: 'A', size: 3, color: '#e74c3c' });
+                const B2 = board2.create('point', [2, 1], { name: 'B', size: 3, color: '#2ecc71' });
+                board2.create('segment', [A2, B2], { strokeWidth: 3, strokeColor: '#8e44ad' });
+                board2.create('text', [-0.5, 2.5, () => {
+                    const len = Math.sqrt((B2.X()-A2.X())**2 + (B2.Y()-A2.Y())**2).toFixed(1);
+                    return t('graph_segment_label') + ' = ' + len;
+                }], { fontSize: 14, color: '#8e44ad' });
+            }
+
+            // ---------- Rule 3: Midpoint ----------
+            const board3 = initJSXGraph('diagram-rule3', {
+                boundingbox: [-2, 3, 3, -1], axis: false, showNavigation: false, showCopyright: false
+            });
+            if (board3) {
+                const A3 = board3.create('point', [-1, 1], { name: 'A', size: 3, color: '#e74c3c' });
+                const B3 = board3.create('point', [2, 1], { name: 'B', size: 3, color: '#2ecc71' });
+                const M3 = board3.create('midpoint', [A3, B3], { name: 'M', size: 4, color: '#8e44ad', fixed: true });
+                board3.create('segment', [A3, B3], { strokeWidth: 2, strokeColor: '#34495e' });
+                board3.create('segment', [A3, M3], { strokeWidth: 2, strokeColor: '#e67e22' });
+                board3.create('segment', [M3, B3], { strokeWidth: 2, strokeColor: '#27ae60' });
+                board3.create('text', [-0.5, 2.5, () => {
+                    const am = Math.sqrt((M3.X()-A3.X())**2 + (M3.Y()-A3.Y())**2).toFixed(1);
+                    return 'AM = ' + am + ' = MB';
+					}], { fontSize: 14, color: '#1a5276' });
+            }
+
+            // ---------- Rule 4: Parallel Lines ----------
+            const board4 = initJSXGraph('diagram-rule4', {
+                boundingbox: [-2, 4, 4, -1], axis: false, showNavigation: false, showCopyright: false
+            });
+            if (board4) {
+                const A4 = board4.create('point', [-1, 0.5], { name: 'A', size: 3, color: '#e74c3c', fixed: true });
+                const B4 = board4.create('point', [3, 0.5], { name: 'B', size: 3, color: '#2ecc71', fixed: true });
+                board4.create('line', [A4, B4], { strokeWidth: 2, strokeColor: '#34495e' });
+
+                const C4 = board4.create('point', [-1, 2.5], { name: 'C', size: 3, color: '#3498db' });
+                const D4 = board4.create('point', [3, 2.5], { name: 'D', size: 3, color: '#f39c12' });
+                const lineTop = board4.create('line', [C4, D4], { strokeWidth: 2, strokeColor: '#34495e' });
+
+                board4.on('update', () => {
+                    const slope = (B4.Y() - A4.Y()) / (B4.X() - A4.X());
+                    D4.moveTo([C4.X() + 3, C4.Y() + slope * 3]);
+                });
+
+                board4.create('text', [1, -0.3, '(AB)'], { fontSize: 14, color: '#1a5276' });
+                board4.create('text', [1, 3.2, '(CD)'], { fontSize: 14, color: '#1a5276' });
+                board4.create('text', [2.5, 1.5, () => t('graph_parallel_label')], { fontSize: 14, color: '#8e44ad' });
+            }
+
+            // ---------- Rule 5: Perpendicular Lines ----------
+            const board5 = initJSXGraph('diagram-rule5', {
+                boundingbox: [-2, 4, 4, -1], axis: false, showNavigation: false, showCopyright: false
+            });
+            if (board5) {
+                const P5 = board5.create('point', [1, 1], { name: 'O', size: 3, color: '#e74c3c' });
+
+                const A5 = board5.create('point', [() => P5.X() - 2, () => P5.Y()], { name: 'A', size: 2, color: '#2ecc71', fixed: true });
+                const B5 = board5.create('point', [() => P5.X() + 2, () => P5.Y()], { name: 'B', size: 2, color: '#2ecc71', fixed: true });
+                board5.create('line', [A5, B5], { strokeWidth: 2, strokeColor: '#34495e' });
+
+                const C5 = board5.create('point', [() => P5.X(), () => P5.Y() - 1.5], { name: 'C', size: 2, color: '#3498db', fixed: true });
+                const D5 = board5.create('point', [() => P5.X(), () => P5.Y() + 1.5], { name: 'D', size: 2, color: '#f39c12', fixed: true });
+                board5.create('line', [C5, D5], { strokeWidth: 2, strokeColor: '#34495e' });
+
+                const marker = board5.create('point', [() => P5.X() + 0.3, () => P5.Y() + 0.3], { size: 1, color: '#e67e22', fixed: true });
+                board5.create('text', [() => P5.X() + 0.5, () => P5.Y() + 0.5, '90°'], { fontSize: 12, color: '#e67e22' });
+                board5.create('text', [2.5, 2.5, () => t('graph_perp_label')], { fontSize: 14, color: '#e67e22' });
+            }
+
+            // ---------- Exercise 1: Types ----------
+            const boardEx1 = initJSXGraph('diagram-ex1', {
+                boundingbox: [-2, 4, 4, -1], axis: false, showNavigation: false, showCopyright: false
+            });
+            if (boardEx1) {
+                const Ae1 = boardEx1.create('point', [-1, 3], { name: 'A', size: 2, color: '#e74c3c', fixed: true });
+                const Be1 = boardEx1.create('point', [3, 3], { name: 'B', size: 2, color: '#2ecc71', fixed: true });
+                boardEx1.create('line', [Ae1, Be1], { strokeWidth: 2, strokeColor: '#34495e' });
+
+                const Ce1 = boardEx1.create('point', [-1, 2], { name: 'C', size: 2, color: '#3498db', fixed: true });
+                const De1 = boardEx1.create('point', [3, 2], { name: 'D', size: 2, color: '#f39c12', fixed: true });
+                boardEx1.create('segment', [Ce1, De1], { strokeWidth: 2, strokeColor: '#8e44ad' });
+
+                const Ee1 = boardEx1.create('point', [-1, 1], { name: 'E', size: 2, color: '#27ae60', fixed: true });
+                const Fe1 = boardEx1.create('point', [3, 1], { name: 'F', size: 2, color: '#e67e22', fixed: true });
+                boardEx1.create('line', [Ee1, Fe1], { strokeWidth: 2, strokeColor: '#34495e', dash: 1, lastArrow: true });
+            }
+
+            // ---------- Exercise 2: Midpoint length ----------
+            const boardEx2 = initJSXGraph('diagram-ex2', {
+                boundingbox: [-1, 3, 5, -1], axis: false, showNavigation: false, showCopyright: false
+            });
+            if (boardEx2) {
+                const Ae2 = boardEx2.create('point', [0, 1], { name: 'A', size: 3, color: '#e74c3c', fixed: true });
+                const Be2 = boardEx2.create('point', [4, 1], { name: 'B', size: 3, color: '#2ecc71', fixed: true });
+                const Me2 = boardEx2.create('midpoint', [Ae2, Be2], { name: 'M', size: 4, color: '#8e44ad', fixed: true });
+                boardEx2.create('segment', [Ae2, Be2], { strokeWidth: 3, strokeColor: '#34495e' });
+                boardEx2.create('text', [1, 0.3, 'AM = 4 cm'], { fontSize: 14, color: '#e67e22' });
+                boardEx2.create('text', [3, 0.3, 'MB = 4 cm'], { fontSize: 14, color: '#27ae60' });
+                boardEx2.create('text', [2, 2, 'AB = 8 cm'], { fontSize: 14, color: '#1a5276' });
+            }
+
+            // ---------- Exercise 3: Symbols ----------
+            const boardEx3 = initJSXGraph('diagram-ex3', {
+                boundingbox: [-2, 4, 4, -1], axis: false, showNavigation: false, showCopyright: false
+            });
+            if (boardEx3) {
+                const Ap3 = boardEx3.create('point', [-1, 3], { name: 'A', size: 2, color: '#e74c3c', fixed: true });
+                const Bp3 = boardEx3.create('point', [3, 3], { name: 'B', size: 2, color: '#2ecc71', fixed: true });
+                const Cp3 = boardEx3.create('point', [1, 2], { name: 'C', size: 2, color: '#3498db', fixed: true });
+                const Dp3 = boardEx3.create('point', [1, 4], { name: 'D', size: 2, color: '#f39c12', fixed: true });
+                boardEx3.create('line', [Ap3, Bp3], { strokeWidth: 2, strokeColor: '#34495e' });
+                boardEx3.create('line', [Cp3, Dp3], { strokeWidth: 2, strokeColor: '#34495e' });
+                boardEx3.create('text', [2.5, 3.8, '⊥'], { fontSize: 16, color: '#e67e22' });
+
+                const Ep3 = boardEx3.create('point', [-1, 1], { name: 'E', size: 2, color: '#27ae60', fixed: true });
+                const Fp3 = boardEx3.create('point', [3, 1], { name: 'F', size: 2, color: '#8e44ad', fixed: true });
+                const Gp3 = boardEx3.create('point', [-1, 0], { name: 'G', size: 2, color: '#e67e22', fixed: true });
+                const Hp3 = boardEx3.create('point', [3, 0], { name: 'H', size: 2, color: '#1abc9c', fixed: true });
+                boardEx3.create('line', [Ep3, Fp3], { strokeWidth: 2, strokeColor: '#34495e' });
+                boardEx3.create('line', [Gp3, Hp3], { strokeWidth: 2, strokeColor: '#34495e' });
+                boardEx3.create('text', [2.5, 0.2, '∥'], { fontSize: 16, color: '#27ae60' });
+            }
+
+            // ---------- Exercise 4: Draw segment ----------
+            const boardEx4 = initJSXGraph('diagram-ex4', {
+                boundingbox: [-1, 3, 5, -1], axis: false, showNavigation: false, showCopyright: false
+            });
+            if (boardEx4) {
+                const Pe4 = boardEx4.create('point', [0, 1], { name: 'P', size: 3, color: '#e74c3c', fixed: true });
+                const Qe4 = boardEx4.create('point', [3, 1], { name: 'Q', size: 3, color: '#2ecc71', fixed: true });
+                const Re4 = boardEx4.create('midpoint', [Pe4, Qe4], { name: 'R', size: 4, color: '#8e44ad', fixed: true });
+                boardEx4.create('segment', [Pe4, Qe4], { strokeWidth: 3, strokeColor: '#34495e' });
+                boardEx4.create('text', [0.8, 0.3, 'PR = 3 cm'], { fontSize: 14, color: '#e67e22' });
+                boardEx4.create('text', [2.2, 0.3, 'RQ = 3 cm'], { fontSize: 14, color: '#27ae60' });
+                boardEx4.create('text', [1.5, 2, 'PQ = 6 cm'], { fontSize: 14, color: '#1a5276' });
+            }
+
+            // Observe language changes
+            const observer = new MutationObserver(() => {
+                [board1, board2, board3, board4, board5, boardEx1, boardEx2, boardEx3, boardEx4].forEach(b => {
+                    if (b) b.update();
+                });
+            });
+            observer.observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
+        });
+    </script>
+
+    <!-- TRANSLATION OBJECT -->
+    <script>
+        const translations = {
+            ar: {
+                page_title: "الدرس 1: المستقيم وأجزاؤه - رياضيات السنة السابعة أساسي",
+                print_header: "السنة السابعة أساسي - الوحدة الثانية - الدرس الأول",
+                site_header: "Educational Dashboard - Mathematics",
+                back_to_index: "← العودة للفهرس",
+                nav_badge: "الدرس 1 | الجزء 1",
+                next_lesson: "الدرس التالي ←",
+                language_label: "اللغة",
+                lang_ar: "العربية",
+                lang_en: "English",
+                lang_fr: "Français",
+                print_label: "اختر القسم للطباعة:",
+                print_all: "الدرس كاملاً",
+                print_rules: "القواعد",
+                print_exercises: "التمارين",
+                print_problems: "المسائل",
+                print_solutions: "الحلول",
+                print_button: "🖨️ طباعة",
+                module_tag: "📘 الهندسة | الدرس 1",
+                lesson_title: "المستقيم وأجزاؤه",
+                lesson_subtitle: "المنتصف، القطعة المستقيمة، والمستقيمات المتعامدة والمتوازية",
+                rules_title: "القواعد",
+                rules_subtitle: "الأساسيات والمبادئ الهندسية للمستقيم وأجزائه",
+                rule1_title: "قاعدة 1: المستقيم",
+                rule1_text: "المستقيم هو مجموعة غير منتهية من النقاط المتصلة في اتجاهين متعاكسين، وليس له بداية ولا نهاية. يُرمز له بحرف أو بحرفين بين قوسين مثل (AB).",
+                example_rule1: "(AB) مستقيم يمر بالنقطتين A و B",
+                rule1_caption: "اسحب النقطتين A و B لتحريك المستقيم",
+                rule2_title: "قاعدة 2: القطعة المستقيمة",
+                rule2_text: "القطعة المستقيمة هي جزء من مستقيم محصور بين نقطتين تُسمّيان طرفيها، ولها طول محدود يمكن قياسه. نرمز لها بـ [AB].",
+                example_rule2: "[AB] قطعة مستقيمة طرفاها A و B",
+                rule2_caption: "اسحب النقطتين لتغيير طول القطعة",
+                rule3_title: "قاعدة 3: منتصف قطعة مستقيمة",
+                rule3_text: "منتصف قطعة مستقيمة هو النقطة التي تقسمها إلى قطعتين متساويتين في الطول. إذا كانت M منتصف [AB] فإن AM = MB = 1/2 AB.",
+                example_rule3: "إذا كانت M منتصف [AB] فإن AM = MB",
+                rule3_caption: "اسحب A أو B، وستبقى M في المنتصف",
+                rule4_title: "قاعدة 4: المستقيمات المتوازية",
+                rule4_text: "مستقيمان متوازيان إذا كانا لا يتقاطعان أبداً مهما امتدّا، ولهما نفس الاتجاه. نرمز للتوازي بـ ∥.",
+                example_rule4: "(AB) ∥ (CD)",
+                rule4_caption: "اسحب النقطة C لتغيير المسافة بين المستقيمين مع بقائهما متوازيين",
+                rule5_title: "قاعدة 5: المستقيمات المتعامدة",
+                rule5_text: "مستقيمان متعامدان إذا تقاطعا وشكّلا زاوية قائمة (90°). نرمز للتعامد بـ ⊥.",
+                example_rule5: "(AB) ⊥ (CD)",
+                rule5_caption: "اسحب نقطة التقاطع، سيبقى المستقيمان متعامدين",
+                graph_line_label: "مستقيم (AB)",
+                graph_segment_label: "طول القطعة",
+                graph_parallel_label: "(AB) ∥ (CD)",
+                graph_perp_label: "(AB) ⊥ (CD)",
+                cm_unit: "cm",
+                midpoint_of: "منتصف",
+                then: "إذن",
+                answer_type_line: "مستقيم",
+                answer_type_segment: "قطعة مستقيمة",
+                answer_type_ray: "نصف مستقيم",
+                exercises_title: "تمارين",
+                exercises_subtitle: "تمرّن على تحديد المستقيمات والقطاعات والمنتصفات",
+                exercise1_q: "حدّد نوع كل شكل هندسي:",
+                exercise2_q: "إذا كانت M منتصف [AB] و AB = 8 cm، فما طول AM؟",
+                exercise3_q: "أكمل بالرموز المناسبة:",
+                exercise4_q: "ارcm قطعة [PQ] طولها 6 cm، ثم عيّن منتصفها R. احسب PR و RQ.",
+                answer_placeholder: "اكتب إجابتك هنا...",
+                problems_title: "مسائل",
+                problems_subtitle: "مسائل حياتية وسياقية لتطبيق المفاهيم الهندسية",
+                problem1_title: "🏙️ مسألة 1: شارعان متوازيان",
+                problem1_text: "في مدينة، شارعان رئيسيان متوازيان يقطعهما شارع ثالث عمودي عليهما. إذا كان طول الجزء الواقع بين الشارعين المتوازيين على الشارع الثالث هو 120 متراً، فما المسافة بين الشارعين المتوازيين؟",
+                problem2_title: "📏 مسألة 2: سور حديقة",
+                problem2_text: "حديقة مستطيلة الشكل طولها 20 متراً وعرضها 10 أمتار. نريد وضع عمود إنارة في منتصف الضلع الطويل. كم يبعد العمود عن كل طرف من طرفي الضلع؟",
+                problem3_title: "🛤️ مسألة 3: مساران متعامدان",
+                problem3_text: "مساران في منتزه يتقاطعان بزاوية قائمة. إذا كان أحد المسارين يمر بالنقطتين A(0,0) و B(4,0)، والآخر يمر بالنقطتين C(2,1) و D(2,5)، فهل هما متعامدان؟ وضّح إجابتك.",
+                solutions_title: "حلول",
+                solutions_subtitle: "الحلول المفصلة خطوة بخطوة لكل التمارين والمسائل",
+                solutions_exercises_heading: "📝 حلول التمارين",
+                solutions_problems_heading: "🧩 حلول المسائل",
+                sol_ex1_q: "التمرين 1 — تحديد الأنواع:",
+                sol_ex2_q: "التمرين 2 — طول AM:",
+                sol_ex3_q: "التمرين 3 — الرموز:",
+                sol_ex4_q: "التمرين 4 — منتصف قطعة:",
+                sol_prob1_q: "المسألة 1 — شارعان متوازيان:",
+                sol_prob2_q: "المسألة 2 — سور حديقة:",
+                sol_prob3_q: "المسألة 3 — مساران متعامدان:",
+                sol_prob1_answer: "المسافة بين الشارعين المتوازيين هي 120 متراً",
+                sol_prob2_answer: "يبعد العمود 10 أمتار عن كل طرف",
+                sol_prob3_answer: "نعم، المساران متعامدان",
+                step_line_1: "الخطوة 1:",
+                step_line_2: "الخطوة 2:",
+                step_explanation: "الشرح:",
+                step_ex2_1: "M منتصف [AB] إذن AM = 1/2 AB",
+                step_ex2_2: "AM = 1/2 × 8 = 4 cm",
+                step_ex4_1: "R منتصف [PQ] إذن PR = RQ = 1/2 PQ",
+                step_ex4_2: "PR = RQ = 1/2 × 6 = 3 cm",
+                step_prob1_1: "بما أن الشارع الثالث عمودي على الشارعين المتوازيين، فإن طول الجزء بينهما هو المسافة بينهما.",
+                step_prob2_1: "منتصف الضلع الطويل يقسمه إلى جزأين متساويين.",
+                step_prob2_2: "الطول الكلي 20 م، نصفه = 20 ÷ 2 = 10 م.",
+                step_prob3_1: "المسار الأول أفقي (يوازي محور السينات)، والمسار الثاني عمودي (يوازي محور الصادات)، لذا فهما متعامدان.",
+                sub_label_a: "أ)",
+                sub_label_b: "ب)",
+                sub_label_c: "ج)",
+                sub_label_d: "د)",
+                footer_dev: "معلومات المطوّر",
+                footer_dev_name: "طور بواسطة: ماجري زياد",
+                footer_hosting: "الاستضافة: Github, Netlify, Supabase",
+                footer_links: "روابط",
+                footer_contact: "اتصل بنا",
+                footer_policies: "السياسات",
+                footer_version: "الإصدار",
+                footer_version_num: "الإصدار: 0.0.2",
+                footer_rights: "جميع الحقوق محفوظة © 2025",
+                print_footer_dev: "طور بواسطة: ماجري زياد",
+                print_footer_version: "الإصدار: 0.0.2",
+                print_footer_page: "عنوان الصفحة: maths_y7_module2_lesson1_part1.html"
+            },
+            en: {
+                page_title: "Lesson 1: The Line and Its Parts - Math Year 7",
+                print_header: "Year 7 – Unit 2 – Lesson 1",
+                site_header: "Educational Dashboard - Mathematics",
+                back_to_index: "← Back to Index",
+                nav_badge: "Lesson 1 | Part 1",
+                next_lesson: "Next Lesson →",
+                language_label: "Language",
+                lang_ar: "العربية",
+                lang_en: "English",
+                lang_fr: "Français",
+                print_label: "Select section to print:",
+                print_all: "Full lesson",
+                print_rules: "Rules",
+                print_exercises: "Exercises",
+                print_problems: "Problems",
+                print_solutions: "Solutions",
+                print_button: "🖨️ Print",
+                module_tag: "📘 Geometry | Lesson 1",
+                lesson_title: "The Line and Its Parts",
+                lesson_subtitle: "Midpoint, segment, perpendicular and parallel lines",
+                rules_title: "Rules",
+                rules_subtitle: "Fundamentals of lines and their parts",
+                rule1_title: "Rule 1: The Line",
+                rule1_text: "A line is an infinite set of points extending in two opposite directions; it has no beginning and no end. It is denoted by a letter or two letters in parentheses, like (AB).",
+                example_rule1: "(AB) is a line passing through points A and B",
+                rule1_caption: "Drag points A and B to move the line",
+                rule2_title: "Rule 2: The Segment",
+                rule2_text: "A segment is a part of a line bounded by two points called endpoints, and it has a finite, measurable length. It is denoted as [AB].",
+                example_rule2: "[AB] is a segment with endpoints A and B",
+                rule2_caption: "Drag the points to change the segment length",
+                rule3_title: "Rule 3: Midpoint of a Segment",
+                rule3_text: "The midpoint of a segment is the point that divides it into two equal segments. If M is the midpoint of [AB] then AM = MB = 1/2 AB.",
+                example_rule3: "If M is the midpoint of [AB] then AM = MB",
+                rule3_caption: "Drag A or B, and M stays in the middle",
+                rule4_title: "Rule 4: Parallel Lines",
+                rule4_text: "Two lines are parallel if they never intersect no matter how far they are extended, and they have the same direction. Parallelism is denoted by ∥.",
+                example_rule4: "(AB) ∥ (CD)",
+                rule4_caption: "Drag point C to change the distance between lines while keeping them parallel",
+                rule5_title: "Rule 5: Perpendicular Lines",
+                rule5_text: "Two lines are perpendicular if they intersect and form a right angle (90°). Perpendicularity is denoted by ⊥.",
+                example_rule5: "(AB) ⊥ (CD)",
+                rule5_caption: "Drag the intersection point, the lines will remain perpendicular",
+                graph_line_label: "Line (AB)",
+                graph_segment_label: "Segment length",
+                graph_parallel_label: "(AB) ∥ (CD)",
+                graph_perp_label: "(AB) ⊥ (CD)",
+                cm_unit: "cm",
+                midpoint_of: "midpoint",
+                then: "then",
+                answer_type_line: "Line",
+                answer_type_segment: "Segment",
+                answer_type_ray: "Ray",
+                exercises_title: "Exercises",
+                exercises_subtitle: "Practice identifying lines, segments, and midpoints",
+                exercise1_q: "Identify the type of each geometric figure:",
+                exercise2_q: "If M is the midpoint of [AB] and AB = 8 cm, what is the length of AM?",
+                exercise3_q: "Complete with the appropriate symbols:",
+                exercise4_q: "Draw a segment [PQ] of length 6 cm, then mark its midpoint R. Calculate PR and RQ.",
+                answer_placeholder: "Write your answer here...",
+                problems_title: "Problems",
+                problems_subtitle: "Real-life problems applying geometric concepts",
+                problem1_title: "🏙️ Problem 1: Two Parallel Streets",
+                problem1_text: "In a city, two main parallel streets are crossed by a third street perpendicular to them. If the length of the part between the two parallel streets on the third street is 120 meters, what is the distance between the two parallel streets?",
+                problem2_title: "📏 Problem 2: Garden Fence",
+                problem2_text: "A rectangular garden is 20 meters long and 10 meters wide. We want to place a lamp post in the middle of the long side. How far is the post from each end of that side?",
+                problem3_title: "🛤️ Problem 3: Two Perpendicular Paths",
+                problem3_text: "Two paths in a park intersect at a right angle. If one path passes through points A(0,0) and B(4,0), and the other through C(2,1) and D(2,5), are they perpendicular? Explain.",
+                solutions_title: "Solutions",
+                solutions_subtitle: "Detailed step-by-step solutions for all exercises and problems",
+                solutions_exercises_heading: "📝 Exercise Solutions",
+                solutions_problems_heading: "🧩 Problem Solutions",
+                sol_ex1_q: "Exercise 1 — Identify types:",
+                sol_ex2_q: "Exercise 2 — Length of AM:",
+                sol_ex3_q: "Exercise 3 — Symbols:",
+                sol_ex4_q: "Exercise 4 — Midpoint of segment:",
+                sol_prob1_q: "Problem 1 — Two Parallel Streets:",
+                sol_prob2_q: "Problem 2 — Garden Fence:",
+                sol_prob3_q: "Problem 3 — Two Perpendicular Paths:",
+                sol_prob1_answer: "The distance between the parallel streets is 120 meters",
+                sol_prob2_answer: "The post is 10 meters from each end",
+                sol_prob3_answer: "Yes, the paths are perpendicular",
+                step_line_1: "Step 1:",
+                step_line_2: "Step 2:",
+                step_explanation: "Explanation:",
+                step_ex2_1: "M midpoint of [AB] then AM = 1/2 AB",
+                step_ex2_2: "AM = 1/2 × 8 = 4 cm",
+                step_ex4_1: "R midpoint of [PQ] then PR = RQ = 1/2 PQ",
+                step_ex4_2: "PR = RQ = 1/2 × 6 = 3 cm",
+                step_prob1_1: "Since the third street is perpendicular to the two parallel streets, the length of the part between them is the distance between them.",
+                step_prob2_1: "The midpoint of the long side divides it into two equal parts.",
+                step_prob2_2: "Total length 20 m, half = 20 ÷ 2 = 10 m.",
+                step_prob3_1: "The first path is horizontal (parallel to x-axis), and the second is vertical (parallel to y-axis), so they are perpendicular.",
+                sub_label_a: "a)",
+                sub_label_b: "b)",
+                sub_label_c: "c)",
+                sub_label_d: "d)",
+                footer_dev: "Developer Info",
+                footer_dev_name: "Developed by: Majri Zied",
+                footer_hosting: "Hosting: Github, Netlify, Supabase",
+                footer_links: "Links",
+                footer_contact: "Contact us",
+                footer_policies: "Policies",
+                footer_version: "Version",
+                footer_version_num: "Version: 0.0.2",
+                footer_rights: "All rights reserved © 2025",
+                print_footer_dev: "Developed by: Majri Zied",
+                print_footer_version: "Version: 0.0.2",
+                print_footer_page: "Page address: maths_y7_module2_lesson1_part1.html"
+            },
+            fr: {
+                page_title: "Leçon 1 : La droite et ses parties - Math 7ème année",
+                print_header: "7ème année – Unité 2 – Leçon 1",
+                site_header: "Educational Dashboard - Mathematics",
+                back_to_index: "← Retour à l'index",
+                nav_badge: "Leçon 1 | Partie 1",
+                next_lesson: "Leçon suivante →",
+                language_label: "Langue",
+                lang_ar: "العربية",
+                lang_en: "English",
+                lang_fr: "Français",
+                print_label: "Choisir la section à imprimer :",
+                print_all: "Leçon complète",
+                print_rules: "Règles",
+                print_exercises: "Exercices",
+                print_problems: "Problèmes",
+                print_solutions: "Solutions",
+                print_button: "🖨️ Imprimer",
+                module_tag: "📘 Géométrie | Leçon 1",
+                lesson_title: "La droite et ses parties",
+                lesson_subtitle: "Milieu, segment, droites perpendiculaires et parallèles",
+                rules_title: "Règles",
+                rules_subtitle: "Fondamentaux des droites et de leurs parties",
+                rule1_title: "Règle 1 : La droite",
+                rule1_text: "Une droite est un ensemble infini de points s'étendant dans deux directions opposées ; elle n'a ni début ni fin. On la note par une lettre ou deux lettres entre parenthèses, comme (AB).",
+                example_rule1: "(AB) est une droite passant par les points A et B",
+                rule1_caption: "Faites glisser les points A et B pour déplacer la droite",
+                rule2_title: "Règle 2 : Le segment",
+                rule2_text: "Un segment est une partie de droite délimitée par deux points appelés extrémités, et il a une longueur finie mesurable. On le note [AB].",
+                example_rule2: "[AB] est un segment avec extrémités A et B",
+                rule2_caption: "Faites glisser les points pour changer la longueur du segment",
+                rule3_title: "Règle 3 : Milieu d'un segment",
+                rule3_text: "Le milieu d'un segment est le point qui le divise en deux segments égaux. Si M est le milieu de [AB] alors AM = MB = 1/2 AB.",
+                example_rule3: "Si M est le milieu de [AB] alors AM = MB",
+                rule3_caption: "Faites glisser A ou B, M reste au milieu",
+                rule4_title: "Règle 4 : Droites parallèles",
+                rule4_text: "Deux droites sont parallèles si elles ne se coupent jamais, quelle que soit leur prolongation, et si elles ont la même direction. On note le parallélisme par ∥.",
+                example_rule4: "(AB) ∥ (CD)",
+                rule4_caption: "Faites glisser le point C pour changer la distance entre les droites tout en les gardant parallèles",
+                rule5_title: "Règle 5 : Droites perpendiculaires",
+                rule5_text: "Deux droites sont perpendiculaires si elles se coupent en formant un angle droit (90°). On note la perpendicularité par ⊥.",
+                example_rule5: "(AB) ⊥ (CD)",
+                rule5_caption: "Faites glisser le point d'intersection, les droites resteront perpendiculaires",
+                graph_line_label: "Droite (AB)",
+                graph_segment_label: "Longueur du segment",
+                graph_parallel_label: "(AB) ∥ (CD)",
+                graph_perp_label: "(AB) ⊥ (CD)",
+                cm_unit: "cm",
+                midpoint_of: "milieu",
+                then: "alors",
+                answer_type_line: "Droite",
+                answer_type_segment: "Segment",
+                answer_type_ray: "Demi-droite",
+                exercises_title: "Exercices",
+                exercises_subtitle: "Entraînez-vous à identifier droites, segments et milieux",
+                exercise1_q: "Identifiez le type de chaque figure géométrique :",
+                exercise2_q: "Si M est le milieu de [AB] et AB = 8 cm, quelle est la longueur de AM ?",
+                exercise3_q: "Complétez avec les symboles appropriés :",
+                exercise4_q: "Tracez un segment [PQ] de longueur 6 cm, puis marquez son milieu R. Calculez PR et RQ.",
+                answer_placeholder: "Écrivez votre réponse ici...",
+                problems_title: "Problèmes",
+                problems_subtitle: "Problèmes de la vie réelle appliquant les concepts géométriques",
+                problem1_title: "🏙️ Problème 1 : Deux rues parallèles",
+                problem1_text: "Dans une ville, deux rues principales parallèles sont traversées par une troisième rue perpendiculaire. Si la longueur de la partie entre les deux rues parallèles sur la troisième rue est de 120 mètres, quelle est la distance entre les deux rues parallèles ?",
+                problem2_title: "📏 Problème 2 : Clôture de jardin",
+                problem2_text: "Un jardin rectangulaire mesure 20 mètres de long et 10 mètres de large. Nous voulons placer un lampadaire au milieu du côté long. À quelle distance se trouve le poteau de chaque extrémité de ce côté ?",
+                problem3_title: "🛤️ Problème 3 : Deux chemins perpendiculaires",
+                problem3_text: "Deux chemins dans un parc se coupent à angle droit. Si un chemin passe par les points A(0,0) et B(4,0), et l'autre par C(2,1) et D(2,5), sont-ils perpendiculaires ? Expliquez.",
+                solutions_title: "Solutions",
+                solutions_subtitle: "Solutions détaillées étape par étape pour tous les exercices et problèmes",
+                solutions_exercises_heading: "📝 Solutions des exercices",
+                solutions_problems_heading: "🧩 Solutions des problèmes",
+                sol_ex1_q: "Exercice 1 — Identifier les types :",
+                sol_ex2_q: "Exercice 2 — Longueur de AM :",
+                sol_ex3_q: "Exercice 3 — Symboles :",
+                sol_ex4_q: "Exercice 4 — Milieu d'un segment :",
+                sol_prob1_q: "Problème 1 — Deux rues parallèles :",
+                sol_prob2_q: "Problème 2 — Clôture de jardin :",
+                sol_prob3_q: "Problème 3 — Deux chemins perpendiculaires :",
+                sol_prob1_answer: "La distance entre les rues parallèles est de 120 mètres",
+                sol_prob2_answer: "Le poteau est à 10 mètres de chaque extrémité",
+                sol_prob3_answer: "Oui, les chemins sont perpendiculaires",
+                step_line_1: "Étape 1 :",
+                step_line_2: "Étape 2 :",
+                step_explanation: "Explication :",
+                step_ex2_1: "M milieu de [AB] alors AM = 1/2 AB",
+                step_ex2_2: "AM = 1/2 × 8 = 4 cm",
+                step_ex4_1: "R milieu de [PQ] alors PR = RQ = 1/2 PQ",
+                step_ex4_2: "PR = RQ = 1/2 × 6 = 3 cm",
+                step_prob1_1: "Comme la troisième rue est perpendiculaire aux deux rues parallèles, la longueur de la partie entre elles est la distance entre elles.",
+                step_prob2_1: "Le milieu du côté long le divise en deux parties égales.",
+                step_prob2_2: "Longueur totale 20 m, moitié = 20 ÷ 2 = 10 m.",
+                step_prob3_1: "Le premier chemin est horizontal (parallèle à l'axe des x), et le second est vertical (parallèle à l'axe des y), donc ils sont perpendiculaires.",
+                sub_label_a: "a)",
+                sub_label_b: "b)",
+                sub_label_c: "c)",
+                sub_label_d: "d)",
+                footer_dev: "Informations du développeur",
+                footer_dev_name: "Développé par : Majri Zied",
+                footer_hosting: "Hébergement : Github, Netlify, Supabase",
+                footer_links: "Liens",
+                footer_contact: "Contactez-nous",
+                footer_policies: "Politiques",
+                footer_version: "Version",
+                footer_version_num: "Version : 0.0.2",
+                footer_rights: "Tous droits réservés © 2025",
+                print_footer_dev: "Développé par : Majri Zied",
+                print_footer_version: "Version : 0.0.2",
+                print_footer_page: "Adresse de la page : maths_y7_module2_lesson1_part1.html"
+            }
+        };
+    </script>
+</body>
+</html>

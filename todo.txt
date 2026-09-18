@@ -1,0 +1,97 @@
+TODO: Enhancements and Options for Mathematics Dashboard
+========================================================
+
+## UI/UX Enhancements
+- [ ] Add a search bar to filter lessons by keyword.
+- [ ] Implement a progress indicator for completed lessons (e.g., checkmarks).
+- [ ] Add breadcrumbs for easier navigation.
+- [ ] Allow users to collapse/expand all sections at once.
+- [ ] Add smooth scrolling to top when toggling sections or navigating.
+- [ ] Implement a floating action button (FAB) for quick actions (print, theme, language).
+- [ ] Add tooltips for icons and buttons.
+- [ ] Use CSS animations for lesson list expansion instead of max-height for smoother transitions.
+- [ ] Add a "Back to top" button.
+- [ ] Provide a grid/list view toggle for lessons on the index page.
+
+## Accessibility (A11y)
+- [ ] Ensure all interactive elements are keyboard accessible (focus indicators, tab order).
+- [ ] Add ARIA roles and labels for custom components (collapsible sections, language selector).
+- [ ] Implement skip navigation link.
+- [ ] Improve color contrast in dark mode for all text elements.
+- [ ] Add screen reader announcements when language or theme changes.
+- [ ] Provide alt text for all images and icons.
+- [ ] Ensure focus management when opening/closing sections.
+- [ ] Use semantic HTML (nav, main, section, article, aside) where appropriate.
+
+## Internationalization (i18n)
+- [ ] Move translation objects to separate JSON files for easier management.
+- [ ] Add more languages (Spanish, German, etc.).
+- [ ] Implement automatic language detection based on browser settings.
+- [ ] Add language persistence across sessions (already partially with localStorage).
+- [ ] Provide a way for users to contribute translations.
+- [ ] Translate all remaining strings, including example placeholders and error messages.
+
+## Theming / Dark Mode
+- [ ] Add a system theme option (auto-detect OS preference) in addition to light/dark toggle.
+- [ ] Allow users to choose accent color.
+- [ ] Optimize dark mode colors for better readability (e.g., rule cards, solution boxes).
+- [ ] Add a high contrast mode.
+- [ ] Persist theme choice across pages (already via localStorage).
+
+## Print / PDF
+- [ ] Improve print stylesheet: hide all interactive elements, add page numbers, proper margins.
+- [ ] Generate a print-friendly summary page with only selected sections.
+- [ ] Add option to include/exclude solutions when printing exercises.
+- [ ] Implement print-specific footer with page URL and date.
+- [ ] Use CSS @page rules for headers/footers.
+
+## Content / Pedagogy
+- [ ] Add more lessons (complete all modules).
+- [ ] Include interactive quizzes after each section.
+- [ ] Provide step-by-step hints for exercises.
+- [ ] Add video or animated explanations for complex rules.
+- [ ] Implement a glossary of math terms.
+- [ ] Add real-world examples with images or diagrams.
+- [ ] Allow teachers to generate printable worksheets.
+- [ ] Add difficulty levels for exercises.
+
+## Functionality
+- [ ] Implement answer validation for exercises (check student input against correct answer).
+- [ ] Save student answers in localStorage and restore on page reload.
+- [ ] Add a timer for practice exercises.
+- [ ] Provide immediate feedback on submitted answers.
+- [ ] Add a score tracker and progress bar.
+- [ ] Create a "practice mode" that shuffles exercises.
+- [ ] Implement spaced repetition for learning review.
+
+## Performance
+- [ ] Minify CSS/JS files for production.
+- [ ] Use lazy loading for images and assets.
+- [ ] Combine and defer non-critical CSS.
+- [ ] Use a content delivery network (CDN) for fonts or libraries.
+- [ ] Optimize SVG icons instead of emoji for faster rendering.
+
+## Code Architecture / Maintainability
+- [ ] Separate translation logic into a shared i18n module instead of duplicating in each HTML.
+- [ ] Use a templating engine or static site generator to avoid repeated HTML.
+- [ ] Move inline translation objects to external JSON files.
+- [ ] Refactor CSS to use more consistent naming (BEM or similar).
+- [ ] Add a build process with npm scripts for minification, bundling.
+- [ ] Write unit tests for JavaScript functions.
+
+## PWA / Offline
+- [ ] Add a service worker to cache assets for offline access.
+- [ ] Create a manifest.json to make the site installable as a PWA.
+- [ ] Implement offline fallback page.
+- [ ] Use IndexedDB to store translations and user progress offline.
+
+## Analytics / Feedback
+- [ ] Integrate analytics to track usage (e.g., Google Analytics, Plausible).
+- [ ] Add a feedback form for users to report errors or suggest improvements.
+- [ ] Implement error logging to catch JS issues.
+
+## Miscellaneous
+- [ ] Add a favicon (already referenced in header but file may be missing).
+- [ ] Include a license file and attribution.
+- [ ] Add a "share" button to share lesson links on social media.
+- [ ] Provide a print button on every section header for quick printing of that section.

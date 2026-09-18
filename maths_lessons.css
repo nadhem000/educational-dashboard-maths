@@ -1,0 +1,491 @@
+/* ============================================================
+   maths_lessons.css — Styles specific to lesson pages
+   (Direction‑aware version for RTL Arabic and LTR EN/FR)
+   ============================================================ */
+
+/* Container override */
+.container {
+    max-width: 1100px;
+}
+
+/* Lesson header */
+.lesson-header {
+    text-align: center;
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+.lesson-header::after {
+    content: '';
+    position: absolute;
+    bottom: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 220px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--accent), var(--secondary), var(--accent));
+    border-radius: 4px;
+}
+
+.lesson-header .lesson-title {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+}
+
+.lesson-header .lesson-subtitle {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+.module-tag {
+    display: inline-block;
+    background: var(--hover);
+    color: var(--algebra);
+    padding: 0.3rem 1.2rem;
+    border-radius: 30px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    margin-bottom: 0.6rem;
+}
+
+/* Section styles */
+.section {
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+    margin-bottom: 2rem;
+    overflow: hidden;
+    transition: box-shadow var(--transition);
+}
+
+.section:hover {
+    box-shadow: 0 6px 28px rgba(0, 0, 0, 0.12);
+}
+
+.section-header {
+    padding: 1.2rem 1.8rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    border-bottom: 2px solid var(--border);
+    cursor: pointer;
+    transition: background var(--transition);
+    user-select: none;
+}
+
+.section-header:hover {
+    background: var(--hover);
+}
+
+.section-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+    color: var(--white);
+    font-weight: 700;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
+}
+
+.rules-icon { background: linear-gradient(135deg, #2980b9, #1a5276); }
+.exercises-icon { background: linear-gradient(135deg, #e67e22, #d35400); }
+.problems-icon { background: linear-gradient(135deg, #8e44ad, #6c3483); }
+.solutions-icon { background: linear-gradient(135deg, #27ae60, #1e8449); }
+
+.section-title {
+    flex: 1;
+}
+
+.section-title h2 {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--primary);
+    margin: 0;
+}
+
+.section-title p {
+    font-size: 0.9rem;
+    color: var(--text-faint);
+    margin: 0;
+}
+
+.section-toggle {
+    font-size: 1.3rem;
+    color: var(--text-faint);
+    transition: transform var(--transition);
+    user-select: none;
+}
+
+.section-toggle.open {
+    transform: rotate(180deg);
+}
+
+.section-body {
+    padding: 1.8rem;
+    max-height: 20000px;
+    overflow: hidden;
+    transition: max-height 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+                opacity 0.4s ease,
+                padding 0.4s ease;
+    opacity: 1;
+}
+
+.section-body.collapsed {
+    max-height: 0;
+    opacity: 0;
+    padding: 0 1.8rem;
+    overflow: hidden;
+}
+
+/* Rule cards */
+.rule-card {
+    background: var(--bg-alt);
+    border-radius: 12px;
+    padding: 1.2rem 1.5rem;
+    margin-bottom: 1rem;
+    border-right: 4px solid var(--secondary);
+    transition: transform var(--transition);
+}
+
+.rule-card:hover {
+    transform: translateX(-4px);
+}
+
+.rule-card .rule-title {
+    font-weight: 800;
+    font-size: 1.1rem;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.rule-card .rule-title::before {
+    content: '📌';
+    font-size: 1.1rem;
+}
+
+.rule-card .rule-text {
+    color: var(--text-secondary);
+    font-size: 0.98rem;
+}
+
+/* FIXED: Example box – inherits page direction, aligns start, no hardcoded RTL/LTR */
+.rule-card .example-box {
+    background: var(--example-bg);
+    border-radius: 8px;
+    padding: 0.8rem 1rem;
+    margin-top: 0.6rem;
+    font-family: var(--mono);
+    font-size: 1.05rem;
+    color: var(--primary);
+    border: 1px dashed var(--secondary);
+    font-feature-settings: "tnum" 0;
+
+    direction: inherit;          /* RTL for Arabic, LTR for EN/FR */
+    text-align: start;           /* Aligns to the right in RTL, left in LTR */
+}
+
+/* Fallback for browsers that don't support `text-align: start` */
+@supports not (text-align: start) {
+    .rule-card .example-box {
+        text-align: right;
+    }
+    html[dir="ltr"] .rule-card .example-box {
+        text-align: left;
+    }
+}
+
+/* Generic class to isolate LTR math snippets inside RTL text */
+.math,
+.math-ltr {
+    direction: ltr;
+    unicode-bidi: isolate;
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 0.95em;
+    font-feature-settings: "tnum" 0;
+}
+
+/* Exercise items */
+.exercise-item {
+    background: var(--bg-light);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.2rem 1.5rem;
+    margin-bottom: 1rem;
+    transition: border-color var(--transition);
+}
+
+.exercise-item:hover {
+    border-color: var(--secondary);
+}
+
+.exercise-question {
+    font-weight: 600;
+    font-size: 1.05rem;
+    margin-bottom: 0.8rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.7rem;
+}
+
+.exercise-number {
+    background: var(--accent);
+    color: var(--white);
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 0.9rem;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.exercise-sub {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    background: var(--bg-sub);
+    border-radius: 8px;
+    padding: 0.6rem 1rem;
+    margin-bottom: 0.5rem;
+    border: 1px solid var(--border-light);
+}
+
+/* Direction handled conditionally */
+html[dir="rtl"] .exercise-sub { direction: rtl; }
+html[dir="ltr"] .exercise-sub { direction: ltr; }
+
+.sub-label {
+    font-weight: 700;
+    color: var(--primary);
+    flex-shrink: 0;
+    font-family: 'Segoe UI', 'Tahoma', 'Arial', sans-serif;
+}
+
+html[dir="rtl"] .sub-label { direction: rtl; }
+html[dir="ltr"] .sub-label { direction: ltr; }
+
+.sub-math {
+    /* Always LTR because it's pure math */
+    direction: ltr;
+    unicode-bidi: isolate;
+    font-family: var(--mono);
+    font-size: 1.05rem;
+    color: var(--primary);
+    letter-spacing: 1.5px;
+    text-align: left;
+    flex: 1;
+    font-feature-settings: "tnum" 0;
+    white-space: nowrap;
+}
+
+.answer-textarea {
+    width: 100%;
+    margin-top: 0.8rem;
+    padding: 0.7rem 1rem;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    font-family: 'Segoe UI', 'Tahoma', 'Arial', sans-serif;
+    font-size: 0.95rem;
+    resize: vertical;
+    min-height: 60px;
+    background: var(--card-bg);
+    color: var(--text);
+    transition: border-color var(--transition);
+}
+
+.answer-textarea:focus {
+    outline: none;
+    border-color: var(--secondary);
+    box-shadow: 0 0 0 2px rgba(46, 134, 193, 0.2);
+}
+
+.exercise-hint {
+    font-size: 0.85rem;
+    color: var(--text-faint);
+    font-style: italic;
+    margin-top: 0.6rem;
+}
+
+/* Problem cards */
+.problem-card {
+    background: var(--bg-light);
+    border: 1px solid var(--border);
+    border-right: 4px solid var(--warning);
+    border-radius: 10px;
+    padding: 1.2rem 1.5rem;
+    margin-bottom: 1rem;
+    transition: transform var(--transition);
+}
+
+.problem-card:hover {
+    transform: translateX(-4px);
+}
+
+.problem-title {
+    font-weight: 800;
+    font-size: 1.05rem;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.problem-text {
+    color: var(--text-secondary);
+    font-size: 0.98rem;
+    line-height: 1.6;
+}
+
+/* Solution styles */
+.solution-item {
+    background: var(--solution-bg);
+    border: 1px solid var(--solution-border);
+    border-radius: 10px;
+    padding: 1.2rem 1.5rem;
+    margin-bottom: 1rem;
+    border-right: 4px solid var(--success);
+}
+
+.solution-item .solution-question {
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+}
+
+.solution-answer {
+    font-family: var(--mono);
+    font-size: 1.05rem;
+    color: var(--success);
+    direction: ltr;
+    unicode-bidi: isolate;
+    text-align: left;
+    background: var(--card-bg);
+    border-radius: 8px;
+    padding: 0.6rem 1rem;
+    border: 1px dashed var(--success);
+    letter-spacing: 1px;
+    font-feature-settings: "tnum" 0;
+}
+
+.solution-answer-rtl {
+    font-size: 1.05rem;
+    color: var(--success);
+    background: var(--card-bg);
+    border-radius: 8px;
+    padding: 0.6rem 1rem;
+    border: 1px dashed var(--success);
+    letter-spacing: 0.5px;
+    font-family: 'Segoe UI', 'Tahoma', 'Arial', sans-serif;
+    font-weight: 700;
+}
+
+html[dir="rtl"] .solution-answer-rtl {
+    direction: rtl;
+    text-align: right;
+}
+html[dir="ltr"] .solution-answer-rtl {
+    direction: ltr;
+    text-align: left;
+}
+
+.solution-steps {
+    margin-top: 0.8rem;
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+}
+
+.solution-steps ol {
+    padding-right: 1.5rem;
+    list-style-type: none;
+}
+
+.solution-steps li {
+    margin-bottom: 0.4rem;
+}
+
+.solution-step-line {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+html[dir="rtl"] .solution-step-line { direction: rtl; }
+html[dir="ltr"] .solution-step-line { direction: ltr; }
+
+.solution-step-label {
+    font-weight: 700;
+    color: var(--primary);
+    flex-shrink: 0;
+    font-family: 'Segoe UI', 'Tahoma', 'Arial', sans-serif;
+}
+
+html[dir="rtl"] .solution-step-label { direction: rtl; }
+html[dir="ltr"] .solution-step-label { direction: ltr; }
+
+/* FIXED: Solution step math – inherits page direction, aligns start, wraps */
+.solution-step-math {
+    font-family: var(--mono);
+    font-size: 1rem;
+    font-feature-settings: "tnum" 0;
+    flex: 1;
+    white-space: normal;           /* allow wrapping for long mixed content */
+    overflow-wrap: break-word;      /* prevent overflow */
+
+    direction: inherit;             /* RTL for Arabic, LTR for EN/FR */
+    text-align: start;              /* Aligns right in RTL, left in LTR */
+}
+
+/* Fallback for browsers that don't support `text-align: start` */
+@supports not (text-align: start) {
+    .solution-step-math {
+        text-align: right;
+    }
+    html[dir="ltr"] .solution-step-math {
+        text-align: left;
+    }
+}
+
+/* Print-specific */
+@media print {
+    body.print-all .section { display: block; }
+    body.print-rules #exercises-section,
+    body.print-rules #problems-section,
+    body.print-rules #solutions-section { display: none; }
+    body.print-exercises #rules-section,
+    body.print-exercises #problems-section,
+    body.print-exercises #solutions-section { display: none; }
+    body.print-problems #rules-section,
+    body.print-problems #exercises-section,
+    body.print-problems #solutions-section { display: none; }
+    body.print-solutions #rules-section,
+    body.print-solutions #exercises-section,
+    body.print-solutions #problems-section { display: none; }
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+    .lesson-header .lesson-title { font-size: 1.6rem; }
+    .section-header { padding: 1rem 1.2rem; }
+    .section-body { padding: 1.2rem; }
+    .section-title h2 { font-size: 1.2rem; }
+    .section-icon { width: 40px; height: 40px; font-size: 1.2rem; }
+    .exercise-number { width: 28px; height: 28px; font-size: 0.8rem; }
+    .rule-card, .exercise-item, .problem-card, .solution-item { padding: 1rem; }
+    .sub-math, .solution-step-math { white-space: normal; }
+}

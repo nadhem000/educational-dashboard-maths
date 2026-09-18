@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="page_title">أحسب بأيسر طريقة - رياضيات السنة السابعة أساسي</title>
+
+    <!-- External Stylesheets -->
+    <link rel="stylesheet" href="maths_shared.css">
+    <link rel="stylesheet" href="maths_lessons.css">
+
+    <!-- KaTeX -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+
+    <!-- External Script -->
+    <script src="maths_lessons.js" defer></script>
+</head>
+<body>
+    <div class="container">
+        <main>
+            <!-- Print-only header -->
+            <div class="print-header" data-i18n="print_header">السنة السابعة أساسي - الوحدة الأولى - الدرس الأول - الجزء 2 - أ</div>
+
+            <!-- Site Header -->
+            <div class="site-header">
+                <div class="header-icon">
+                    <img src="assets/icons/icon-152x152.png" alt="أيقونة الموقع">
+                </div>
+                <h1 data-i18n="site_header">Educational Dashboard - Mathematics</h1>
+            </div>
+
+            <!-- Top Navigation -->
+            <nav class="top-nav">
+                <a href="maths_y7.html" class="nav-link" data-i18n="back_to_index">← العودة للفهرس</a>
+                <span class="nav-badge" data-i18n="nav_badge">الدرس 1 | جزء 2 | أ</span>
+                <a href="maths_y7_alg_module1_lesson2_part1_sub1.html" class="nav-link" data-i18n="next_part">التالي ←</a>
+            </nav>
+
+            <!-- Print Controls -->
+            <div class="print-controls">
+                <label for="print-section" data-i18n="print_label">اختر القسم للطباعة:</label>
+                <select id="print-section" name="print-section">
+                    <option value="all" data-i18n="print_all">الدرس كاملاً</option>
+                    <option value="rules" data-i18n="print_rules">القواعد</option>
+                    <option value="exercises" data-i18n="print_exercises">التمارين</option>
+                    <option value="problems" data-i18n="print_problems">المسائل</option>
+                    <option value="solutions" data-i18n="print_solutions">الحلول</option>
+                </select>
+                <button class="print-button" onclick="printSelected()" data-i18n="print_button">🖨️ طباعة</button>
+                <button id="theme-toggle" class="theme-toggle" aria-label="تبديل الوضع الليلي/النهاري">
+                    <span class="theme-icon">🌙</span>
+                </button>
+
+                <!-- Language Selector -->
+                <div class="language-selector">
+                    <label for="language-select" class="sr-only" data-i18n="language_label">اللغة</label>
+                    <select id="language-select" name="language-select">
+                        <option value="ar" data-i18n="lang_ar">العربية</option>
+                        <option value="en" data-i18n="lang_en">English</option>
+                        <option value="fr" data-i18n="lang_fr">Français</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Lesson Header -->
+            <header class="lesson-header">
+                <span class="module-tag" data-i18n="module_tag">📘 الجبر والحساب | الدرس 1 | الجزء 2 | أ</span>
+                <h1 class="lesson-title" data-i18n="lesson_title">أحسب بأيسر طريقة</h1>
+                <p class="lesson-subtitle" data-i18n="lesson_subtitle">استعمال خاصيات العمليات لتسهيل الحساب الذهني والكتابي</p>
+            </header>
+
+            <!-- Section 1: Rules -->
+            <div class="section" id="rules-section">
+                <div class="section-header" onclick="toggleSection('rules-body', 'rules-toggle')" role="button"
+                     tabindex="0" aria-expanded="true" aria-controls="rules-body"
+                     onkeydown="if(event.key==='Enter'||event.key===' ') toggleSection('rules-body', 'rules-toggle')">
+                    <div class="section-icon rules-icon">📐</div>
+                    <div class="section-title">
+                        <h2 data-i18n="rules_title">القواعد</h2>
+                        <p data-i18n="rules_subtitle">طرق ذكية لتسهيل العمليات الحسابية</p>
+                    </div>
+                    <span class="section-toggle open" id="rules-toggle">▼</span>
+                </div>
+                <div class="section-body" id="rules-body">
+                    <div class="rule-card">
+                        <div class="rule-title" data-i18n="rule1_title">قاعدة 1: استعمال خاصية التوزيع</div>
+                        <div class="rule-text" data-i18n="rule1_text">لضرب عدد قريب من 10 أو 100، يمكن تفكيكه إلى فرق أو مجموع لتسهيل الضرب.</div>
+                        <div class="example-box">\(99 \times 5 = (100 - 1) \times 5 = 500 - 5 = 495\)</div>
+                    </div>
+                    <div class="rule-card">
+                        <div class="rule-title" data-i18n="rule2_title">قاعدة 2: إعادة الترتيب والتجميع</div>
+                        <div class="rule-text" data-i18n="rule2_text">استعمل الإبدالية والتجميعية لتكوين أعداد صديقة (مثل 10، 100) تسهّل الجمع.</div>
+                        <div class="example-box">\(25 + 37 + 75 = (25 + 75) + 37 = 100 + 37 = 137\)</div>
+                    </div>
+                    <div class="rule-card">
+                        <div class="rule-title" data-i18n="rule3_title">قاعدة 3: تفكيك أحد العوامل</div>
+                        <div class="rule-text" data-i18n="rule3_text">فكّك عددًا إلى مجموع أو فرق لتسهيل الضرب مع عدد آخر.</div>
+                        <div class="example-box">\(12 \times 15 = 12 \times (10 + 5) = 120 + 60 = 180\)</div>
+                    </div>
+                    <div class="rule-card">
+                        <div class="rule-title" data-i18n="rule4_title">قاعدة 4: المضاعفة والتنصيف</div>
+                        <div class="rule-text" data-i18n="rule4_text">استعمل العلاقة بين الضرب في 4 أو 25 لتسهيل الحساب.</div>
+                        <div class="example-box">\(25 \times 16 = 25 \times (4 \times 4) = (25 \times 4) \times 4 = 100 \times 4 = 400\)</div>
+                    </div>
+                    <div class="rule-card">
+                        <div class="rule-title" data-i18n="rule5_title">قاعدة 5: التقريب ثم التعديل</div>
+                        <div class="rule-text" data-i18n="rule5_text">قرّب العدد إلى عدد صديق ثم أضف أو اطرح الفرق.</div>
+                        <div class="example-box">\(198 + 47 = 200 + 47 - 2 = 245\)</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 2: Exercises -->
+            <div class="section" id="exercises-section">
+                <div class="section-header" onclick="toggleSection('exercises-body', 'exercises-toggle')" role="button"
+                     tabindex="0" aria-expanded="true" aria-controls="exercises-body"
+                     onkeydown="if(event.key==='Enter'||event.key===' ') toggleSection('exercises-body', 'exercises-toggle')">
+                    <div class="section-icon exercises-icon">✏️</div>
+                    <div class="section-title">
+                        <h2 data-i18n="exercises_title">تمارين</h2>
+                        <p data-i18n="exercises_subtitle">احسب بأيسر طريقة باستعمال القواعد السابقة</p>
+                    </div>
+                    <span class="section-toggle open" id="exercises-toggle">▼</span>
+                </div>
+                <div class="section-body" id="exercises-body">
+                    <!-- Exercise 1 -->
+                    <div class="exercise-item">
+                        <div class="exercise-question">
+                            <span class="exercise-number">1</span>
+                            <span data-i18n="exercise1_q">استعمل خاصية التوزيع لحساب:</span>
+                        </div>
+                        <div class="exercise-sub"><span class="sub-label" data-i18n="sub_label_a">أ)</span><span class="sub-math">\(98 \times 4 =\)</span></div>
+                        <div class="exercise-sub"><span class="sub-label" data-i18n="sub_label_b">ب)</span><span class="sub-math">\(102 \times 6 =\)</span></div>
+                        <div class="exercise-sub"><span class="sub-label" data-i18n="sub_label_c">ج)</span><span class="sub-math">\(7 \times 99 =\)</span></div>
+                        <textarea id="answer-ex1" name="answer-ex1" class="answer-textarea" placeholder="اكتب إجابتك هنا..." data-i18n-placeholder="answer_placeholder"></textarea>
+                        <div class="exercise-hint" data-i18n="exercise1_hint">💡 قرب العدد إلى 100 ثم اضرب واطرح/أضف الفرق.</div>
+                    </div>
+                    <!-- Exercise 2 -->
+                    <div class="exercise-item">
+                        <div class="exercise-question">
+                            <span class="exercise-number">2</span>
+                            <span data-i18n="exercise2_q">أعد الترتيب والتجميع لتسهيل الجمع:</span>
+                        </div>
+                        <div class="exercise-sub"><span class="sub-label" data-i18n="sub_label_a">أ)</span><span class="sub-math">\(13 + 48 + 7 =\)</span></div>
+                        <div class="exercise-sub"><span class="sub-label" data-i18n="sub_label_b">ب)</span><span class="sub-math">\(36 + 25 + 14 =\)</span></div>
+                        <div class="exercise-sub"><span class="sub-label" data-i18n="sub_label_c">ج)</span><span class="sub-math">\(52 + 19 + 8 =\)</span></div>
+                        <textarea id="answer-ex2" name="answer-ex2" class="answer-textarea" placeholder="اكتب إجابتك هنا..." data-i18n-placeholder="answer_placeholder"></textarea>
+                        <div class="exercise-hint" data-i18n="exercise2_hint">💡 ابحث عن أزواج مجموعها 20 أو 100.</div>
+                    </div>
+                    <!-- Exercise 3 -->
+                    <div class="exercise-item">
+                        <div class="exercise-question">
+                            <span class="exercise-number">3</span>
+                            <span data-i18n="exercise3_q">فكّك أحد العوامل لتسهيل الضرب:</span>
+                        </div>
+                        <div class="exercise-sub"><span class="sub-label" data-i18n="sub_label_a">أ)</span><span class="sub-math">\(15 \times 12 =\)</span></div>
+                        <div class="exercise-sub"><span class="sub-label" data-i18n="sub_label_b">ب)</span><span class="sub-math">\(18 \times 5 =\)</span></div>
+                        <div class="exercise-sub"><span class="sub-label" data-i18n="sub_label_c">ج)</span><span class="sub-math">\(25 \times 14 =\)</span></div>
+                        <textarea id="answer-ex3" name="answer-ex3" class="answer-textarea" placeholder="اكتب إجابتك هنا..." data-i18n-placeholder="answer_placeholder"></textarea>
+                        <div class="exercise-hint" data-i18n="exercise3_hint">💡 فكّك أحد العددين إلى 10 + عدد أو 20 - عدد.</div>
+                    </div>
+                    <!-- Exercise 4 -->
+                    <div class="exercise-item">
+                        <div class="exercise-question">
+                            <span class="exercise-number">4</span>
+                            <span data-i18n="exercise4_q">استعمل المضاعفة والتنصيف:</span>
+                        </div>
+                        <div class="exercise-sub"><span class="sub-label" data-i18n="sub_label_a">أ)</span><span class="sub-math">\(25 \times 24 =\)</span></div>
+                        <div class="exercise-sub"><span class="sub-label" data-i18n="sub_label_b">ب)</span><span class="sub-math">\(50 \times 18 =\)</span></div>
+                        <textarea id="answer-ex4" name="answer-ex4" class="answer-textarea" placeholder="اكتب إجابتك هنا..." data-i18n-placeholder="answer_placeholder"></textarea>
+                        <div class="exercise-hint" data-i18n="exercise4_hint">💡 تذكر: 25 × 4 = 100 و 50 × 2 = 100.</div>
+                    </div>
+                    <!-- Exercise 5 -->
+                    <div class="exercise-item">
+                        <div class="exercise-question">
+                            <span class="exercise-number">5</span>
+                            <span data-i18n="exercise5_q">احسب بالتقريب ثم التعديل:</span>
+                        </div>
+                        <div class="exercise-sub"><span class="sub-label" data-i18n="sub_label_a">أ)</span><span class="sub-math">\(199 + 65 =\)</span></div>
+                        <div class="exercise-sub"><span class="sub-label" data-i18n="sub_label_b">ب)</span><span class="sub-math">\(305 - 98 =\)</span></div>
+                        <textarea id="answer-ex5" name="answer-ex5" class="answer-textarea" placeholder="اكتب إجابتك هنا..." data-i18n-placeholder="answer_placeholder"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 3: Problems -->
+            <div class="section" id="problems-section">
+                <div class="section-header" onclick="toggleSection('problems-body', 'problems-toggle')" role="button"
+                     tabindex="0" aria-expanded="true" aria-controls="problems-body"
+                     onkeydown="if(event.key==='Enter'||event.key===' ') toggleSection('problems-body', 'problems-toggle')">
+                    <div class="section-icon problems-icon">🧩</div>
+                    <div class="section-title">
+                        <h2 data-i18n="problems_title">مسائل</h2>
+                        <p data-i18n="problems_subtitle">مسائل حياتية نستعمل فيها الحساب الأيسر</p>
+                    </div>
+                    <span class="section-toggle open" id="problems-toggle">▼</span>
+                </div>
+                <div class="section-body" id="problems-body">
+                    <div class="problem-card">
+                        <div class="problem-title" data-i18n="problem1_title">🛒 مسألة 1: مشتريات</div>
+                        <div class="problem-text" data-i18n="problem1_text">اشترى تلميذ 4 كراريس ثمن الواحد 99 مليمًا. احسب المبلغ الإجمالي بأيسر طريقة.</div>
+                    </div>
+                    <div class="problem-card">
+                        <div class="problem-title" data-i18n="problem2_title">📚 مسألة 2: عدد الصفحات</div>
+                        <div class="problem-text" data-i18n="problem2_text">قرأت سلمى 25 صفحة يوميًا لمدة 16 يومًا. كم صفحة قرأت في المجموع؟ (استعمل 25 × 16)</div>
+                    </div>
+                    <div class="problem-card">
+                        <div class="problem-title" data-i18n="problem3_title">🧮 مسألة 3: جمع النقاط</div>
+                        <div class="problem-text" data-i18n="problem3_text">جمع فريق رياضي 37 نقطة في الذهاب و 48 نقطة في الإياب و 13 نقطة إضافية من مباريات ودية. احسب المجموع الكلي بأيسر طريقة.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 4: Solutions -->
+            <div class="section" id="solutions-section">
+                <div class="section-header" onclick="toggleSection('solutions-body', 'solutions-toggle')" role="button"
+                     tabindex="0" aria-expanded="true" aria-controls="solutions-body"
+                     onkeydown="if(event.key==='Enter'||event.key===' ') toggleSection('solutions-body', 'solutions-toggle')">
+                    <div class="section-icon solutions-icon">✅</div>
+                    <div class="section-title">
+                        <h2 data-i18n="solutions_title">حلول</h2>
+                        <p data-i18n="solutions_subtitle">الحلول الكاملة لجميع التمارين والمسائل</p>
+                    </div>
+                    <span class="section-toggle open" id="solutions-toggle">▼</span>
+                </div>
+                <div class="section-body" id="solutions-body">
+                    <div style="margin-bottom: 1.5rem;">
+                        <h3 data-i18n="solutions_exercises_heading">📝 حلول التمارين</h3>
+                        <!-- Exercise 1 -->
+                        <div class="solution-item">
+                            <div class="solution-question" data-i18n="sol_ex1_q">التمرين 1:</div>
+                            <div class="solution-answer-rtl">
+                                <span data-i18n="sub_label_a">أ)</span> \(392\) &nbsp;|&nbsp;
+                                <span data-i18n="sub_label_b">ب)</span> \(612\) &nbsp;|&nbsp;
+                                <span data-i18n="sub_label_c">ج)</span> \(693\)
+                            </div>
+                            <div class="solution-steps">
+                                <ol>
+                                    <li><span class="solution-step-math">\(98 \times 4 = (100 - 2) \times 4 = 400 - 8 = 392\)</span></li>
+                                    <li><span class="solution-step-math">\(102 \times 6 = (100 + 2) \times 6 = 600 + 12 = 612\)</span></li>
+                                    <li><span class="solution-step-math">\(7 \times 99 = 7 \times (100 - 1) = 700 - 7 = 693\)</span></li>
+                                </ol>
+                            </div>
+                        </div>
+                        <!-- Exercise 2 -->
+                        <div class="solution-item">
+                            <div class="solution-question" data-i18n="sol_ex2_q">التمرين 2:</div>
+                            <div class="solution-answer-rtl">
+                                <span data-i18n="sub_label_a">أ)</span> \(68\) &nbsp;|&nbsp;
+                                <span data-i18n="sub_label_b">ب)</span> \(75\) &nbsp;|&nbsp;
+                                <span data-i18n="sub_label_c">ج)</span> \(79\)
+                            </div>
+                            <div class="solution-steps">
+                                <ol>
+                                    <li><span class="solution-step-math">\(13 + 48 + 7 = (13 + 7) + 48 = 20 + 48 = 68\)</span></li>
+                                    <li><span class="solution-step-math">\(36 + 25 + 14 = (36 + 14) + 25 = 50 + 25 = 75\)</span></li>
+                                    <li><span class="solution-step-math">\(52 + 19 + 8 = (52 + 8) + 19 = 60 + 19 = 79\)</span></li>
+                                </ol>
+                            </div>
+                        </div>
+                        <!-- Exercise 3 -->
+                        <div class="solution-item">
+                            <div class="solution-question" data-i18n="sol_ex3_q">التمرين 3:</div>
+                            <div class="solution-answer-rtl">
+                                <span data-i18n="sub_label_a">أ)</span> \(180\) &nbsp;|&nbsp;
+                                <span data-i18n="sub_label_b">ب)</span> \(90\) &nbsp;|&nbsp;
+                                <span data-i18n="sub_label_c">ج)</span> \(350\)
+                            </div>
+                            <div class="solution-steps">
+                                <ol>
+                                    <li><span class="solution-step-math">\(15 \times 12 = 15 \times (10 + 2) = 150 + 30 = 180\)</span></li>
+                                    <li><span class="solution-step-math">\(18 \times 5 = (20 - 2) \times 5 = 100 - 10 = 90\)</span></li>
+                                    <li><span class="solution-step-math">\(25 \times 14 = 25 \times (10 + 4) = 250 + 100 = 350\)</span></li>
+                                </ol>
+                            </div>
+                        </div>
+                        <!-- Exercise 4 -->
+                        <div class="solution-item">
+                            <div class="solution-question" data-i18n="sol_ex4_q">التمرين 4:</div>
+                            <div class="solution-answer-rtl">
+                                <span data-i18n="sub_label_a">أ)</span> \(600\) &nbsp;|&nbsp;
+                                <span data-i18n="sub_label_b">ب)</span> \(900\)
+                            </div>
+                            <div class="solution-steps">
+                                <ol>
+                                    <li><span class="solution-step-math">\(25 \times 24 = 25 \times (4 \times 6) = (25 \times 4) \times 6 = 100 \times 6 = 600\)</span></li>
+                                    <li><span class="solution-step-math">\(50 \times 18 = 50 \times (2 \times 9) = (50 \times 2) \times 9 = 100 \times 9 = 900\)</span></li>
+                                </ol>
+                            </div>
+                        </div>
+                        <!-- Exercise 5 -->
+                        <div class="solution-item">
+                            <div class="solution-question" data-i18n="sol_ex5_q">التمرين 5:</div>
+                            <div class="solution-answer-rtl">
+                                <span data-i18n="sub_label_a">أ)</span> \(264\) &nbsp;|&nbsp;
+                                <span data-i18n="sub_label_b">ب)</span> \(207\)
+                            </div>
+                            <div class="solution-steps">
+                                <ol>
+                                    <li><span class="solution-step-math">\(199 + 65 = 200 + 65 - 1 = 264\)</span></li>
+                                    <li><span class="solution-step-math">\(305 - 98 = 305 - 100 + 2 = 207\)</span></li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 data-i18n="solutions_problems_heading">🧩 حلول المسائل</h3>
+                        <!-- Problem 1 -->
+                        <div class="solution-item">
+                            <div class="solution-question" data-i18n="sol_prob1_q">المسألة 1:</div>
+                            <div class="solution-answer-rtl" data-i18n="sol_prob1_answer">المبلغ = 396 مليمًا</div>
+                            <div class="solution-steps">
+                                <ol>
+                                    <li><span class="solution-step-math">\(4 \times 99 = 4 \times (100 - 1) = 400 - 4 = 396\)</span></li>
+                                </ol>
+                            </div>
+                        </div>
+                        <!-- Problem 2 -->
+                        <div class="solution-item">
+                            <div class="solution-question" data-i18n="sol_prob2_q">المسألة 2:</div>
+                            <div class="solution-answer-rtl" data-i18n="sol_prob2_answer">قرأت 400 صفحة</div>
+                            <div class="solution-steps">
+                                <ol>
+                                    <li><span class="solution-step-math">\(25 \times 16 = 25 \times (4 \times 4) = (25 \times 4) \times 4 = 100 \times 4 = 400\)</span></li>
+                                </ol>
+                            </div>
+                        </div>
+                        <!-- Problem 3 -->
+                        <div class="solution-item">
+                            <div class="solution-question" data-i18n="sol_prob3_q">المسألة 3:</div>
+                            <div class="solution-answer-rtl" data-i18n="sol_prob3_answer">المجموع = 98 نقطة</div>
+                            <div class="solution-steps">
+                                <ol>
+                                    <li><span class="solution-step-math">\(37 + 48 + 13 = (37 + 13) + 48 = 50 + 48 = 98\)</span></li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="site-footer">
+            <div class="footer-col">
+                <h4 data-i18n="footer_dev">معلومات المطوّر</h4>
+                <p data-i18n="footer_dev_name">طور بواسطة: ماجري زياد</p>
+                <p data-i18n="footer_hosting">الاستضافة: Github, Netlify, Supabase</p>
+            </div>
+            <div class="footer-col">
+                <h4 data-i18n="footer_links">روابط</h4>
+                <a href="#" data-i18n="footer_contact">اتصل بنا</a>
+                <a href="#" data-i18n="footer_policies">السياسات</a>
+            </div>
+            <div class="footer-col">
+                <h4 data-i18n="footer_version">الإصدار</h4>
+                <p data-i18n="footer_version_num">الإصدار: 0.0.2</p>
+                <p data-i18n="footer_rights">جميع الحقوق محفوظة &copy; 2025</p>
+            </div>
+        </footer>
+
+        <!-- Print-only custom footer -->
+        <div class="print-footer">
+            <p data-i18n="print_footer_dev">طور بواسطة: ماجري زياد</p>
+            <p data-i18n="print_footer_version">الإصدار: 0.0.2</p>
+            <p data-i18n="print_footer_page">عنوان الصفحة: maths_y7_alg_module1_lesson1_part2_sub1.html</p>
+        </div>
+    </div>
+
+    <!-- Inline Translation Object (corrected) -->
+    <script>
+        const translations = {
+            ar: {
+                page_title: "أحسب بأيسر طريقة - رياضيات السنة السابعة أساسي",
+                print_header: "السنة السابعة أساسي - الوحدة الأولى - الدرس الأول - الجزء 2 - أ",
+                site_header: "Educational Dashboard - Mathematics",
+                back_to_index: "← العودة للفهرس",
+                nav_badge: "الدرس 1 | جزء 2 | أ",
+                next_part: "التالي ←",
+                language_label: "اللغة",
+                lang_ar: "العربية",
+                lang_en: "English",
+                lang_fr: "Français",
+                print_label: "اختر القسم للطباعة:",
+                print_all: "الدرس كاملاً",
+                print_rules: "القواعد",
+                print_exercises: "التمارين",
+                print_problems: "المسائل",
+                print_solutions: "الحلول",
+                print_button: "🖨️ طباعة",
+                module_tag: "📘 الجبر والحساب | الدرس 1 | الجزء 2 | أ",
+                lesson_title: "أحسب بأيسر طريقة",
+                lesson_subtitle: "استعمال خاصيات العمليات لتسهيل الحساب الذهني والكتابي",
+                rules_title: "القواعد",
+                rules_subtitle: "طرق ذكية لتسهيل العمليات الحسابية",
+                rule1_title: "قاعدة 1: استعمال خاصية التوزيع",
+                rule1_text: "لضرب عدد قريب من 10 أو 100، يمكن تفكيكه إلى فرق أو مجموع لتسهيل الضرب.",
+                rule2_title: "قاعدة 2: إعادة الترتيب والتجميع",
+                rule2_text: "استعمل الإبدالية والتجميعية لتكوين أعداد صديقة (مثل 10، 100) تسهّل الجمع.",
+                rule3_title: "قاعدة 3: تفكيك أحد العوامل",
+                rule3_text: "فكّك عددًا إلى مجموع أو فرق لتسهيل الضرب مع عدد آخر.",
+                rule4_title: "قاعدة 4: المضاعفة والتنصيف",
+                rule4_text: "استعمل العلاقة بين الضرب في 4 أو 25 لتسهيل الحساب.",
+                rule5_title: "قاعدة 5: التقريب ثم التعديل",
+                rule5_text: "قرّب العدد إلى عدد صديق ثم أضف أو اطرح الفرق.",
+                exercises_title: "تمارين",
+                exercises_subtitle: "احسب بأيسر طريقة باستعمال القواعد السابقة",
+                exercise1_q: "استعمل خاصية التوزيع لحساب:",
+                exercise1_hint: "💡 قرب العدد إلى 100 ثم اضرب واطرح/أضف الفرق.",
+                exercise2_q: "أعد الترتيب والتجميع لتسهيل الجمع:",
+                exercise2_hint: "💡 ابحث عن أزواج مجموعها 20 أو 100.",
+                exercise3_q: "فكّك أحد العوامل لتسهيل الضرب:",
+                exercise3_hint: "💡 فكّك أحد العددين إلى 10 + عدد أو 20 - عدد.",
+                exercise4_q: "استعمل المضاعفة والتنصيف:",
+                exercise4_hint: "💡 تذكر: 25 × 4 = 100 و 50 × 2 = 100.",
+                exercise5_q: "احسب بالتقريب ثم التعديل:",
+                answer_placeholder: "اكتب إجابتك هنا...",
+                problems_title: "مسائل",
+                problems_subtitle: "مسائل حياتية نستعمل فيها الحساب الأيسر",
+                problem1_title: "🛒 مسألة 1: مشتريات",
+                problem1_text: "اشترى تلميذ 4 كراريس ثمن الواحد 99 مليمًا. احسب المبلغ الإجمالي بأيسر طريقة.",
+                problem2_title: "📚 مسألة 2: عدد الصفحات",
+                problem2_text: "قرأت سلمى 25 صفحة يوميًا لمدة 16 يومًا. كم صفحة قرأت في المجموع؟ (استعمل 25 × 16)",
+                problem3_title: "🧮 مسألة 3: جمع النقاط",
+                problem3_text: "جمع فريق رياضي 37 نقطة في الذهاب و 48 نقطة في الإياب و 13 نقطة إضافية من مباريات ودية. احسب المجموع الكلي بأيسر طريقة.",
+                solutions_title: "حلول",
+                solutions_subtitle: "الحلول الكاملة لجميع التمارين والمسائل",
+                solutions_exercises_heading: "📝 حلول التمارين",
+                solutions_problems_heading: "🧩 حلول المسائل",
+                sol_ex1_q: "التمرين 1:",
+                sol_ex2_q: "التمرين 2:",
+                sol_ex3_q: "التمرين 3:",
+                sol_ex4_q: "التمرين 4:",
+                sol_ex5_q: "التمرين 5:",
+                sol_prob1_q: "المسألة 1:",
+                sol_prob2_q: "المسألة 2:",
+                sol_prob3_q: "المسألة 3:",
+                sol_prob1_answer: "المبلغ = \\(396\\) مليمًا",
+                sol_prob2_answer: "قرأت \\(400\\) صفحة",
+                sol_prob3_answer: "المجموع = \\(98\\) نقطة",
+                sub_label_a: "أ)",
+                sub_label_b: "ب)",
+                sub_label_c: "ج)",
+                sub_label_d: "د)",
+                currency: "دينار",
+                footer_dev: "معلومات المطوّر",
+                footer_dev_name: "طور بواسطة: ماجري زياد",
+                footer_hosting: "الاستضافة: Github, Netlify, Supabase",
+                footer_links: "روابط",
+                footer_contact: "اتصل بنا",
+                footer_policies: "السياسات",
+                footer_version: "الإصدار",
+                footer_version_num: "الإصدار: 0.0.2",
+                footer_rights: "جميع الحقوق محفوظة © 2025",
+                print_footer_dev: "طور بواسطة: ماجري زياد",
+                print_footer_version: "الإصدار: 0.0.2",
+                print_footer_page: "عنوان الصفحة: maths_y7_alg_module1_lesson1_part2_sub1.html"
+            },
+            en: {
+                page_title: "Calculate the Easiest Way - Math Year 7",
+                print_header: "Year 7 – Unit 1 – Lesson 1 – Part 2 – a",
+                site_header: "Educational Dashboard - Mathematics",
+                back_to_index: "← Back to Index",
+                nav_badge: "Lesson 1 | Part 2 | a",
+                next_part: "Next →",
+                language_label: "Language",
+                lang_ar: "العربية",
+                lang_en: "English",
+                lang_fr: "Français",
+                print_label: "Select section to print:",
+                print_all: "Full lesson",
+                print_rules: "Rules",
+                print_exercises: "Exercises",
+                print_problems: "Problems",
+                print_solutions: "Solutions",
+                print_button: "🖨️ Print",
+                module_tag: "📘 Algebra & Arithmetic | Lesson 1 | Part 2 | a",
+                lesson_title: "Calculate the Easiest Way",
+                lesson_subtitle: "Using properties of operations to simplify mental and written calculation",
+                rules_title: "Rules",
+                rules_subtitle: "Smart methods to simplify arithmetic operations",
+                rule1_title: "Rule 1: Use the distributive property",
+                rule1_text: "To multiply a number close to 10 or 100, decompose it into a difference or sum to simplify the multiplication.",
+                rule2_title: "Rule 2: Rearranging and grouping",
+                rule2_text: "Use commutativity and associativity to form friendly numbers (like 10, 100) that make addition easier.",
+                rule3_title: "Rule 3: Decomposing a factor",
+                rule3_text: "Decompose a number into a sum or difference to simplify multiplication with another number.",
+                rule4_title: "Rule 4: Doubling and halving",
+                rule4_text: "Use the relationship between multiplication by 4 or 25 to simplify calculation.",
+                rule5_title: "Rule 5: Rounding then adjusting",
+                rule5_text: "Round the number to a friendly number, then add or subtract the difference.",
+                exercises_title: "Exercises",
+                exercises_subtitle: "Calculate the easiest way using the rules above",
+                exercise1_q: "Use the distributive property to calculate:",
+                exercise1_hint: "💡 Round the number to 100, then multiply and subtract/add the difference.",
+                exercise2_q: "Rearrange and group to simplify addition:",
+                exercise2_hint: "💡 Look for pairs summing to 20 or 100.",
+                exercise3_q: "Decompose a factor to simplify multiplication:",
+                exercise3_hint: "💡 Decompose one number into 10 + number or 20 - number.",
+                exercise4_q: "Use doubling and halving:",
+                exercise4_hint: "💡 Remember: 25 × 4 = 100 and 50 × 2 = 100.",
+                exercise5_q: "Calculate by rounding then adjusting:",
+                answer_placeholder: "Write your answer here...",
+                problems_title: "Problems",
+                problems_subtitle: "Real-life problems using the easiest calculation",
+                problem1_title: "🛒 Problem 1: Purchases",
+                problem1_text: "A student bought 4 notebooks each costing 99 millimes. Calculate the total amount the easiest way.",
+                problem2_title: "📚 Problem 2: Number of pages",
+                problem2_text: "Salma read 25 pages daily for 16 days. How many pages did she read in total? (Use 25 × 16)",
+                problem3_title: "🧮 Problem 3: Collecting points",
+                problem3_text: "A sports team collected 37 points in the first leg, 48 points in the second leg, and 13 extra points from friendly matches. Calculate the total sum the easiest way.",
+                solutions_title: "Solutions",
+                solutions_subtitle: "Complete solutions for all exercises and problems",
+                solutions_exercises_heading: "📝 Exercise Solutions",
+                solutions_problems_heading: "🧩 Problem Solutions",
+                sol_ex1_q: "Exercise 1:",
+                sol_ex2_q: "Exercise 2:",
+                sol_ex3_q: "Exercise 3:",
+                sol_ex4_q: "Exercise 4:",
+                sol_ex5_q: "Exercise 5:",
+                sol_prob1_q: "Problem 1:",
+                sol_prob2_q: "Problem 2:",
+                sol_prob3_q: "Problem 3:",
+                sol_prob1_answer: "Total = \\(396\\) millimes",
+                sol_prob2_answer: "She read \\(400\\) pages",
+                sol_prob3_answer: "Total = \\(98\\) points",
+                sub_label_a: "a)",
+                sub_label_b: "b)",
+                sub_label_c: "c)",
+                sub_label_d: "d)",
+                currency: "dinars",
+                footer_dev: "Developer Info",
+                footer_dev_name: "Developed by: Majri Zied",
+                footer_hosting: "Hosting: Github, Netlify, Supabase",
+                footer_links: "Links",
+                footer_contact: "Contact us",
+                footer_policies: "Policies",
+                footer_version: "Version",
+                footer_version_num: "Version: 0.0.2",
+                footer_rights: "All rights reserved © 2025",
+                print_footer_dev: "Developed by: Majri Zied",
+                print_footer_version: "Version: 0.0.2",
+                print_footer_page: "Page address: maths_y7_alg_module1_lesson1_part2_sub1.html"
+            },
+            fr: {
+                page_title: "Calculer de la manière la plus simple - Math 7ème année",
+                print_header: "7ème année – Unité 1 – Leçon 1 – Partie 2 – a",
+                site_header: "Educational Dashboard - Mathematics",
+                back_to_index: "← Retour à l'index",
+                nav_badge: "Leçon 1 | Partie 2 | a",
+                next_part: "Suivant →",
+                language_label: "Langue",
+                lang_ar: "العربية",
+                lang_en: "English",
+                lang_fr: "Français",
+                print_label: "Choisir la section à imprimer :",
+                print_all: "Leçon complète",
+                print_rules: "Règles",
+                print_exercises: "Exercices",
+                print_problems: "Problèmes",
+                print_solutions: "Solutions",
+                print_button: "🖨️ Imprimer",
+                module_tag: "📘 Algèbre et arithmétique | Leçon 1 | Partie 2 | a",
+                lesson_title: "Calculer de la manière la plus simple",
+                lesson_subtitle: "Utiliser les propriétés des opérations pour simplifier le calcul mental et écrit",
+                rules_title: "Règles",
+                rules_subtitle: "Méthodes intelligentes pour simplifier les opérations arithmétiques",
+                rule1_title: "Règle 1 : Utiliser la distributivité",
+                rule1_text: "Pour multiplier un nombre proche de 10 ou 100, décomposez-le en différence ou somme pour simplifier la multiplication.",
+                rule2_title: "Règle 2 : Réarranger et regrouper",
+                rule2_text: "Utilisez la commutativité et l'associativité pour former des nombres amis (comme 10, 100) qui facilitent l'addition.",
+                rule3_title: "Règle 3 : Décomposer un facteur",
+                rule3_text: "Décomposez un nombre en somme ou différence pour simplifier la multiplication avec un autre nombre.",
+                rule4_title: "Règle 4 : Doubler et diviser par deux",
+                rule4_text: "Utilisez la relation entre la multiplication par 4 ou 25 pour simplifier le calcul.",
+                rule5_title: "Règle 5 : Arrondir puis ajuster",
+                rule5_text: "Arrondissez le nombre à un nombre ami, puis ajoutez ou soustrayez la différence.",
+                exercises_title: "Exercices",
+                exercises_subtitle: "Calculez de la manière la plus simple en utilisant les règles ci-dessus",
+                exercise1_q: "Utilisez la distributivité pour calculer :",
+                exercise1_hint: "💡 Arrondissez le nombre à 100, puis multipliez et soustrayez/ajoutez la différence.",
+                exercise2_q: "Réarrangez et regroupez pour simplifier l'addition :",
+                exercise2_hint: "💡 Cherchez des paires dont la somme vaut 20 ou 100.",
+                exercise3_q: "Décomposez un facteur pour simplifier la multiplication :",
+                exercise3_hint: "💡 Décomposez un nombre en 10 + nombre ou 20 - nombre.",
+                exercise4_q: "Utilisez le doublement et la division par deux :",
+                exercise4_hint: "💡 Rappel : 25 × 4 = 100 et 50 × 2 = 100.",
+                exercise5_q: "Calculez en arrondissant puis en ajustant :",
+                answer_placeholder: "Écrivez votre réponse ici...",
+                problems_title: "Problèmes",
+                problems_subtitle: "Problèmes de la vie réelle utilisant le calcul le plus simple",
+                problem1_title: "🛒 Problème 1 : Achats",
+                problem1_text: "Un élève a acheté 4 cahiers coûtant chacun 99 millimes. Calculez le montant total de la manière la plus simple.",
+                problem2_title: "📚 Problème 2 : Nombre de pages",
+                problem2_text: "Salma a lu 25 pages par jour pendant 16 jours. Combien de pages a-t-elle lues au total ? (Utilisez 25 × 16)",
+                problem3_title: "🧮 Problème 3 : Collecte de points",
+                problem3_text: "Une équipe sportive a récolté 37 points au match aller, 48 points au match retour et 13 points supplémentaires lors de matchs amicaux. Calculez la somme totale de la manière la plus simple.",
+                solutions_title: "Solutions",
+                solutions_subtitle: "Solutions complètes pour tous les exercices et problèmes",
+                solutions_exercises_heading: "📝 Solutions des exercices",
+                solutions_problems_heading: "🧩 Solutions des problèmes",
+                sol_ex1_q: "Exercice 1 :",
+                sol_ex2_q: "Exercice 2 :",
+                sol_ex3_q: "Exercice 3 :",
+                sol_ex4_q: "Exercice 4 :",
+                sol_ex5_q: "Exercice 5 :",
+                sol_prob1_q: "Problème 1 :",
+                sol_prob2_q: "Problème 2 :",
+                sol_prob3_q: "Problème 3 :",
+                sol_prob1_answer: "Total = \\(396\\) millimes",
+                sol_prob2_answer: "Elle a lu \\(400\\) pages",
+                sol_prob3_answer: "Total = \\(98\\) points",
+                sub_label_a: "a)",
+                sub_label_b: "b)",
+                sub_label_c: "c)",
+                sub_label_d: "d)",
+                currency: "dinars",
+                footer_dev: "Informations du développeur",
+                footer_dev_name: "Développé par : Majri Zied",
+                footer_hosting: "Hébergement : Github, Netlify, Supabase",
+                footer_links: "Liens",
+                footer_contact: "Contactez-nous",
+                footer_policies: "Politiques",
+                footer_version: "Version",
+                footer_version_num: "Version : 0.0.2",
+                footer_rights: "Tous droits réservés © 2025",
+                print_footer_dev: "Développé par : Majri Zied",
+                print_footer_version: "Version : 0.0.2",
+                print_footer_page: "Adresse de la page : maths_y7_alg_module1_lesson1_part2_sub1.html"
+            }
+        };
+    </script>
+</body>
+</html>

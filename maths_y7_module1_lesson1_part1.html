@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="page_title">الدرس 1: العمليات على الأعداد الصحيحة الطبيعية - رياضيات السنة السابعة أساسي</title>
+
+    <!-- External Stylesheets -->
+    <link rel="stylesheet" href="maths_shared.css">
+    <link rel="stylesheet" href="maths_lessons.css">
+
+    <!-- KaTeX -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+
+    <!-- JSXGraph -->
+    <script src="https://cdn.jsdelivr.net/npm/jsxgraph@1.4.0/distrib/jsxgraphcore.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jsxgraph@1.4.0/distrib/jsxgraph.css">
+
+    <!-- External Script -->
+    <script src="maths_lessons.js" defer></script>
+</head>
+<body>
+    <div class="container">
+        <main>
+            <!-- Print-only header -->
+            <div class="print-header" data-i18n="print_header">السنة السابعة أساسي - الوحدة الأولى - الدرس الأول</div>
+
+            <!-- Site Header -->
+            <div class="site-header">
+                <div class="header-icon">
+                    <img src="assets/icons/icon-152x152.png" alt="أيقونة الموقع">
+                </div>
+                <h1 data-i18n="site_header">Educational Dashboard - Mathematics</h1>
+            </div>
+
+            <!-- Top Navigation -->
+            <nav class="top-nav">
+                <a href="maths_y7.html" class="nav-link" data-i18n="back_to_index">← العودة للفهرس</a>
+                <span class="nav-badge" data-i18n="nav_badge">الدرس 1 | الجزء 1</span>
+                <a href="maths_y7_module1_lesson2_part1.html" class="nav-link" data-i18n="next_lesson">الدرس التالي ←</a>
+            </nav>
+
+            <!-- Print Controls -->
+            <div class="print-controls">
+                <label for="print-section" data-i18n="print_label">اختر القسم للطباعة:</label>
+                <select id="print-section" name="print-section">
+                    <option value="all" data-i18n="print_all">الدرس كاملاً</option>
+                    <option value="rules" data-i18n="print_rules">القواعد</option>
+                    <option value="exercises" data-i18n="print_exercises">التمارين</option>
+                    <option value="problems" data-i18n="print_problems">المسائل</option>
+                    <option value="solutions" data-i18n="print_solutions">الحلول</option>
+                </select>
+                <button class="print-button" onclick="printSelected()" data-i18n="print_button">🖨️ طباعة</button>
+                <button id="theme-toggle" class="theme-toggle" aria-label="تبديل الوضع الليلي/النهاري">
+                    <span class="theme-icon">🌙</span>
+                </button>
+
+                <!-- Language Selector -->
+                <div class="language-selector">
+                    <label for="language-select" class="sr-only" data-i18n="language_label">اللغة</label>
+                    <select id="language-select" name="language-select">
+                        <option value="ar" data-i18n="lang_ar">العربية</option>
+                        <option value="en" data-i18n="lang_en">English</option>
+                        <option value="fr" data-i18n="lang_fr">Français</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Lesson Header -->
+            <header class="lesson-header">
+                <span class="module-tag" data-i18n="module_tag">📘 الجبر والحساب | الدرس 1</span>
+                <h1 class="lesson-title" data-i18n="lesson_title">العمليات على الأعداد الصحيحة الطبيعية</h1>
+                <p class="lesson-subtitle" data-i18n="lesson_subtitle">الجمع، الطرح، الضرب، الأقواس، وأولويات الحساب</p>
+            </header>
+
+            <!-- Section 1: Rules -->
+            <div class="section" id="rules-section">
+                <div class="section-header" onclick="toggleSection('rules-body', 'rules-toggle')" role="button"
+                     tabindex="0" aria-expanded="true" aria-controls="rules-body"
+                     onkeydown="if(event.key==='Enter'||event.key===' ') toggleSection('rules-body', 'rules-toggle')">
+                    <div class="section-icon rules-icon">📐</div>
+                    <div class="section-title">
+                        <h2 data-i18n="rules_title">القواعد</h2>
+                        <p data-i18n="rules_subtitle">الأساسيات والمبادئ لحساب العمليات على الأعداد الطبيعية</p>
+                    </div>
+                    <span class="section-toggle open" id="rules-toggle">▼</span>
+                </div>
+                <div class="section-body" id="rules-body">
+                    <div class="rule-card">
+                        <div class="rule-title" data-i18n="rule1_title">قاعدة 1: أولوية الضرب على الجمع والطرح</div>
+                        <div class="rule-text" data-i18n="rule1_text">عند عدم وجود أقواس، تُنجَز عملية الضرب قبل عملية الجمع أو الطرح. القاعدة الأساسية: <strong>الضرب أولاً، ثم الجمع والطرح.</strong></div>
+                        <div class="example-box">\(7 + 3 \times 4 = 7 + 12 = 19\)</div>
+                    </div>
+                    <div class="rule-card">
+                        <div class="rule-title" data-i18n="rule2_title">قاعدة 2: دور الأقواس</div>
+                        <div class="rule-text" data-i18n="rule2_text">الأقواس تُغيّر ترتيب العمليات: ما داخل القوس يُحسب <strong>أولاً</strong> مهما كانت العملية. إذا وُجدت عدة أقواس، نبدأ بالقوس الأعمق.</div>
+                        <div class="example-box">\((7 + 3) \times 4 = 10 \times 4 = 40\)</div>
+                    </div>
+                    <div class="rule-card">
+                        <div class="rule-title" data-i18n="rule3_title">قاعدة 3: ترتيب العمليات بدون أقواس</div>
+                        <div class="rule-text" data-i18n="rule3_text">عند عدم وجود أقواس، نتبع الترتيب التالي:<br><strong>① الضرب (والقسمة إن وجدت)</strong> ← <strong>② الجمع والطرح من اليسار إلى اليمين.</strong></div>
+                        <div class="example-box">\(15 - 2 \times 5 = 15 - 10 = 5\)</div>
+                    </div>
+                    <div class="rule-card">
+                        <div class="rule-title" data-i18n="rule4_title">قاعدة 4: ترتيب العمليات مع الأقواس</div>
+                        <div class="rule-text" data-i18n="rule4_text"><strong>① نحسب ما داخل الأقواس أولاً</strong> ← <strong>② ثم الضرب</strong> ← <strong>③ ثم الجمع والطرح.</strong></div>
+                        <div class="example-box">\(2 \times (5 + 3) - 4 = 2 \times 8 - 4 = 16 - 4 = 12\)</div>
+                    </div>
+                    <div class="rule-card">
+                        <div class="rule-title" data-i18n="rule5_title">قاعدة 5: خصائص الجمع والضرب</div>
+                        <div class="rule-text" data-i18n="rule5_text">
+                            <strong>الإبدالية:</strong> \(a + b = b + a\) &nbsp;|&nbsp; \(a \times b = b \times a\)<br>
+                            <strong>التجميعية:</strong> \((a + b) + c = a + (b + c)\) &nbsp;|&nbsp; \((a \times b) \times c = a \times (b \times c)\)<br>
+                            <strong>العنصر المحايد:</strong> \(a + 0 = a\) &nbsp;|&nbsp; \(a \times 1 = a\)<br>
+                            <strong>التوزيعية:</strong> \(a \times (b + c) = a \times b + a \times c\)
+                        </div>
+                        <div class="example-box">\(3 \times (4 + 5) = 3 \times 9 = 27\) &nbsp;|&nbsp; \(3 \times 4 + 3 \times 5 = 12 + 15 = 27\)</div>
+                    </div>
+                    <div class="rule-card">
+                        <div class="rule-title" data-i18n="rule6_title">قاعدة 6: ملاحظة مهمة</div>
+                        <div class="rule-text" data-i18n="rule6_text">عندما لا يوجد رمز بين عدد وقوس، فهذا يعني الضرب ضمنياً: \(2(5) = 2 \times 5\) و \((3)(4) = 3 \times 4\).</div>
+                    </div>
+
+                    <!-- JSXGraph Demo: Rectangle Perimeter -->
+                    <div style="margin-top:1.5rem; text-align:center;">
+                        <h3 data-i18n="graph_title" style="margin-bottom:0.5rem;">مثال تفاعلي: محيط المستطيل</h3>
+                        <div id="geometry-demo" class="jxgbox" style="width:100%; max-width:500px; height:350px; margin:0 auto;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 2: Exercises -->
+            <div class="section" id="exercises-section">
+                <div class="section-header" onclick="toggleSection('exercises-body', 'exercises-toggle')" role="button"
+                     tabindex="0" aria-expanded="true" aria-controls="exercises-body"
+                     onkeydown="if(event.key==='Enter'||event.key===' ') toggleSection('exercises-body', 'exercises-toggle')">
+                    <div class="section-icon exercises-icon">✏️</div>
+                    <div class="section-title">
+                        <h2 data-i18n="exercises_title">تمارين</h2>
+                        <p data-i18n="exercises_subtitle">تمرّن على حساب العمليات خطوة بخطوة</p>
+                    </div>
+                    <span class="section-toggle open" id="exercises-toggle">▼</span>
+                </div>
+                <div class="section-body" id="exercises-body">
+                    <!-- Exercise 1 -->
+                    <div class="exercise-item">
+                        <div class="exercise-question">
+                            <span class="exercise-number">1</span>
+                            <span data-i18n="exercise1_q">احسب العمليات التالية بدون أقواس:</span>
+                        </div>
+                        <div class="exercise-sub"><span class="sub-label" data-i18n="sub_label_a">أ)</span><span class="sub-math">\(8 + 3 \times 2 =\)</span></div>
+                        <div class="exercise-sub"><span class="sub-label" data-i18n="sub_label_b">ب)</span><span class="sub-math">\(12 - 4 \times 2 =\)</span></div>
+                        <div class="exercise-sub"><span class="sub-label" data-i18n="sub_label_c">ج)</span><span class="sub-math">\(5 \times 6 + 10 =\)</span></div>
+                        <textarea id="answer-ex1" name="answer-ex1" class="answer-textarea" placeholder="اكتب إجابتك هنا..." data-i18n-placeholder="answer_placeholder"></textarea>
+                        <div class="exercise-hint" data-i18n="exercise1_hint">💡 تذكّر: الضرب قبل الجمع والطرح.</div>
+                    </div>
+                    <!-- Exercise 2 -->
+                    <div class="exercise-item">
+                        <div class="exercise-question">
+                            <span class="exercise-number">2</span>
+                            <span data-i18n="exercise2_q">احسب مع الأقواس:</span>
+                        </div>
+                        <div class="exercise-sub"><span class="sub-label" data-i18n="sub_label_a">أ)</span><span class="sub-math">\((8 + 3) \times 2 =\)</span></div>
+                        <div class="exercise-sub"><span class="sub-label" data-i18n="sub_label_b">ب)</span><span class="sub-math">\(12 - (4 \times 2) =\)</span></div>
+                        <div class="exercise-sub"><span class="sub-label" data-i18n="sub_label_c">ج)</span><span class="sub-math">\((5 + 6) \times 10 =\)</span></div>
+                        <textarea id="answer-ex2" name="answer-ex2" class="answer-textarea" placeholder="اكتب إجابتك هنا..." data-i18n-placeholder="answer_placeholder"></textarea>
+                        <div class="exercise-hint" data-i18n="exercise2_hint">💡 الأقواس تُحسب أولاً!</div>
+                    </div>
+                    <!-- Exercise 3 -->
+                    <div class="exercise-item">
+                        <div class="exercise-question">
+                            <span class="exercise-number">3</span>
+                            <span data-i18n="exercise3_q">احسب السلاسل التالية:</span>
+                        </div>
+                        <div class="exercise-sub"><span class="sub-label" data-i18n="sub_label_a">أ)</span><span class="sub-math">\(15 - 3 \times 2 + 7 =\)</span></div>
+                        <div class="exercise-sub"><span class="sub-label" data-i18n="sub_label_b">ب)</span><span class="sub-math">\(20 + 4 \times (6 - 2) =\)</span></div>
+                        <div class="exercise-sub"><span class="sub-label" data-i18n="sub_label_c">ج)</span><span class="sub-math">\(2 \times 3 + 5 \times 4 =\)</span></div>
+                        <div class="exercise-sub"><span class="sub-label" data-i18n="sub_label_d">د)</span><span class="sub-math">\((10 + 5) \times (8 - 3) =\)</span></div>
+                        <textarea id="answer-ex3" name="answer-ex3" class="answer-textarea" placeholder="اكتب إجابتك هنا..." data-i18n-placeholder="answer_placeholder"></textarea>
+                    </div>
+                    <!-- Exercise 4 -->
+                    <div class="exercise-item">
+                        <div class="exercise-question">
+                            <span class="exercise-number">4</span>
+                            <span data-i18n="exercise4_q">استعمل خاصية التوزيع لحساب:</span>
+                        </div>
+                        <div class="exercise-sub"><span class="sub-label" data-i18n="sub_label_a">أ)</span><span class="sub-math">\(7 \times (10 + 3) =\)</span></div>
+                        <div class="exercise-sub"><span class="sub-label" data-i18n="sub_label_b">ب)</span><span class="sub-math">\(9 \times (20 - 5) =\)</span></div>
+                        <div class="exercise-sub"><span class="sub-label" data-i18n="sub_label_c">ج)</span><span class="sub-math">\(6 \times 101 =\)</span></div>
+                        <textarea id="answer-ex4" name="answer-ex4" class="answer-textarea" placeholder="اكتب إجابتك هنا..." data-i18n-placeholder="answer_placeholder"></textarea>
+                        <div class="exercise-hint" data-i18n="exercise4_hint">💡 6 × 101 = 6 × (100 + 1)</div>
+                    </div>
+                    <!-- Exercise 5 -->
+                    <div class="exercise-item">
+                        <div class="exercise-question">
+                            <span class="exercise-number">5</span>
+                            <span data-i18n="exercise5_q">أكمل بالعدد المناسب:</span>
+                        </div>
+                        <div class="exercise-sub"><span class="sub-label" data-i18n="sub_label_a">أ)</span><span class="sub-math">\(5 + \dots = 13\)</span></div>
+                        <div class="exercise-sub"><span class="sub-label" data-i18n="sub_label_b">ب)</span><span class="sub-math">\(\dots - 8 = 7\)</span></div>
+                        <div class="exercise-sub"><span class="sub-label" data-i18n="sub_label_c">ج)</span><span class="sub-math">\(6 \times \dots = 54\)</span></div>
+                        <textarea id="answer-ex5" name="answer-ex5" class="answer-textarea" placeholder="اكتب إجابتك هنا..." data-i18n-placeholder="answer_placeholder"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 3: Problems -->
+            <div class="section" id="problems-section">
+                <div class="section-header" onclick="toggleSection('problems-body', 'problems-toggle')" role="button"
+                     tabindex="0" aria-expanded="true" aria-controls="problems-body"
+                     onkeydown="if(event.key==='Enter'||event.key===' ') toggleSection('problems-body', 'problems-toggle')">
+                    <div class="section-icon problems-icon">🧩</div>
+                    <div class="section-title">
+                        <h2 data-i18n="problems_title">مسائل</h2>
+                        <p data-i18n="problems_subtitle">مسائل حياتية وسياقية لتطبيق القواعد</p>
+                    </div>
+                    <span class="section-toggle open" id="problems-toggle">▼</span>
+                </div>
+                <div class="section-body" id="problems-body">
+                    <div class="problem-card">
+                        <div class="problem-title" data-i18n="problem1_title">🧮 مسألة 1: مشتريات من السوق</div>
+                        <div class="problem-text" data-i18n="problem1_text">اشترى تلميذ 3 كراريس، ثمن الكراس الواحد <span class="math-ltr">\(2.5\)</span> دينار، وقلمين ثمن الواحد <span class="math-ltr">\(1.5\)</span> دينار.<br><strong>احسب جملة ما دفعه.</strong></div>
+                    </div>
+                    <div class="problem-card">
+                        <div class="problem-title" data-i18n="problem2_title">🏫 مسألة 2: تلاميذ القسم</div>
+                        <div class="problem-text" data-i18n="problem2_text">في قسم به <span class="math-ltr">\(32\)</span> تلميذاً، غاب اليوم <span class="math-ltr">\(5\)</span> تلاميذ. المعلّمة قسمت الحاضرين إلى <span class="math-ltr">\(3\)</span> مجموعات متساوية.<br><strong>كم تلميذاً في كل مجموعة؟</strong></div>
+                    </div>
+                    <div class="problem-card">
+                        <div class="problem-title" data-i18n="problem3_title">📦 مسألة 3: صناديق الفواكه</div>
+                        <div class="problem-text" data-i18n="problem3_text">عند فلاح <span class="math-ltr">\(4\)</span> صناديق، في كل صندوق <span class="math-ltr">\(12\)</span> تفاحة، و<span class="math-ltr">\(5\)</span> صناديق أخرى، في كل منها <span class="math-ltr">\(8\)</span> برتقالات.<br><strong>احسب العدد الجملي للفواكه.</strong></div>
+                    </div>
+                    <div class="problem-card">
+                        <div class="problem-title" data-i18n="problem4_title">🎒 مسألة 4: محفظة وكتب</div>
+                        <div class="problem-text" data-i18n="problem4_text">ثمن محفظة <span class="math-ltr">\(35\)</span> ديناراً وثمن كتابين <span class="math-ltr">\(12\)</span> ديناراً للكتاب الواحد.<br><strong>كم دفعت الأم مقابل المحفظة والكتابين معاً؟</strong></div>
+                    </div>
+                    <div class="problem-card">
+                        <div class="problem-title" data-i18n="problem5_title">🏟️ مسألة 5: ملعب رياضي</div>
+                        <div class="problem-text" data-i18n="problem5_text">ملعب مستطيل الشكل طوله <span class="math-ltr">\(25\)</span> متراً وعرضه <span class="math-ltr">\(15\)</span> متراً. نريد وضع سياج حوله.<br><strong>احسب طول السياج اللازم.</strong><br><em>(تذكّر: محيط المستطيل = <span class="math-ltr">\(2 \times (\text{الطول} + \text{العرض})\)</span>)</em></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 4: Solutions -->
+            <div class="section" id="solutions-section">
+                <div class="section-header" onclick="toggleSection('solutions-body', 'solutions-toggle')" role="button"
+                     tabindex="0" aria-expanded="true" aria-controls="solutions-body"
+                     onkeydown="if(event.key==='Enter'||event.key===' ') toggleSection('solutions-body', 'solutions-toggle')">
+                    <div class="section-icon solutions-icon">✅</div>
+                    <div class="section-title">
+                        <h2 data-i18n="solutions_title">حلول</h2>
+                        <p data-i18n="solutions_subtitle">الحلول المفصلة خطوة بخطوة لكل التمارين والمسائل</p>
+                    </div>
+                    <span class="section-toggle open" id="solutions-toggle">▼</span>
+                </div>
+                <div class="section-body" id="solutions-body">
+                    <div style="margin-bottom: 1.5rem;">
+                        <h3 data-i18n="solutions_exercises_heading">📝 حلول التمارين</h3>
+                        <!-- Exercise Solutions -->
+                        <div class="solution-item">
+                            <div class="solution-question" data-i18n="sol_ex1_q">التمرين 1 — بدون أقواس:</div>
+                            <div class="solution-answer-rtl">
+                                <span data-i18n="sub_label_a">أ)</span> \(14\) &nbsp;|&nbsp;
+                                <span data-i18n="sub_label_b">ب)</span> \(4\) &nbsp;|&nbsp;
+                                <span data-i18n="sub_label_c">ج)</span> \(40\)
+                            </div>
+                            <div class="solution-steps">
+                                <ol>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="sub_label_a">أ)</span> <span class="solution-step-math">\(8 + 3 \times 2 = 8 + 6 = 14\)</span></span></li>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="sub_label_b">ب)</span> <span class="solution-step-math">\(12 - 4 \times 2 = 12 - 8 = 4\)</span></span></li>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="sub_label_c">ج)</span> <span class="solution-step-math">\(5 \times 6 + 10 = 30 + 10 = 40\)</span></span></li>
+                                </ol>
+                            </div>
+                        </div>
+                        <div class="solution-item">
+                            <div class="solution-question" data-i18n="sol_ex2_q">التمرين 2 — مع الأقواس:</div>
+                            <div class="solution-answer-rtl">
+                                <span data-i18n="sub_label_a">أ)</span> \(22\) &nbsp;|&nbsp;
+                                <span data-i18n="sub_label_b">ب)</span> \(4\) &nbsp;|&nbsp;
+                                <span data-i18n="sub_label_c">ج)</span> \(110\)
+                            </div>
+                            <div class="solution-steps">
+                                <ol>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="sub_label_a">أ)</span> <span class="solution-step-math">\((8 + 3) \times 2 = 11 \times 2 = 22\)</span></span></li>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="sub_label_b">ب)</span> <span class="solution-step-math">\(12 - (4 \times 2) = 12 - 8 = 4\)</span></span></li>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="sub_label_c">ج)</span> <span class="solution-step-math">\((5 + 6) \times 10 = 11 \times 10 = 110\)</span></span></li>
+                                </ol>
+                            </div>
+                        </div>
+                        <div class="solution-item">
+                            <div class="solution-question" data-i18n="sol_ex3_q">التمرين 3 — سلاسل:</div>
+                            <div class="solution-answer-rtl">
+                                <span data-i18n="sub_label_a">أ)</span> \(16\) &nbsp;|&nbsp;
+                                <span data-i18n="sub_label_b">ب)</span> \(36\) &nbsp;|&nbsp;
+                                <span data-i18n="sub_label_c">ج)</span> \(26\) &nbsp;|&nbsp;
+                                <span data-i18n="sub_label_d">د)</span> \(75\)
+                            </div>
+                            <div class="solution-steps">
+                                <ol>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="sub_label_a">أ)</span> <span class="solution-step-math">\(15 - 3 \times 2 + 7 = 15 - 6 + 7 = 9 + 7 = 16\)</span></span></li>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="sub_label_b">ب)</span> <span class="solution-step-math">\(20 + 4 \times (6 - 2) = 20 + 4 \times 4 = 20 + 16 = 36\)</span></span></li>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="sub_label_c">ج)</span> <span class="solution-step-math">\(2 \times 3 + 5 \times 4 = 6 + 20 = 26\)</span></span></li>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="sub_label_d">د)</span> <span class="solution-step-math">\((10 + 5) \times (8 - 3) = 15 \times 5 = 75\)</span></span></li>
+                                </ol>
+                            </div>
+                        </div>
+                        <div class="solution-item">
+                            <div class="solution-question" data-i18n="sol_ex4_q">التمرين 4 — التوزيعية:</div>
+                            <div class="solution-answer-rtl">
+                                <span data-i18n="sub_label_a">أ)</span> \(91\) &nbsp;|&nbsp;
+                                <span data-i18n="sub_label_b">ب)</span> \(135\) &nbsp;|&nbsp;
+                                <span data-i18n="sub_label_c">ج)</span> \(606\)
+                            </div>
+                            <div class="solution-steps">
+                                <ol>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="sub_label_a">أ)</span> <span class="solution-step-math">\(7 \times (10 + 3) = 7 \times 10 + 7 \times 3 = 70 + 21 = 91\)</span></span></li>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="sub_label_b">ب)</span> <span class="solution-step-math">\(9 \times (20 - 5) = 9 \times 20 - 9 \times 5 = 180 - 45 = 135\)</span></span></li>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="sub_label_c">ج)</span> <span class="solution-step-math">\(6 \times 101 = 6 \times (100 + 1) = 600 + 6 = 606\)</span></span></li>
+                                </ol>
+                            </div>
+                        </div>
+                        <div class="solution-item">
+                            <div class="solution-question" data-i18n="sol_ex5_q">التمرين 5 — أكمل:</div>
+                            <div class="solution-answer-rtl">
+                                <span data-i18n="sub_label_a">أ)</span> \(8\) &nbsp;|&nbsp;
+                                <span data-i18n="sub_label_b">ب)</span> \(15\) &nbsp;|&nbsp;
+                                <span data-i18n="sub_label_c">ج)</span> \(9\)
+                            </div>
+                            <div class="solution-steps">
+                                <ol>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="sub_label_a">أ)</span> <span class="solution-step-math">\(5 + 8 = 13\)</span></span></li>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="sub_label_b">ب)</span> <span class="solution-step-math">\(15 - 8 = 7\)</span></span></li>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="sub_label_c">ج)</span> <span class="solution-step-math">\(6 \times 9 = 54\)</span></span></li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 data-i18n="solutions_problems_heading">🧩 حلول المسائل</h3>
+                        <!-- Problem Solutions -->
+                        <div class="solution-item">
+                            <div class="solution-question" data-i18n="sol_prob1_q">المسألة 1 — مشتريات من السوق:</div>
+                            <div class="solution-answer-rtl" data-i18n="sol_prob1_answer">جملة ما دفعه = \(10.5\) <span data-i18n="currency">دينار</span></div>
+                            <div class="solution-steps">
+                                <ol>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_notebooks_cost">ثمن الكراريس:</span> <span class="solution-step-math">\(3 \times 2.5 = 7.5\) <span data-i18n="currency">دينار</span></span></span></li>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_pens_cost">ثمن القلمين:</span> <span class="solution-step-math">\(2 \times 1.5 = 3\) <span data-i18n="currency">دينار</span></span></span></li>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_total">الجملة:</span> <span class="solution-step-math">\(7.5 + 3 = 10.5\) <span data-i18n="currency">دينار</span></span></span></li>
+                                </ol>
+                            </div>
+                        </div>
+                        <div class="solution-item">
+                            <div class="solution-question" data-i18n="sol_prob2_q">المسألة 2 — تلاميذ القسم:</div>
+                            <div class="solution-answer-rtl" data-i18n="sol_prob2_answer">في كل مجموعة \(9\) تلاميذ</div>
+                            <div class="solution-steps">
+                                <ol>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_present_count">عدد الحاضرين:</span> <span class="solution-step-math">\(32 - 5 = 27\)</span></span></li>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_group_count">عدد كل مجموعة:</span> <span class="solution-step-math">\(27 \div 3 = 9\)</span></span></li>
+                                </ol>
+                            </div>
+                        </div>
+                        <div class="solution-item">
+                            <div class="solution-question" data-i18n="sol_prob3_q">المسألة 3 — صناديق الفواكه:</div>
+                            <div class="solution-answer-rtl" data-i18n="sol_prob3_answer">العدد الجملي = \(88\) فاكهة</div>
+                            <div class="solution-steps">
+                                <ol>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_apples_count">عدد التفاح:</span> <span class="solution-step-math">\(4 \times 12 = 48\)</span></span></li>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_oranges_count">عدد البرتقالات:</span> <span class="solution-step-math">\(5 \times 8 = 40\)</span></span></li>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_total">الجملة:</span> <span class="solution-step-math">\(48 + 40 = 88\)</span></span></li>
+                                </ol>
+                            </div>
+                        </div>
+                        <div class="solution-item">
+                            <div class="solution-question" data-i18n="sol_prob4_q">المسألة 4 — محفظة وكتب:</div>
+                            <div class="solution-answer-rtl" data-i18n="sol_prob4_answer">المجموع = \(59\) <span data-i18n="currency">دينار</span></div>
+                            <div class="solution-steps">
+                                <ol>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_books_cost">ثمن الكتابين:</span> <span class="solution-step-math">\(12 \times 2 = 24\)</span></span></li>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_sum">المجموع:</span> <span class="solution-step-math">\(35 + 24 = 59\)</span></span></li>
+                                </ol>
+                            </div>
+                        </div>
+                        <div class="solution-item">
+                            <div class="solution-question" data-i18n="sol_prob5_q">المسألة 5 — ملعب رياضي:</div>
+                            <div class="solution-answer-rtl" data-i18n="sol_prob5_answer">طول السياج = \(80\) متراً</div>
+                            <div class="solution-steps">
+                                <ol>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_inside_parentheses">نحسب ما داخل القوس:</span> <span class="solution-step-math">\(25 + 15 = 40\)</span></span></li>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_perimeter">المحيط:</span> <span class="solution-step-math">\(2 \times 40 = 80\)</span></span></li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="site-footer">
+            <div class="footer-col">
+                <h4 data-i18n="footer_dev">معلومات المطوّر</h4>
+                <p data-i18n="footer_dev_name">طور بواسطة: ماجري زياد</p>
+                <p data-i18n="footer_hosting">الاستضافة: Github, Netlify, Supabase</p>
+            </div>
+            <div class="footer-col">
+                <h4 data-i18n="footer_links">روابط</h4>
+                <a href="#" data-i18n="footer_contact">اتصل بنا</a>
+                <a href="#" data-i18n="footer_policies">السياسات</a>
+            </div>
+            <div class="footer-col">
+                <h4 data-i18n="footer_version">الإصدار</h4>
+                <p data-i18n="footer_version_num">الإصدار: 0.0.2</p>
+                <p data-i18n="footer_rights">جميع الحقوق محفوظة &copy; 2025</p>
+            </div>
+        </footer>
+
+        <!-- Print-only custom footer -->
+        <div class="print-footer">
+            <p data-i18n="print_footer_dev">طور بواسطة: ماجري زياد</p>
+            <p data-i18n="print_footer_version">الإصدار: 0.0.2</p>
+            <p data-i18n="print_footer_page">عنوان الصفحة: maths_y7_module1_lesson1_part1.html</p>
+        </div>
+    </div>
+
+    <!-- JSXGraph initialization: Rectangle Perimeter Model -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const board = initJSXGraph('geometry-demo', {
+                boundingbox: [-1, 6, 6, -1],
+                axis: false,
+                showNavigation: false,
+                showCopyright: false
+            });
+            if (board) {
+                // Fixed origin point A
+                const A = board.create('point', [0, 0], { name: 'A', size: 3, fixed: true, color: '#e74c3c' });
+                // Draggable point B for width
+                const B = board.create('point', [3, 0], { name: 'B', size: 3, color: '#2ecc71' });
+                // Draggable point C for height
+                const C = board.create('point', [0, 2], { name: 'C', size: 3, color: '#3498db' });
+
+                // Rectangle polygon with dynamic coordinates
+                board.create('polygon', [A, B, [() => B.X(), () => C.Y()], C], {
+                    borders: { strokeWidth: 2, strokeColor: '#34495e' },
+                    fillColor: '#ecf0f1',
+                    fillOpacity: 0.6,
+                    hasInnerPoints: false
+                });
+
+                // Helper to get current language
+                function getLang() {
+                    return document.documentElement.lang || 'ar';
+                }
+
+                // Dynamic text: width (length)
+                board.create('text', [
+                    () => (A.X() + B.X()) / 2,
+                    () => A.Y() - 0.3,
+                    () => {
+                        const lang = getLang();
+                        const label = lang === 'ar' ? 'الطول = ' : (lang === 'fr' ? 'Longueur = ' : 'Length = ');
+                        return label + (B.X() - A.X()).toFixed(1);
+                    }
+                ], { fontSize: 14, anchorX: 'middle' });
+
+                // Dynamic text: height (width)
+                board.create('text', [
+                    () => A.X() - 0.3,
+                    () => (A.Y() + C.Y()) / 2,
+                    () => {
+                        const lang = getLang();
+                        const label = lang === 'ar' ? 'العرض = ' : (lang === 'fr' ? 'Largeur = ' : 'Width = ');
+                        return label + (C.Y() - A.Y()).toFixed(1);
+                    }
+                ], { fontSize: 14, anchorY: 'middle' });
+
+                // Dynamic text: perimeter calculation
+                board.create('text', [
+                    () => (A.X() + B.X()) / 2,
+                    () => (A.Y() + C.Y()) / 2 + 0.5,
+                    () => {
+                        const lang = getLang();
+                        const length = (B.X() - A.X()).toFixed(1);
+                        const width = (C.Y() - A.Y()).toFixed(1);
+                        const perimeter = (2 * (parseFloat(length) + parseFloat(width))).toFixed(1);
+                        if (lang === 'ar') {
+                            return `المحيط = ${length}×2 + ${width}×2 = (${length}+${width})×2 = ${perimeter}`;
+                        } else if (lang === 'fr') {
+                            return `Périmètre = ${length}×2 + ${width}×2 = (${length}+${width})×2 = ${perimeter}`;
+                        } else {
+                            return `Perimeter = ${length}×2 + ${width}×2 = (${length}+${width})×2 = ${perimeter}`;
+                        }
+                    }
+                ], { fontSize: 14, anchorX: 'middle', color: '#8e44ad' });
+
+                // Observe language changes and update board
+                const observer = new MutationObserver(() => {
+                    board.update();
+                });
+                observer.observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
+            }
+        });
+    </script>
+
+    <!-- Inline Translation Object (complete) -->
+    <script>
+        const translations = {
+            ar: {
+                page_title: "الدرس 1: العمليات على الأعداد الصحيحة الطبيعية - رياضيات السنة السابعة أساسي",
+                print_header: "السنة السابعة أساسي - الوحدة الأولى - الدرس الأول",
+                site_header: "Educational Dashboard - Mathematics",
+                back_to_index: "← العودة للفهرس",
+                nav_badge: "الدرس 1 | الجزء 1",
+                next_lesson: "الدرس التالي ←",
+                language_label: "اللغة",
+                lang_ar: "العربية",
+                lang_en: "English",
+                lang_fr: "Français",
+                print_label: "اختر القسم للطباعة:",
+                print_all: "الدرس كاملاً",
+                print_rules: "القواعد",
+                print_exercises: "التمارين",
+                print_problems: "المسائل",
+                print_solutions: "الحلول",
+                print_button: "🖨️ طباعة",
+                module_tag: "📘 الجبر والحساب | الدرس 1",
+                lesson_title: "العمليات على الأعداد الصحيحة الطبيعية",
+                lesson_subtitle: "الجمع، الطرح، الضرب، الأقواس، وأولويات الحساب",
+                rules_title: "القواعد",
+                rules_subtitle: "الأساسيات والمبادئ لحساب العمليات على الأعداد الطبيعية",
+                rule1_title: "قاعدة 1: أولوية الضرب على الجمع والطرح",
+                rule1_text: "عند عدم وجود أقواس، تُنجَز عملية الضرب قبل عملية الجمع أو الطرح. القاعدة الأساسية: الضرب أولاً، ثم الجمع والطرح.",
+                rule2_title: "قاعدة 2: دور الأقواس",
+                rule2_text: "الأقواس تُغيّر ترتيب العمليات: ما داخل القوس يُحسب أولاً مهما كانت العملية. إذا وُجدت عدة أقواس، نبدأ بالقوس الأعمق.",
+                rule3_title: "قاعدة 3: ترتيب العمليات بدون أقواس",
+                rule3_text: "عند عدم وجود أقواس، نتبع الترتيب التالي: ① الضرب (والقسمة إن وجدت) ← ② الجمع والطرح من اليسار إلى اليمين.",
+                rule4_title: "قاعدة 4: ترتيب العمليات مع الأقواس",
+                rule4_text: "① نحسب ما داخل الأقواس أولاً ← ② ثم الضرب ← ③ ثم الجمع والطرح.",
+                rule5_title: "قاعدة 5: خصائص الجمع والضرب",
+                rule5_text: "الإبدالية: a + b = b + a | a × b = b × a. التجميعية: (a + b) + c = a + (b + c) | (a × b) × c = a × (b × c). العنصر المحايد: a + 0 = a | a × 1 = a. التوزيعية: a × (b + c) = a × b + a × c",
+                rule6_title: "قاعدة 6: ملاحظة مهمة",
+                rule6_text: "عندما لا يوجد رمز بين عدد وقوس، فهذا يعني الضرب ضمنياً: 2(5) = 2 × 5 و (3)(4) = 3 × 4.",
+                exercises_title: "تمارين",
+                exercises_subtitle: "تمرّن على حساب العمليات خطوة بخطوة",
+                exercise1_q: "احسب العمليات التالية بدون أقواس:",
+                exercise1_hint: "💡 تذكّر: الضرب قبل الجمع والطرح.",
+                exercise2_q: "احسب مع الأقواس:",
+                exercise2_hint: "💡 الأقواس تُحسب أولاً!",
+                exercise3_q: "احسب السلاسل التالية:",
+                exercise4_q: "استعمل خاصية التوزيع لحساب:",
+                exercise4_hint: "💡 6 × 101 = 6 × (100 + 1)",
+                exercise5_q: "أكمل بالعدد المناسب:",
+                answer_placeholder: "اكتب إجابتك هنا...",
+                problems_title: "مسائل",
+                problems_subtitle: "مسائل حياتية وسياقية لتطبيق القواعد",
+                problem1_title: "🧮 مسألة 1: مشتريات من السوق",
+                problem1_text: "اشترى تلميذ 3 كراريس، ثمن الكراس الواحد 2.5 دينار، وقلمين ثمن الواحد 1.5 دينار. احسب جملة ما دفعه.",
+                problem2_title: "🏫 مسألة 2: تلاميذ القسم",
+                problem2_text: "في قسم به 32 تلميذاً، غاب اليوم 5 تلاميذ. المعلّمة قسمت الحاضرين إلى 3 مجموعات متساوية. كم تلميذاً في كل مجموعة؟",
+                problem3_title: "📦 مسألة 3: صناديق الفواكه",
+                problem3_text: "عند فلاح 4 صناديق، في كل صندوق 12 تفاحة، و5 صناديق أخرى، في كل منها 8 برتقالات. احسب العدد الجملي للفواكه.",
+                problem4_title: "🎒 مسألة 4: محفظة وكتب",
+                problem4_text: "ثمن محفظة 35 ديناراً وثمن كتابين 12 ديناراً للكتاب الواحد. كم دفعت الأم مقابل المحفظة والكتابين معاً؟",
+                problem5_title: "🏟️ مسألة 5: ملعب رياضي",
+                problem5_text: "ملعب مستطيل الشكل طوله 25 متراً وعرضه 15 متراً. نريد وضع سياج حوله. احسب طول السياج اللازم. (تذكّر: محيط المستطيل = 2 × (الطول + العرض))",
+                solutions_title: "حلول",
+                solutions_subtitle: "الحلول المفصلة خطوة بخطوة لكل التمارين والمسائل",
+                solutions_exercises_heading: "📝 حلول التمارين",
+                solutions_problems_heading: "🧩 حلول المسائل",
+                sol_ex1_q: "التمرين 1 — بدون أقواس:",
+                sol_ex2_q: "التمرين 2 — مع الأقواس:",
+                sol_ex3_q: "التمرين 3 — سلاسل:",
+                sol_ex4_q: "التمرين 4 — التوزيعية:",
+                sol_ex5_q: "التمرين 5 — أكمل:",
+                sol_prob1_q: "المسألة 1 — مشتريات من السوق:",
+                sol_prob2_q: "المسألة 2 — تلاميذ القسم:",
+                sol_prob3_q: "المسألة 3 — صناديق الفواكه:",
+                sol_prob4_q: "المسألة 4 — محفظة وكتب:",
+                sol_prob5_q: "المسألة 5 — ملعب رياضي:",
+                step_math_notebooks: "3 × 2.5 = 7.5",
+                step_math_pens: "2 × 1.5 = 3",
+                step_math_total: "7.5 + 3 = 10.5",
+                sol_prob1_answer: "جملة ما دفعه = 10.5",
+                sol_prob2_answer: "في كل مجموعة 9 تلاميذ",
+                sol_prob3_answer: "العدد الجملي = 88 فاكهة",
+                sol_prob4_answer: "المجموع = 59",
+                sol_prob5_answer: "طول السياج = 80 متراً",
+                step_notebooks_cost: "ثمن الكراريس:",
+                step_pens_cost: "ثمن القلمين:",
+                step_total: "الجملة:",
+                step_present_count: "عدد الحاضرين:",
+                step_group_count: "عدد كل مجموعة:",
+                step_apples_count: "عدد التفاح:",
+                step_oranges_count: "عدد البرتقالات:",
+                step_books_cost: "ثمن الكتابين:",
+                step_sum: "المجموع:",
+                step_inside_parentheses: "نحسب ما داخل القوس:",
+                step_perimeter: "المحيط:",
+                sub_label_a: "أ)",
+                sub_label_b: "ب)",
+                sub_label_c: "ج)",
+                sub_label_d: "د)",
+                currency: "دينار",
+                graph_title: "مثال تفاعلي: محيط المستطيل",
+                footer_dev: "معلومات المطوّر",
+                footer_dev_name: "طور بواسطة: ماجري زياد",
+                footer_hosting: "الاستضافة: Github, Netlify, Supabase",
+                footer_links: "روابط",
+                footer_contact: "اتصل بنا",
+                footer_policies: "السياسات",
+                footer_version: "الإصدار",
+                footer_version_num: "الإصدار: 0.0.2",
+                footer_rights: "جميع الحقوق محفوظة © 2025",
+                print_footer_dev: "طور بواسطة: ماجري زياد",
+                print_footer_version: "الإصدار: 0.0.2",
+                print_footer_page: "عنوان الصفحة: maths_y7_module1_lesson1_part1.html"
+            },
+            en: {
+                page_title: "Lesson 1: Operations on Natural Integers - Math Year 7",
+                print_header: "Year 7 – Unit 1 – Lesson 1",
+                site_header: "Educational Dashboard - Mathematics",
+                back_to_index: "← Back to Index",
+                nav_badge: "Lesson 1 | Part 1",
+                next_lesson: "Next Lesson →",
+                language_label: "Language",
+                lang_ar: "العربية",
+                lang_en: "English",
+                lang_fr: "Français",
+                print_label: "Select section to print:",
+                print_all: "Full lesson",
+                print_rules: "Rules",
+                print_exercises: "Exercises",
+                print_problems: "Problems",
+                print_solutions: "Solutions",
+                print_button: "🖨️ Print",
+                module_tag: "📘 Algebra & Arithmetic | Lesson 1",
+                lesson_title: "Operations on Natural Integers",
+                lesson_subtitle: "Addition, subtraction, multiplication, parentheses, and order of operations",
+                rules_title: "Rules",
+                rules_subtitle: "Fundamentals and principles for calculating operations on natural numbers",
+                rule1_title: "Rule 1: Priority of multiplication over addition and subtraction",
+                rule1_text: "When there are no parentheses, multiplication is performed before addition or subtraction. Basic rule: multiplication first, then addition and subtraction.",
+                rule2_title: "Rule 2: Role of parentheses",
+                rule2_text: "Parentheses change the order of operations: what is inside the parentheses is calculated first, regardless of the operation. If there are multiple parentheses, start with the innermost.",
+                rule3_title: "Rule 3: Order of operations without parentheses",
+                rule3_text: "Without parentheses, follow this order: ① multiplication (and division if present) ← ② addition and subtraction from left to right.",
+                rule4_title: "Rule 4: Order of operations with parentheses",
+                rule4_text: "① Calculate inside parentheses first ← ② then multiplication ← ③ then addition and subtraction.",
+                rule5_title: "Rule 5: Properties of addition and multiplication",
+                rule5_text: "Commutativity: a + b = b + a | a × b = b × a. Associativity: (a + b) + c = a + (b + c) | (a × b) × c = a × (b × c). Identity element: a + 0 = a | a × 1 = a. Distributivity: a × (b + c) = a × b + a × c",
+                rule6_title: "Rule 6: Important note",
+                rule6_text: "When there is no symbol between a number and a parenthesis, it means implicit multiplication: 2(5) = 2 × 5 and (3)(4) = 3 × 4.",
+                exercises_title: "Exercises",
+                exercises_subtitle: "Practice calculating operations step by step",
+                exercise1_q: "Calculate the following operations without parentheses:",
+                exercise1_hint: "💡 Remember: multiplication before addition and subtraction.",
+                exercise2_q: "Calculate with parentheses:",
+                exercise2_hint: "💡 Parentheses are calculated first!",
+                exercise3_q: "Calculate the following chains:",
+                exercise4_q: "Use the distributive property to calculate:",
+                exercise4_hint: "💡 6 × 101 = 6 × (100 + 1)",
+                exercise5_q: "Complete with the appropriate number:",
+                answer_placeholder: "Write your answer here...",
+                problems_title: "Problems",
+                problems_subtitle: "Real-life and contextual problems to apply the rules",
+                problem1_title: "🧮 Problem 1: Market purchases",
+                problem1_text: "A student bought 3 notebooks, each costing 2.5 dinars, and two pens, each costing 1.5 dinars. Calculate the total amount paid.",
+                problem2_title: "🏫 Problem 2: Class students",
+                problem2_text: "In a class of 32 students, 5 students are absent today. The teacher divided those present into 3 equal groups. How many students are in each group?",
+                problem3_title: "📦 Problem 3: Fruit boxes",
+                problem3_text: "A farmer has 4 boxes, each containing 12 apples, and 5 other boxes, each containing 8 oranges. Calculate the total number of fruits.",
+                problem4_title: "🎒 Problem 4: School bag and books",
+                problem4_text: "The price of a school bag is 35 dinars and the price of two books is 12 dinars each. How much did the mother pay for the bag and the two books together?",
+                problem5_title: "🏟️ Problem 5: Sports field",
+                problem5_text: "A rectangular field is 25 meters long and 15 meters wide. We want to put a fence around it. Calculate the length of the fence needed. (Remember: perimeter of rectangle = 2 × (length + width))",
+                solutions_title: "Solutions",
+                solutions_subtitle: "Detailed step-by-step solutions for all exercises and problems",
+                solutions_exercises_heading: "📝 Exercise Solutions",
+                solutions_problems_heading: "🧩 Problem Solutions",
+                sol_ex1_q: "Exercise 1 — Without parentheses:",
+                sol_ex2_q: "Exercise 2 — With parentheses:",
+                sol_ex3_q: "Exercise 3 — Chains:",
+                sol_ex4_q: "Exercise 4 — Distributive property:",
+                sol_ex5_q: "Exercise 5 — Complete:",
+                sol_prob1_q: "Problem 1 — Market purchases:",
+                sol_prob2_q: "Problem 2 — Class students:",
+                sol_prob3_q: "Problem 3 — Fruit boxes:",
+                sol_prob4_q: "Problem 4 — School bag and books:",
+                sol_prob5_q: "Problem 5 — Sports field:",
+                step_math_notebooks: "3 × 2.5 = 7.5",
+                step_math_pens: "2 × 1.5 = 3",
+                step_math_total: "7.5 + 3 = 10.5",
+                sol_prob1_answer: "Total paid = 10.5",
+                sol_prob2_answer: "Each group has 9 students",
+                sol_prob3_answer: "Total number of fruits = 88",
+                sol_prob4_answer: "Total = 59",
+                sol_prob5_answer: "Fence length = 80 meters",
+                step_notebooks_cost: "Notebooks cost:",
+                step_pens_cost: "Pens cost:",
+                step_total: "Total:",
+                step_present_count: "Number present:",
+                step_group_count: "Number per group:",
+                step_apples_count: "Number of apples:",
+                step_oranges_count: "Number of oranges:",
+                step_books_cost: "Books cost:",
+                step_sum: "Sum:",
+                step_inside_parentheses: "Inside parentheses:",
+                step_perimeter: "Perimeter:",
+                sub_label_a: "a)",
+                sub_label_b: "b)",
+                sub_label_c: "c)",
+                sub_label_d: "d)",
+                currency: "dinars",
+                graph_title: "Interactive Example: Rectangle Perimeter",
+                footer_dev: "Developer Info",
+                footer_dev_name: "Developed by: Majri Zied",
+                footer_hosting: "Hosting: Github, Netlify, Supabase",
+                footer_links: "Links",
+                footer_contact: "Contact us",
+                footer_policies: "Policies",
+                footer_version: "Version",
+                footer_version_num: "Version: 0.0.2",
+                footer_rights: "All rights reserved © 2025",
+                print_footer_dev: "Developed by: Majri Zied",
+                print_footer_version: "Version: 0.0.2",
+                print_footer_page: "Page address: maths_y7_module1_lesson1_part1.html"
+            },
+            fr: {
+                page_title: "Leçon 1 : Opérations sur les entiers naturels - Math 7ème année",
+                print_header: "7ème année – Unité 1 – Leçon 1",
+                site_header: "Educational Dashboard - Mathematics",
+                back_to_index: "← Retour à l'index",
+                nav_badge: "Leçon 1 | Partie 1",
+                next_lesson: "Leçon suivante →",
+                language_label: "Langue",
+                lang_ar: "العربية",
+                lang_en: "English",
+                lang_fr: "Français",
+                print_label: "Choisir la section à imprimer :",
+                print_all: "Leçon complète",
+                print_rules: "Règles",
+                print_exercises: "Exercices",
+                print_problems: "Problèmes",
+                print_solutions: "Solutions",
+                print_button: "🖨️ Imprimer",
+                module_tag: "📘 Algèbre et arithmétique | Leçon 1",
+                lesson_title: "Opérations sur les entiers naturels",
+                lesson_subtitle: "Addition, soustraction, multiplication, parenthèses et priorité des opérations",
+                rules_title: "Règles",
+                rules_subtitle: "Fondamentaux et principes pour calculer les opérations sur les nombres naturels",
+                rule1_title: "Règle 1 : Priorité de la multiplication sur l'addition et la soustraction",
+                rule1_text: "En l'absence de parenthèses, la multiplication est effectuée avant l'addition ou la soustraction. Règle de base : multiplication d'abord, puis addition et soustraction.",
+                rule2_title: "Règle 2 : Rôle des parenthèses",
+                rule2_text: "Les parenthèses changent l'ordre des opérations : ce qui est à l'intérieur est calculé en premier, quelle que soit l'opération. S'il y a plusieurs parenthèses, on commence par la plus intérieure.",
+                rule3_title: "Règle 3 : Ordre des opérations sans parenthèses",
+                rule3_text: "Sans parenthèses, suivre cet ordre : ① multiplication (et division si présente) ← ② addition et soustraction de gauche à droite.",
+                rule4_title: "Règle 4 : Ordre des opérations avec parenthèses",
+                rule4_text: "① Calculer d'abord l'intérieur des parenthèses ← ② puis la multiplication ← ③ puis l'addition et la soustraction.",
+                rule5_title: "Règle 5 : Propriétés de l'addition et de la multiplication",
+                rule5_text: "Commutativité : a + b = b + a | a × b = b × a. Associativité : (a + b) + c = a + (b + c) | (a × b) × c = a × (b × c). Élément neutre : a + 0 = a | a × 1 = a. Distributivité : a × (b + c) = a × b + a × c",
+                rule6_title: "Règle 6 : Remarque importante",
+                rule6_text: "Lorsqu'il n'y a pas de symbole entre un nombre et une parenthèse, cela signifie une multiplication implicite : 2(5) = 2 × 5 et (3)(4) = 3 × 4.",
+                exercises_title: "Exercices",
+                exercises_subtitle: "Entraînez-vous à calculer les opérations pas à pas",
+                exercise1_q: "Calculez les opérations suivantes sans parenthèses :",
+                exercise1_hint: "💡 Rappel : multiplication avant addition et soustraction.",
+                exercise2_q: "Calculez avec parenthèses :",
+                exercise2_hint: "💡 Les parenthèses sont calculées en premier !",
+                exercise3_q: "Calculez les chaînes suivantes :",
+                exercise4_q: "Utilisez la distributivité pour calculer :",
+                exercise4_hint: "💡 6 × 101 = 6 × (100 + 1)",
+                exercise5_q: "Complétez avec le nombre approprié :",
+                answer_placeholder: "Écrivez votre réponse ici...",
+                problems_title: "Problèmes",
+                problems_subtitle: "Problèmes de la vie réelle pour appliquer les règles",
+                problem1_title: "🧮 Problème 1 : Achats au marché",
+                problem1_text: "Un élève a acheté 3 cahiers, chacun coûtant 2,5 dinars, et deux stylos, chacun coûtant 1,5 dinar. Calculez le montant total payé.",
+                problem2_title: "🏫 Problème 2 : Élèves de la classe",
+                problem2_text: "Dans une classe de 32 élèves, 5 élèves sont absents aujourd'hui. L'enseignante a réparti les présents en 3 groupes égaux. Combien d'élèves y a-t-il dans chaque groupe ?",
+                problem3_title: "📦 Problème 3 : Boîtes de fruits",
+                problem3_text: "Un fermier a 4 boîtes contenant chacune 12 pommes, et 5 autres boîtes contenant chacune 8 oranges. Calculez le nombre total de fruits.",
+                problem4_title: "🎒 Problème 4 : Cartable et livres",
+                problem4_text: "Le prix d'un cartable est de 35 dinars et le prix de deux livres est de 12 dinars chacun. Combien la mère a-t-elle payé pour le cartable et les deux livres ensemble ?",
+                problem5_title: "🏟️ Problème 5 : Terrain de sport",
+                problem5_text: "Un terrain rectangulaire mesure 25 mètres de long et 15 mètres de large. Nous voulons installer une clôture autour. Calculez la longueur de clôture nécessaire. (Rappel : périmètre du rectangle = 2 × (longueur + largeur))",
+                solutions_title: "Solutions",
+                solutions_subtitle: "Solutions détaillées étape par étape pour tous les exercices et problèmes",
+                solutions_exercises_heading: "📝 Solutions des exercices",
+                solutions_problems_heading: "🧩 Solutions des problèmes",
+                sol_ex1_q: "Exercice 1 — Sans parenthèses :",
+                sol_ex2_q: "Exercice 2 — Avec parenthèses :",
+                sol_ex3_q: "Exercice 3 — Chaînes :",
+                sol_ex4_q: "Exercice 4 — Distributivité :",
+                sol_ex5_q: "Exercice 5 — Complétez :",
+                sol_prob1_q: "Problème 1 — Achats au marché :",
+                sol_prob2_q: "Problème 2 — Élèves de la classe :",
+                sol_prob3_q: "Problème 3 — Boîtes de fruits :",
+                sol_prob4_q: "Problème 4 — Cartable et livres :",
+                sol_prob5_q: "Problème 5 — Terrain de sport :",
+                step_math_notebooks: "3 × 2,5 = 7,5",
+                step_math_pens: "2 × 1,5 = 3",
+                step_math_total: "7,5 + 3 = 10,5",
+                sol_prob1_answer: "Total payé = 10,5",
+                sol_prob2_answer: "Chaque groupe a 9 élèves",
+                sol_prob3_answer: "Nombre total de fruits = 88",
+                sol_prob4_answer: "Total = 59",
+                sol_prob5_answer: "Longueur de la clôture = 80 mètres",
+                step_notebooks_cost: "Coût des cahiers :",
+                step_pens_cost: "Coût des stylos :",
+                step_total: "Total :",
+                step_present_count: "Nombre de présents :",
+                step_group_count: "Nombre par groupe :",
+                step_apples_count: "Nombre de pommes :",
+                step_oranges_count: "Nombre d'oranges :",
+                step_books_cost: "Coût des livres :",
+                step_sum: "Somme :",
+                step_inside_parentheses: "Intérieur des parenthèses :",
+                step_perimeter: "Périmètre :",
+                sub_label_a: "a)",
+                sub_label_b: "b)",
+                sub_label_c: "c)",
+                sub_label_d: "d)",
+                currency: "dinars",
+                graph_title: "Exemple interactif : Périmètre du rectangle",
+                footer_dev: "Informations du développeur",
+                footer_dev_name: "Développé par : Majri Zied",
+                footer_hosting: "Hébergement : Github, Netlify, Supabase",
+                footer_links: "Liens",
+                footer_contact: "Contactez-nous",
+                footer_policies: "Politiques",
+                footer_version: "Version",
+                footer_version_num: "Version : 0.0.2",
+                footer_rights: "Tous droits réservés © 2025",
+                print_footer_dev: "Développé par : Majri Zied",
+                print_footer_version: "Version : 0.0.2",
+                print_footer_page: "Adresse de la page : maths_y7_module1_lesson1_part1.html"
+            }
+        };
+    </script>
+</body>
+</html>

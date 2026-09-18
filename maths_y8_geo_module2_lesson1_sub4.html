@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="page_title">مناظر مستقيم بتناظر مركزي - رياضيات السنة الثامنة أساسي</title>
+
+    <!-- External Stylesheets -->
+    <link rel="stylesheet" href="maths_shared.css">
+    <link rel="stylesheet" href="maths_lessons.css">
+
+    <!-- KaTeX -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+
+    <!-- JSXGraph -->
+    <script src="https://cdn.jsdelivr.net/npm/jsxgraph@1.4.0/distrib/jsxgraphcore.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jsxgraph@1.4.0/distrib/jsxgraph.css">
+
+    <script src="maths_lessons.js" defer></script>
+
+    <style>
+        .rule-diagram, .exercise-diagram {
+            margin: 1rem 0;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 0.5rem;
+            background: var(--card-bg);
+        }
+        .diagram-caption {
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-top: 0.3rem;
+            font-style: italic;
+        }
+        .math, .katex, .katex-display {
+            direction: ltr !important;
+            unicode-bidi: isolate;
+        }
+        .example-box, .solution-step-math {
+            direction: rtl !important;
+            text-align: right !important;
+            unicode-bidi: normal !important;
+            white-space: normal !important;
+            overflow-wrap: break-word;
+            word-break: break-word;
+        }
+        .drawing-board {
+            width: 100%;
+            max-width: 500px;
+            height: 300px;
+            margin: 0 auto 0.5rem auto;
+        }
+        .board-controls {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: center;
+            margin-top: 0.5rem;
+        }
+        .board-btn {
+            padding: 0.4rem 1rem;
+            background: var(--secondary);
+            color: var(--white);
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        .board-btn:hover {
+            background: var(--primary);
+        }
+        .check-result {
+            text-align: center;
+            font-weight: 700;
+            margin-top: 0.5rem;
+            min-height: 1.5em;
+        }
+        .check-result.correct { color: var(--success); }
+        .check-result.incorrect { color: var(--error); }
+        .solution-diagram {
+            width: 100%;
+            max-width: 350px;
+            height: 200px;
+            margin: 0 auto;
+        }
+        .coord-input-group {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 0.8rem;
+            flex-wrap: wrap;
+        }
+        .coord-input-group label {
+            font-weight: 600;
+            margin-left: 0.5rem;
+        }
+        .coord-input {
+            width: 70px;
+            padding: 0.3rem;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            text-align: center;
+            font-family: var(--mono);
+        }
+        .coord-display {
+            background: var(--bg-alt);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <main>
+            <!-- Print-only header -->
+            <div class="print-header" data-i18n="print_header">السنة الثامنة أساسي - الهندسة - الدرس 1 - الجزء 4 - د</div>
+
+            <!-- Site Header -->
+            <div class="site-header">
+                <div class="header-icon">
+                    <img src="assets/icons/icon-152x152.png" alt="أيقونة الموقع">
+                </div>
+                <h1 data-i18n="site_header">Educational Dashboard - Mathematics</h1>
+            </div>
+
+            <!-- Top Navigation -->
+            <nav class="top-nav">
+                <a href="maths_y8.html" class="nav-link" data-i18n="back_to_index">← العودة للفهرس</a>
+                <span class="nav-badge" data-i18n="nav_badge">الدرس 1 | الجزء 4 | د</span>
+                <a href="maths_y8_geo_module2_lesson1_sub5.html" class="nav-link" data-i18n="next_lesson">التالي ←</a>
+            </nav>
+
+            <!-- Print Controls -->
+            <div class="print-controls">
+                <label for="print-section" data-i18n="print_label">اختر القسم للطباعة:</label>
+                <select id="print-section" name="print-section">
+                    <option value="all" data-i18n="print_all">الدرس كاملاً</option>
+                    <option value="rules" data-i18n="print_rules">القواعد</option>
+                    <option value="exercises" data-i18n="print_exercises">التمارين</option>
+                    <option value="problems" data-i18n="print_problems">المسائل</option>
+                    <option value="solutions" data-i18n="print_solutions">الحلول</option>
+                </select>
+                <button class="print-button" onclick="printSelected()" data-i18n="print_button">🖨️ طباعة</button>
+                <button id="theme-toggle" class="theme-toggle" aria-label="تبديل الوضع الليلي/النهاري">
+                    <span class="theme-icon">🌙</span>
+                </button>
+
+                <!-- Language Selector -->
+                <div class="language-selector">
+                    <label for="language-select" class="sr-only" data-i18n="language_label">اللغة</label>
+                    <select id="language-select" name="language-select">
+                        <option value="ar" data-i18n="lang_ar">العربية</option>
+                        <option value="en" data-i18n="lang_en">English</option>
+                        <option value="fr" data-i18n="lang_fr">Français</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Lesson Header -->
+            <header class="lesson-header">
+                <span class="module-tag" data-i18n="module_tag">📘 الهندسة | الدرس 1 | الجزء 4 | د</span>
+                <h1 class="lesson-title" data-i18n="lesson_title">مناظر مستقيم بتناظر مركزي</h1>
+                <p class="lesson-subtitle" data-i18n="lesson_subtitle">صورة مستقيم بالتناظر المركزي وحالاته</p>
+            </header>
+
+            <!-- Section 1: Rules -->
+            <div class="section" id="rules-section">
+                <div class="section-header" onclick="toggleSection('rules-body', 'rules-toggle')" role="button"
+                     tabindex="0" aria-expanded="true" aria-controls="rules-body"
+                     onkeydown="if(event.key==='Enter'||event.key===' ') toggleSection('rules-body', 'rules-toggle')">
+                    <div class="section-icon rules-icon">📐</div>
+                    <div class="section-title">
+                        <h2 data-i18n="rules_title">القواعد</h2>
+                        <p data-i18n="rules_subtitle">صورة مستقيم بالتناظر المركزي</p>
+                    </div>
+                    <span class="section-toggle open" id="rules-toggle">▼</span>
+                </div>
+                <div class="section-body" id="rules-body">
+                    <!-- Rule 1: Line not through O -->
+                    <div class="rule-card">
+                        <div class="rule-title" data-i18n="rule1_title">قاعدة 1: مستقيم لا يشمل مركز التناظر</div>
+                        <div class="rule-text" data-i18n="rule1_text">
+                            إذا كان المستقيم \((d)\) <strong>لا يشمل</strong> مركز التناظر \(O\)، فإن صورته \((d')\) هي مستقيم <strong>يوازي</strong> \((d)\): أي \((d') \parallel (d)\).
+                        </div>
+                        <div class="example-box" data-i18n="rule1_example">
+                            إذا كانت \(A\) و \(B\) نقطتين على \((d)\)، فإن صورتهما \(A'\) و \(B'\) تنتميان إلى \((d')\)، و \((A'B') \parallel (AB)\).
+                        </div>
+                        <div class="rule-diagram">
+                            <div id="diagram-rule1" class="jxgbox" style="width:100%; max-width:500px; height:300px;"></div>
+                            <div class="diagram-caption" data-i18n="rule1_caption">اسحب النقطة A أو B أو المركز O لترى أن (d') يوازي (d)</div>
+                        </div>
+                    </div>
+
+                    <!-- Rule 2: Line through O -->
+                    <div class="rule-card">
+                        <div class="rule-title" data-i18n="rule2_title">قاعدة 2: مستقيم يشمل مركز التناظر</div>
+                        <div class="rule-text" data-i18n="rule2_text">
+                            إذا كان المستقيم \((d)\) <strong>يشمل</strong> مركز التناظر \(O\)، فإن صورته هي <strong>المستقيم نفسه</strong>: أي \((d') = (d)\). نقول إن \((d)\) <strong>صامد</strong> (ثابت) بالتناظر المركزي.
+                        </div>
+                        <div class="example-box" data-i18n="rule2_example">
+                            كل نقطة \(M\) من \((d)\) لها صورة \(M'\) تنتمي أيضاً إلى \((d)\)، لأن \(O\) منتصف \([MM']\) و \(O \in (d)\).
+                        </div>
+                    </div>
+
+                    <!-- Rule 3: Construction method -->
+                    <div class="rule-card">
+                        <div class="rule-title" data-i18n="rule3_title">قاعدة 3: طريقة إنشاء صورة مستقيم</div>
+                        <div class="rule-text" data-i18n="rule3_text">
+                            لإنشاء صورة مستقيم \((d)\) بالتناظر المركزي الذي مركزه \(O\):
+                            <ol>
+                                <li>نختار نقطتين مختلفتين \(A\) و \(B\) على \((d)\).</li>
+                                <li>ننشئ صورتيهما \(A'\) و \(B'\) بالتناظر المركزي.</li>
+                                <li>نرسم المستقيم \((A'B')\) الذي هو صورة \((d)\).</li>
+                            </ol>
+                        </div>
+                        <div class="example-box" data-i18n="rule3_example">
+                            اختيار نقطتين يكفي، لأن صورة مستقيم هي مستقيم، ومستقيم يتحدّد بنقطتين مختلفتين.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 2: Exercises -->
+            <div class="section" id="exercises-section">
+                <div class="section-header" onclick="toggleSection('exercises-body', 'exercises-toggle')" role="button"
+                     tabindex="0" aria-expanded="true" aria-controls="exercises-body"
+                     onkeydown="if(event.key==='Enter'||event.key===' ') toggleSection('exercises-body', 'exercises-toggle')">
+                    <div class="section-icon exercises-icon">✏️</div>
+                    <div class="section-title">
+                        <h2 data-i18n="exercises_title">تمارين</h2>
+                        <p data-i18n="exercises_subtitle">تمرّن على إيجاد صورة مستقيم بالتناظر المركزي</p>
+                    </div>
+                    <span class="section-toggle open" id="exercises-toggle">▼</span>
+                </div>
+                <div class="section-body" id="exercises-body">
+                    <!-- Exercise 1: Interactive -->
+                    <div class="exercise-item">
+                        <div class="exercise-question">
+                            <span class="exercise-number">1</span>
+                            <span data-i18n="exercise1_q">المستقيم \((d)\) يشمل النقطتين \(A(-2, 1)\) و \(B(1, 2)\)، و \(O(0, 0)\). أنشئ صورة \((d)\) بالنسبة إلى \(O\) بإدخال إحداثيات \(A'\) و \(B'\).</span>
+                        </div>
+                        <div class="coord-display" data-i18n="ex1_coords_display">
+                            \(A(-2, 1)\) | \(B(1, 2)\) | \(O(0, 0)\)
+                        </div>
+                        <div class="exercise-diagram">
+                            <div id="exercise1-board" class="jxgbox drawing-board"></div>
+                            <div class="board-controls">
+                                <button class="board-btn" onclick="checkEx1()" data-i18n="check_btn">تحقق</button>
+                                <button class="board-btn" onclick="resetEx1()" data-i18n="reset_btn">إعادة</button>
+                            </div>
+                            <div class="coord-input-group">
+                                <span data-i18n="coord_label_A_prime">\(A'\):</span>
+                                <label for="ex1-ax" data-i18n="coord_label_x">x:</label>
+                                <input type="number" id="ex1-ax" class="coord-input" step="any" value="2" dir="ltr">
+                                <label for="ex1-ay" data-i18n="coord_label_y">y:</label>
+                                <input type="number" id="ex1-ay" class="coord-input" step="any" value="-1" dir="ltr">
+                            </div>
+                            <div class="coord-input-group">
+                                <span data-i18n="coord_label_B_prime">\(B'\):</span>
+                                <label for="ex1-bx" data-i18n="coord_label_x">x:</label>
+                                <input type="number" id="ex1-bx" class="coord-input" step="any" value="-1" dir="ltr">
+                                <label for="ex1-by" data-i18n="coord_label_y">y:</label>
+                                <input type="number" id="ex1-by" class="coord-input" step="any" value="-2" dir="ltr">
+                            </div>
+                            <button class="board-btn" onclick="applyCoordsEx1()" data-i18n="apply_coords_btn">تعيين</button>
+                            <div id="ex1-result" class="check-result"></div>
+                            <div class="diagram-caption" data-i18n="exercise1_caption">اسحب النقطتين أو أدخل إحداثياتهما.</div>
+                        </div>
+                    </div>
+
+                    <!-- Exercise 2: Coordinates -->
+                    <div class="exercise-item">
+                        <div class="exercise-question">
+                            <span class="exercise-number">2</span>
+                            <span data-i18n="exercise2_q">المستقيم \((d)\) معرّف بالمعادلة \(y = 2x + 3\)، والمركز \(O(0, 0)\). ما هي معادلة صورته \((d')\)؟</span>
+                        </div>
+                        <textarea id="answer-ex2" name="answer-ex2" class="answer-textarea" placeholder="اكتب إجابتك هنا..." data-i18n-placeholder="answer_placeholder"></textarea>
+                    </div>
+
+                    <!-- Exercise 3: Line through O -->
+                    <div class="exercise-item">
+                        <div class="exercise-question">
+                            <span class="exercise-number">3</span>
+                            <span data-i18n="exercise3_q">المستقيم \((d)\) يشمل النقطة \(O(1, 1)\) وله معادلة \(y = x\). ما هي صورة \((d)\) بالتناظر المركزي الذي مركزه \(O\)؟ علّل إجابتك.</span>
+                        </div>
+                        <textarea id="answer-ex3" name="answer-ex3" class="answer-textarea" placeholder="اكتب إجابتك هنا..." data-i18n-placeholder="answer_placeholder"></textarea>
+                    </div>
+
+                    <!-- Exercise 4: True/False -->
+                    <div class="exercise-item">
+                        <div class="exercise-question">
+                            <span class="exercise-number">4</span>
+                            <span data-i18n="exercise4_q">أجب بصحيح أو خطأ مع التعليل: صورة مستقيم بالتناظر المركزي هي دائماً مستقيم يوازيه.</span>
+                        </div>
+                        <textarea id="answer-ex4" name="answer-ex4" class="answer-textarea" placeholder="اكتب إجابتك هنا..." data-i18n-placeholder="answer_placeholder"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 3: Problems -->
+            <div class="section" id="problems-section">
+                <div class="section-header" onclick="toggleSection('problems-body', 'problems-toggle')" role="button"
+                     tabindex="0" aria-expanded="true" aria-controls="problems-body"
+                     onkeydown="if(event.key==='Enter'||event.key===' ') toggleSection('problems-body', 'problems-toggle')">
+                    <div class="section-icon problems-icon">🧩</div>
+                    <div class="section-title">
+                        <h2 data-i18n="problems_title">مسائل</h2>
+                        <p data-i18n="problems_subtitle">مسائل تطبيقية على صورة مستقيم</p>
+                    </div>
+                    <span class="section-toggle open" id="problems-toggle">▼</span>
+                </div>
+                <div class="section-body" id="problems-body">
+                    <div class="problem-card">
+                        <div class="problem-title" data-i18n="problem1_title">🛤️ مسألة 1: السكة الحديدية</div>
+                        <div class="problem-text" data-i18n="problem1_text">
+                            سكة حديدية مستقيمة \((d)\) لا تمرّ بمركز محطة \(O\). أراد المهندس إنشاء سكة ثانية \((d')\) متناظرة مع \((d)\) بالنسبة إلى \(O\). بيّن أن \((d')\) يوازي \((d)\)، ثم اذكر كيف يمكن تحديد موقع \((d')\) عملياً باستعمال نقطتين من \((d)\).
+                        </div>
+                    </div>
+                    <div class="problem-card">
+                        <div class="problem-title" data-i18n="problem2_title">🌉 مسألة 2: الجسر والطريق</div>
+                        <div class="problem-text" data-i18n="problem2_text">
+                            طريق مستقيم \((d)\) يمرّ عبر وسط مدينة \(O\). أرادت البلدية رسم طريق ثانٍ \((d')\) متناظر مع \((d)\) بالنسبة إلى \(O\). ماذا تلاحظ؟ علّل إجابتك اعتماداً على الخاصية المناسبة.
+                        </div>
+                    </div>
+                    <div class="problem-card">
+                        <div class="problem-title" data-i18n="problem3_title">📏 مسألة 3: مستقيمان متوازيان</div>
+                        <div class="problem-text" data-i18n="problem3_text">
+                            ليكن \((d_1)\) و \((d_2)\) مستقيمين متوازيين لا يشملان النقطة \(O\). أثبت أن صورتيهما \((d_1')\) و \((d_2')\) بالتناظر المركزي الذي مركزه \(O\) هما أيضاً مستقيمان متوازيان. (إرشاد: استعمل قاعدة صورة مستقيم.)
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 4: Solutions -->
+            <div class="section" id="solutions-section">
+                <div class="section-header" onclick="toggleSection('solutions-body', 'solutions-toggle')" role="button"
+                     tabindex="0" aria-expanded="true" aria-controls="solutions-body"
+                     onkeydown="if(event.key==='Enter'||event.key===' ') toggleSection('solutions-body', 'solutions-toggle')">
+                    <div class="section-icon solutions-icon">✅</div>
+                    <div class="section-title">
+                        <h2 data-i18n="solutions_title">حلول</h2>
+                        <p data-i18n="solutions_subtitle">الحلول المفصلة خطوة بخطوة</p>
+                    </div>
+                    <span class="section-toggle open" id="solutions-toggle">▼</span>
+                </div>
+                <div class="section-body" id="solutions-body">
+                    <div style="margin-bottom: 1.5rem;">
+                        <h3 data-i18n="solutions_exercises_heading">📝 حلول التمارين</h3>
+                        <!-- Solution Exercise 1 -->
+                        <div class="solution-item">
+                            <div class="solution-question" data-i18n="sol_ex1_q">التمرين 1 — صورة المستقيم (d):</div>
+                            <div class="solution-answer-rtl">
+                                <span data-i18n="sol_ex1_answer">\(A'(2, -1)\) و \(B'(-1, -2)\)، و \((d') \parallel (d)\).</span>
+                            </div>
+                            <div class="solution-steps">
+                                <ol>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_line_1">الخطوة 1:</span> <span class="solution-step-math" data-i18n="step_ex1_1">بما أن \(O(0, 0)\)، فإن الصورة تُحسب بالعلاقة \(M' = -M\).</span></span></li>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_line_2">الخطوة 2:</span> <span class="solution-step-math" data-i18n="step_ex1_2">\(A' = -A = (2, -1)\) و \(B' = -B = (-1, -2)\).</span></span></li>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_line_3">الخطوة 3:</span> <span class="solution-step-math" data-i18n="step_ex1_3">ميل \((d)\) = \(\dfrac{2-1}{1-(-2)} = \dfrac{1}{3}\)، وميل \((d')\) = \(\dfrac{-2-(-1)}{-1-2} = \dfrac{-1}{-3} = \dfrac{1}{3}\). الميلان متساويان إذن \((d') \parallel (d)\).</span></span></li>
+                                </ol>
+                            </div>
+                            <div class="solution-diagram">
+                                <div id="solution-ex1-board" class="jxgbox" style="width:100%; height:200px;"></div>
+                            </div>
+                        </div>
+                        <!-- Solution Exercise 2 -->
+                        <div class="solution-item">
+                            <div class="solution-question" data-i18n="sol_ex2_q">التمرين 2 — معادلة صورة (d):</div>
+                            <div class="solution-answer-rtl">
+                                <span data-i18n="sol_ex2_answer">\((d'): y = 2x - 3\).</span>
+                            </div>
+                            <div class="solution-steps">
+                                <ol>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_line_1">الخطوة 1:</span> <span class="solution-step-math" data-i18n="step_ex2_1">نأخذ نقطتين على \((d)\): مثلاً \(A(0, 3)\) و \(B(1, 5)\).</span></span></li>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_line_2">الخطوة 2:</span> <span class="solution-step-math" data-i18n="step_ex2_2">صورتاهما بالنسبة إلى \(O(0, 0)\): \(A'(0, -3)\) و \(B'(-1, -5)\).</span></span></li>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_line_3">الخطوة 3:</span> <span class="solution-step-math" data-i18n="step_ex2_3">ميل \((d')\) = \(\dfrac{-5-(-3)}{-1-0} = 2\)، والترتيب عند المبدأ \(-3\). إذن \((d'): y = 2x - 3\).</span></span></li>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_line_4">الخطوة 4:</span> <span class="solution-step-math" data-i18n="step_ex2_4">نلاحظ أن ميل \((d')\) يساوي ميل \((d)\)، أي أن \((d') \parallel (d)\).</span></span></li>
+                                </ol>
+                            </div>
+                        </div>
+                        <!-- Solution Exercise 3 -->
+                        <div class="solution-item">
+                            <div class="solution-question" data-i18n="sol_ex3_q">التمرين 3 — مستقيم يشمل المركز:</div>
+                            <div class="solution-answer-rtl">
+                                <span data-i18n="sol_ex3_answer">\((d') = (d)\)، لأن \(O\) تنتمي إلى \((d)\).</span>
+                            </div>
+                            <div class="solution-steps">
+                                <ol>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_line_1">الخطوة 1:</span> <span class="solution-step-math" data-i18n="step_ex3_1">مركز التناظر \(O(1, 1)\) ينتمي إلى المستقيم \((d): y = x\) لأن \(1 = 1\).</span></span></li>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_line_2">الخطوة 2:</span> <span class="solution-step-math" data-i18n="step_ex3_2">حسب القاعدة 2، إذا كان المركز ينتمي إلى المستقيم، فإن صورة المستقيم هي المستقيم نفسه.</span></span></li>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_line_3">الخطوة 3:</span> <span class="solution-step-math" data-i18n="step_ex3_3">إذن \((d') = (d): y = x\). المستقيم صامد بالتناظر المركزي.</span></span></li>
+                                </ol>
+                            </div>
+                        </div>
+                        <!-- Solution Exercise 4 -->
+                        <div class="solution-item">
+                            <div class="solution-question" data-i18n="sol_ex4_q">التمرين 4 — صحيح أم خطأ:</div>
+                            <div class="solution-answer-rtl">
+                                <span data-i18n="sol_ex4_answer">خطأ. صورة مستقيم بالتناظر المركزي هي مستقيم يوازيه إذا لم يشمل المركز، أما إذا شمل المركز فهي المستقيم نفسه.</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 data-i18n="solutions_problems_heading">🧩 حلول المسائل</h3>
+                        <!-- Solution Problem 1 -->
+                        <div class="solution-item">
+                            <div class="solution-question" data-i18n="sol_prob1_q">المسألة 1 — السكة الحديدية:</div>
+                            <div class="solution-answer-rtl">
+                                <span data-i18n="sol_prob1_answer">\((d') \parallel (d)\)، ويمكن تحديد \((d')\) بإنشاء صورتي نقطتين من \((d)\).</span>
+                            </div>
+                            <div class="solution-steps">
+                                <ol>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_line_1">الخطوة 1:</span> <span class="solution-step-math" data-i18n="step_prob1_1">بما أن \((d)\) لا يشمل \(O\)، فحسب القاعدة 1 فإن \((d') \parallel (d)\).</span></span></li>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_line_2">الخطوة 2:</span> <span class="solution-step-math" data-i18n="step_prob1_2">نختار نقطتين \(A\) و \(B\) على \((d)\)، وننشئ \(A'\) و \(B'\) بالتناظر المركزي الذي مركزه \(O\).</span></span></li>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_line_3">الخطوة 3:</span> <span class="solution-step-math" data-i18n="step_prob1_3">نرسم المستقيم \((A'B')\) الذي يمثّل \((d')\). وبما أن \(A'\) و \(B'\) هما صورة \(A\) و \(B\)، فإن \((d') \parallel (d)\).</span></span></li>
+                                </ol>
+                            </div>
+                        </div>
+                        <!-- Solution Problem 2 -->
+                        <div class="solution-item">
+                            <div class="solution-question" data-i18n="sol_prob2_q">المسألة 2 — الجسر والطريق:</div>
+                            <div class="solution-answer-rtl">
+                                <span data-i18n="sol_prob2_answer">\((d') = (d)\)، لأن \(O \in (d)\).</span>
+                            </div>
+                            <div class="solution-steps">
+                                <ol>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_line_1">الخطوة 1:</span> <span class="solution-step-math" data-i18n="step_prob2_1">الطريق \((d)\) يمرّ عبر \(O\)، إذن \(O \in (d)\).</span></span></li>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_line_2">الخطوة 2:</span> <span class="solution-step-math" data-i18n="step_prob2_2">حسب القاعدة 2، صورة مستقيم يشمل المركز هي المستقيم نفسه. إذن \((d') = (d)\).</span></span></li>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_line_3">الخطوة 3:</span> <span class="solution-step-math" data-i18n="step_prob2_3">النتيجة العملية: الطريق الثاني ينطبق على الطريق الأول، أي لا يوجد طريق جديد.</span></span></li>
+                                </ol>
+                            </div>
+                        </div>
+                        <!-- Solution Problem 3 -->
+                        <div class="solution-item">
+                            <div class="solution-question" data-i18n="sol_prob3_q">المسألة 3 — مستقيمان متوازيان:</div>
+                            <div class="solution-answer-rtl">
+                                <span data-i18n="sol_prob3_answer">\((d_1') \parallel (d_2')\).</span>
+                            </div>
+                            <div class="solution-steps">
+                                <ol>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_line_1">الخطوة 1:</span> <span class="solution-step-math" data-i18n="step_prob3_1">بما أن \((d_1)\) لا يشمل \(O\)، فحسب القاعدة 1: \((d_1') \parallel (d_1)\).</span></span></li>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_line_2">الخطوة 2:</span> <span class="solution-step-math" data-i18n="step_prob3_2">بما أن \((d_2)\) لا يشمل \(O\)، فحسب القاعدة 1: \((d_2') \parallel (d_2)\).</span></span></li>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_line_3">الخطوة 3:</span> <span class="solution-step-math" data-i18n="step_prob3_3">وبما أن \((d_1) \parallel (d_2)\)، فإن \((d_1') \parallel (d_1) \parallel (d_2) \parallel (d_2')\). إذن \((d_1') \parallel (d_2')\).</span></span></li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="site-footer">
+            <div class="footer-col">
+                <h4 data-i18n="footer_dev">معلومات المطوّر</h4>
+                <p data-i18n="footer_dev_name">طور بواسطة: ماجري زياد</p>
+                <p data-i18n="footer_hosting">الاستضافة: Github, Netlify, Supabase</p>
+            </div>
+            <div class="footer-col">
+                <h4 data-i18n="footer_links">روابط</h4>
+                <a href="#" data-i18n="footer_contact">اتصل بنا</a>
+                <a href="#" data-i18n="footer_policies">السياسات</a>
+            </div>
+            <div class="footer-col">
+                <h4 data-i18n="footer_version">الإصدار</h4>
+                <p data-i18n="footer_version_num">الإصدار: 0.0.2</p>
+                <p data-i18n="footer_rights">جميع الحقوق محفوظة &copy; 2025</p>
+            </div>
+        </footer>
+
+        <!-- Print-only custom footer -->
+        <div class="print-footer">
+            <p data-i18n="print_footer_dev">طور بواسطة: ماجري زياد</p>
+            <p data-i18n="print_footer_version">الإصدار: 0.0.2</p>
+            <p data-i18n="print_footer_page">عنوان الصفحة: maths_y8_geo_module2_lesson1_sub4.html</p>
+        </div>
+    </div>
+
+    <!-- JSXGraph Diagrams and Interactive Exercises -->
+    <script>
+        function t(key) {
+            const lang = document.documentElement.lang || 'ar';
+            return (translations[lang] && translations[lang][key]) || key;
+        }
+
+        // Helper: create coordinate grid (O, I, J)
+        function createCoordinateGrid(board, options = {}) {
+            board.create('axis', [[0,0], [1,0]], { name: 'x', withLabel: true, label: { position: 'rt', offset: [-10, 10] } });
+            board.create('axis', [[0,0], [0,1]], { name: 'y', withLabel: true, label: { position: 'rt', offset: [10, -10] } });
+            board.create('point', [0,0], { name: 'O', size: 2, color: '#333', fixed: true });
+            board.create('point', [1,0], { name: 'I', size: 2, color: '#333', fixed: true });
+            board.create('point', [0,1], { name: 'J', size: 2, color: '#333', fixed: true });
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // ---------- Rule 1: Image of a line not through O (interactive) ----------
+            const boardRule1 = initJSXGraph('diagram-rule1', {
+                boundingbox: [-6, 6, 6, -6], axis: false, showNavigation: false, showCopyright: false
+            });
+            if (boardRule1) {
+                createCoordinateGrid(boardRule1);
+
+                // Center O (draggable)
+                const O = boardRule1.create('point', [0, 0], { name: 'O', size: 4, color: '#3498db' });
+
+                // Two draggable points on line (d)
+                const A = boardRule1.create('point', [-2, 1], { name: 'A', size: 3, color: '#e74c3c' });
+                const B = boardRule1.create('point', [1, 2], { name: 'B', size: 3, color: '#e74c3c' });
+
+                // Line (d) through A and B
+                boardRule1.create('line', [A, B], { strokeWidth: 2, strokeColor: '#e74c3c', name: '(d)' });
+
+                // Images A' = 2O - A, B' = 2O - B
+                const A_prime = boardRule1.create('point', [
+                    function() { return 2*O.X() - A.X(); },
+                    function() { return 2*O.Y() - A.Y(); }
+                ], { name: "A'", size: 3, color: '#2ecc71', fixed: true });
+                const B_prime = boardRule1.create('point', [
+                    function() { return 2*O.X() - B.X(); },
+                    function() { return 2*O.Y() - B.Y(); }
+                ], { name: "B'", size: 3, color: '#2ecc71', fixed: true });
+
+                // Line (d') through A' and B'
+                boardRule1.create('line', [A_prime, B_prime], { strokeWidth: 2, strokeColor: '#2ecc71', dash: 2, name: "(d')" });
+
+                // Segments [AA'] and [BB'] passing through O (visualize center is midpoint)
+                boardRule1.create('segment', [A, A_prime], { strokeWidth: 1, strokeColor: '#95a5a6', dash: 3 });
+                boardRule1.create('segment', [B, B_prime], { strokeWidth: 1, strokeColor: '#95a5a6', dash: 3 });
+
+                // Legend
+                boardRule1.create('text', [-5.5, 5.3, () => t('graph_legend')], { fontSize: 13, color: '#1a5276' });
+            }
+
+            // ---------- Exercise 1: Interactive ----------
+            const boardEx1 = initJSXGraph('exercise1-board', {
+                boundingbox: [-6, 6, 6, -6], axis: false, showNavigation: false, showCopyright: false
+            });
+            if (boardEx1) {
+                createCoordinateGrid(boardEx1);
+
+                // Fixed center O at origin
+                const Oex = boardEx1.create('point', [0, 0], { name: 'O', size: 4, color: '#3498db', fixed: true });
+
+                // Fixed original line (d) through A(-2,1) and B(1,2)
+                const Aex = boardEx1.create('point', [-2, 1], { name: 'A', size: 3, color: '#e74c3c', fixed: true });
+                const Bex = boardEx1.create('point', [1, 2], { name: 'B', size: 3, color: '#e74c3c', fixed: true });
+                boardEx1.create('line', [Aex, Bex], { strokeWidth: 2, strokeColor: '#e74c3c', name: '(d)' });
+
+                // User image points A'? B'?
+                const A_user = boardEx1.create('point', [2, -1], { name: "A'?", size: 3, color: '#f39c12' });
+                const B_user = boardEx1.create('point', [-1, -2], { name: "B'?", size: 3, color: '#f39c12' });
+
+                // Line through user points (d')
+                boardEx1.create('line', [A_user, B_user], { strokeWidth: 2, strokeColor: '#f39c12', dash: 2, name: "(d')" });
+
+                function expectedImage(M) {
+                    return [2*Oex.X() - M.X(), 2*Oex.Y() - M.Y()];
+                }
+
+                window.checkEx1 = function() {
+                    const expA = expectedImage(Aex);
+                    const expB = expectedImage(Bex);
+                    const userPts = [A_user, B_user];
+                    const expPts = [expA, expB];
+                    let allCorrect = true;
+                    for (let i = 0; i < 2; i++) {
+                        const dist = Math.sqrt((userPts[i].X()-expPts[i][0])**2 + (userPts[i].Y()-expPts[i][1])**2);
+                        if (dist > 0.5) { allCorrect = false; break; }
+                    }
+                    const resultDiv = document.getElementById('ex1-result');
+                    if (allCorrect) {
+                        resultDiv.textContent = t('correct_msg');
+                        resultDiv.className = 'check-result correct';
+                    } else {
+                        resultDiv.textContent = t('incorrect_msg');
+                        resultDiv.className = 'check-result incorrect';
+                    }
+                };
+                window.resetEx1 = function() {
+                    A_user.moveTo([2, -1]);
+                    B_user.moveTo([-1, -2]);
+                    document.getElementById('ex1-result').textContent = '';
+                    document.getElementById('ex1-ax').value = 2;
+                    document.getElementById('ex1-ay').value = -1;
+                    document.getElementById('ex1-bx').value = -1;
+                    document.getElementById('ex1-by').value = -2;
+                };
+                window.applyCoordsEx1 = function() {
+                    const ax = parseFloat(document.getElementById('ex1-ax').value);
+                    const ay = parseFloat(document.getElementById('ex1-ay').value);
+                    const bx = parseFloat(document.getElementById('ex1-bx').value);
+                    const by = parseFloat(document.getElementById('ex1-by').value);
+                    if ([ax, ay, bx, by].some(isNaN)) {
+                        alert(t('invalid_coords'));
+                        return;
+                    }
+                    A_user.moveTo([ax, ay]);
+                    B_user.moveTo([bx, by]);
+                    document.getElementById('ex1-result').textContent = '';
+                };
+            }
+
+            // ---------- Solution diagram for Exercise 1 (static) ----------
+            const boardSolEx1 = initJSXGraph('solution-ex1-board', {
+                boundingbox: [-5, 5, 5, -5], axis: false, showNavigation: false, showCopyright: false
+            });
+            if (boardSolEx1) {
+                createCoordinateGrid(boardSolEx1);
+                const O = boardSolEx1.create('point', [0, 0], { name: 'O', size: 3, color: '#3498db', fixed: true });
+                const A = boardSolEx1.create('point', [-2, 1], { name: 'A', size: 3, color: '#e74c3c', fixed: true });
+                const B = boardSolEx1.create('point', [1, 2], { name: 'B', size: 3, color: '#e74c3c', fixed: true });
+                boardSolEx1.create('line', [A, B], { strokeWidth: 2, strokeColor: '#e74c3c', name: '(d)' });
+                const Ap = boardSolEx1.create('point', [2, -1], { name: "A'", size: 3, color: '#2ecc71', fixed: true });
+                const Bp = boardSolEx1.create('point', [-1, -2], { name: "B'", size: 3, color: '#2ecc71', fixed: true });
+                boardSolEx1.create('line', [Ap, Bp], { strokeWidth: 2, strokeColor: '#2ecc71', dash: 2, name: "(d')" });
+                boardSolEx1.create('segment', [A, Ap], { strokeWidth: 1, strokeColor: '#95a5a6', dash: 3 });
+                boardSolEx1.create('segment', [B, Bp], { strokeWidth: 1, strokeColor: '#95a5a6', dash: 3 });
+            }
+
+            // Observe language changes
+            const observer = new MutationObserver(() => {
+                [boardRule1, boardEx1, boardSolEx1].forEach(b => {
+                    if (b) b.update();
+                });
+            });
+            observer.observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
+        });
+    </script>
+
+    <!-- TRANSLATION OBJECT (full trilingual) -->
+    <script>
+        const translations = {
+            ar: {
+                page_title: "مناظر مستقيم بتناظر مركزي - رياضيات السنة الثامنة أساسي",
+                print_header: "السنة الثامنة أساسي - الهندسة - الدرس 1 - الجزء 4 - د",
+                site_header: "Educational Dashboard - Mathematics",
+                back_to_index: "← العودة للفهرس",
+                nav_badge: "الدرس 1 | الجزء 4 | د",
+                next_lesson: "التالي ←",
+                language_label: "اللغة",
+                lang_ar: "العربية",
+                lang_en: "English",
+                lang_fr: "Français",
+                print_label: "اختر القسم للطباعة:",
+                print_all: "الدرس كاملاً",
+                print_rules: "القواعد",
+                print_exercises: "التمارين",
+                print_problems: "المسائل",
+                print_solutions: "الحلول",
+                print_button: "🖨️ طباعة",
+                module_tag: "📘 الهندسة | الدرس 1 | الجزء 4 | د",
+                lesson_title: "مناظر مستقيم بتناظر مركزي",
+                lesson_subtitle: "صورة مستقيم بالتناظر المركزي وحالاته",
+                rules_title: "القواعد",
+                rules_subtitle: "صورة مستقيم بالتناظر المركزي",
+                rule1_title: "قاعدة 1: مستقيم لا يشمل مركز التناظر",
+                rule1_text: "إذا كان المستقيم (d) لا يشمل مركز التناظر O، فإن صورته (d') هي مستقيم يوازي (d): أي (d') يوازي (d).",
+                rule1_example: "إذا كانت A و B نقطتين على (d)، فإن صورتهما A' و B' تنتميان إلى (d')، و (A'B') يوازي (AB).",
+                rule1_caption: "اسحب النقطة A أو B أو المركز O لترى أن (d') يوازي (d)",
+                rule2_title: "قاعدة 2: مستقيم يشمل مركز التناظر",
+                rule2_text: "إذا كان المستقيم (d) يشمل مركز التناظر O، فإن صورته هي المستقيم نفسه: أي (d') = (d). نقول إن (d) صامد (ثابت) بالتناظر المركزي.",
+                rule2_example: "كل نقطة M من (d) لها صورة M' تنتمي أيضاً إلى (d)، لأن O منتصف [MM'] و O تنتمي إلى (d).",
+                rule3_title: "قاعدة 3: طريقة إنشاء صورة مستقيم",
+                rule3_text: "لإنشاء صورة مستقيم (d) بالتناظر المركزي الذي مركزه O: 1) نختار نقطتين مختلفتين A و B على (d). 2) ننشئ صورتيهما A' و B' بالتناظر المركزي. 3) نرسم المستقيم (A'B') الذي هو صورة (d).",
+                rule3_example: "اختيار نقطتين يكفي، لأن صورة مستقيم هي مستقيم، ومستقيم يتحدّد بنقطتين مختلفتين.",
+                graph_legend: "الخط الأحمر (d)، الخط الأخضر (d') الصورة بالتناظر المركزي",
+                exercises_title: "تمارين",
+                exercises_subtitle: "تمرّن على إيجاد صورة مستقيم بالتناظر المركزي",
+                exercise1_q: "المستقيم (d) يشمل النقطتين A(-2, 1) و B(1, 2)، و O(0, 0). أنشئ صورة (d) بالنسبة إلى O بإدخال إحداثيات A' و B'.",
+                exercise1_caption: "اسحب النقطتين أو أدخل إحداثياتهما.",
+                exercise2_q: "المستقيم (d) معرّف بالمعادلة y = 2x + 3، والمركز O(0, 0). ما هي معادلة صورته (d')؟",
+                exercise3_q: "المستقيم (d) يشمل النقطة O(1, 1) وله معادلة y = x. ما هي صورة (d) بالتناظر المركزي الذي مركزه O؟ علّل إجابتك.",
+                exercise4_q: "أجب بصحيح أو خطأ مع التعليل: صورة مستقيم بالتناظر المركزي هي دائماً مستقيم يوازيه.",
+                answer_placeholder: "اكتب إجابتك هنا...",
+                check_btn: "تحقق",
+                reset_btn: "إعادة",
+                correct_msg: "أحسنت! إجابة صحيحة.",
+                incorrect_msg: "حاول مرة أخرى.",
+                ex1_coords_display: "\\(A(-2, 1)\\) | \\(B(1, 2)\\) | \\(O(0, 0)\\)",
+                coord_label_A_prime: "\\(A'\\):",
+                coord_label_B_prime: "\\(B'\\):",
+                coord_label_x: "x:",
+                coord_label_y: "y:",
+                apply_coords_btn: "تعيين",
+                invalid_coords: "يرجى إدخال قيم صحيحة للإحداثيات.",
+                problems_title: "مسائل",
+                problems_subtitle: "مسائل تطبيقية على صورة مستقيم",
+                problem1_title: "🛤️ مسألة 1: السكة الحديدية",
+                problem1_text: "سكة حديدية مستقيمة (d) لا تمرّ بمركز محطة O. أراد المهندس إنشاء سكة ثانية (d') متناظرة مع (d) بالنسبة إلى O. بيّن أن (d') يوازي (d)، ثم اذكر كيف يمكن تحديد موقع (d') عملياً باستعمال نقطتين من (d).",
+                problem2_title: "🌉 مسألة 2: الجسر والطريق",
+                problem2_text: "طريق مستقيم (d) يمرّ عبر وسط مدينة O. أرادت البلدية رسم طريق ثانٍ (d') متناظر مع (d) بالنسبة إلى O. ماذا تلاحظ؟ علّل إجابتك اعتماداً على الخاصية المناسبة.",
+                problem3_title: "📏 مسألة 3: مستقيمان متوازيان",
+                problem3_text: "ليكن (d1) و (d2) مستقيمين متوازيين لا يشملان النقطة O. أثبت أن صورتيهما (d1') و (d2') بالتناظر المركزي الذي مركزه O هما أيضاً مستقيمان متوازيان. (إرشاد: استعمل قاعدة صورة مستقيم.)",
+                solutions_title: "حلول",
+                solutions_subtitle: "الحلول المفصلة خطوة بخطوة",
+                solutions_exercises_heading: "📝 حلول التمارين",
+                solutions_problems_heading: "🧩 حلول المسائل",
+                sol_ex1_q: "التمرين 1 — صورة المستقيم (d):",
+                sol_ex1_answer: "A'(2, -1) و B'(-1, -2)، و (d') يوازي (d).",
+                sol_ex2_q: "التمرين 2 — معادلة صورة (d):",
+                sol_ex2_answer: "(d'): y = 2x - 3.",
+                sol_ex3_q: "التمرين 3 — مستقيم يشمل المركز:",
+                sol_ex3_answer: "(d') = (d)، لأن O تنتمي إلى (d).",
+                sol_ex4_q: "التمرين 4 — صحيح أم خطأ:",
+                sol_ex4_answer: "خطأ. صورة مستقيم بالتناظر المركزي هي مستقيم يوازيه إذا لم يشمل المركز، أما إذا شمل المركز فهي المستقيم نفسه.",
+                sol_prob1_q: "المسألة 1 — السكة الحديدية:",
+                sol_prob2_q: "المسألة 2 — الجسر والطريق:",
+                sol_prob3_q: "المسألة 3 — مستقيمان متوازيان:",
+                sol_prob1_answer: "(d') يوازي (d)، ويمكن تحديد (d') بإنشاء صورتي نقطتين من (d).",
+                sol_prob2_answer: "(d') = (d)، لأن O تنتمي إلى (d).",
+                sol_prob3_answer: "(d1') يوازي (d2').",
+                step_line_1: "الخطوة 1:",
+                step_line_2: "الخطوة 2:",
+                step_line_3: "الخطوة 3:",
+                step_line_4: "الخطوة 4:",
+                step_ex1_1: "بما أن O(0, 0)، فإن الصورة تُحسب بالعلاقة M' = -M.",
+                step_ex1_2: "A' = -A = (2, -1) و B' = -B = (-1, -2).",
+                step_ex1_3: "ميل (d) = (2-1)/(1-(-2)) = 1/3، وميل (d') = (-2-(-1))/(-1-2) = 1/3. الميلان متساويان إذن (d') يوازي (d).",
+                step_ex2_1: "نأخذ نقطتين على (d): مثلاً A(0, 3) و B(1, 5).",
+                step_ex2_2: "صورتاهما بالنسبة إلى O(0, 0): A'(0, -3) و B'(-1, -5).",
+                step_ex2_3: "ميل (d') = (-5-(-3))/(-1-0) = 2، والترتيب عند المبدأ -3. إذن (d'): y = 2x - 3.",
+                step_ex2_4: "نلاحظ أن ميل (d') يساوي ميل (d)، أي أن (d') يوازي (d).",
+                step_ex3_1: "مركز التناظر O(1, 1) ينتمي إلى المستقيم (d): y = x لأن 1 = 1.",
+                step_ex3_2: "حسب القاعدة 2، إذا كان المركز ينتمي إلى المستقيم، فإن صورة المستقيم هي المستقيم نفسه.",
+                step_ex3_3: "إذن (d') = (d): y = x. المستقيم صامد بالتناظر المركزي.",
+                step_prob1_1: "بما أن (d) لا يشمل O، فحسب القاعدة 1 فإن (d') يوازي (d).",
+                step_prob1_2: "نختار نقطتين A و B على (d)، وننشئ A' و B' بالتناظر المركزي الذي مركزه O.",
+                step_prob1_3: "نرسم المستقيم (A'B') الذي يمثّل (d'). وبما أن A' و B' هما صورة A و B، فإن (d') يوازي (d).",
+                step_prob2_1: "الطريق (d) يمرّ عبر O، إذن O تنتمي إلى (d).",
+                step_prob2_2: "حسب القاعدة 2، صورة مستقيم يشمل المركز هي المستقيم نفسه. إذن (d') = (d).",
+                step_prob2_3: "النتيجة العملية: الطريق الثاني ينطبق على الطريق الأول، أي لا يوجد طريق جديد.",
+                step_prob3_1: "بما أن (d1) لا يشمل O، فحسب القاعدة 1: (d1') يوازي (d1).",
+                step_prob3_2: "بما أن (d2) لا يشمل O، فحسب القاعدة 1: (d2') يوازي (d2).",
+                step_prob3_3: "وبما أن (d1) يوازي (d2)، فإن (d1') يوازي (d1) يوازي (d2) يوازي (d2'). إذن (d1') يوازي (d2').",
+                cm_unit: "cm",
+                footer_dev: "معلومات المطوّر",
+                footer_dev_name: "طور بواسطة: ماجري زياد",
+                footer_hosting: "الاستضافة: Github, Netlify, Supabase",
+                footer_links: "روابط",
+                footer_contact: "اتصل بنا",
+                footer_policies: "السياسات",
+                footer_version: "الإصدار",
+                footer_version_num: "الإصدار: 0.0.2",
+                footer_rights: "جميع الحقوق محفوظة © 2025",
+                print_footer_dev: "طور بواسطة: ماجري زياد",
+                print_footer_version: "الإصدار: 0.0.2",
+                print_footer_page: "عنوان الصفحة: maths_y8_geo_module2_lesson1_sub4.html"
+            },
+            en: {
+                page_title: "Image of a Line under Central Symmetry - Math Year 8",
+                print_header: "Year 8 – Geometry – Lesson 1 – Part 4 – d",
+                site_header: "Educational Dashboard - Mathematics",
+                back_to_index: "← Back to Index",
+                nav_badge: "Lesson 1 | Part 4 | d",
+                next_lesson: "Next →",
+                language_label: "Language",
+                lang_ar: "العربية",
+                lang_en: "English",
+                lang_fr: "Français",
+                print_label: "Select section to print:",
+                print_all: "Full lesson",
+                print_rules: "Rules",
+                print_exercises: "Exercises",
+                print_problems: "Problems",
+                print_solutions: "Solutions",
+                print_button: "🖨️ Print",
+                module_tag: "📘 Geometry | Lesson 1 | Part 4 | d",
+                lesson_title: "Image of a Line under Central Symmetry",
+                lesson_subtitle: "Image of a line under central symmetry and its cases",
+                rules_title: "Rules",
+                rules_subtitle: "Image of a line under central symmetry",
+                rule1_title: "Rule 1: Line not containing the center of symmetry",
+                rule1_text: "If line (d) does not contain the center of symmetry O, its image (d') is a line parallel to (d): (d') is parallel to (d).",
+                rule1_example: "If A and B are two points on (d), their images A' and B' belong to (d'), and (A'B') is parallel to (AB).",
+                rule1_caption: "Drag point A or B or the center O to see that (d') is parallel to (d)",
+                rule2_title: "Rule 2: Line containing the center of symmetry",
+                rule2_text: "If line (d) contains the center of symmetry O, its image is the line itself: (d') = (d). We say (d) is invariant under central symmetry.",
+                rule2_example: "Every point M on (d) has an image M' also on (d), because O is the midpoint of [MM'] and O belongs to (d).",
+                rule3_title: "Rule 3: Construction of the image of a line",
+                rule3_text: "To construct the image of line (d) under central symmetry with center O: 1) Choose two distinct points A and B on (d). 2) Construct their images A' and B' under central symmetry. 3) Draw line (A'B'), which is the image of (d).",
+                rule3_example: "Choosing two points is enough, since the image of a line is a line, and a line is determined by two distinct points.",
+                graph_legend: "Red line (d), green line (d') its image under central symmetry",
+                exercises_title: "Exercises",
+                exercises_subtitle: "Practice finding the image of a line under central symmetry",
+                exercise1_q: "Line (d) passes through A(-2, 1) and B(1, 2), with O(0, 0). Construct the image of (d) with respect to O by entering the coordinates of A' and B'.",
+                exercise1_caption: "Drag the points or enter their coordinates.",
+                exercise2_q: "Line (d) has equation y = 2x + 3, and center O(0, 0). What is the equation of its image (d')?",
+                exercise3_q: "Line (d) contains point O(1, 1) and has equation y = x. What is the image of (d) under central symmetry with center O? Justify your answer.",
+                exercise4_q: "Answer true or false with justification: the image of a line under central symmetry is always a line parallel to it.",
+                answer_placeholder: "Write your answer here...",
+                check_btn: "Check",
+                reset_btn: "Reset",
+                correct_msg: "Well done! Correct answer.",
+                incorrect_msg: "Try again.",
+                ex1_coords_display: "\\(A(-2, 1)\\) | \\(B(1, 2)\\) | \\(O(0, 0)\\)",
+                coord_label_A_prime: "\\(A'\\):",
+                coord_label_B_prime: "\\(B'\\):",
+                coord_label_x: "x:",
+                coord_label_y: "y:",
+                apply_coords_btn: "Apply",
+                invalid_coords: "Please enter valid coordinates.",
+                problems_title: "Problems",
+                problems_subtitle: "Applied problems on the image of a line",
+                problem1_title: "🛤️ Problem 1: Railway",
+                problem1_text: "A straight railway line (d) does not pass through the station center O. An engineer wants to build a second line (d') symmetric to (d) with respect to O. Show that (d') is parallel to (d), then explain how to locate (d') in practice using two points of (d).",
+                problem2_title: "🌉 Problem 2: Bridge and road",
+                problem2_text: "A straight road (d) passes through the city center O. The municipality wants to draw a second road (d') symmetric to (d) with respect to O. What do you notice? Justify your answer using the appropriate property.",
+                problem3_title: "📏 Problem 3: Two parallel lines",
+                problem3_text: "Let (d1) and (d2) be two parallel lines not containing point O. Prove that their images (d1') and (d2') under central symmetry with center O are also parallel lines. (Hint: use the image-of-a-line rule.)",
+                solutions_title: "Solutions",
+                solutions_subtitle: "Detailed step-by-step solutions",
+                solutions_exercises_heading: "📝 Exercise Solutions",
+                solutions_problems_heading: "🧩 Problem Solutions",
+                sol_ex1_q: "Exercise 1 — Image of line (d):",
+                sol_ex1_answer: "A'(2, -1) and B'(-1, -2), and (d') is parallel to (d).",
+                sol_ex2_q: "Exercise 2 — Equation of the image of (d):",
+                sol_ex2_answer: "(d'): y = 2x - 3.",
+                sol_ex3_q: "Exercise 3 — Line containing the center:",
+                sol_ex3_answer: "(d') = (d), since O belongs to (d).",
+                sol_ex4_q: "Exercise 4 — True or false:",
+                sol_ex4_answer: "False. The image of a line under central symmetry is a parallel line if the line does not contain the center; if it contains the center, it is the line itself.",
+                sol_prob1_q: "Problem 1 — Railway:",
+                sol_prob2_q: "Problem 2 — Bridge and road:",
+                sol_prob3_q: "Problem 3 — Two parallel lines:",
+                sol_prob1_answer: "(d') is parallel to (d), and (d') can be located by constructing the images of two points of (d).",
+                sol_prob2_answer: "(d') = (d), since O belongs to (d).",
+                sol_prob3_answer: "(d1') is parallel to (d2').",
+                step_line_1: "Step 1:",
+                step_line_2: "Step 2:",
+                step_line_3: "Step 3:",
+                step_line_4: "Step 4:",
+                step_ex1_1: "Since O(0, 0), the image is computed by M' = -M.",
+                step_ex1_2: "A' = -A = (2, -1) and B' = -B = (-1, -2).",
+                step_ex1_3: "Slope of (d) = (2-1)/(1-(-2)) = 1/3, slope of (d') = (-2-(-1))/(-1-2) = 1/3. Equal slopes, so (d') is parallel to (d).",
+                step_ex2_1: "Take two points on (d): for instance A(0, 3) and B(1, 5).",
+                step_ex2_2: "Their images with respect to O(0, 0): A'(0, -3) and B'(-1, -5).",
+                step_ex2_3: "Slope of (d') = (-5-(-3))/(-1-0) = 2, y-intercept -3. So (d'): y = 2x - 3.",
+                step_ex2_4: "We notice that the slope of (d') equals the slope of (d), i.e., (d') is parallel to (d).",
+                step_ex3_1: "The center of symmetry O(1, 1) belongs to line (d): y = x since 1 = 1.",
+                step_ex3_2: "By Rule 2, if the center belongs to the line, then the image of the line is the line itself.",
+                step_ex3_3: "So (d') = (d): y = x. The line is invariant under central symmetry.",
+                step_prob1_1: "Since (d) does not contain O, by Rule 1 (d') is parallel to (d).",
+                step_prob1_2: "Choose two points A and B on (d), construct A' and B' under central symmetry with center O.",
+                step_prob1_3: "Draw line (A'B') representing (d'). Since A' and B' are the images of A and B, (d') is parallel to (d).",
+                step_prob2_1: "The road (d) passes through O, so O belongs to (d).",
+                step_prob2_2: "By Rule 2, the image of a line containing the center is the line itself. So (d') = (d).",
+                step_prob2_3: "Practical result: the second road coincides with the first one, meaning there is no new road.",
+                step_prob3_1: "Since (d1) does not contain O, by Rule 1: (d1') is parallel to (d1).",
+                step_prob3_2: "Since (d2) does not contain O, by Rule 1: (d2') is parallel to (d2).",
+                step_prob3_3: "Since (d1) is parallel to (d2), we have (d1') parallel to (d1) parallel to (d2) parallel to (d2'). So (d1') is parallel to (d2').",
+                cm_unit: "cm",
+                footer_dev: "Developer Info",
+                footer_dev_name: "Developed by: Majri Zied",
+                footer_hosting: "Hosting: Github, Netlify, Supabase",
+                footer_links: "Links",
+                footer_contact: "Contact us",
+                footer_policies: "Policies",
+                footer_version: "Version",
+                footer_version_num: "Version: 0.0.2",
+                footer_rights: "All rights reserved © 2025",
+                print_footer_dev: "Developed by: Majri Zied",
+                print_footer_version: "Version: 0.0.2",
+                print_footer_page: "Page address: maths_y8_geo_module2_lesson1_sub4.html"
+            },
+            fr: {
+                page_title: "Image d'une droite par symétrie centrale - Math 8ème année",
+                print_header: "8ème année – Géométrie – Leçon 1 – Partie 4 – d",
+                site_header: "Educational Dashboard - Mathematics",
+                back_to_index: "← Retour à l'index",
+                nav_badge: "Leçon 1 | Partie 4 | d",
+                next_lesson: "Suivant →",
+                language_label: "Langue",
+                lang_ar: "العربية",
+                lang_en: "English",
+                lang_fr: "Français",
+                print_label: "Choisir la section à imprimer :",
+                print_all: "Leçon complète",
+                print_rules: "Règles",
+                print_exercises: "Exercices",
+                print_problems: "Problèmes",
+                print_solutions: "Solutions",
+                print_button: "🖨️ Imprimer",
+                module_tag: "📘 Géométrie | Leçon 1 | Partie 4 | d",
+                lesson_title: "Image d'une droite par symétrie centrale",
+                lesson_subtitle: "Image d'une droite par symétrie centrale et ses cas",
+                rules_title: "Règles",
+                rules_subtitle: "Image d'une droite par symétrie centrale",
+                rule1_title: "Règle 1 : Droite ne contenant pas le centre de symétrie",
+                rule1_text: "Si la droite (d) ne contient pas le centre de symétrie O, son image (d') est une droite parallèle à (d) : (d') est parallèle à (d).",
+                rule1_example: "Si A et B sont deux points de (d), leurs images A' et B' appartiennent à (d'), et (A'B') est parallèle à (AB).",
+                rule1_caption: "Faites glisser le point A ou B ou le centre O pour voir que (d') est parallèle à (d)",
+                rule2_title: "Règle 2 : Droite contenant le centre de symétrie",
+                rule2_text: "Si la droite (d) contient le centre de symétrie O, son image est la droite elle-même : (d') = (d). On dit que (d) est invariante par symétrie centrale.",
+                rule2_example: "Chaque point M de (d) a une image M' également sur (d), car O est le milieu de [MM'] et O appartient à (d).",
+                rule3_title: "Règle 3 : Construction de l'image d'une droite",
+                rule3_text: "Pour construire l'image d'une droite (d) par la symétrie centrale de centre O : 1) Choisir deux points distincts A et B sur (d). 2) Construire leurs images A' et B' par la symétrie centrale. 3) Tracer la droite (A'B'), qui est l'image de (d).",
+                rule3_example: "Choisir deux points suffit, car l'image d'une droite est une droite, et une droite est déterminée par deux points distincts.",
+                graph_legend: "Droite rouge (d), droite verte (d') son image par symétrie centrale",
+                exercises_title: "Exercices",
+                exercises_subtitle: "Entraînez-vous à trouver l'image d'une droite par symétrie centrale",
+                exercise1_q: "La droite (d) passe par A(-2, 1) et B(1, 2), avec O(0, 0). Construisez l'image de (d) par rapport à O en saisissant les coordonnées de A' et B'.",
+                exercise1_caption: "Faites glisser les points ou entrez leurs coordonnées.",
+                exercise2_q: "La droite (d) a pour équation y = 2x + 3, et le centre O(0, 0). Quelle est l'équation de son image (d') ?",
+                exercise3_q: "La droite (d) contient le point O(1, 1) et a pour équation y = x. Quelle est l'image de (d) par la symétrie centrale de centre O ? Justifiez.",
+                exercise4_q: "Répondez vrai ou faux avec justification : l'image d'une droite par symétrie centrale est toujours une droite parallèle.",
+                answer_placeholder: "Écrivez votre réponse ici...",
+                check_btn: "Vérifier",
+                reset_btn: "Réinitialiser",
+                correct_msg: "Bravo ! Bonne réponse.",
+                incorrect_msg: "Essayez encore.",
+                ex1_coords_display: "\\(A(-2, 1)\\) | \\(B(1, 2)\\) | \\(O(0, 0)\\)",
+                coord_label_A_prime: "\\(A'\\) :",
+                coord_label_B_prime: "\\(B'\\) :",
+                coord_label_x: "x :",
+                coord_label_y: "y :",
+                apply_coords_btn: "Appliquer",
+                invalid_coords: "Veuillez entrer des coordonnées valides.",
+                problems_title: "Problèmes",
+                problems_subtitle: "Problèmes appliqués sur l'image d'une droite",
+                problem1_title: "🛤️ Problème 1 : Voie ferrée",
+                problem1_text: "Une voie ferrée rectiligne (d) ne passe pas par le centre de la gare O. Un ingénieur veut construire une seconde voie (d') symétrique de (d) par rapport à O. Montrez que (d') est parallèle à (d), puis expliquez comment situer (d') en pratique à l'aide de deux points de (d).",
+                problem2_title: "🌉 Problème 2 : Pont et route",
+                problem2_text: "Une route rectiligne (d) passe par le centre-ville O. La municipalité veut tracer une seconde route (d') symétrique de (d) par rapport à O. Que remarquez-vous ? Justifiez votre réponse à l'aide de la propriété appropriée.",
+                problem3_title: "📏 Problème 3 : Deux droites parallèles",
+                problem3_text: "Soient (d1) et (d2) deux droites parallèles ne contenant pas le point O. Prouvez que leurs images (d1') et (d2') par la symétrie centrale de centre O sont également parallèles. (Indication : utilisez la règle de l'image d'une droite.)",
+                solutions_title: "Solutions",
+                solutions_subtitle: "Solutions détaillées étape par étape",
+                solutions_exercises_heading: "📝 Solutions des exercices",
+                solutions_problems_heading: "🧩 Solutions des problèmes",
+                sol_ex1_q: "Exercice 1 — Image de la droite (d) :",
+                sol_ex1_answer: "A'(2, -1) et B'(-1, -2), et (d') est parallèle à (d).",
+                sol_ex2_q: "Exercice 2 — Équation de l'image de (d) :",
+                sol_ex2_answer: "(d') : y = 2x - 3.",
+                sol_ex3_q: "Exercice 3 — Droite contenant le centre :",
+                sol_ex3_answer: "(d') = (d), car O appartient à (d).",
+                sol_ex4_q: "Exercice 4 — Vrai ou faux :",
+                sol_ex4_answer: "Faux. L'image d'une droite par symétrie centrale est une droite parallèle si elle ne contient pas le centre ; si elle contient le centre, c'est la droite elle-même.",
+                sol_prob1_q: "Problème 1 — Voie ferrée :",
+                sol_prob2_q: "Problème 2 — Pont et route :",
+                sol_prob3_q: "Problème 3 — Deux droites parallèles :",
+                sol_prob1_answer: "(d') est parallèle à (d), et (d') peut être située en construisant les images de deux points de (d).",
+                sol_prob2_answer: "(d') = (d), car O appartient à (d).",
+                sol_prob3_answer: "(d1') est parallèle à (d2').",
+                step_line_1: "Étape 1 :",
+                step_line_2: "Étape 2 :",
+                step_line_3: "Étape 3 :",
+                step_line_4: "Étape 4 :",
+                step_ex1_1: "Puisque O(0, 0), l'image se calcule par M' = -M.",
+                step_ex1_2: "A' = -A = (2, -1) et B' = -B = (-1, -2).",
+                step_ex1_3: "Pente de (d) = (2-1)/(1-(-2)) = 1/3, pente de (d') = (-2-(-1))/(-1-2) = 1/3. Pentes égales, donc (d') est parallèle à (d).",
+                step_ex2_1: "Prendre deux points de (d) : par exemple A(0, 3) et B(1, 5).",
+                step_ex2_2: "Leurs images par rapport à O(0, 0) : A'(0, -3) et B'(-1, -5).",
+                step_ex2_3: "Pente de (d') = (-5-(-3))/(-1-0) = 2, ordonnée à l'origine -3. Donc (d') : y = 2x - 3.",
+                step_ex2_4: "On remarque que la pente de (d') égale la pente de (d), donc (d') est parallèle à (d).",
+                step_ex3_1: "Le centre de symétrie O(1, 1) appartient à la droite (d) : y = x puisque 1 = 1.",
+                step_ex3_2: "Par la Règle 2, si le centre appartient à la droite, l'image de la droite est la droite elle-même.",
+                step_ex3_3: "Donc (d') = (d) : y = x. La droite est invariante par symétrie centrale.",
+                step_prob1_1: "Puisque (d) ne contient pas O, par la Règle 1 (d') est parallèle à (d).",
+                step_prob1_2: "Choisir deux points A et B sur (d), construire A' et B' par la symétrie centrale de centre O.",
+                step_prob1_3: "Tracer la droite (A'B') représentant (d'). Puisque A' et B' sont les images de A et B, (d') est parallèle à (d).",
+                step_prob2_1: "La route (d) passe par O, donc O appartient à (d).",
+                step_prob2_2: "Par la Règle 2, l'image d'une droite contenant le centre est la droite elle-même. Donc (d') = (d).",
+                step_prob2_3: "Résultat pratique : la seconde route coïncide avec la première, donc il n'y a pas de nouvelle route.",
+                step_prob3_1: "Puisque (d1) ne contient pas O, par la Règle 1 : (d1') est parallèle à (d1).",
+                step_prob3_2: "Puisque (d2) ne contient pas O, par la Règle 1 : (d2') est parallèle à (d2).",
+                step_prob3_3: "Puisque (d1) est parallèle à (d2), on a (d1') parallèle à (d1) parallèle à (d2) parallèle à (d2'). Donc (d1') est parallèle à (d2').",
+                cm_unit: "cm",
+                footer_dev: "Informations du développeur",
+                footer_dev_name: "Développé par : Majri Zied",
+                footer_hosting: "Hébergement : Github, Netlify, Supabase",
+                footer_links: "Liens",
+                footer_contact: "Contactez-nous",
+                footer_policies: "Politiques",
+                footer_version: "Version",
+                footer_version_num: "Version : 0.0.2",
+                footer_rights: "Tous droits réservés © 2025",
+                print_footer_dev: "Développé par : Majri Zied",
+                print_footer_version: "Version : 0.0.2",
+                print_footer_page: "Adresse de la page : maths_y8_geo_module2_lesson1_sub4.html"
+            }
+        };
+    </script>
+</body>
+</html>

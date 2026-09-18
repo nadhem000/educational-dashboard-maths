@@ -1,0 +1,1153 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>فهرس دروس الرياضيات - السنة التاسعة</title>
+
+    <!-- External Stylesheets -->
+    <link rel="stylesheet" href="maths_shared.css">
+    <link rel="stylesheet" href="maths_programs.css">
+
+    <!-- Additional styles for nested lesson/part/sub-part structure -->
+    <style>
+        .lesson-group {
+            border-top: 1px solid var(--border);
+        }
+        .lesson-group-header {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary);
+            padding: 1rem 2rem 0.5rem 2rem;
+            margin: 0;
+        }
+        .part-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .part-group {
+            margin: 0;
+        }
+        .part-group-header {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text);
+            padding: 0.8rem 2rem 0.3rem 2.5rem;
+            margin: 0;
+        }
+        .subpart-list {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 0.5rem 0;
+        }
+        .subpart-item {
+            border-top: 1px dashed var(--border);
+        }
+        .subpart-link {
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            padding: 0.6rem 2rem 0.6rem 3rem;
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: background var(--transition), color var(--transition), padding-right var(--transition);
+        }
+        .subpart-link:hover {
+            background: var(--hover);
+            color: var(--secondary);
+            padding-right: 3.2rem;
+        }
+        .subpart-number {
+            width: 28px;
+            height: 28px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 700;
+            flex-shrink: 0;
+            color: var(--white);
+        }
+        /* Year 9 color palette */
+        .algebra-num.subpart-number {
+            background: linear-gradient(135deg, #5dade2, #2e86c1);
+        }
+        .geometry-num.subpart-number {
+            background: linear-gradient(135deg, #f0b27a, #e67e22);
+        }
+        .algebra-module .module-header {
+            background: linear-gradient(135deg, #2980b9, #1a5276);
+        }
+        .geometry-module .module-header {
+            background: linear-gradient(135deg, #d35400, #a04000);
+        }
+        .algebra-icon {
+            color: #2980b9;
+        }
+        .geometry-icon {
+            color: #d35400;
+        }
+
+        @media (max-width: 640px) {
+            .lesson-group-header { padding-left: 1.2rem; padding-right: 1.2rem; font-size: 1.1rem; }
+            .part-group-header { padding-left: 1.5rem; padding-right: 1.5rem; }
+            .subpart-link { padding-left: 2rem; padding-right: 2rem; font-size: 0.9rem; }
+            .subpart-link:hover { padding-right: 2.2rem; }
+        }
+    </style>
+
+    <!-- External Script -->
+    <script src="maths_programs.js" defer></script>
+</head>
+<body>
+    <div class="container">
+
+        <!-- Print-only header -->
+        <div class="print-header" data-i18n="print_header">فهرس دروس الرياضيات — السنة التاسعة أساسي</div>
+
+        <!-- Site Header -->
+        <div class="site-header">
+            <div class="header-icon">
+                <img src="assets/icons/icon-152x152.png" alt="أيقونة الموقع">
+            </div>
+            <h1 data-i18n="site_header">Educational Dashboard - Mathematics</h1>
+        </div>
+
+        <!-- Top Navigation -->
+        <nav class="top-nav">
+            <a href="index.html" class="nav-link" data-i18n="home_link">🏠 الرئيسية</a>
+            <span class="nav-badge" data-i18n="nav_badge">📚 فهرس الدروس</span>
+            <a href="maths_y9_alg_module1_lesson1_part1_sub1.html" class="nav-link" data-i18n="first_lesson_link">الدرس الأول ←</a>
+        </nav>
+
+        <!-- Print Controls -->
+        <div class="print-controls">
+            <label for="print-section" data-i18n="print_label">اختر القسم للطباعة:</label>
+            <select id="print-section">
+                <option value="all" data-i18n="print_all">الفهرس كاملاً</option>
+                <option value="algebra" data-i18n="print_algebra">دروس الجبر فقط</option>
+                <option value="geometry" data-i18n="print_geometry">دروس الهندسة فقط</option>
+            </select>
+            <button class="print-button" onclick="printSelected()" data-i18n="print_button">🖨️ طباعة</button>
+            <button id="theme-toggle" class="theme-toggle" aria-label="تبديل الوضع الليلي/النهاري">
+                <span class="theme-icon">🌙</span>
+            </button>
+
+            <!-- Language Selector -->
+            <div class="language-selector">
+                <label for="language-select" class="sr-only" data-i18n="language_label">اللغة</label>
+                <select id="language-select">
+                    <option value="ar" data-i18n="lang_ar">العربية</option>
+                    <option value="en" data-i18n="lang_en">English</option>
+                    <option value="fr" data-i18n="lang_fr">Français</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Page Header -->
+        <header class="page-header">
+            <span class="badge" data-i18n="badge">📐 السنة التاسعة أساسي</span>
+            <h1 data-i18n="page_heading">فهرس دروس الرياضيات</h1>
+            <p class="subtitle" data-i18n="page_subtitle">جميع دروس الجبر والهندسة — اضغط على أي درس للانتقال إليه</p>
+        </header>
+
+        <!-- ================= ALGEBRA MODULE ================= -->
+        <div class="module-card algebra-module" id="algebra-module-card">
+            <div class="module-header" onclick="toggleModule('algebraModule')" role="button" tabindex="0"
+                 aria-expanded="true" aria-controls="algebraModule"
+                 onkeydown="if(event.key==='Enter'||event.key===' ') toggleModule('algebraModule')">
+                <div class="module-icon algebra-icon">∑</div>
+                <div class="module-title-group">
+                    <h2 data-i18n="algebra_title">دروس الجبر والحساب</h2>
+                    <span class="module-count" data-i18n="algebra_count">8 دروس</span>
+                </div>
+                <span class="module-toggle open" id="algebraToggle">▼</span>
+            </div>
+            <ul class="lesson-list expanded" id="algebraModule">
+                <!-- Lesson 0: Review -->
+                <li class="lesson-group">
+                    <h3 class="lesson-group-header" data-i18n="alg_review_title">تقديم البرنامَج مع مراجعة</h3>
+                    <ul class="part-list">
+                        <li class="part-group">
+                            <ul class="subpart-list">
+                                <li class="subpart-item">
+                                    <a href="maths_y9_alg_module1_review_sub1.html" class="subpart-link">
+                                        <span class="subpart-number algebra-num">a</span>
+                                        <span class="subpart-text" data-i18n="alg_review_sub1">مراجعة</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- Lesson I -->
+                <li class="lesson-group">
+                    <h3 class="lesson-group-header" data-i18n="alg_lesson1_title">الدرس I: التعداد و الحساب</h3>
+                    <ul class="part-list">
+                        <li class="part-group">
+                            <h4 class="part-group-header" data-i18n="alg_lesson1_part1_title">Part 1: قَابِليَّة القِسْمَة</h4>
+                            <ul class="subpart-list">
+                                <li class="subpart-item"><a href="maths_y9_alg_module1_lesson1_part1_sub1.html" class="subpart-link"><span class="subpart-number algebra-num">a</span><span class="subpart-text" data-i18n="alg_lesson1_part1_sub1">قابليّة القسمة على 2 و 3 و 4 و5 و8 و 9 و</span></a></li>
+                                <li class="subpart-item"><a href="maths_y9_alg_module1_lesson1_part1_sub2.html" class="subpart-link"><span class="subpart-number algebra-num">b</span><span class="subpart-text" data-i18n="alg_lesson1_part1_sub2">تطبيق قابليَّة القسمة على 2 و3و4و5و8و9و25</span></a></li>
+                                <li class="subpart-item"><a href="maths_y9_alg_module1_lesson1_part1_sub3.html" class="subpart-link"><span class="subpart-number algebra-num">c</span><span class="subpart-text" data-i18n="alg_lesson1_part1_sub3">قابليَّة القسمة على</span></a></li>
+                            </ul>
+                        </li>
+                        <li class="part-group">
+                            <h4 class="part-group-header" data-i18n="alg_lesson1_part2_title">Part 2: انشطة في التعداد</h4>
+                            <ul class="subpart-list">
+                                <li class="subpart-item"><a href="maths_y9_alg_module1_lesson1_part2_sub1.html" class="subpart-link"><span class="subpart-number algebra-num">a</span><span class="subpart-text" data-i18n="alg_lesson1_part2_sub1">كم مجموعة منتهية</span></a></li>
+                                <li class="subpart-item"><a href="maths_y9_alg_module1_lesson1_part2_sub2.html" class="subpart-link"><span class="subpart-number algebra-num">b</span><span class="subpart-text" data-i18n="alg_lesson1_part2_sub2">أنشطة في التعداد</span></a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- Lesson II -->
+                <li class="lesson-group">
+                    <h3 class="lesson-group-header" data-i18n="alg_lesson2_title">الدرس II: مجموعة الأعداد الحقيقية</h3>
+                    <ul class="part-list">
+                        <li class="part-group">
+                            <h4 class="part-group-header" data-i18n="alg_lesson2_part1_title">Part 1: Qو D , Z , N تذكير بالمجموعات</h4>
+                            <ul class="subpart-list">
+                                <li class="subpart-item"><a href="maths_y9_alg_module1_lesson2_part1_sub1.html" class="subpart-link"><span class="subpart-number algebra-num">a</span><span class="subpart-text" data-i18n="alg_lesson2_part1_sub1">الكتابة العشريّة الدّوريّة لعدد كسري</span></a></li>
+                            </ul>
+                        </li>
+                        <li class="part-group">
+                            <h4 class="part-group-header" data-i18n="alg_lesson2_part2_title">Part 2: الأعداد الحقيقيّة</h4>
+                            <ul class="subpart-list">
+                                <li class="subpart-item"><a href="maths_y9_alg_module1_lesson2_part2_sub1.html" class="subpart-link"><span class="subpart-number algebra-num">a</span><span class="subpart-text" data-i18n="alg_lesson2_part2_sub1">الجذر التّربيعي لعدد حقيقي موجب</span></a></li>
+                                <li class="subpart-item"><a href="maths_y9_alg_module1_lesson2_part2_sub2.html" class="subpart-link"><span class="subpart-number algebra-num">b</span><span class="subpart-text" data-i18n="alg_lesson2_part2_sub2">القيمة التقريبيّة لعدد حقيقي</span></a></li>
+                                <li class="subpart-item"><a href="maths_y9_alg_module1_lesson2_part2_sub3.html" class="subpart-link"><span class="subpart-number algebra-num">c</span><span class="subpart-text" data-i18n="alg_lesson2_part2_sub3">تدريج مستقيم بواسطة الأعداد الحقيقية</span></a></li>
+                                <li class="subpart-item"><a href="maths_y9_alg_module1_lesson2_part2_sub4.html" class="subpart-link"><span class="subpart-number algebra-num">d</span><span class="subpart-text" data-i18n="alg_lesson2_part2_sub4">إيجاد رقم ذو رتبة معيّنة في كتابة عشريّة دوريّة</span></a></li>
+                                <li class="subpart-item"><a href="maths_y9_alg_module1_lesson2_part2_sub5.html" class="subpart-link"><span class="subpart-number algebra-num">e</span><span class="subpart-text" data-i18n="alg_lesson2_part2_sub5">كتابة عدد عشري دوري في صيغة عدد كسري</span></a></li>
+                                <li class="subpart-item"><a href="maths_y9_alg_module1_lesson2_part2_sub6.html" class="subpart-link"><span class="subpart-number algebra-num">f</span><span class="subpart-text" data-i18n="alg_lesson2_part2_sub6">إيجاد دور كتابة عشريّة دوريّة</span></a></li>
+                                <li class="subpart-item"><a href="maths_y9_alg_module1_lesson2_part2_sub7.html" class="subpart-link"><span class="subpart-number algebra-num">g</span><span class="subpart-text" data-i18n="alg_lesson2_part2_sub7">إيجاد دور كتابة عشريّة دوريّة ( )</span></a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- Lesson III -->
+                <li class="lesson-group">
+                    <h3 class="lesson-group-header" data-i18n="alg_lesson3_title">الدرس III: العمليات في مجموعة الأعداد الحقيقية</h3>
+                    <ul class="part-list">
+                        <li class="part-group">
+                            <h4 class="part-group-header" data-i18n="alg_lesson3_part1_title">Part 1: النشر و التفكيك في مجموعة الأعداد الحقيقية</h4>
+                            <ul class="subpart-list">
+                                <li class="subpart-item"><a href="maths_y9_alg_module1_lesson3_part1_sub1.html" class="subpart-link"><span class="subpart-number algebra-num">a</span><span class="subpart-text" data-i18n="alg_lesson3_part1_sub1">عملية النشر في مجموعة الاعداد الحقيقية</span></a></li>
+                            </ul>
+                        </li>
+                        <li class="part-group">
+                            <h4 class="part-group-header" data-i18n="alg_lesson3_part2_title">Part 2: حساب عبارات بها جذور تربيعية</h4>
+                            <ul class="subpart-list">
+                                <li class="subpart-item"><a href="maths_y9_alg_module1_lesson3_part2_sub1.html" class="subpart-link"><span class="subpart-number algebra-num">a</span><span class="subpart-text" data-i18n="alg_lesson3_part2_sub1">تطبيق : حساب عبارات بها جذور تربيعية</span></a></li>
+                                <li class="subpart-item"><a href="maths_y9_alg_module1_lesson3_part2_sub2.html" class="subpart-link"><span class="subpart-number algebra-num">b</span><span class="subpart-text" data-i18n="alg_lesson3_part2_sub2">حساب عبارات بها جذور تربيعية</span></a></li>
+                                <li class="subpart-item"><a href="maths_y9_alg_module1_lesson3_part2_sub3.html" class="subpart-link"><span class="subpart-number algebra-num">c</span><span class="subpart-text" data-i18n="alg_lesson3_part2_sub3">خاصيات الجمع و الطرح في مجموعة الأعداد الحقيقية</span></a></li>
+                                <li class="subpart-item"><a href="maths_y9_alg_module1_lesson3_part2_sub4.html" class="subpart-link"><span class="subpart-number algebra-num">d</span><span class="subpart-text" data-i18n="alg_lesson3_part2_sub4">خاصيات عملية الضرب في مجموعة الأعداد الحقيقية</span></a></li>
+                                <li class="subpart-item"><a href="maths_y9_alg_module1_lesson3_part2_sub5.html" class="subpart-link"><span class="subpart-number algebra-num">e</span><span class="subpart-text" data-i18n="alg_lesson3_part2_sub5">مقلوب عدد حقيقي</span></a></li>
+                            </ul>
+                        </li>
+                        <li class="part-group">
+                            <h4 class="part-group-header" data-i18n="alg_lesson3_part3_title">Part 3: التفكيك في مجموعة الاعداد الحقيقية</h4>
+                            <ul class="subpart-list">
+                                <li class="subpart-item"><a href="maths_y9_alg_module1_lesson3_part3_sub1.html" class="subpart-link"><span class="subpart-number algebra-num">a</span><span class="subpart-text" data-i18n="alg_lesson3_part3_sub1">تطبيق : النشر و التفكيك في مجموعة الأعداد الحقيقية</span></a></li>
+                            </ul>
+                        </li>
+                        <li class="part-group">
+                            <h4 class="part-group-header" data-i18n="alg_lesson3_part4_title">Part 4: تعريف القيمة المطلقة لعدد حقيقي</h4>
+                            <ul class="subpart-list">
+                                <li class="subpart-item"><a href="maths_y9_alg_module1_lesson3_part4_sub1.html" class="subpart-link"><span class="subpart-number algebra-num">a</span><span class="subpart-text" data-i18n="alg_lesson3_part4_sub1">خاصيات القيمة المطلقة لعدد حقيقي</span></a></li>
+                                <li class="subpart-item"><a href="maths_y9_alg_module1_lesson3_part4_sub2.html" class="subpart-link"><span class="subpart-number algebra-num">b</span><span class="subpart-text" data-i18n="alg_lesson3_part4_sub2">تطبيق</span></a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- Lesson IV -->
+                <li class="lesson-group">
+                    <h3 class="lesson-group-header" data-i18n="alg_lesson4_title">الدرس IV: القوى في مجموعة الأعداد الحقيقية</h3>
+                    <ul class="part-list">
+                        <li class="part-group">
+                            <h4 class="part-group-header" data-i18n="alg_lesson4_part1_title">Part 1: خاصّيات القوى في مجموعة الأعداد الحقيقيّة</h4>
+                            <ul class="subpart-list">
+                                <li class="subpart-item"><a href="maths_y9_alg_module1_lesson4_part1_sub1.html" class="subpart-link"><span class="subpart-number algebra-num">a</span><span class="subpart-text" data-i18n="alg_lesson4_part1_sub1">قوة جذاء عددين حقيقين</span></a></li>
+                                <li class="subpart-item"><a href="maths_y9_alg_module1_lesson4_part1_sub2.html" class="subpart-link"><span class="subpart-number algebra-num">b</span><span class="subpart-text" data-i18n="alg_lesson4_part1_sub2">خارج قسمة قوتين لنفس العدد</span></a></li>
+                                <li class="subpart-item"><a href="maths_y9_alg_module1_lesson4_part1_sub3.html" class="subpart-link"><span class="subpart-number algebra-num">c</span><span class="subpart-text" data-i18n="alg_lesson4_part1_sub3">تعريف القوى في مجموعة الأعداد الحقيقية</span></a></li>
+                                <li class="subpart-item"><a href="maths_y9_alg_module1_lesson4_part1_sub4.html" class="subpart-link"><span class="subpart-number algebra-num">d</span><span class="subpart-text" data-i18n="alg_lesson4_part1_sub4">جذاء قوتين لنفس العدد</span></a></li>
+                                <li class="subpart-item"><a href="maths_y9_alg_module1_lesson4_part1_sub5.html" class="subpart-link"><span class="subpart-number algebra-num">e</span><span class="subpart-text" data-i18n="alg_lesson4_part1_sub5">قوة قوة عدد حقيقي</span></a></li>
+                                <li class="subpart-item"><a href="maths_y9_alg_module1_lesson4_part1_sub6.html" class="subpart-link"><span class="subpart-number algebra-num">f</span><span class="subpart-text" data-i18n="alg_lesson4_part1_sub6">قوة و علامة عدد حقيقي دليلها عدد نسبي</span></a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- Lesson V -->
+                <li class="lesson-group">
+                    <h3 class="lesson-group-header" data-i18n="alg_lesson5_title">الدرس V: الترتيب والمقارنة في مجموعة الأعداد الحقيقية</h3>
+                    <ul class="part-list">
+                        <li class="part-group">
+                            <h4 class="part-group-header" data-i18n="alg_lesson5_part1_title">Part 1: مقارنة عددين حقيقيّين بحساب الفارق</h4>
+                            <ul class="subpart-list">
+                                <li class="subpart-item"><a href="maths_y9_alg_module1_lesson5_part1_sub1.html" class="subpart-link"><span class="subpart-number algebra-num">a</span><span class="subpart-text" data-i18n="alg_lesson5_part1_sub1">مقارنة عددين حقيقيّين بحساب الفارق</span></a></li>
+                            </ul>
+                        </li>
+                        <li class="part-group">
+                            <h4 class="part-group-header" data-i18n="alg_lesson5_part2_title">Part 2: التّرتيب و الجمع في مجموعة الأعداد الحقيقيّة</h4>
+                            <ul class="subpart-list">
+                                <li class="subpart-item"><a href="maths_y9_alg_module1_lesson5_part2_sub1.html" class="subpart-link"><span class="subpart-number algebra-num">a</span><span class="subpart-text" data-i18n="alg_lesson5_part2_sub1">التّرتيب و الجمع في مجموعة الأعداد الحقيقيّة</span></a></li>
+                            </ul>
+                        </li>
+                        <li class="part-group">
+                            <h4 class="part-group-header" data-i18n="alg_lesson5_part3_title">Part 3: التّرتيب و الضّرب في مجموعة الأعداد الحقيقيّة</h4>
+                            <ul class="subpart-list">
+                                <li class="subpart-item"><a href="maths_y9_alg_module1_lesson5_part3_sub1.html" class="subpart-link"><span class="subpart-number algebra-num">a</span><span class="subpart-text" data-i18n="alg_lesson5_part3_sub1">التّرتيب و الضّرب في مجموعة الأعداد الحقيقيّة</span></a></li>
+                            </ul>
+                        </li>
+                        <li class="part-group">
+                            <h4 class="part-group-header" data-i18n="alg_lesson5_part4_title">Part 4: مقارنة مربّعي عددين حقيقيّين</h4>
+                            <ul class="subpart-list">
+                                <li class="subpart-item"><a href="maths_y9_alg_module1_lesson5_part4_sub1.html" class="subpart-link"><span class="subpart-number algebra-num">a</span><span class="subpart-text" data-i18n="alg_lesson5_part4_sub1">مقارنة مربّعي عددين حقيقيّين</span></a></li>
+                            </ul>
+                        </li>
+                        <li class="part-group">
+                            <h4 class="part-group-header" data-i18n="alg_lesson5_part5_title">Part 5: مقارنة الجذور التربيعية لعددين حقيقيين</h4>
+                            <ul class="subpart-list">
+                                <li class="subpart-item"><a href="maths_y9_alg_module1_lesson5_part5_sub1.html" class="subpart-link"><span class="subpart-number algebra-num">a</span><span class="subpart-text" data-i18n="alg_lesson5_part5_sub1">ملاحظة</span></a></li>
+                                <li class="subpart-item"><a href="maths_y9_alg_module1_lesson5_part5_sub2.html" class="subpart-link"><span class="subpart-number algebra-num">b</span><span class="subpart-text" data-i18n="alg_lesson5_part5_sub2">مقارنة الجذاءات المعتبرة</span></a></li>
+                            </ul>
+                        </li>
+                        <li class="part-group">
+                            <h4 class="part-group-header" data-i18n="alg_lesson5_part6_title">Part 6: تطبيق شامل</h4>
+                            <ul class="subpart-list">
+                                <li class="subpart-item"><a href="maths_y9_alg_module1_lesson5_part6_sub1.html" class="subpart-link"><span class="subpart-number algebra-num">a</span><span class="subpart-text" data-i18n="alg_lesson5_part6_sub1">تطبيق عدد</span></a></li>
+                                <li class="subpart-item"><a href="maths_y9_alg_module1_lesson5_part6_sub2.html" class="subpart-link"><span class="subpart-number algebra-num">b</span><span class="subpart-text" data-i18n="alg_lesson5_part6_sub2">مقارنة مربّعي عددين حقيقيّين</span></a></li>
+                                <li class="subpart-item"><a href="maths_y9_alg_module1_lesson5_part6_sub3.html" class="subpart-link"><span class="subpart-number algebra-num">c</span><span class="subpart-text" data-i18n="alg_lesson5_part6_sub3">مقارنة مقلوب عددين حقيقيّين مخالفين للصّفر</span></a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- Lesson VI -->
+                <li class="lesson-group">
+                    <h3 class="lesson-group-header" data-i18n="alg_lesson6_title">الدرس VI: الجذاءات المعتبرة و العبارات الحرفية</h3>
+                    <ul class="part-list">
+                        <li class="part-group">
+                            <h4 class="part-group-header" data-i18n="alg_lesson6_part1_title">Part 1: تذكير</h4>
+                            <ul class="subpart-list">
+                                <li class="subpart-item"><a href="maths_y9_alg_module1_lesson6_part1_sub1.html" class="subpart-link"><span class="subpart-number algebra-num">a</span><span class="subpart-text" data-i18n="alg_lesson6_part1_sub1">التّفكيك</span></a></li>
+                            </ul>
+                        </li>
+                        <li class="part-group">
+                            <h4 class="part-group-header" data-i18n="alg_lesson6_part2_title">Part 2: الجذاءات المعتبرة</h4>
+                            <ul class="subpart-list">
+                                <li class="subpart-item"><a href="maths_y9_alg_module1_lesson6_part2_sub1.html" class="subpart-link"><span class="subpart-number algebra-num">a</span><span class="subpart-text" data-i18n="alg_lesson6_part2_sub1">تطبيق شامل</span></a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- Lesson VII -->
+                <li class="lesson-group">
+                    <h3 class="lesson-group-header" data-i18n="alg_lesson7_title">الدرس VII: المعادلات و المتراجحات</h3>
+                    <ul class="part-list">
+                        <li class="part-group">
+                            <h4 class="part-group-header" data-i18n="alg_lesson7_part1_title">Part 1: المجالات</h4>
+                            <ul class="subpart-list">
+                                <li class="subpart-item"><a href="maths_y9_alg_module1_lesson7_part1_sub1.html" class="subpart-link"><span class="subpart-number algebra-num">a</span><span class="subpart-text" data-i18n="alg_lesson7_part1_sub1">تطبيق شامل عدد</span></a></li>
+                                <li class="subpart-item"><a href="maths_y9_alg_module1_lesson7_part1_sub2.html" class="subpart-link"><span class="subpart-number algebra-num">b</span><span class="subpart-text" data-i18n="alg_lesson7_part1_sub2">المجالات و القيمة المطلقة</span></a></li>
+                                <li class="subpart-item"><a href="maths_y9_alg_module1_lesson7_part1_sub3.html" class="subpart-link"><span class="subpart-number algebra-num">c</span><span class="subpart-text" data-i18n="alg_lesson7_part1_sub3">مجموعة الأعداد الحقيقيّة و المجالات</span></a></li>
+                                <li class="subpart-item"><a href="maths_y9_alg_module1_lesson7_part1_sub4.html" class="subpart-link"><span class="subpart-number algebra-num">d</span><span class="subpart-text" data-i18n="alg_lesson7_part1_sub4">مجال غير محدود</span></a></li>
+                                <li class="subpart-item"><a href="maths_y9_alg_module1_lesson7_part1_sub5.html" class="subpart-link"><span class="subpart-number algebra-num">e</span><span class="subpart-text" data-i18n="alg_lesson7_part1_sub5">مجال نصف مفتوح</span></a></li>
+                                <li class="subpart-item"><a href="maths_y9_alg_module1_lesson7_part1_sub6.html" class="subpart-link"><span class="subpart-number algebra-num">f</span><span class="subpart-text" data-i18n="alg_lesson7_part1_sub6">مجال مفتوح</span></a></li>
+                                <li class="subpart-item"><a href="maths_y9_alg_module1_lesson7_part1_sub7.html" class="subpart-link"><span class="subpart-number algebra-num">g</span><span class="subpart-text" data-i18n="alg_lesson7_part1_sub7">مجال مغلق</span></a></li>
+                                <li class="subpart-item"><a href="maths_y9_alg_module1_lesson7_part1_sub8.html" class="subpart-link"><span class="subpart-number algebra-num">h</span><span class="subpart-text" data-i18n="alg_lesson7_part1_sub8">تعريف المعادلة</span></a></li>
+                                <li class="subpart-item"><a href="maths_y9_alg_module1_lesson7_part1_sub9.html" class="subpart-link"><span class="subpart-number algebra-num">i</span><span class="subpart-text" data-i18n="alg_lesson7_part1_sub9">معادلة : لها أكثر من حلّ</span></a></li>
+                                <li class="subpart-item"><a href="maths_y9_alg_module1_lesson7_part1_sub10.html" class="subpart-link"><span class="subpart-number algebra-num">j</span><span class="subpart-text" data-i18n="alg_lesson7_part1_sub10">معادلة : حلّها مجموعة الاعداد الحقيقيّة</span></a></li>
+                                <li class="subpart-item"><a href="maths_y9_alg_module1_lesson7_part1_sub11.html" class="subpart-link"><span class="subpart-number algebra-num">k</span><span class="subpart-text" data-i18n="alg_lesson7_part1_sub11">معادلة : ليس لها حلّ في مجموعة الأعداد الحقيقيّة</span></a></li>
+                                <li class="subpart-item"><a href="maths_y9_alg_module1_lesson7_part1_sub12.html" class="subpart-link"><span class="subpart-number algebra-num">l</span><span class="subpart-text" data-i18n="alg_lesson7_part1_sub12">Ax＋b=0 : معادلة في صيغة</span></a></li>
+                                <li class="subpart-item"><a href="maths_y9_alg_module1_lesson7_part1_sub13.html" class="subpart-link"><span class="subpart-number algebra-num">m</span><span class="subpart-text" data-i18n="alg_lesson7_part1_sub13">المعادلات و النّشر</span></a></li>
+                                <li class="subpart-item"><a href="maths_y9_alg_module1_lesson7_part1_sub14.html" class="subpart-link"><span class="subpart-number algebra-num">n</span><span class="subpart-text" data-i18n="alg_lesson7_part1_sub14">المعادلات و التّفكيك</span></a></li>
+                                <li class="subpart-item"><a href="maths_y9_alg_module1_lesson7_part1_sub15.html" class="subpart-link"><span class="subpart-number algebra-num">o</span><span class="subpart-text" data-i18n="alg_lesson7_part1_sub15">تطبيق شامل</span></a></li>
+                                <li class="subpart-item"><a href="maths_y9_alg_module1_lesson7_part1_sub16.html" class="subpart-link"><span class="subpart-number algebra-num">p</span><span class="subpart-text" data-i18n="alg_lesson7_part1_sub16">تعريف المتراجحة</span></a></li>
+                                <li class="subpart-item"><a href="maths_y9_alg_module1_lesson7_part1_sub17.html" class="subpart-link"><span class="subpart-number algebra-num">q</span><span class="subpart-text" data-i18n="alg_lesson7_part1_sub17">حلّ المتراجحة</span></a></li>
+                                <li class="subpart-item"><a href="maths_y9_alg_module1_lesson7_part1_sub18.html" class="subpart-link"><span class="subpart-number algebra-num">r</span><span class="subpart-text" data-i18n="alg_lesson7_part1_sub18">أمثلة من المتراجحات</span></a></li>
+                                <li class="subpart-item"><a href="maths_y9_alg_module1_lesson7_part1_sub19.html" class="subpart-link"><span class="subpart-number algebra-num">s</span><span class="subpart-text" data-i18n="alg_lesson7_part1_sub19">متراجحة : حلّها مجموعة الأعداد الحقيقيّة</span></a></li>
+                                <li class="subpart-item"><a href="maths_y9_alg_module1_lesson7_part1_sub20.html" class="subpart-link"><span class="subpart-number algebra-num">t</span><span class="subpart-text" data-i18n="alg_lesson7_part1_sub20">متراجحة : ليس لها حلّ في مجموعة الأعداد الحقيقيّة</span></a></li>
+                                <li class="subpart-item"><a href="maths_y9_alg_module1_lesson7_part1_sub21.html" class="subpart-link"><span class="subpart-number algebra-num">u</span><span class="subpart-text" data-i18n="alg_lesson7_part1_sub21">المتراجحة و القيمة المطلقة</span></a></li>
+                            </ul>
+                        </li>
+                        <li class="part-group">
+                            <h4 class="part-group-header" data-i18n="alg_lesson7_part2_title">Part 2: تعريف الحصر</h4>
+                            <ul class="subpart-list">
+                                <li class="subpart-item"><a href="maths_y9_alg_module1_lesson7_part2_sub1.html" class="subpart-link"><span class="subpart-number algebra-num">a</span><span class="subpart-text" data-i18n="alg_lesson7_part2_sub1">حصر جذاء عددين حقيقيين</span></a></li>
+                                <li class="subpart-item"><a href="maths_y9_alg_module1_lesson7_part2_sub2.html" class="subpart-link"><span class="subpart-number algebra-num">b</span><span class="subpart-text" data-i18n="alg_lesson7_part2_sub2">حصر مجموع عددين حقيقيّين</span></a></li>
+                                <li class="subpart-item"><a href="maths_y9_alg_module1_lesson7_part2_sub3.html" class="subpart-link"><span class="subpart-number algebra-num">c</span><span class="subpart-text" data-i18n="alg_lesson7_part2_sub3">حصر مقلوب عدد حقيقي</span></a></li>
+                                <li class="subpart-item"><a href="maths_y9_alg_module1_lesson7_part2_sub4.html" class="subpart-link"><span class="subpart-number algebra-num">d</span><span class="subpart-text" data-i18n="alg_lesson7_part2_sub4">تطبيق شامل</span></a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- Lesson VIII -->
+                <li class="lesson-group">
+                    <h3 class="lesson-group-header" data-i18n="alg_lesson8_title">الدرس VIII: التعيين في المستوي</h3>
+                    <ul class="part-list">
+                        <li class="part-group">
+                            <h4 class="part-group-header" data-i18n="alg_lesson8_part1_title">Part 1: المستقيم المدرج</h4>
+                            <ul class="subpart-list">
+                                <li class="subpart-item"><a href="maths_y9_alg_module1_lesson8_part1_sub1.html" class="subpart-link"><span class="subpart-number algebra-num">a</span><span class="subpart-text" data-i18n="alg_lesson8_part1_sub1">إيجاد فاصلة نقطة</span></a></li>
+                                <li class="subpart-item"><a href="maths_y9_alg_module1_lesson8_part1_sub2.html" class="subpart-link"><span class="subpart-number algebra-num">b</span><span class="subpart-text" data-i18n="alg_lesson8_part1_sub2">حساب الأبعاد</span></a></li>
+                                <li class="subpart-item"><a href="maths_y9_alg_module1_lesson8_part1_sub3.html" class="subpart-link"><span class="subpart-number algebra-num">c</span><span class="subpart-text" data-i18n="alg_lesson8_part1_sub3">فاصلة منتصف قطعة مستقيم</span></a></li>
+                                <li class="subpart-item"><a href="maths_y9_alg_module1_lesson8_part1_sub4.html" class="subpart-link"><span class="subpart-number algebra-num">d</span><span class="subpart-text" data-i18n="alg_lesson8_part1_sub4">تحديد و تعيين النقاط في المستقيم المدرج</span></a></li>
+                            </ul>
+                        </li>
+                        <li class="part-group">
+                            <h4 class="part-group-header" data-i18n="alg_lesson8_part2_title">Part 2: (o,i,j) المعين</h4>
+                            <ul class="subpart-list">
+                                <li class="subpart-item"><a href="maths_y9_alg_module1_lesson8_part2_sub1.html" class="subpart-link"><span class="subpart-number algebra-num">a</span><span class="subpart-text" data-i18n="alg_lesson8_part2_sub1">إيجاد مجموعة النقاط</span></a></li>
+                                <li class="subpart-item"><a href="maths_y9_alg_module1_lesson8_part2_sub2.html" class="subpart-link"><span class="subpart-number algebra-num">b</span><span class="subpart-text" data-i18n="alg_lesson8_part2_sub2">التوازي مع محور الفاصلات - الترتيبات - حساب الأبعاد</span></a></li>
+                                <li class="subpart-item"><a href="maths_y9_alg_module1_lesson8_part2_sub3.html" class="subpart-link"><span class="subpart-number algebra-num">c</span><span class="subpart-text" data-i18n="alg_lesson8_part2_sub3">التناظر بالنسبة لمحور الفاصلات و محور الترتيبات و أصل المعين</span></a></li>
+                                <li class="subpart-item"><a href="maths_y9_alg_module1_lesson8_part2_sub4.html" class="subpart-link"><span class="subpart-number algebra-num">d</span><span class="subpart-text" data-i18n="alg_lesson8_part2_sub4">إحداثيات منتصف قطعة مستقيم</span></a></li>
+                                <li class="subpart-item"><a href="maths_y9_alg_module1_lesson8_part2_sub5.html" class="subpart-link"><span class="subpart-number algebra-num">e</span><span class="subpart-text" data-i18n="alg_lesson8_part2_sub5">مسقط نقطة على مستقيم وفقا لمنحى</span></a></li>
+                                <li class="subpart-item"><a href="maths_y9_alg_module1_lesson8_part2_sub6.html" class="subpart-link"><span class="subpart-number algebra-num">f</span><span class="subpart-text" data-i18n="alg_lesson8_part2_sub6">تحديد و تعيين النقاط</span></a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <!-- ================= GEOMETRY MODULE ================= -->
+        <div class="module-card geometry-module" id="geometry-module-card">
+            <div class="module-header" onclick="toggleModule('geometryModule')" role="button" tabindex="0"
+                 aria-expanded="true" aria-controls="geometryModule"
+                 onkeydown="if(event.key==='Enter'||event.key===' ') toggleModule('geometryModule')">
+                <div class="module-icon geometry-icon">△</div>
+                <div class="module-title-group">
+                    <h2 data-i18n="geometry_title">دروس الهندسة</h2>
+                    <span class="module-count" data-i18n="geometry_count">4 دروس</span>
+                </div>
+                <span class="module-toggle open" id="geometryToggle">▼</span>
+            </div>
+            <ul class="lesson-list expanded" id="geometryModule">
+                <!-- Lesson IX -->
+                <li class="lesson-group">
+                    <h3 class="lesson-group-header" data-i18n="geo_lesson1_title">الدرس IX: مبرهنة طالس و تطبيقاتها</h3>
+                    <ul class="part-list">
+                        <li class="part-group">
+                            <h4 class="part-group-header" data-i18n="geo_lesson1_part1_title">Part 1: تذكير</h4>
+                            <ul class="subpart-list">
+                                <li class="subpart-item"><a href="maths_y9_geo_module2_lesson1_part1_sub1.html" class="subpart-link"><span class="subpart-number geometry-num">a</span><span class="subpart-text" data-i18n="geo_lesson1_part1_sub1">تطبيق</span></a></li>
+                                <li class="subpart-item"><a href="maths_y9_geo_module2_lesson1_part1_sub2.html" class="subpart-link"><span class="subpart-number geometry-num">b</span><span class="subpart-text" data-i18n="geo_lesson1_part1_sub2">تذكير</span></a></li>
+                            </ul>
+                        </li>
+                        <li class="part-group">
+                            <h4 class="part-group-header" data-i18n="geo_lesson1_part2_title">Part 2: مبرهنة طالس في المثلث</h4>
+                            <ul class="subpart-list">
+                                <li class="subpart-item"><a href="maths_y9_geo_module2_lesson1_part2_sub1.html" class="subpart-link"><span class="subpart-number geometry-num">a</span><span class="subpart-text" data-i18n="geo_lesson1_part2_sub1">تطبيق عدد</span></a></li>
+                                <li class="subpart-item"><a href="maths_y9_geo_module2_lesson1_part2_sub2.html" class="subpart-link"><span class="subpart-number geometry-num">b</span><span class="subpart-text" data-i18n="geo_lesson1_part2_sub2">تطبيق</span></a></li>
+                                <li class="subpart-item"><a href="maths_y9_geo_module2_lesson1_part2_sub3.html" class="subpart-link"><span class="subpart-number geometry-num">c</span><span class="subpart-text" data-i18n="geo_lesson1_part2_sub3">مبرهنة طالس في المثلث</span></a></li>
+                            </ul>
+                        </li>
+                        <li class="part-group">
+                            <h4 class="part-group-header" data-i18n="geo_lesson1_part3_title">Part 3: المستقيم الرابط بين ضلعي المثلث</h4>
+                            <ul class="subpart-list">
+                                <li class="subpart-item"><a href="maths_y9_geo_module2_lesson1_part3_sub1.html" class="subpart-link"><span class="subpart-number geometry-num">a</span><span class="subpart-text" data-i18n="geo_lesson1_part3_sub1">تطبيق عدد</span></a></li>
+                                <li class="subpart-item"><a href="maths_y9_geo_module2_lesson1_part3_sub2.html" class="subpart-link"><span class="subpart-number geometry-num">b</span><span class="subpart-text" data-i18n="geo_lesson1_part3_sub2">تطبيق</span></a></li>
+                                <li class="subpart-item"><a href="maths_y9_geo_module2_lesson1_part3_sub3.html" class="subpart-link"><span class="subpart-number geometry-num">c</span><span class="subpart-text" data-i18n="geo_lesson1_part3_sub3">المستقيم الرابط بين منتصفي ضلعي المثلث</span></a></li>
+                            </ul>
+                        </li>
+                        <li class="part-group">
+                            <h4 class="part-group-header" data-i18n="geo_lesson1_part4_title">Part 4: مبرهنة طالس في شبه المنحرف</h4>
+                            <ul class="subpart-list">
+                                <li class="subpart-item"><a href="maths_y9_geo_module2_lesson1_part4_sub1.html" class="subpart-link"><span class="subpart-number geometry-num">a</span><span class="subpart-text" data-i18n="geo_lesson1_part4_sub1">تطبيق</span></a></li>
+                                <li class="subpart-item"><a href="maths_y9_geo_module2_lesson1_part4_sub2.html" class="subpart-link"><span class="subpart-number geometry-num">b</span><span class="subpart-text" data-i18n="geo_lesson1_part4_sub2">مبرهنة طالس في شبه المنحرف</span></a></li>
+                            </ul>
+                        </li>
+                        <li class="part-group">
+                            <h4 class="part-group-header" data-i18n="geo_lesson1_part5_title">Part 5: مبرهنة طالس و المستقيمات المتوازية</h4>
+                            <ul class="subpart-list">
+                                <li class="subpart-item"><a href="maths_y9_geo_module2_lesson1_part5_sub1.html" class="subpart-link"><span class="subpart-number geometry-num">a</span><span class="subpart-text" data-i18n="geo_lesson1_part5_sub1">مسقط منتصف قطعة مستقيم</span></a></li>
+                                <li class="subpart-item"><a href="maths_y9_geo_module2_lesson1_part5_sub2.html" class="subpart-link"><span class="subpart-number geometry-num">b</span><span class="subpart-text" data-i18n="geo_lesson1_part5_sub2">تطبيق</span></a></li>
+                                <li class="subpart-item"><a href="maths_y9_geo_module2_lesson1_part5_sub3.html" class="subpart-link"><span class="subpart-number geometry-num">c</span><span class="subpart-text" data-i18n="geo_lesson1_part5_sub3">مبرهنة طالس و المستقيمات المتوازية</span></a></li>
+                            </ul>
+                        </li>
+                        <li class="part-group">
+                            <h4 class="part-group-header" data-i18n="geo_lesson1_part6_title">Part 6: تجزئة قطعة مستقيم إلى إجزأء متقايسة</h4>
+                            <ul class="subpart-list">
+                                <li class="subpart-item"><a href="maths_y9_geo_module2_lesson1_part6_sub1.html" class="subpart-link"><span class="subpart-number geometry-num">a</span><span class="subpart-text" data-i18n="geo_lesson1_part6_sub1">تجزئة قطعة مستقيم إلى أجزاء متناسبة مع أطوال مقدمة</span></a></li>
+                                <li class="subpart-item"><a href="maths_y9_geo_module2_lesson1_part6_sub2.html" class="subpart-link"><span class="subpart-number geometry-num">b</span><span class="subpart-text" data-i18n="geo_lesson1_part6_sub2">تطبيق</span></a></li>
+                                <li class="subpart-item"><a href="maths_y9_geo_module2_lesson1_part6_sub3.html" class="subpart-link"><span class="subpart-number geometry-num">c</span><span class="subpart-text" data-i18n="geo_lesson1_part6_sub3">تحديد نقطة تقسم قطعة مستقيم حسب نسب معينة</span></a></li>
+                                <li class="subpart-item"><a href="maths_y9_geo_module2_lesson1_part6_sub4.html" class="subpart-link"><span class="subpart-number geometry-num">d</span><span class="subpart-text" data-i18n="geo_lesson1_part6_sub4">تجزئة قطعة مستقيم إلى أجزاء متقايسة</span></a></li>
+                            </ul>
+                        </li>
+                        <li class="part-group">
+                            <h4 class="part-group-header" data-i18n="geo_lesson1_part7_title">Part 7: الدائرة المحيطة بالمثلث القائم</h4>
+                            <ul class="subpart-list">
+                                <li class="subpart-item"><a href="maths_y9_geo_module2_lesson1_part7_sub1.html" class="subpart-link"><span class="subpart-number geometry-num">a</span><span class="subpart-text" data-i18n="geo_lesson1_part7_sub1">تطبيق</span></a></li>
+                                <li class="subpart-item"><a href="maths_y9_geo_module2_lesson1_part7_sub2.html" class="subpart-link"><span class="subpart-number geometry-num">b</span><span class="subpart-text" data-i18n="geo_lesson1_part7_sub2">الخاصية المعاكسة</span></a></li>
+                                <li class="subpart-item"><a href="maths_y9_geo_module2_lesson1_part7_sub3.html" class="subpart-link"><span class="subpart-number geometry-num">c</span><span class="subpart-text" data-i18n="geo_lesson1_part7_sub3">الدائرة المحيطة بالمثلث القائم</span></a></li>
+                            </ul>
+                        </li>
+                        <li class="part-group">
+                            <h4 class="part-group-header" data-i18n="geo_lesson1_part8_title">Part 8: مركز ثقل المثلث</h4>
+                            <ul class="subpart-list">
+                                <li class="subpart-item"><a href="maths_y9_geo_module2_lesson1_part8_sub1.html" class="subpart-link"><span class="subpart-number geometry-num">a</span><span class="subpart-text" data-i18n="geo_lesson1_part8_sub1">تطبيق</span></a></li>
+                                <li class="subpart-item"><a href="maths_y9_geo_module2_lesson1_part8_sub2.html" class="subpart-link"><span class="subpart-number geometry-num">b</span><span class="subpart-text" data-i18n="geo_lesson1_part8_sub2">مركز ثقل المثلث</span></a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- Lesson X -->
+                <li class="lesson-group">
+                    <h3 class="lesson-group-header" data-i18n="geo_lesson2_title">الدرس X: العلاقات القياسية في المثلث القائم</h3>
+                    <ul class="part-list">
+                        <li class="part-group">
+                            <ul class="subpart-list">
+                                <li class="subpart-item"><a href="maths_y9_geo_module2_lesson2_sub1.html" class="subpart-link"><span class="subpart-number geometry-num">a</span><span class="subpart-text" data-i18n="geo_lesson2_sub1">نظرية بيتاغور بكل بساطة</span></a></li>
+                                <li class="subpart-item"><a href="maths_y9_geo_module2_lesson2_sub2.html" class="subpart-link"><span class="subpart-number geometry-num">b</span><span class="subpart-text" data-i18n="geo_lesson2_sub2">تطبيق نظرية بيتاغور</span></a></li>
+                                <li class="subpart-item"><a href="maths_y9_geo_module2_lesson2_sub3.html" class="subpart-link"><span class="subpart-number geometry-num">c</span><span class="subpart-text" data-i18n="geo_lesson2_sub3">تطبيق نظرية بيتاغور</span></a></li>
+                                <li class="subpart-item"><a href="maths_y9_geo_module2_lesson2_sub4.html" class="subpart-link"><span class="subpart-number geometry-num">d</span><span class="subpart-text" data-i18n="geo_lesson2_sub4">العلاقات القياسية في المثلث القائم</span></a></li>
+                                <li class="subpart-item"><a href="maths_y9_geo_module2_lesson2_sub5.html" class="subpart-link"><span class="subpart-number geometry-num">e</span><span class="subpart-text" data-i18n="geo_lesson2_sub5">قيس طول إرتفاع مثلث متقايس الأضلاع</span></a></li>
+                                <li class="subpart-item"><a href="maths_y9_geo_module2_lesson2_sub6.html" class="subpart-link"><span class="subpart-number geometry-num">f</span><span class="subpart-text" data-i18n="geo_lesson2_sub6">قيس طول قطر المربع</span></a></li>
+                                <li class="subpart-item"><a href="maths_y9_geo_module2_lesson2_sub7.html" class="subpart-link"><span class="subpart-number geometry-num">g</span><span class="subpart-text" data-i18n="geo_lesson2_sub7">عكس نظرية بيتاغور</span></a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- Lesson XI -->
+                <li class="lesson-group">
+                    <h3 class="lesson-group-header" data-i18n="geo_lesson3_title">الدرس XI: رباعيات الأضلاع</h3>
+                    <ul class="part-list">
+                        <li class="part-group">
+                            <ul class="subpart-list">
+                                <li class="subpart-item"><a href="maths_y9_geo_module2_lesson3_sub1.html" class="subpart-link"><span class="subpart-number geometry-num">a</span><span class="subpart-text" data-i18n="geo_lesson3_sub1">الخاصيات المعاكسة</span></a></li>
+                                <li class="subpart-item"><a href="maths_y9_geo_module2_lesson3_sub2.html" class="subpart-link"><span class="subpart-number geometry-num">b</span><span class="subpart-text" data-i18n="geo_lesson3_sub2">الخاصيات المباشرة</span></a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- Lesson XII -->
+                <li class="lesson-group">
+                    <h3 class="lesson-group-header" data-i18n="geo_lesson4_title">الدرس XII: التعامد في الفضاء</h3>
+                    <ul class="part-list">
+                        <li class="part-group">
+                            <ul class="subpart-list">
+                                <li class="subpart-item"><a href="maths_y9_geo_module2_lesson4_sub1.html" class="subpart-link"><span class="subpart-number geometry-num">a</span><span class="subpart-text" data-i18n="geo_lesson4_sub1">التعامد في الفضاء</span></a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Site Footer -->
+        <footer class="site-footer">
+            <div class="footer-col">
+                <h4 data-i18n="footer_dev">معلومات المطوّر</h4>
+                <p data-i18n="footer_dev_name">طور بواسطة: ماجري زياد</p>
+                <p data-i18n="footer_hosting">الاستضافة: Github, Netlify, Supabase</p>
+            </div>
+            <div class="footer-col">
+                <h4 data-i18n="footer_links">روابط</h4>
+                <a href="#" data-i18n="footer_contact">اتصل بنا</a>
+                <a href="#" data-i18n="footer_policies">السياسات</a>
+            </div>
+            <div class="footer-col">
+                <h4 data-i18n="footer_version">الإصدار</h4>
+                <p data-i18n="footer_version_num">الإصدار: 0.0.2</p>
+                <p data-i18n="footer_rights">جميع الحقوق محفوظة &copy; 2025</p>
+            </div>
+        </footer>
+
+        <!-- Print-only custom footer -->
+        <div class="print-footer">
+            <p data-i18n="print_footer_dev">طور بواسطة: ماجري زياد</p>
+            <p data-i18n="print_footer_version">الإصدار: 0.0.2</p>
+            <p data-i18n="print_footer_page">عنوان الصفحة: maths_y9.html</p>
+        </div>
+    </div>
+
+    <!-- Inline Translation Object with full trilingual support -->
+   <script>
+        const translations = {
+            ar: {
+                page_title: "فهرس دروس الرياضيات - السنة التاسعة",
+                print_header: "فهرس دروس الرياضيات — السنة التاسعة أساسي",
+                site_header: "Educational Dashboard - Mathematics",
+                home_link: "🏠 الرئيسية",
+                nav_badge: "📚 فهرس الدروس",
+                first_lesson_link: "الدرس الأول ←",
+                language_label: "اللغة",
+                lang_ar: "العربية",
+                lang_en: "English",
+                lang_fr: "Français",
+                print_label: "اختر القسم للطباعة:",
+                print_all: "الفهرس كاملاً",
+                print_algebra: "دروس الجبر فقط",
+                print_geometry: "دروس الهندسة فقط",
+                print_button: "🖨️ طباعة",
+                badge: "📐 السنة التاسعة أساسي",
+                page_heading: "فهرس دروس الرياضيات",
+                page_subtitle: "جميع دروس الجبر والهندسة — اضغط على أي درس للانتقال إليه",
+                algebra_title: "دروس الجبر والحساب",
+                algebra_count: "8 دروس",
+                geometry_title: "دروس الهندسة",
+                geometry_count: "4 دروس",
+                footer_dev: "معلومات المطوّر",
+                footer_dev_name: "طور بواسطة: ماجري زياد",
+                footer_hosting: "الاستضافة: Github, Netlify, Supabase",
+                footer_links: "روابط",
+                footer_contact: "اتصل بنا",
+                footer_policies: "السياسات",
+                footer_version: "الإصدار",
+                footer_version_num: "الإصدار: 0.0.2",
+                footer_rights: "جميع الحقوق محفوظة © 2025",
+                print_footer_dev: "طور بواسطة: ماجري زياد",
+                print_footer_version: "الإصدار: 0.0.2",
+                print_footer_page: "عنوان الصفحة: maths_y9.html",
+
+                // Algebra lessons
+                alg_review_title: "تقديم البرنامَج مع مراجعة",
+                alg_review_sub1: "مراجعة",
+                alg_lesson1_title: "الدرس I: التعداد و الحساب",
+                alg_lesson1_part1_title: "Part 1: قَابِليَّة القِسْمَة",
+                alg_lesson1_part1_sub1: "قابليّة القسمة على 2 و 3 و 4 و5 و8 و 9 و",
+                alg_lesson1_part1_sub2: "تطبيق قابليَّة القسمة على 2 و3و4و5و8و9و25",
+                alg_lesson1_part1_sub3: "قابليَّة القسمة على",
+                alg_lesson1_part2_title: "Part 2: انشطة في التعداد",
+                alg_lesson1_part2_sub1: "كم مجموعة منتهية",
+                alg_lesson1_part2_sub2: "أنشطة في التعداد",
+                alg_lesson2_title: "الدرس II: مجموعة الأعداد الحقيقية",
+                alg_lesson2_part1_title: "Part 1: Qو D , Z , N تذكير بالمجموعات",
+                alg_lesson2_part1_sub1: "الكتابة العشريّة الدّوريّة لعدد كسري",
+                alg_lesson2_part2_title: "Part 2: الأعداد الحقيقيّة",
+                alg_lesson2_part2_sub1: "الجذر التّربيعي لعدد حقيقي موجب",
+                alg_lesson2_part2_sub2: "القيمة التقريبيّة لعدد حقيقي",
+                alg_lesson2_part2_sub3: "تدريج مستقيم بواسطة الأعداد الحقيقية",
+                alg_lesson2_part2_sub4: "إيجاد رقم ذو رتبة معيّنة في كتابة عشريّة دوريّة",
+                alg_lesson2_part2_sub5: "كتابة عدد عشري دوري في صيغة عدد كسري",
+                alg_lesson2_part2_sub6: "إيجاد دور كتابة عشريّة دوريّة",
+                alg_lesson2_part2_sub7: "إيجاد دور كتابة عشريّة دوريّة ( )",
+                alg_lesson3_title: "الدرس III: العمليات في مجموعة الأعداد الحقيقية",
+                alg_lesson3_part1_title: "Part 1: النشر و التفكيك في مجموعة الأعداد الحقيقية",
+                alg_lesson3_part1_sub1: "عملية النشر في مجموعة الاعداد الحقيقية",
+                alg_lesson3_part2_title: "Part 2: حساب عبارات بها جذور تربيعية",
+                alg_lesson3_part2_sub1: "تطبيق : حساب عبارات بها جذور تربيعية",
+                alg_lesson3_part2_sub2: "حساب عبارات بها جذور تربيعية",
+                alg_lesson3_part2_sub3: "خاصيات الجمع و الطرح في مجموعة الأعداد الحقيقية",
+                alg_lesson3_part2_sub4: "خاصيات عملية الضرب في مجموعة الأعداد الحقيقية",
+                alg_lesson3_part2_sub5: "مقلوب عدد حقيقي",
+                alg_lesson3_part3_title: "Part 3: التفكيك في مجموعة الاعداد الحقيقية",
+                alg_lesson3_part3_sub1: "تطبيق : النشر و التفكيك في مجموعة الأعداد الحقيقية",
+                alg_lesson3_part4_title: "Part 4: تعريف القيمة المطلقة لعدد حقيقي",
+                alg_lesson3_part4_sub1: "خاصيات القيمة المطلقة لعدد حقيقي",
+                alg_lesson3_part4_sub2: "تطبيق",
+                alg_lesson4_title: "الدرس IV: القوى في مجموعة الأعداد الحقيقية",
+                alg_lesson4_part1_title: "Part 1: خاصّيات القوى في مجموعة الأعداد الحقيقيّة",
+                alg_lesson4_part1_sub1: "قوة جذاء عددين حقيقين",
+                alg_lesson4_part1_sub2: "خارج قسمة قوتين لنفس العدد",
+                alg_lesson4_part1_sub3: "تعريف القوى في مجموعة الأعداد الحقيقية",
+                alg_lesson4_part1_sub4: "جذاء قوتين لنفس العدد",
+                alg_lesson4_part1_sub5: "قوة قوة عدد حقيقي",
+                alg_lesson4_part1_sub6: "قوة و علامة عدد حقيقي دليلها عدد نسبي",
+                alg_lesson5_title: "الدرس V: الترتيب والمقارنة في مجموعة الأعداد الحقيقية",
+                alg_lesson5_part1_title: "Part 1: مقارنة عددين حقيقيّين بحساب الفارق",
+                alg_lesson5_part1_sub1: "مقارنة عددين حقيقيّين بحساب الفارق",
+                alg_lesson5_part2_title: "Part 2: التّرتيب و الجمع في مجموعة الأعداد الحقيقيّة",
+                alg_lesson5_part2_sub1: "التّرتيب و الجمع في مجموعة الأعداد الحقيقيّة",
+                alg_lesson5_part3_title: "Part 3: التّرتيب و الضّرب في مجموعة الأعداد الحقيقيّة",
+                alg_lesson5_part3_sub1: "التّرتيب و الضّرب في مجموعة الأعداد الحقيقيّة",
+                alg_lesson5_part4_title: "Part 4: مقارنة مربّعي عددين حقيقيّين",
+                alg_lesson5_part4_sub1: "مقارنة مربّعي عددين حقيقيّين",
+                alg_lesson5_part5_title: "Part 5: مقارنة الجذور التربيعية لعددين حقيقيين",
+                alg_lesson5_part5_sub1: "ملاحظة",
+                alg_lesson5_part5_sub2: "مقارنة الجذاءات المعتبرة",
+                alg_lesson5_part6_title: "Part 6: تطبيق شامل",
+                alg_lesson5_part6_sub1: "تطبيق عدد",
+                alg_lesson5_part6_sub2: "مقارنة مربّعي عددين حقيقيّين",
+                alg_lesson5_part6_sub3: "مقارنة مقلوب عددين حقيقيّين مخالفين للصّفر",
+                alg_lesson6_title: "الدرس VI: الجذاءات المعتبرة و العبارات الحرفية",
+                alg_lesson6_part1_title: "Part 1: تذكير",
+                alg_lesson6_part1_sub1: "التّفكيك",
+                alg_lesson6_part2_title: "Part 2: الجذاءات المعتبرة",
+                alg_lesson6_part2_sub1: "تطبيق شامل",
+                alg_lesson7_title: "الدرس VII: المعادلات و المتراجحات",
+                alg_lesson7_part1_title: "Part 1: المجالات",
+                alg_lesson7_part1_sub1: "تطبيق شامل عدد",
+                alg_lesson7_part1_sub2: "المجالات و القيمة المطلقة",
+                alg_lesson7_part1_sub3: "مجموعة الأعداد الحقيقيّة و المجالات",
+                alg_lesson7_part1_sub4: "مجال غير محدود",
+                alg_lesson7_part1_sub5: "مجال نصف مفتوح",
+                alg_lesson7_part1_sub6: "مجال مفتوح",
+                alg_lesson7_part1_sub7: "مجال مغلق",
+                alg_lesson7_part1_sub8: "تعريف المعادلة",
+                alg_lesson7_part1_sub9: "معادلة : لها أكثر من حلّ",
+                alg_lesson7_part1_sub10: "معادلة : حلّها مجموعة الاعداد الحقيقيّة",
+                alg_lesson7_part1_sub11: "معادلة : ليس لها حلّ في مجموعة الأعداد الحقيقيّة",
+                alg_lesson7_part1_sub12: "Ax＋b=0 : معادلة في صيغة",
+                alg_lesson7_part1_sub13: "المعادلات و النّشر",
+                alg_lesson7_part1_sub14: "المعادلات و التّفكيك",
+                alg_lesson7_part1_sub15: "تطبيق شامل",
+                alg_lesson7_part1_sub16: "تعريف المتراجحة",
+                alg_lesson7_part1_sub17: "حلّ المتراجحة",
+                alg_lesson7_part1_sub18: "أمثلة من المتراجحات",
+                alg_lesson7_part1_sub19: "متراجحة : حلّها مجموعة الأعداد الحقيقيّة",
+                alg_lesson7_part1_sub20: "متراجحة : ليس لها حلّ في مجموعة الأعداد الحقيقيّة",
+                alg_lesson7_part1_sub21: "المتراجحة و القيمة المطلقة",
+                alg_lesson7_part2_title: "Part 2: تعريف الحصر",
+                alg_lesson7_part2_sub1: "حصر جذاء عددين حقيقيين",
+                alg_lesson7_part2_sub2: "حصر مجموع عددين حقيقيّين",
+                alg_lesson7_part2_sub3: "حصر مقلوب عدد حقيقي",
+                alg_lesson7_part2_sub4: "تطبيق شامل",
+                alg_lesson8_title: "الدرس VIII: التعيين في المستوي",
+                alg_lesson8_part1_title: "Part 1: المستقيم المدرج",
+                alg_lesson8_part1_sub1: "إيجاد فاصلة نقطة",
+                alg_lesson8_part1_sub2: "حساب الأبعاد",
+                alg_lesson8_part1_sub3: "فاصلة منتصف قطعة مستقيم",
+                alg_lesson8_part1_sub4: "تحديد و تعيين النقاط في المستقيم المدرج",
+                alg_lesson8_part2_title: "Part 2: (o,i,j) المعين",
+                alg_lesson8_part2_sub1: "إيجاد مجموعة النقاط",
+                alg_lesson8_part2_sub2: "التوازي مع محور الفاصلات - الترتيبات - حساب الأبعاد",
+                alg_lesson8_part2_sub3: "التناظر بالنسبة لمحور الفاصلات و محور الترتيبات و أصل المعين",
+                alg_lesson8_part2_sub4: "إحداثيات منتصف قطعة مستقيم",
+                alg_lesson8_part2_sub5: "مسقط نقطة على مستقيم وفقا لمنحى",
+                alg_lesson8_part2_sub6: "تحديد و تعيين النقاط",
+
+                // Geometry lessons
+                geo_lesson1_title: "الدرس IX: مبرهنة طالس و تطبيقاتها",
+                geo_lesson1_part1_title: "Part 1: تذكير",
+                geo_lesson1_part1_sub1: "تطبيق",
+                geo_lesson1_part1_sub2: "تذكير",
+                geo_lesson1_part2_title: "Part 2: مبرهنة طالس في المثلث",
+                geo_lesson1_part2_sub1: "تطبيق عدد",
+                geo_lesson1_part2_sub2: "تطبيق",
+                geo_lesson1_part2_sub3: "مبرهنة طالس في المثلث",
+                geo_lesson1_part3_title: "Part 3: المستقيم الرابط بين ضلعي المثلث",
+                geo_lesson1_part3_sub1: "تطبيق عدد",
+                geo_lesson1_part3_sub2: "تطبيق",
+                geo_lesson1_part3_sub3: "المستقيم الرابط بين منتصفي ضلعي المثلث",
+                geo_lesson1_part4_title: "Part 4: مبرهنة طالس في شبه المنحرف",
+                geo_lesson1_part4_sub1: "تطبيق",
+                geo_lesson1_part4_sub2: "مبرهنة طالس في شبه المنحرف",
+                geo_lesson1_part5_title: "Part 5: مبرهنة طالس و المستقيمات المتوازية",
+                geo_lesson1_part5_sub1: "مسقط منتصف قطعة مستقيم",
+                geo_lesson1_part5_sub2: "تطبيق",
+                geo_lesson1_part5_sub3: "مبرهنة طالس و المستقيمات المتوازية",
+                geo_lesson1_part6_title: "Part 6: تجزئة قطعة مستقيم إلى إجزأء متقايسة",
+                geo_lesson1_part6_sub1: "تجزئة قطعة مستقيم إلى أجزاء متناسبة مع أطوال مقدمة",
+                geo_lesson1_part6_sub2: "تطبيق",
+                geo_lesson1_part6_sub3: "تحديد نقطة تقسم قطعة مستقيم حسب نسب معينة",
+                geo_lesson1_part6_sub4: "تجزئة قطعة مستقيم إلى أجزاء متقايسة",
+                geo_lesson1_part7_title: "Part 7: الدائرة المحيطة بالمثلث القائم",
+                geo_lesson1_part7_sub1: "تطبيق",
+                geo_lesson1_part7_sub2: "الخاصية المعاكسة",
+                geo_lesson1_part7_sub3: "الدائرة المحيطة بالمثلث القائم",
+                geo_lesson1_part8_title: "Part 8: مركز ثقل المثلث",
+                geo_lesson1_part8_sub1: "تطبيق",
+                geo_lesson1_part8_sub2: "مركز ثقل المثلث",
+                geo_lesson2_title: "الدرس X: العلاقات القياسية في المثلث القائم",
+                geo_lesson2_sub1: "نظرية بيتاغور بكل بساطة",
+                geo_lesson2_sub2: "تطبيق نظرية بيتاغور",
+                geo_lesson2_sub3: "تطبيق نظرية بيتاغور",
+                geo_lesson2_sub4: "العلاقات القياسية في المثلث القائم",
+                geo_lesson2_sub5: "قيس طول إرتفاع مثلث متقايس الأضلاع",
+                geo_lesson2_sub6: "قيس طول قطر المربع",
+                geo_lesson2_sub7: "عكس نظرية بيتاغور",
+                geo_lesson3_title: "الدرس XI: رباعيات الأضلاع",
+                geo_lesson3_sub1: "الخاصيات المعاكسة",
+                geo_lesson3_sub2: "الخاصيات المباشرة",
+                geo_lesson4_title: "الدرس XII: التعامد في الفضاء",
+                geo_lesson4_sub1: "التعامد في الفضاء"
+            },
+            en: {
+                page_title: "Mathematics Lessons Index - Year 9",
+                print_header: "Mathematics Lessons Index — Year 9",
+                site_header: "Educational Dashboard - Mathematics",
+                home_link: "🏠 Home",
+                nav_badge: "📚 Lessons Index",
+                first_lesson_link: "First Lesson →",
+                language_label: "Language",
+                lang_ar: "العربية",
+                lang_en: "English",
+                lang_fr: "Français",
+                print_label: "Select section to print:",
+                print_all: "Full index",
+                print_algebra: "Algebra lessons only",
+                print_geometry: "Geometry lessons only",
+                print_button: "🖨️ Print",
+                badge: "📐 Year 9",
+                page_heading: "Mathematics Lessons Index",
+                page_subtitle: "All algebra and geometry lessons — click any lesson to open it",
+                algebra_title: "Algebra & Arithmetic",
+                algebra_count: "8 lessons",
+                geometry_title: "Geometry",
+                geometry_count: "4 lessons",
+                footer_dev: "Developer Info",
+                footer_dev_name: "Developed by: Majri Zied",
+                footer_hosting: "Hosting: Github, Netlify, Supabase",
+                footer_links: "Links",
+                footer_contact: "Contact us",
+                footer_policies: "Policies",
+                footer_version: "Version",
+                footer_version_num: "Version: 0.0.2",
+                footer_rights: "All rights reserved © 2025",
+                print_footer_dev: "Developed by: Majri Zied",
+                print_footer_version: "Version: 0.0.2",
+                print_footer_page: "Page address: maths_y9.html",
+
+                // Algebra lessons
+                alg_review_title: "Program Introduction with Review",
+                alg_review_sub1: "Review",
+                alg_lesson1_title: "Lesson I: Counting and Calculation",
+                alg_lesson1_part1_title: "Part 1: Divisibility",
+                alg_lesson1_part1_sub1: "Divisibility by 2, 3, 4, 5, 8, 9",
+                alg_lesson1_part1_sub2: "Apply divisibility rules for 2,3,4,5,8,9,25",
+                alg_lesson1_part1_sub3: "Divisibility by",
+                alg_lesson1_part2_title: "Part 2: Counting Activities",
+                alg_lesson1_part2_sub1: "How many finite sets",
+                alg_lesson1_part2_sub2: "Counting activities",
+                alg_lesson2_title: "Lesson II: Real Numbers Set",
+                alg_lesson2_part1_title: "Part 1: Reminder of sets N, Z, D, Q",
+                alg_lesson2_part1_sub1: "Periodic decimal expansion of a fraction",
+                alg_lesson2_part2_title: "Part 2: Real Numbers",
+                alg_lesson2_part2_sub1: "Square root of a positive real number",
+                alg_lesson2_part2_sub2: "Approximate value of a real number",
+                alg_lesson2_part2_sub3: "Graduating a line with real numbers",
+                alg_lesson2_part2_sub4: "Finding a digit of a specific rank in a periodic decimal",
+                alg_lesson2_part2_sub5: "Writing a periodic decimal as a fraction",
+                alg_lesson2_part2_sub6: "Finding the period of a periodic decimal",
+                alg_lesson2_part2_sub7: "Finding the period of a periodic decimal ( )",
+                alg_lesson3_title: "Lesson III: Operations in Real Numbers Set",
+                alg_lesson3_part1_title: "Part 1: Expansion and Factoring in Real Numbers",
+                alg_lesson3_part1_sub1: "Expansion in real numbers",
+                alg_lesson3_part2_title: "Part 2: Computing Expressions with Square Roots",
+                alg_lesson3_part2_sub1: "Application: Computing expressions with square roots",
+                alg_lesson3_part2_sub2: "Computing expressions with square roots",
+                alg_lesson3_part2_sub3: "Properties of addition and subtraction in real numbers",
+                alg_lesson3_part2_sub4: "Properties of multiplication in real numbers",
+                alg_lesson3_part2_sub5: "Reciprocal of a real number",
+                alg_lesson3_part3_title: "Part 3: Factoring in Real Numbers",
+                alg_lesson3_part3_sub1: "Application: Expansion and factoring in real numbers",
+                alg_lesson3_part4_title: "Part 4: Absolute Value of a Real Number",
+                alg_lesson3_part4_sub1: "Properties of absolute value of a real number",
+                alg_lesson3_part4_sub2: "Application",
+                alg_lesson4_title: "Lesson IV: Powers in Real Numbers Set",
+                alg_lesson4_part1_title: "Part 1: Properties of Powers in Real Numbers",
+                alg_lesson4_part1_sub1: "Power of a product of two real numbers",
+                alg_lesson4_part1_sub2: "Quotient of two powers of the same number",
+                alg_lesson4_part1_sub3: "Definition of powers in real numbers",
+                alg_lesson4_part1_sub4: "Product of two powers of the same number",
+                alg_lesson4_part1_sub5: "Power of a power of a real number",
+                alg_lesson4_part1_sub6: "Power and sign of a real number with rational exponent",
+                alg_lesson5_title: "Lesson V: Order and Comparison in Real Numbers Set",
+                alg_lesson5_part1_title: "Part 1: Comparing two real numbers using difference",
+                alg_lesson5_part1_sub1: "Comparing two real numbers using difference",
+                alg_lesson5_part2_title: "Part 2: Order and addition in real numbers",
+                alg_lesson5_part2_sub1: "Order and addition in real numbers",
+                alg_lesson5_part3_title: "Part 3: Order and multiplication in real numbers",
+                alg_lesson5_part3_sub1: "Order and multiplication in real numbers",
+                alg_lesson5_part4_title: "Part 4: Comparing squares of two real numbers",
+                alg_lesson5_part4_sub1: "Comparing squares of two real numbers",
+                alg_lesson5_part5_title: "Part 5: Comparing square roots of two real numbers",
+                alg_lesson5_part5_sub1: "Note",
+                alg_lesson5_part5_sub2: "Comparing notable products",
+                alg_lesson5_part6_title: "Part 6: Comprehensive Application",
+                alg_lesson5_part6_sub1: "Application number",
+                alg_lesson5_part6_sub2: "Comparing squares of two real numbers",
+                alg_lesson5_part6_sub3: "Comparing reciprocals of two nonzero real numbers",
+                alg_lesson6_title: "Lesson VI: Notable Products and Algebraic Expressions",
+                alg_lesson6_part1_title: "Part 1: Reminder",
+                alg_lesson6_part1_sub1: "Factoring",
+                alg_lesson6_part2_title: "Part 2: Notable Products",
+                alg_lesson6_part2_sub1: "Comprehensive application",
+                alg_lesson7_title: "Lesson VII: Equations and Inequalities",
+                alg_lesson7_part1_title: "Part 1: Intervals",
+                alg_lesson7_part1_sub1: "Comprehensive application number",
+                alg_lesson7_part1_sub2: "Intervals and absolute value",
+                alg_lesson7_part1_sub3: "Real numbers set and intervals",
+                alg_lesson7_part1_sub4: "Unbounded interval",
+                alg_lesson7_part1_sub5: "Half-open interval",
+                alg_lesson7_part1_sub6: "Open interval",
+                alg_lesson7_part1_sub7: "Closed interval",
+                alg_lesson7_part1_sub8: "Definition of equation",
+                alg_lesson7_part1_sub9: "Equation: has more than one solution",
+                alg_lesson7_part1_sub10: "Equation: solution set is all real numbers",
+                alg_lesson7_part1_sub11: "Equation: no solution in real numbers",
+                alg_lesson7_part1_sub12: "Equation of the form Ax+b=0",
+                alg_lesson7_part1_sub13: "Equations and expansion",
+                alg_lesson7_part1_sub14: "Equations and factoring",
+                alg_lesson7_part1_sub15: "Comprehensive application",
+                alg_lesson7_part1_sub16: "Definition of inequality",
+                alg_lesson7_part1_sub17: "Solving inequality",
+                alg_lesson7_part1_sub18: "Examples of inequalities",
+                alg_lesson7_part1_sub19: "Inequality: solution set is all real numbers",
+                alg_lesson7_part1_sub20: "Inequality: no solution in real numbers",
+                alg_lesson7_part1_sub21: "Inequality and absolute value",
+                alg_lesson7_part2_title: "Part 2: Definition of bounding",
+                alg_lesson7_part2_sub1: "Bounding the product of two real numbers",
+                alg_lesson7_part2_sub2: "Bounding the sum of two real numbers",
+                alg_lesson7_part2_sub3: "Bounding the reciprocal of a real number",
+                alg_lesson7_part2_sub4: "Comprehensive application",
+                alg_lesson8_title: "Lesson VIII: Coordinate System in the Plane",
+                alg_lesson8_part1_title: "Part 1: Number Line",
+                alg_lesson8_part1_sub1: "Finding the coordinate of a point",
+                alg_lesson8_part1_sub2: "Calculating distances",
+                alg_lesson8_part1_sub3: "Coordinate of midpoint of a segment",
+                alg_lesson8_part1_sub4: "Locating and placing points on number line",
+                alg_lesson8_part2_title: "Part 2: Coordinate System (o,i,j)",
+                alg_lesson8_part2_sub1: "Finding set of points",
+                alg_lesson8_part2_sub2: "Parallelism with x-axis - y-coordinates - distance calculation",
+                alg_lesson8_part2_sub3: "Symmetry with respect to x-axis, y-axis, and origin",
+                alg_lesson8_part2_sub4: "Coordinates of midpoint of a segment",
+                alg_lesson8_part2_sub5: "Projection of a point onto a line along a direction",
+                alg_lesson8_part2_sub6: "Locating and placing points",
+
+                // Geometry lessons
+                geo_lesson1_title: "Lesson IX: Thales' Theorem and Applications",
+                geo_lesson1_part1_title: "Part 1: Reminder",
+                geo_lesson1_part1_sub1: "Application",
+                geo_lesson1_part1_sub2: "Reminder",
+                geo_lesson1_part2_title: "Part 2: Thales' Theorem in a Triangle",
+                geo_lesson1_part2_sub1: "Application number",
+                geo_lesson1_part2_sub2: "Application",
+                geo_lesson1_part2_sub3: "Thales' theorem in a triangle",
+                geo_lesson1_part3_title: "Part 3: Segment Joining Two Sides of a Triangle",
+                geo_lesson1_part3_sub1: "Application number",
+                geo_lesson1_part3_sub2: "Application",
+                geo_lesson1_part3_sub3: "Segment joining midpoints of two sides of a triangle",
+                geo_lesson1_part4_title: "Part 4: Thales' Theorem in a Trapezoid",
+                geo_lesson1_part4_sub1: "Application",
+                geo_lesson1_part4_sub2: "Thales' theorem in a trapezoid",
+                geo_lesson1_part5_title: "Part 5: Thales' Theorem and Parallel Lines",
+                geo_lesson1_part5_sub1: "Projection of midpoint of a segment",
+                geo_lesson1_part5_sub2: "Application",
+                geo_lesson1_part5_sub3: "Thales' theorem and parallel lines",
+                geo_lesson1_part6_title: "Part 6: Dividing a Segment into Equal Parts",
+                geo_lesson1_part6_sub1: "Dividing a segment into parts proportional to given lengths",
+                geo_lesson1_part6_sub2: "Application",
+                geo_lesson1_part6_sub3: "Locating a point dividing a segment in a given ratio",
+                geo_lesson1_part6_sub4: "Dividing a segment into equal parts",
+                geo_lesson1_part7_title: "Part 7: Circumcircle of a Right Triangle",
+                geo_lesson1_part7_sub1: "Application",
+                geo_lesson1_part7_sub2: "Converse property",
+                geo_lesson1_part7_sub3: "Circumcircle of a right triangle",
+                geo_lesson1_part8_title: "Part 8: Centroid of a Triangle",
+                geo_lesson1_part8_sub1: "Application",
+                geo_lesson1_part8_sub2: "Centroid of a triangle",
+                geo_lesson2_title: "Lesson X: Metric Relations in a Right Triangle",
+                geo_lesson2_sub1: "Pythagorean theorem simply",
+                geo_lesson2_sub2: "Apply Pythagorean theorem",
+                geo_lesson2_sub3: "Apply Pythagorean theorem",
+                geo_lesson2_sub4: "Metric relations in a right triangle",
+                geo_lesson2_sub5: "Measure height of equilateral triangle",
+                geo_lesson2_sub6: "Measure diagonal of square",
+                geo_lesson2_sub7: "Converse of Pythagorean theorem",
+                geo_lesson3_title: "Lesson XI: Quadrilaterals",
+                geo_lesson3_sub1: "Converse properties",
+                geo_lesson3_sub2: "Direct properties",
+                geo_lesson4_title: "Lesson XII: Perpendicularity in Space",
+                geo_lesson4_sub1: "Perpendicularity in space"
+            },
+            fr: {
+                page_title: "Index des cours de mathématiques - 9ème année",
+                print_header: "Index des cours de mathématiques — 9ème année",
+                site_header: "Educational Dashboard - Mathematics",
+                home_link: "🏠 Accueil",
+                nav_badge: "📚 Index des leçons",
+                first_lesson_link: "Première leçon →",
+                language_label: "Langue",
+                lang_ar: "العربية",
+                lang_en: "English",
+                lang_fr: "Français",
+                print_label: "Choisir la section à imprimer :",
+                print_all: "Index complet",
+                print_algebra: "Leçons d'algèbre uniquement",
+                print_geometry: "Leçons de géométrie uniquement",
+                print_button: "🖨️ Imprimer",
+                badge: "📐 9ème année",
+                page_heading: "Index des leçons de mathématiques",
+                page_subtitle: "Toutes les leçons d'algèbre et de géométrie — cliquez sur une leçon pour l'ouvrir",
+                algebra_title: "Algèbre et arithmétique",
+                algebra_count: "8 leçons",
+                geometry_title: "Géométrie",
+                geometry_count: "4 leçons",
+                footer_dev: "Informations du développeur",
+                footer_dev_name: "Développé par : Majri Zied",
+                footer_hosting: "Hébergement : Github, Netlify, Supabase",
+                footer_links: "Liens",
+                footer_contact: "Contactez-nous",
+                footer_policies: "Politiques",
+                footer_version: "Version",
+                footer_version_num: "Version : 0.0.2",
+                footer_rights: "Tous droits réservés © 2025",
+                print_footer_dev: "Développé par : Majri Zied",
+                print_footer_version: "Version : 0.0.2",
+                print_footer_page: "Adresse de la page : maths_y9.html",
+
+                // Algebra lessons
+                alg_review_title: "Introduction au programme avec révision",
+                alg_review_sub1: "Révision",
+                alg_lesson1_title: "Leçon I : Dénombrement et calcul",
+                alg_lesson1_part1_title: "Partie 1 : Divisibilité",
+                alg_lesson1_part1_sub1: "Divisibilité par 2, 3, 4, 5, 8, 9",
+                alg_lesson1_part1_sub2: "Appliquer les critères de divisibilité pour 2,3,4,5,8,9,25",
+                alg_lesson1_part1_sub3: "Divisibilité par",
+                alg_lesson1_part2_title: "Partie 2 : Activités de dénombrement",
+                alg_lesson1_part2_sub1: "Combien d'ensembles finis",
+                alg_lesson1_part2_sub2: "Activités de dénombrement",
+                alg_lesson2_title: "Leçon II : Ensemble des nombres réels",
+                alg_lesson2_part1_title: "Partie 1 : Rappel des ensembles N, Z, D, Q",
+                alg_lesson2_part1_sub1: "Écriture décimale périodique d'une fraction",
+                alg_lesson2_part2_title: "Partie 2 : Nombres réels",
+                alg_lesson2_part2_sub1: "Racine carrée d'un nombre réel positif",
+                alg_lesson2_part2_sub2: "Valeur approchée d'un nombre réel",
+                alg_lesson2_part2_sub3: "Graduation d'une droite avec les nombres réels",
+                alg_lesson2_part2_sub4: "Trouver un chiffre d'un rang donné dans un décimal périodique",
+                alg_lesson2_part2_sub5: "Écrire un décimal périodique sous forme de fraction",
+                alg_lesson2_part2_sub6: "Trouver la période d'un décimal périodique",
+                alg_lesson2_part2_sub7: "Trouver la période d'un décimal périodique ( )",
+                alg_lesson3_title: "Leçon III : Opérations dans l'ensemble des nombres réels",
+                alg_lesson3_part1_title: "Partie 1 : Développement et factorisation dans les réels",
+                alg_lesson3_part1_sub1: "Développement dans les réels",
+                alg_lesson3_part2_title: "Partie 2 : Calcul d'expressions avec racines carrées",
+                alg_lesson3_part2_sub1: "Application : Calcul d'expressions avec racines carrées",
+                alg_lesson3_part2_sub2: "Calcul d'expressions avec racines carrées",
+                alg_lesson3_part2_sub3: "Propriétés de l'addition et de la soustraction dans les réels",
+                alg_lesson3_part2_sub4: "Propriétés de la multiplication dans les réels",
+                alg_lesson3_part2_sub5: "Inverse d'un nombre réel",
+                alg_lesson3_part3_title: "Partie 3 : Factorisation dans les réels",
+                alg_lesson3_part3_sub1: "Application : Développement et factorisation dans les réels",
+                alg_lesson3_part4_title: "Partie 4 : Valeur absolue d'un nombre réel",
+                alg_lesson3_part4_sub1: "Propriétés de la valeur absolue d'un nombre réel",
+                alg_lesson3_part4_sub2: "Application",
+                alg_lesson4_title: "Leçon IV : Puissances dans l'ensemble des nombres réels",
+                alg_lesson4_part1_title: "Partie 1 : Propriétés des puissances dans les réels",
+                alg_lesson4_part1_sub1: "Puissance d'un produit de deux nombres réels",
+                alg_lesson4_part1_sub2: "Quotient de deux puissances de même base",
+                alg_lesson4_part1_sub3: "Définition des puissances dans les réels",
+                alg_lesson4_part1_sub4: "Produit de deux puissances de même base",
+                alg_lesson4_part1_sub5: "Puissance d'une puissance d'un nombre réel",
+                alg_lesson4_part1_sub6: "Puissance et signe d'un nombre réel à exposant rationnel",
+                alg_lesson5_title: "Leçon V : Ordre et comparaison dans les réels",
+                alg_lesson5_part1_title: "Partie 1 : Comparer deux réels par la différence",
+                alg_lesson5_part1_sub1: "Comparer deux réels par la différence",
+                alg_lesson5_part2_title: "Partie 2 : Ordre et addition dans les réels",
+                alg_lesson5_part2_sub1: "Ordre et addition dans les réels",
+                alg_lesson5_part3_title: "Partie 3 : Ordre et multiplication dans les réels",
+                alg_lesson5_part3_sub1: "Ordre et multiplication dans les réels",
+                alg_lesson5_part4_title: "Partie 4 : Comparer les carrés de deux réels",
+                alg_lesson5_part4_sub1: "Comparer les carrés de deux réels",
+                alg_lesson5_part5_title: "Partie 5 : Comparer les racines carrées de deux réels",
+                alg_lesson5_part5_sub1: "Remarque",
+                alg_lesson5_part5_sub2: "Comparer les produits remarquables",
+                alg_lesson5_part6_title: "Partie 6 : Application complète",
+                alg_lesson5_part6_sub1: "Application numéro",
+                alg_lesson5_part6_sub2: "Comparer les carrés de deux réels",
+                alg_lesson5_part6_sub3: "Comparer les inverses de deux réels non nuls",
+                alg_lesson6_title: "Leçon VI : Produits remarquables et expressions littérales",
+                alg_lesson6_part1_title: "Partie 1 : Rappel",
+                alg_lesson6_part1_sub1: "Factorisation",
+                alg_lesson6_part2_title: "Partie 2 : Produits remarquables",
+                alg_lesson6_part2_sub1: "Application complète",
+                alg_lesson7_title: "Leçon VII : Équations et inéquations",
+                alg_lesson7_part1_title: "Partie 1 : Intervalles",
+                alg_lesson7_part1_sub1: "Application complète numéro",
+                alg_lesson7_part1_sub2: "Intervalles et valeur absolue",
+                alg_lesson7_part1_sub3: "Ensemble des réels et intervalles",
+                alg_lesson7_part1_sub4: "Intervalle non borné",
+                alg_lesson7_part1_sub5: "Intervalle semi-ouvert",
+                alg_lesson7_part1_sub6: "Intervalle ouvert",
+                alg_lesson7_part1_sub7: "Intervalle fermé",
+                alg_lesson7_part1_sub8: "Définition d'une équation",
+                alg_lesson7_part1_sub9: "Équation : plus d'une solution",
+                alg_lesson7_part1_sub10: "Équation : solution = ensemble des réels",
+                alg_lesson7_part1_sub11: "Équation : aucune solution dans les réels",
+                alg_lesson7_part1_sub12: "Équation de la forme Ax+b=0",
+                alg_lesson7_part1_sub13: "Équations et développement",
+                alg_lesson7_part1_sub14: "Équations et factorisation",
+                alg_lesson7_part1_sub15: "Application complète",
+                alg_lesson7_part1_sub16: "Définition d'une inéquation",
+                alg_lesson7_part1_sub17: "Résolution d'une inéquation",
+                alg_lesson7_part1_sub18: "Exemples d'inéquations",
+                alg_lesson7_part1_sub19: "Inéquation : solution = ensemble des réels",
+                alg_lesson7_part1_sub20: "Inéquation : aucune solution dans les réels",
+                alg_lesson7_part1_sub21: "Inéquation et valeur absolue",
+                alg_lesson7_part2_title: "Partie 2 : Définition de l'encadrement",
+                alg_lesson7_part2_sub1: "Encadrer le produit de deux réels",
+                alg_lesson7_part2_sub2: "Encadrer la somme de deux réels",
+                alg_lesson7_part2_sub3: "Encadrer l'inverse d'un réel",
+                alg_lesson7_part2_sub4: "Application complète",
+                alg_lesson8_title: "Leçon VIII : Repérage dans le plan",
+                alg_lesson8_part1_title: "Partie 1 : Droite graduée",
+                alg_lesson8_part1_sub1: "Trouver l'abscisse d'un point",
+                alg_lesson8_part1_sub2: "Calculer des distances",
+                alg_lesson8_part1_sub3: "Abscisse du milieu d'un segment",
+                alg_lesson8_part1_sub4: "Placer des points sur une droite graduée",
+                alg_lesson8_part2_title: "Partie 2 : Repère (o,i,j)",
+                alg_lesson8_part2_sub1: "Trouver un ensemble de points",
+                alg_lesson8_part2_sub2: "Parallélisme à l'axe des abscisses - ordonnées - calcul de distances",
+                alg_lesson8_part2_sub3: "Symétrie par rapport aux axes et à l'origine",
+                alg_lesson8_part2_sub4: "Coordonnées du milieu d'un segment",
+                alg_lesson8_part2_sub5: "Projection d'un point sur une droite selon une direction",
+                alg_lesson8_part2_sub6: "Placer des points",
+
+                // Geometry lessons
+                geo_lesson1_title: "Leçon IX : Théorème de Thalès et applications",
+                geo_lesson1_part1_title: "Partie 1 : Rappel",
+                geo_lesson1_part1_sub1: "Application",
+                geo_lesson1_part1_sub2: "Rappel",
+                geo_lesson1_part2_title: "Partie 2 : Théorème de Thalès dans un triangle",
+                geo_lesson1_part2_sub1: "Application numéro",
+                geo_lesson1_part2_sub2: "Application",
+                geo_lesson1_part2_sub3: "Théorème de Thalès dans un triangle",
+                geo_lesson1_part3_title: "Partie 3 : Segment joignant deux côtés d'un triangle",
+                geo_lesson1_part3_sub1: "Application numéro",
+                geo_lesson1_part3_sub2: "Application",
+                geo_lesson1_part3_sub3: "Segment joignant les milieux de deux côtés d'un triangle",
+                geo_lesson1_part4_title: "Partie 4 : Théorème de Thalès dans un trapèze",
+                geo_lesson1_part4_sub1: "Application",
+                geo_lesson1_part4_sub2: "Théorème de Thalès dans un trapèze",
+                geo_lesson1_part5_title: "Partie 5 : Théorème de Thalès et droites parallèles",
+                geo_lesson1_part5_sub1: "Projection du milieu d'un segment",
+                geo_lesson1_part5_sub2: "Application",
+                geo_lesson1_part5_sub3: "Théorème de Thalès et droites parallèles",
+                geo_lesson1_part6_title: "Partie 6 : Partager un segment en parties égales",
+                geo_lesson1_part6_sub1: "Partager un segment en parties proportionnelles à des longueurs données",
+                geo_lesson1_part6_sub2: "Application",
+                geo_lesson1_part6_sub3: "Placer un point divisant un segment dans un rapport donné",
+                geo_lesson1_part6_sub4: "Partager un segment en parties égales",
+                geo_lesson1_part7_title: "Partie 7 : Cercle circonscrit à un triangle rectangle",
+                geo_lesson1_part7_sub1: "Application",
+                geo_lesson1_part7_sub2: "Propriété réciproque",
+                geo_lesson1_part7_sub3: "Cercle circonscrit à un triangle rectangle",
+                geo_lesson1_part8_title: "Partie 8 : Centre de gravité d'un triangle",
+                geo_lesson1_part8_sub1: "Application",
+                geo_lesson1_part8_sub2: "Centre de gravité d'un triangle",
+                geo_lesson2_title: "Leçon X : Relations métriques dans un triangle rectangle",
+                geo_lesson2_sub1: "Théorème de Pythagore simplement",
+                geo_lesson2_sub2: "Appliquer le théorème de Pythagore",
+                geo_lesson2_sub3: "Appliquer le théorème de Pythagore",
+                geo_lesson2_sub4: "Relations métriques dans un triangle rectangle",
+                geo_lesson2_sub5: "Mesurer la hauteur d'un triangle équilatéral",
+                geo_lesson2_sub6: "Mesurer la diagonale d'un carré",
+                geo_lesson2_sub7: "Réciproque du théorème de Pythagore",
+                geo_lesson3_title: "Leçon XI : Quadrilatères",
+                geo_lesson3_sub1: "Propriétés réciproques",
+                geo_lesson3_sub2: "Propriétés directes",
+                geo_lesson4_title: "Leçon XII : Perpendicularité dans l'espace",
+                geo_lesson4_sub1: "Perpendicularité dans l'espace"
+            }
+        };
+    </script>
+
+</body>
+</html>

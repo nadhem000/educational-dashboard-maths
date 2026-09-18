@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الرئيسية - فهرس دروس الرياضيات</title>
+
+    <!-- External Stylesheets -->
+    <link rel="stylesheet" href="maths_shared.css">
+    <link rel="stylesheet" href="maths_programs.css">
+
+    <!-- Index-specific styles -->
+    <style>
+        .year-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        .year-card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 2rem 1.5rem;
+            text-align: center;
+            text-decoration: none;
+            color: var(--text);
+            border: 1px solid var(--border);
+            transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.8rem;
+        }
+        .year-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+            border-color: var(--secondary);
+        }
+        .year-icon {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+        .year-number {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--primary);
+            line-height: 1.2;
+        }
+        .year-label {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+        .year-description {
+            font-size: 0.9rem;
+            color: var(--text-faint);
+            line-height: 1.5;
+        }
+
+        /* Color accents per year */
+        .year-card.y5 { border-top: 4px solid #e74c3c; }
+        .year-card.y6 { border-top: 4px solid #27ae60; }
+        .year-card.y7 { border-top: 4px solid #8e44ad; }
+        .year-card.y8 { border-top: 4px solid #e67e22; }
+        .year-card.y9 { border-top: 4px solid #2980b9; }
+
+        /* Responsive */
+        @media (max-width: 640px) {
+            .year-cards {
+                grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+                gap: 1rem;
+            }
+            .year-number { font-size: 1.8rem; }
+            .year-icon { font-size: 2.2rem; }
+            .year-card { padding: 1.5rem 1rem; }
+        }
+    </style>
+
+    <!-- External Script -->
+    <script src="maths_programs.js" defer></script>
+</head>
+<body>
+    <div class="container">
+
+        <!-- Print-only header (unused but kept for consistency) -->
+        <div class="print-header" data-i18n="print_header">فهرس دروس الرياضيات — الرئيسية</div>
+
+        <!-- Site Header -->
+        <div class="site-header">
+            <div class="header-icon">
+                <img src="assets/icons/icon-152x152.png" alt="أيقونة الموقع">
+            </div>
+            <h1 data-i18n="site_header">Educational Dashboard - Mathematics</h1>
+        </div>
+
+        <!-- Top Navigation -->
+        <nav class="top-nav">
+            <a href="index.html" class="nav-link" data-i18n="home_link">🏠 الرئيسية</a>
+            <span class="nav-badge" data-i18n="nav_badge">📚 فهرس الدروس</span>
+            <a href="maths_y6.html" class="nav-link" data-i18n="first_lesson_link">السنة السادسة ←</a>
+        </nav>
+
+        <!-- Language Selector & Theme Toggle -->
+        <div class="print-controls" style="justify-content: flex-end;">
+            <button id="theme-toggle" class="theme-toggle" aria-label="تبديل الوضع الليلي/النهاري">
+                <span class="theme-icon">🌙</span>
+            </button>
+
+            <div class="language-selector">
+                <label for="language-select" class="sr-only" data-i18n="language_label">اللغة</label>
+                <select id="language-select">
+                    <option value="ar" data-i18n="lang_ar">العربية</option>
+                    <option value="en" data-i18n="lang_en">English</option>
+                    <option value="fr" data-i18n="lang_fr">Français</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Page Header -->
+        <header class="page-header">
+            <span class="badge" data-i18n="badge">📐 الرياضيات</span>
+            <h1 data-i18n="page_heading">فهرس دروس الرياضيات</h1>
+            <p class="subtitle" data-i18n="page_subtitle">اختر السنة الدراسية للوصول إلى برنامج الدروس</p>
+        </header>
+
+        <!-- Year Cards -->
+        <div class="year-cards">
+            <a href="maths_y5.html" class="year-card y5">
+                <div class="year-icon">📘</div>
+                <div class="year-number">5</div>
+                <div class="year-label" data-i18n="year5_label">السنة الخامسة أساسي</div>
+                <div class="year-description" data-i18n="year5_desc">برنامج الرياضيات للسنة الخامسة</div>
+            </a>
+            <a href="maths_y6.html" class="year-card y6">
+                <div class="year-icon">📗</div>
+                <div class="year-number">6</div>
+                <div class="year-label" data-i18n="year6_label">السنة السادسة أساسي</div>
+                <div class="year-description" data-i18n="year6_desc">برنامج الرياضيات للسنة السادسة</div>
+            </a>
+            <a href="maths_y7.html" class="year-card y7">
+                <div class="year-icon">📙</div>
+                <div class="year-number">7</div>
+                <div class="year-label" data-i18n="year7_label">السنة السابعة أساسي</div>
+                <div class="year-description" data-i18n="year7_desc">برنامج الرياضيات للسنة السابعة</div>
+            </a>
+            <a href="maths_y8.html" class="year-card y8">
+                <div class="year-icon">📕</div>
+                <div class="year-number">8</div>
+                <div class="year-label" data-i18n="year8_label">السنة الثامنة أساسي</div>
+                <div class="year-description" data-i18n="year8_desc">برنامج الرياضيات للسنة الثامنة</div>
+            </a>
+            <a href="maths_y9.html" class="year-card y9">
+                <div class="year-icon">📔</div>
+                <div class="year-number">9</div>
+                <div class="year-label" data-i18n="year9_label">السنة التاسعة أساسي</div>
+                <div class="year-description" data-i18n="year9_desc">برنامج الرياضيات للسنة التاسعة</div>
+            </a>
+        </div>
+
+        <!-- Site Footer -->
+        <footer class="site-footer">
+            <div class="footer-col">
+                <h4 data-i18n="footer_dev">معلومات المطوّر</h4>
+                <p data-i18n="footer_dev_name">طور بواسطة: ماجري زياد</p>
+                <p data-i18n="footer_hosting">الاستضافة: Github, Netlify, Supabase</p>
+            </div>
+            <div class="footer-col">
+                <h4 data-i18n="footer_links">روابط</h4>
+                <a href="#" data-i18n="footer_contact">اتصل بنا</a>
+                <a href="#" data-i18n="footer_policies">السياسات</a>
+            </div>
+            <div class="footer-col">
+                <h4 data-i18n="footer_version">الإصدار</h4>
+                <p data-i18n="footer_version_num">الإصدار: 0.0.2</p>
+                <p data-i18n="footer_rights">جميع الحقوق محفوظة &copy; 2025</p>
+            </div>
+        </footer>
+
+        <!-- Print-only footer (unused) -->
+        <div class="print-footer">
+            <p data-i18n="print_footer_dev">طور بواسطة: ماجري زياد</p>
+            <p data-i18n="print_footer_version">الإصدار: 0.0.2</p>
+            <p data-i18n="print_footer_page">عنوان الصفحة: index.html</p>
+        </div>
+    </div>
+
+    <!-- Inline Translation Object -->
+    <script>
+        const translations = {
+            ar: {
+                page_title: "الرئيسية - فهرس دروس الرياضيات",
+                print_header: "فهرس دروس الرياضيات — الرئيسية",
+                site_header: "Educational Dashboard - Mathematics",
+                home_link: "🏠 الرئيسية",
+                nav_badge: "📚 فهرس الدروس",
+                first_lesson_link: "السنة السادسة ←",
+                language_label: "اللغة",
+                lang_ar: "العربية",
+                lang_en: "English",
+                lang_fr: "Français",
+                badge: "📐 الرياضيات",
+                page_heading: "فهرس دروس الرياضيات",
+                page_subtitle: "اختر السنة الدراسية للوصول إلى برنامج الدروس",
+                year5_label: "السنة الخامسة أساسي",
+                year5_desc: "برنامج الرياضيات للسنة الخامسة",
+                year6_label: "السنة السادسة أساسي",
+                year6_desc: "برنامج الرياضيات للسنة السادسة",
+                year7_label: "السنة السابعة أساسي",
+                year7_desc: "برنامج الرياضيات للسنة السابعة",
+                year8_label: "السنة الثامنة أساسي",
+                year8_desc: "برنامج الرياضيات للسنة الثامنة",
+                year9_label: "السنة التاسعة أساسي",
+                year9_desc: "برنامج الرياضيات للسنة التاسعة",
+                footer_dev: "معلومات المطوّر",
+                footer_dev_name: "طور بواسطة: ماجري زياد",
+                footer_hosting: "الاستضافة: Github, Netlify, Supabase",
+                footer_links: "روابط",
+                footer_contact: "اتصل بنا",
+                footer_policies: "السياسات",
+                footer_version: "الإصدار",
+                footer_version_num: "الإصدار: 0.0.2",
+                footer_rights: "جميع الحقوق محفوظة © 2025",
+                print_footer_dev: "طور بواسطة: ماجري زياد",
+                print_footer_version: "الإصدار: 0.0.2",
+                print_footer_page: "عنوان الصفحة: index.html"
+            },
+            en: {
+                page_title: "Home - Mathematics Lessons Index",
+                print_header: "Mathematics Lessons Index — Home",
+                site_header: "Educational Dashboard - Mathematics",
+                home_link: "🏠 Home",
+                nav_badge: "📚 Lessons Index",
+                first_lesson_link: "Year 6 →",
+                language_label: "Language",
+                lang_ar: "العربية",
+                lang_en: "English",
+                lang_fr: "Français",
+                badge: "📐 Mathematics",
+                page_heading: "Mathematics Lessons Index",
+                page_subtitle: "Choose a school year to access its program",
+                year5_label: "Year 5 Basic Education",
+                year5_desc: "Mathematics program for Year 5",
+                year6_label: "Year 6 Basic Education",
+                year6_desc: "Mathematics program for Year 6",
+                year7_label: "Year 7 Basic Education",
+                year7_desc: "Mathematics program for Year 7",
+                year8_label: "Year 8 Basic Education",
+                year8_desc: "Mathematics program for Year 8",
+                year9_label: "Year 9 Basic Education",
+                year9_desc: "Mathematics program for Year 9",
+                footer_dev: "Developer Info",
+                footer_dev_name: "Developed by: Majri Zied",
+                footer_hosting: "Hosting: Github, Netlify, Supabase",
+                footer_links: "Links",
+                footer_contact: "Contact us",
+                footer_policies: "Policies",
+                footer_version: "Version",
+                footer_version_num: "Version: 0.0.2",
+                footer_rights: "All rights reserved © 2025",
+                print_footer_dev: "Developed by: Majri Zied",
+                print_footer_version: "Version: 0.0.2",
+                print_footer_page: "Page address: index.html"
+            },
+            fr: {
+                page_title: "Accueil - Index des cours de mathématiques",
+                print_header: "Index des cours de mathématiques — Accueil",
+                site_header: "Educational Dashboard - Mathematics",
+                home_link: "🏠 Accueil",
+                nav_badge: "📚 Index des leçons",
+                first_lesson_link: "6ème année →",
+                language_label: "Langue",
+                lang_ar: "العربية",
+                lang_en: "English",
+                lang_fr: "Français",
+                badge: "📐 Mathématiques",
+                page_heading: "Index des leçons de mathématiques",
+                page_subtitle: "Choisissez une année scolaire pour accéder à son programme",
+                year5_label: "5ème année de base",
+                year5_desc: "Programme de mathématiques pour la 5ème année",
+                year6_label: "6ème année de base",
+                year6_desc: "Programme de mathématiques pour la 6ème année",
+                year7_label: "7ème année de base",
+                year7_desc: "Programme de mathématiques pour la 7ème année",
+                year8_label: "8ème année de base",
+                year8_desc: "Programme de mathématiques pour la 8ème année",
+                year9_label: "9ème année de base",
+                year9_desc: "Programme de mathématiques pour la 9ème année",
+                footer_dev: "Informations du développeur",
+                footer_dev_name: "Développé par : Majri Zied",
+                footer_hosting: "Hébergement : Github, Netlify, Supabase",
+                footer_links: "Liens",
+                footer_contact: "Contactez-nous",
+                footer_policies: "Politiques",
+                footer_version: "Version",
+                footer_version_num: "Version : 0.0.2",
+                footer_rights: "Tous droits réservés © 2025",
+                print_footer_dev: "Développé par : Majri Zied",
+                print_footer_version: "Version : 0.0.2",
+                print_footer_page: "Adresse de la page : index.html"
+            }
+        };
+    </script>
+</body>
+</html>

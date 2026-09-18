@@ -1,0 +1,1001 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="page_title">التناظر المركزي و الاستقامة - رياضيات السنة الثامنة أساسي</title>
+
+    <!-- External Stylesheets -->
+    <link rel="stylesheet" href="maths_shared.css">
+    <link rel="stylesheet" href="maths_lessons.css">
+
+    <!-- KaTeX -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+
+    <!-- JSXGraph -->
+    <script src="https://cdn.jsdelivr.net/npm/jsxgraph@1.4.0/distrib/jsxgraphcore.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jsxgraph@1.4.0/distrib/jsxgraph.css">
+
+    <script src="maths_lessons.js" defer></script>
+
+    <style>
+        .rule-diagram, .exercise-diagram {
+            margin: 1rem 0;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 0.5rem;
+            background: var(--card-bg);
+        }
+        .diagram-caption {
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-top: 0.3rem;
+            font-style: italic;
+        }
+        .math, .katex, .katex-display {
+            direction: ltr !important;
+            unicode-bidi: isolate;
+        }
+        .example-box, .solution-step-math {
+            direction: rtl !important;
+            text-align: right !important;
+            unicode-bidi: normal !important;
+            white-space: normal !important;
+            overflow-wrap: break-word;
+            word-break: break-word;
+        }
+        .drawing-board {
+            width: 100%;
+            max-width: 500px;
+            height: 300px;
+            margin: 0 auto 0.5rem auto;
+        }
+        .board-controls {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: center;
+            margin-top: 0.5rem;
+        }
+        .board-btn {
+            padding: 0.4rem 1rem;
+            background: var(--secondary);
+            color: var(--white);
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        .board-btn:hover {
+            background: var(--primary);
+        }
+        .check-result {
+            text-align: center;
+            font-weight: 700;
+            margin-top: 0.5rem;
+            min-height: 1.5em;
+        }
+        .check-result.correct { color: var(--success); }
+        .check-result.incorrect { color: var(--error); }
+        .solution-diagram {
+            width: 100%;
+            max-width: 350px;
+            height: 200px;
+            margin: 0 auto;
+        }
+        .coord-input-group {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 0.8rem;
+            flex-wrap: wrap;
+        }
+        .coord-input-group label {
+            font-weight: 600;
+            margin-left: 0.5rem;
+        }
+        .coord-input {
+            width: 70px;
+            padding: 0.3rem;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            text-align: center;
+            font-family: var(--mono);
+        }
+        .coord-display {
+            background: var(--bg-alt);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <main>
+            <!-- Print-only header -->
+            <div class="print-header" data-i18n="print_header">السنة الثامنة أساسي - الهندسة - الدرس 1 - الجزء 3 - ج</div>
+
+            <!-- Site Header -->
+            <div class="site-header">
+                <div class="header-icon">
+                    <img src="assets/icons/icon-152x152.png" alt="أيقونة الموقع">
+                </div>
+                <h1 data-i18n="site_header">Educational Dashboard - Mathematics</h1>
+            </div>
+
+            <!-- Top Navigation -->
+            <nav class="top-nav">
+                <a href="maths_y8.html" class="nav-link" data-i18n="back_to_index">← العودة للفهرس</a>
+                <span class="nav-badge" data-i18n="nav_badge">الدرس 1 | الجزء 3 | ج</span>
+                <a href="maths_y8_geo_module2_lesson1_sub4.html" class="nav-link" data-i18n="next_lesson">التالي ←</a>
+            </nav>
+
+            <!-- Print Controls -->
+            <div class="print-controls">
+                <label for="print-section" data-i18n="print_label">اختر القسم للطباعة:</label>
+                <select id="print-section" name="print-section">
+                    <option value="all" data-i18n="print_all">الدرس كاملاً</option>
+                    <option value="rules" data-i18n="print_rules">القواعد</option>
+                    <option value="exercises" data-i18n="print_exercises">التمارين</option>
+                    <option value="problems" data-i18n="print_problems">المسائل</option>
+                    <option value="solutions" data-i18n="print_solutions">الحلول</option>
+                </select>
+                <button class="print-button" onclick="printSelected()" data-i18n="print_button">🖨️ طباعة</button>
+                <button id="theme-toggle" class="theme-toggle" aria-label="تبديل الوضع الليلي/النهاري">
+                    <span class="theme-icon">🌙</span>
+                </button>
+
+                <!-- Language Selector -->
+                <div class="language-selector">
+                    <label for="language-select" class="sr-only" data-i18n="language_label">اللغة</label>
+                    <select id="language-select" name="language-select">
+                        <option value="ar" data-i18n="lang_ar">العربية</option>
+                        <option value="en" data-i18n="lang_en">English</option>
+                        <option value="fr" data-i18n="lang_fr">Français</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Lesson Header -->
+            <header class="lesson-header">
+                <span class="module-tag" data-i18n="module_tag">📘 الهندسة | الدرس 1 | الجزء 3 | ج</span>
+                <h1 class="lesson-title" data-i18n="lesson_title">التناظر المركزي و الاستقامة</h1>
+                <p class="lesson-subtitle" data-i18n="lesson_subtitle">حفظ الاستقامة والترتيب والمنتصف بالتناظر المركزي</p>
+            </header>
+
+            <!-- Section 1: Rules -->
+            <div class="section" id="rules-section">
+                <div class="section-header" onclick="toggleSection('rules-body', 'rules-toggle')" role="button"
+                     tabindex="0" aria-expanded="true" aria-controls="rules-body"
+                     onkeydown="if(event.key==='Enter'||event.key===' ') toggleSection('rules-body', 'rules-toggle')">
+                    <div class="section-icon rules-icon">📐</div>
+                    <div class="section-title">
+                        <h2 data-i18n="rules_title">القواعد</h2>
+                        <p data-i18n="rules_subtitle">خصائص التناظر المركزي المتعلقة بالاستقامة</p>
+                    </div>
+                    <span class="section-toggle open" id="rules-toggle">▼</span>
+                </div>
+                <div class="section-body" id="rules-body">
+                    <!-- Rule 1: Collinearity is preserved -->
+                    <div class="rule-card">
+                        <div class="rule-title" data-i18n="rule1_title">قاعدة 1: حفظ الاستقامة</div>
+                        <div class="rule-text" data-i18n="rule1_text">
+                            التناظر المركزي <strong>يحافظ على الاستقامة</strong>: إذا كانت \(A\) و \(B\) و \(C\) ثلاث نقط على استقامة واحدة، فإن صورها \(A'\) و \(B'\) و \(C'\) تكون أيضاً على استقامة واحدة.
+                        </div>
+                        <div class="example-box" data-i18n="rule1_example">
+                            إذا كانت \(A\) و \(B\) و \(C\) تنتمي إلى نفس المستقيم \((d)\)، فإن \(A'\) و \(B'\) و \(C'\) تنتمي إلى مستقيم واحد \((d')\).
+                        </div>
+                        <div class="rule-diagram">
+                            <div id="diagram-rule1" class="jxgbox" style="width:100%; max-width:500px; height:300px;"></div>
+                            <div class="diagram-caption" data-i18n="rule1_caption">اسحب النقطة A أو B أو C أو المركز O لترى أن الاستقامة محفوظة</div>
+                        </div>
+                    </div>
+
+                    <!-- Rule 2: Order is preserved -->
+                    <div class="rule-card">
+                        <div class="rule-title" data-i18n="rule2_title">قاعدة 2: حفظ الترتيب</div>
+                        <div class="rule-text" data-i18n="rule2_text">
+                            التناظر المركزي <strong>يحافظ على الترتيب</strong>: إذا كانت \(B\) بين \(A\) و \(C\)، فإن \(B'\) تكون بين \(A'\) و \(C'\).
+                        </div>
+                        <div class="example-box" data-i18n="rule2_example">
+                            إذا كان \(AB = 3\text{ cm}\) و \(BC = 2\text{ cm}\) مع \(B\) بين \(A\) و \(C\)، فإن \(A'B' = 3\text{ cm}\) و \(B'C' = 2\text{ cm}\) و \(B'\) بين \(A'\) و \(C'\).
+                        </div>
+                    </div>
+
+                    <!-- Rule 3: Midpoint is preserved -->
+                    <div class="rule-card">
+                        <div class="rule-title" data-i18n="rule3_title">قاعدة 3: حفظ المنتصف</div>
+                        <div class="rule-text" data-i18n="rule3_text">
+                            التناظر المركزي <strong>يحافظ على المنتصف</strong>: إذا كانت \(M\) منتصف القطعة \([AB]\)، فإن صورتها \(M'\) تكون منتصف القطعة \([A'B']\).
+                        </div>
+                        <div class="example-box" data-i18n="rule3_example">
+                            إذا كانت \(M\) منتصف \([AB]\)، فإن \(M'\) منتصف \([A'B']\)، و \(A'M' = M'B'\).
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 2: Exercises -->
+            <div class="section" id="exercises-section">
+                <div class="section-header" onclick="toggleSection('exercises-body', 'exercises-toggle')" role="button"
+                     tabindex="0" aria-expanded="true" aria-controls="exercises-body"
+                     onkeydown="if(event.key==='Enter'||event.key===' ') toggleSection('exercises-body', 'exercises-toggle')">
+                    <div class="section-icon exercises-icon">✏️</div>
+                    <div class="section-title">
+                        <h2 data-i18n="exercises_title">تمارين</h2>
+                        <p data-i18n="exercises_subtitle">تمرّن على حفظ الاستقامة والترتيب والمنتصف</p>
+                    </div>
+                    <span class="section-toggle open" id="exercises-toggle">▼</span>
+                </div>
+                <div class="section-body" id="exercises-body">
+                    <!-- Exercise 1: Interactive -->
+                    <div class="exercise-item">
+                        <div class="exercise-question">
+                            <span class="exercise-number">1</span>
+                            <span data-i18n="exercise1_q">النقط \(A\) و \(B\) و \(C\) على استقامة واحدة. أوجد صورها \(A'\) و \(B'\) و \(C'\) بالنسبة إلى المركز \(O\). لاحظ أن الاستقامة محفوظة.</span>
+                        </div>
+                        <div class="coord-display" data-i18n="points_coords_display">
+                            \(A(-2, 1)\) | \(B(0, 2)\) | \(C(2, 3)\) | \(O(1, 0)\)
+                        </div>
+                        <div class="exercise-diagram">
+                            <div id="exercise1-board" class="jxgbox drawing-board"></div>
+                            <div class="board-controls">
+                                <button class="board-btn" onclick="checkEx1()" data-i18n="check_btn">تحقق</button>
+                                <button class="board-btn" onclick="resetEx1()" data-i18n="reset_btn">إعادة</button>
+                            </div>
+                            <div class="coord-input-group">
+                                <span data-i18n="coord_label_A_prime">\(A'\):</span>
+                                <label for="ex1-ax" data-i18n="coord_label_x">x:</label>
+                                <input type="number" id="ex1-ax" class="coord-input" step="any" value="-4" dir="ltr">
+                                <label for="ex1-ay" data-i18n="coord_label_y">y:</label>
+                                <input type="number" id="ex1-ay" class="coord-input" step="any" value="1" dir="ltr">
+                            </div>
+                            <div class="coord-input-group">
+                                <span data-i18n="coord_label_B_prime">\(B'\):</span>
+                                <label for="ex1-bx" data-i18n="coord_label_x">x:</label>
+                                <input type="number" id="ex1-bx" class="coord-input" step="any" value="0" dir="ltr">
+                                <label for="ex1-by" data-i18n="coord_label_y">y:</label>
+                                <input type="number" id="ex1-by" class="coord-input" step="any" value="0" dir="ltr">
+                            </div>
+                            <div class="coord-input-group">
+                                <span data-i18n="coord_label_C_prime">\(C'\):</span>
+                                <label for="ex1-cx" data-i18n="coord_label_x">x:</label>
+                                <input type="number" id="ex1-cx" class="coord-input" step="any" value="2" dir="ltr">
+                                <label for="ex1-cy" data-i18n="coord_label_y">y:</label>
+                                <input type="number" id="ex1-cy" class="coord-input" step="any" value="3" dir="ltr">
+                            </div>
+                            <button class="board-btn" onclick="applyCoordsEx1()" data-i18n="apply_coords_btn">تعيين</button>
+                            <div id="ex1-result" class="check-result"></div>
+                            <div class="diagram-caption" data-i18n="exercise1_caption">اسحب النقاط أو أدخل إحداثياتها.</div>
+                        </div>
+                    </div>
+
+                    <!-- Exercise 2: Coordinates -->
+                    <div class="exercise-item">
+                        <div class="exercise-question">
+                            <span class="exercise-number">2</span>
+                            <span data-i18n="exercise2_q">إذا كانت \(A(1, 2)\) و \(B(2, 4)\) و \(C(3, 6)\) على استقامة واحدة، و \(O(0, 0)\)، فأوجد \(A'\) و \(B'\) و \(C'\) وتحقّق من أن الاستقامة محفوظة.</span>
+                        </div>
+                        <textarea id="answer-ex2" name="answer-ex2" class="answer-textarea" placeholder="اكتب إجابتك هنا..." data-i18n-placeholder="answer_placeholder"></textarea>
+                    </div>
+
+                    <!-- Exercise 3: Midpoint -->
+                    <div class="exercise-item">
+                        <div class="exercise-question">
+                            <span class="exercise-number">3</span>
+                            <span data-i18n="exercise3_q">لتكن \(A(0, 0)\) و \(B(4, 2)\). النقطة \(M\) منتصف \([AB]\). إذا كان \(O(1, 1)\)، أثبت أن \(M'\) منتصف \([A'B']\).</span>
+                        </div>
+                        <textarea id="answer-ex3" name="answer-ex3" class="answer-textarea" placeholder="اكتب إجابتك هنا..." data-i18n-placeholder="answer_placeholder"></textarea>
+                    </div>
+
+                    <!-- Exercise 4: True/False -->
+                    <div class="exercise-item">
+                        <div class="exercise-question">
+                            <span class="exercise-number">4</span>
+                            <span data-i18n="exercise4_q">أجب بصحيح أو خطأ مع التعليل: إذا كانت \(A\) و \(B\) و \(C\) على استقامة واحدة وكان \(B\) بين \(A\) و \(C\)، فإن \(B'\) تكون بين \(A'\) و \(C'\).</span>
+                        </div>
+                        <textarea id="answer-ex4" name="answer-ex4" class="answer-textarea" placeholder="اكتب إجابتك هنا..." data-i18n-placeholder="answer_placeholder"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 3: Problems -->
+            <div class="section" id="problems-section">
+                <div class="section-header" onclick="toggleSection('problems-body', 'problems-toggle')" role="button"
+                     tabindex="0" aria-expanded="true" aria-controls="problems-body"
+                     onkeydown="if(event.key==='Enter'||event.key===' ') toggleSection('problems-body', 'problems-toggle')">
+                    <div class="section-icon problems-icon">🧩</div>
+                    <div class="section-title">
+                        <h2 data-i18n="problems_title">مسائل</h2>
+                        <p data-i18n="problems_subtitle">مسائل تطبيقية على الاستقامة بالتناظر المركزي</p>
+                    </div>
+                    <span class="section-toggle open" id="problems-toggle">▼</span>
+                </div>
+                <div class="section-body" id="problems-body">
+                    <div class="problem-card">
+                        <div class="problem-title" data-i18n="problem1_title">🛣️ مسألة 1: الطريق والقرى</div>
+                        <div class="problem-text" data-i18n="problem1_text">
+                            ثلاث قرى \(A\) و \(B\) و \(C\) على استقامة واحدة على طول طريق، بحيث \(B\) بين \(A\) و \(C\)، و \(AB = 3\text{ km}\) و \(BC = 4\text{ km}\). أرادت السلطة المحلية تعيين مواقع جديدة \(A'\) و \(B'\) و \(C'\) متناظرة بالنسبة إلى نقطة \(O\) تمثل مركز المنطقة. أثبت أن \(A'\) و \(B'\) و \(C'\) على استقامة واحدة، وأن \(B'\) بين \(A'\) و \(C'\)، ثم احسب \(A'C'\).
+                        </div>
+                    </div>
+                    <div class="problem-card">
+                        <div class="problem-title" data-i18n="problem2_title">📐 مسألة 2: تصميم هندسي</div>
+                        <div class="problem-text" data-i18n="problem2_text">
+                            في تصميم هندسي، القطعة \([AB]\) طولها \(8\text{ cm}\)، و \(M\) منتصفها. أراد المصمم إنشاء \(A'\) و \(B'\) و \(M'\) متناظرة بالنسبة إلى نقطة \(O\). أثبت أن \(M'\) منتصف \([A'B']\)، ثم احسب \(A'M'\).
+                        </div>
+                    </div>
+                    <div class="problem-card">
+                        <div class="problem-title" data-i18n="problem3_title">🎯 مسألة 3: القطع المستقيمة المتوازية</div>
+                        <div class="problem-text" data-i18n="problem3_text">
+                            إذا كان \(A\) و \(B\) نقطتين مختلفتين و \(A'\) و \(B'\) صورتاهما بالتناظر المركزي الذي مركزه \(O\)، أثبت أن \((AB) \parallel (A'B')\). (إرشاد: استعمل أن التناظر المركزي يحافظ على الاستقامة والمسافات).
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 4: Solutions -->
+            <div class="section" id="solutions-section">
+                <div class="section-header" onclick="toggleSection('solutions-body', 'solutions-toggle')" role="button"
+                     tabindex="0" aria-expanded="true" aria-controls="solutions-body"
+                     onkeydown="if(event.key==='Enter'||event.key===' ') toggleSection('solutions-body', 'solutions-toggle')">
+                    <div class="section-icon solutions-icon">✅</div>
+                    <div class="section-title">
+                        <h2 data-i18n="solutions_title">حلول</h2>
+                        <p data-i18n="solutions_subtitle">الحلول المفصلة خطوة بخطوة</p>
+                    </div>
+                    <span class="section-toggle open" id="solutions-toggle">▼</span>
+                </div>
+                <div class="section-body" id="solutions-body">
+                    <div style="margin-bottom: 1.5rem;">
+                        <h3 data-i18n="solutions_exercises_heading">📝 حلول التمارين</h3>
+                        <!-- Solution Exercise 1 -->
+                        <div class="solution-item">
+                            <div class="solution-question" data-i18n="sol_ex1_q">التمرين 1 — صور النقاط A و B و C:</div>
+                            <div class="solution-answer-rtl">
+                                <span data-i18n="sol_ex1_answer">\(A'(4, -1)\) | \(B'(2, -2)\) | \(C'(0, -3)\).</span>
+                            </div>
+                            <div class="solution-steps">
+                                <ol>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_line_1">الخطوة 1:</span> <span class="solution-step-math" data-i18n="step_ex1_1">نستعمل الصيغة \(M' = 2O - M\) مع \(O(1, 0)\).</span></span></li>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_line_2">الخطوة 2:</span> <span class="solution-step-math" data-i18n="step_ex1_2">\(A' = 2(1, 0) - (-2, 1) = (2 + 2, 0 - 1) = (4, -1)\).</span></span></li>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_line_3">الخطوة 3:</span> <span class="solution-step-math" data-i18n="step_ex1_3">\(B' = 2(1, 0) - (0, 2) = (2, -2)\) و \(C' = 2(1, 0) - (2, 3) = (0, -3)\).</span></span></li>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_line_4">الخطوة 4:</span> <span class="solution-step-math" data-i18n="step_ex1_4">نتحقّق من الاستقامة: ميل \(A'B'\) = \(\dfrac{-2-(-1)}{2-4} = \dfrac{-1}{-2} = 0.5\)، وميل \(B'C'\) = \(\dfrac{-3-(-2)}{0-2} = \dfrac{-1}{-2} = 0.5\). الميلان متساويان إذن \(A'\) و \(B'\) و \(C'\) على استقامة واحدة.</span></span></li>
+                                </ol>
+                            </div>
+                            <div class="solution-diagram">
+                                <div id="solution-ex1-board" class="jxgbox" style="width:100%; height:200px;"></div>
+                            </div>
+                        </div>
+                        <!-- Solution Exercise 2 -->
+                        <div class="solution-item">
+                            <div class="solution-question" data-i18n="sol_ex2_q">التمرين 2 — صور A و B و C بالنسبة إلى O:</div>
+                            <div class="solution-answer-rtl">
+                                <span data-i18n="sol_ex2_answer">\(A'(-1, -2)\) | \(B'(-2, -4)\) | \(C'(-3, -6)\). النقاط على استقامة واحدة.</span>
+                            </div>
+                            <div class="solution-steps">
+                                <ol>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_line_1">الخطوة 1:</span> <span class="solution-step-math" data-i18n="step_ex2_1">\(O(0, 0)\)، إذن \(M' = -M\).</span></span></li>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_line_2">الخطوة 2:</span> <span class="solution-step-math" data-i18n="step_ex2_2">\(A'(-1, -2)\)، \(B'(-2, -4)\)، \(C'(-3, -6)\).</span></span></li>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_line_3">الخطوة 3:</span> <span class="solution-step-math" data-i18n="step_ex2_3">التحقق من الاستقامة: \(\dfrac{-4-(-2)}{-2-(-1)} = \dfrac{-2}{-1} = 2\) و \(\dfrac{-6-(-4)}{-3-(-2)} = \dfrac{-2}{-1} = 2\). إذن النقاط على استقامة واحدة.</span></span></li>
+                                </ol>
+                            </div>
+                        </div>
+                        <!-- Solution Exercise 3 -->
+                        <div class="solution-item">
+                            <div class="solution-question" data-i18n="sol_ex3_q">التمرين 3 — حفظ المنتصف:</div>
+                            <div class="solution-answer-rtl">
+                                <span data-i18n="sol_ex3_answer">\(M(2, 1)\) و \(M'(0, 1)\). \(M'\) منتصف \([A'B']\).</span>
+                            </div>
+                            <div class="solution-steps">
+                                <ol>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_line_1">الخطوة 1:</span> <span class="solution-step-math" data-i18n="step_ex3_1">\(M\) منتصف \([AB]\) إذن \(M\left(\dfrac{0+4}{2}, \dfrac{0+2}{2}\right) = (2, 1)\).</span></span></li>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_line_2">الخطوة 2:</span> <span class="solution-step-math" data-i18n="step_ex3_2">\(A' = 2(1, 1) - (0, 0) = (2, 2)\) و \(B' = 2(1, 1) - (4, 2) = (-2, 0)\).</span></span></li>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_line_3">الخطوة 3:</span> <span class="solution-step-math" data-i18n="step_ex3_3">منتصف \([A'B']\) هو \(\left(\dfrac{2-2}{2}, \dfrac{2+0}{2}\right) = (0, 1) = M'\). إذن \(M'\) منتصف \([A'B']\).</span></span></li>
+                                </ol>
+                            </div>
+                        </div>
+                        <!-- Solution Exercise 4 -->
+                        <div class="solution-item">
+                            <div class="solution-question" data-i18n="sol_ex4_q">التمرين 4 — صحيح أم خطأ:</div>
+                            <div class="solution-answer-rtl">
+                                <span data-i18n="sol_ex4_answer">صحيح. التناظر المركزي يحافظ على الاستقامة والترتيب، إذن \(B'\) بين \(A'\) و \(C'\).</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 data-i18n="solutions_problems_heading">🧩 حلول المسائل</h3>
+                        <!-- Solution Problem 1 -->
+                        <div class="solution-item">
+                            <div class="solution-question" data-i18n="sol_prob1_q">المسألة 1 — الطريق والقرى:</div>
+                            <div class="solution-answer-rtl">
+                                <span data-i18n="sol_prob1_answer">\(A'\) و \(B'\) و \(C'\) على استقامة واحدة، \(B'\) بين \(A'\) و \(C'\)، و \(A'C' = 7\text{ km}\).</span>
+                            </div>
+                            <div class="solution-steps">
+                                <ol>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_line_1">الخطوة 1:</span> <span class="solution-step-math" data-i18n="step_prob1_1">بما أن \(A\) و \(B\) و \(C\) على استقامة واحدة، فحسب قاعدة حفظ الاستقامة، \(A'\) و \(B'\) و \(C'\) على استقامة واحدة.</span></span></li>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_line_2">الخطوة 2:</span> <span class="solution-step-math" data-i18n="step_prob1_2">حسب حفظ الترتيب، بما أن \(B\) بين \(A\) و \(C\) فإن \(B'\) بين \(A'\) و \(C'\).</span></span></li>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_line_3">الخطوة 3:</span> <span class="solution-step-math" data-i18n="step_prob1_3">حسب حفظ المسافات، \(A'B' = AB = 3\text{ km}\) و \(B'C' = BC = 4\text{ km}\)، إذن \(A'C' = 3 + 4 = 7\text{ km}\).</span></span></li>
+                                </ol>
+                            </div>
+                        </div>
+                        <!-- Solution Problem 2 -->
+                        <div class="solution-item">
+                            <div class="solution-question" data-i18n="sol_prob2_q">المسألة 2 — تصميم هندسي:</div>
+                            <div class="solution-answer-rtl">
+                                <span data-i18n="sol_prob2_answer">\(M'\) منتصف \([A'B']\)، و \(A'M' = 4\text{ cm}\).</span>
+                            </div>
+                            <div class="solution-steps">
+                                <ol>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_line_1">الخطوة 1:</span> <span class="solution-step-math" data-i18n="step_prob2_1">\(M\) منتصف \([AB]\)، وحسب قاعدة حفظ المنتصف فإن \(M'\) منتصف \([A'B']\).</span></span></li>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_line_2">الخطوة 2:</span> <span class="solution-step-math" data-i18n="step_prob2_2">حسب حفظ المسافات، \(A'B' = AB = 8\text{ cm}\). وبما أن \(M'\) المنتصف فإن \(A'M' = \dfrac{A'B'}{2} = 4\text{ cm}\).</span></span></li>
+                                </ol>
+                            </div>
+                        </div>
+                        <!-- Solution Problem 3 -->
+                        <div class="solution-item">
+                            <div class="solution-question" data-i18n="sol_prob3_q">المسألة 3 — القطع المستقيمة المتوازية:</div>
+                            <div class="solution-answer-rtl">
+                                <span data-i18n="sol_prob3_answer">\((AB) \parallel (A'B')\).</span>
+                            </div>
+                            <div class="solution-steps">
+                                <ol>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_line_1">الخطوة 1:</span> <span class="solution-step-math" data-i18n="step_prob3_1">بما أن \(A\) و \(B\) نقطتان مختلفتان، فإن \((AB)\) مستقيم. صورة هذا المستقيم بالتناظر المركزي هي المستقيم \((A'B')\).</span></span></li>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_line_2">الخطوة 2:</span> <span class="solution-step-math" data-i18n="step_prob3_2">التناظر المركزي يحول كل مستقيم لا يشمل المركز إلى مستقيم يوازيه. وبما أن \(O\) ليس بالضرورة على \((AB)\)، فإن \((A'B') \parallel (AB)\)، وإذا كان \(O \in (AB)\) فإن \((A'B') = (AB)\).</span></span></li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="site-footer">
+            <div class="footer-col">
+                <h4 data-i18n="footer_dev">معلومات المطوّر</h4>
+                <p data-i18n="footer_dev_name">طور بواسطة: ماجري زياد</p>
+                <p data-i18n="footer_hosting">الاستضافة: Github, Netlify, Supabase</p>
+            </div>
+            <div class="footer-col">
+                <h4 data-i18n="footer_links">روابط</h4>
+                <a href="#" data-i18n="footer_contact">اتصل بنا</a>
+                <a href="#" data-i18n="footer_policies">السياسات</a>
+            </div>
+            <div class="footer-col">
+                <h4 data-i18n="footer_version">الإصدار</h4>
+                <p data-i18n="footer_version_num">الإصدار: 0.0.2</p>
+                <p data-i18n="footer_rights">جميع الحقوق محفوظة &copy; 2025</p>
+            </div>
+        </footer>
+
+        <!-- Print-only custom footer -->
+        <div class="print-footer">
+            <p data-i18n="print_footer_dev">طور بواسطة: ماجري زياد</p>
+            <p data-i18n="print_footer_version">الإصدار: 0.0.2</p>
+            <p data-i18n="print_footer_page">عنوان الصفحة: maths_y8_geo_module2_lesson1_sub3.html</p>
+        </div>
+    </div>
+
+    <!-- JSXGraph Diagrams and Interactive Exercises -->
+    <script>
+        function t(key) {
+            const lang = document.documentElement.lang || 'ar';
+            return (translations[lang] && translations[lang][key]) || key;
+        }
+
+        // Helper: create coordinate grid (O, I, J)
+        function createCoordinateGrid(board, options = {}) {
+            board.create('axis', [[0,0], [1,0]], { name: 'x', withLabel: true, label: { position: 'rt', offset: [-10, 10] } });
+            board.create('axis', [[0,0], [0,1]], { name: 'y', withLabel: true, label: { position: 'rt', offset: [10, -10] } });
+            board.create('point', [0,0], { name: 'O', size: 2, color: '#333', fixed: true });
+            board.create('point', [1,0], { name: 'I', size: 2, color: '#333', fixed: true });
+            board.create('point', [0,1], { name: 'J', size: 2, color: '#333', fixed: true });
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // ---------- Rule 1: Central symmetry preserves collinearity (interactive) ----------
+            const boardRule1 = initJSXGraph('diagram-rule1', {
+                boundingbox: [-6, 6, 6, -6], axis: false, showNavigation: false, showCopyright: false
+            });
+            if (boardRule1) {
+                createCoordinateGrid(boardRule1);
+
+                // Center O (draggable, but not required to be at origin)
+                const O = boardRule1.create('point', [1, 0], { name: 'O', size: 4, color: '#3498db' });
+
+                // Three collinear points A, B, C (draggable along a line)
+                const A = boardRule1.create('point', [-2, 1], { name: 'A', size: 3, color: '#e74c3c' });
+                const B = boardRule1.create('point', [0, 2], { name: 'B', size: 3, color: '#27ae60' });
+                const C = boardRule1.create('point', [2, 3], { name: 'C', size: 3, color: '#8e44ad' });
+
+                // Line through A, B, C
+                boardRule1.create('line', [A, C], { strokeWidth: 1.5, strokeColor: '#7f8c8d', dash: 1 });
+
+                // Images: A' = 2O - A, etc.
+                const A_prime = boardRule1.create('point', [
+                    function() { return 2*O.X() - A.X(); },
+                    function() { return 2*O.Y() - A.Y(); }
+                ], { name: "A'", size: 3, color: '#e74c3c', fixed: true });
+
+                const B_prime = boardRule1.create('point', [
+                    function() { return 2*O.X() - B.X(); },
+                    function() { return 2*O.Y() - B.Y(); }
+                ], { name: "B'", size: 3, color: '#27ae60', fixed: true });
+
+                const C_prime = boardRule1.create('point', [
+                    function() { return 2*O.X() - C.X(); },
+                    function() { return 2*O.Y() - C.Y(); }
+                ], { name: "C'", size: 3, color: '#8e44ad', fixed: true });
+
+                // Line through A', B', C' (parallel to (AC))
+                boardRule1.create('line', [A_prime, C_prime], { strokeWidth: 1.5, strokeColor: '#e67e22', dash: 1 });
+
+                // Segments [AA'], [BB'], [CC'] passing through O
+                boardRule1.create('segment', [A, A_prime], { strokeWidth: 1, strokeColor: '#95a5a6', dash: 3 });
+                boardRule1.create('segment', [B, B_prime], { strokeWidth: 1, strokeColor: '#95a5a6', dash: 3 });
+                boardRule1.create('segment', [C, C_prime], { strokeWidth: 1, strokeColor: '#95a5a6', dash: 3 });
+
+                // Legend
+                boardRule1.create('text', [-5.5, 5.3, () => t('graph_legend')], { fontSize: 13, color: '#1a5276' });
+            }
+
+            // ---------- Exercise 1: Interactive (place A', B', C') ----------
+            const boardEx1 = initJSXGraph('exercise1-board', {
+                boundingbox: [-6, 6, 6, -6], axis: false, showNavigation: false, showCopyright: false
+            });
+            if (boardEx1) {
+                createCoordinateGrid(boardEx1);
+
+                // Center O (fixed)
+                const Oex = boardEx1.create('point', [1, 0], { name: 'O', size: 4, color: '#3498db', fixed: true });
+
+                // Original collinear points A, B, C (fixed)
+                const Aex = boardEx1.create('point', [-2, 1], { name: 'A', size: 3, color: '#e74c3c', fixed: true });
+                const Bex = boardEx1.create('point', [0, 2], { name: 'B', size: 3, color: '#27ae60', fixed: true });
+                const Cex = boardEx1.create('point', [2, 3], { name: 'C', size: 3, color: '#8e44ad', fixed: true });
+                boardEx1.create('line', [Aex, Cex], { strokeWidth: 1.5, strokeColor: '#7f8c8d', dash: 1 });
+
+                // User image points A'?, B'?, C'?
+                const A_user = boardEx1.create('point', [-4, 1], { name: "A'?", size: 3, color: '#f39c12' });
+                const B_user = boardEx1.create('point', [0, 0], { name: "B'?", size: 3, color: '#f39c12' });
+                const C_user = boardEx1.create('point', [2, 3], { name: "C'?", size: 3, color: '#f39c12' });
+
+                // Helper: expected image M' = 2O - M
+                function expectedImage(M) {
+                    return [2*Oex.X() - M.X(), 2*Oex.Y() - M.Y()];
+                }
+
+                window.checkEx1 = function() {
+                    const expA = expectedImage(Aex);
+                    const expB = expectedImage(Bex);
+                    const expC = expectedImage(Cex);
+                    const userPts = [A_user, B_user, C_user];
+                    const expPts = [expA, expB, expC];
+                    let allCorrect = true;
+                    for (let i = 0; i < 3; i++) {
+                        const dist = Math.sqrt((userPts[i].X()-expPts[i][0])**2 + (userPts[i].Y()-expPts[i][1])**2);
+                        if (dist > 0.5) { allCorrect = false; break; }
+                    }
+                    const resultDiv = document.getElementById('ex1-result');
+                    if (allCorrect) {
+                        resultDiv.textContent = t('correct_msg');
+                        resultDiv.className = 'check-result correct';
+                    } else {
+                        resultDiv.textContent = t('incorrect_msg');
+                        resultDiv.className = 'check-result incorrect';
+                    }
+                };
+                window.resetEx1 = function() {
+                    A_user.moveTo([-4, 1]);
+                    B_user.moveTo([0, 0]);
+                    C_user.moveTo([2, 3]);
+                    document.getElementById('ex1-result').textContent = '';
+                    document.getElementById('ex1-ax').value = -4;
+                    document.getElementById('ex1-ay').value = 1;
+                    document.getElementById('ex1-bx').value = 0;
+                    document.getElementById('ex1-by').value = 0;
+                    document.getElementById('ex1-cx').value = 2;
+                    document.getElementById('ex1-cy').value = 3;
+                };
+                window.applyCoordsEx1 = function() {
+                    const ax = parseFloat(document.getElementById('ex1-ax').value);
+                    const ay = parseFloat(document.getElementById('ex1-ay').value);
+                    const bx = parseFloat(document.getElementById('ex1-bx').value);
+                    const by = parseFloat(document.getElementById('ex1-by').value);
+                    const cx = parseFloat(document.getElementById('ex1-cx').value);
+                    const cy = parseFloat(document.getElementById('ex1-cy').value);
+                    if ([ax, ay, bx, by, cx, cy].some(isNaN)) {
+                        alert(t('invalid_coords'));
+                        return;
+                    }
+                    A_user.moveTo([ax, ay]);
+                    B_user.moveTo([bx, by]);
+                    C_user.moveTo([cx, cy]);
+                    document.getElementById('ex1-result').textContent = '';
+                };
+            }
+
+            // ---------- Solution diagram for Exercise 1 (static) ----------
+            const boardSolEx1 = initJSXGraph('solution-ex1-board', {
+                boundingbox: [-3, 4, 6, -5], axis: false, showNavigation: false, showCopyright: false
+            });
+            if (boardSolEx1) {
+                createCoordinateGrid(boardSolEx1);
+                const O = boardSolEx1.create('point', [1, 0], { name: 'O', size: 3, color: '#3498db', fixed: true });
+                const A = boardSolEx1.create('point', [-2, 1], { name: 'A', size: 3, color: '#e74c3c', fixed: true });
+                const B = boardSolEx1.create('point', [0, 2], { name: 'B', size: 3, color: '#27ae60', fixed: true });
+                const C = boardSolEx1.create('point', [2, 3], { name: 'C', size: 3, color: '#8e44ad', fixed: true });
+                boardSolEx1.create('line', [A, C], { strokeWidth: 1.5, strokeColor: '#7f8c8d', dash: 1 });
+                const Ap = boardSolEx1.create('point', [4, -1], { name: "A'", size: 3, color: '#e74c3c', fixed: true });
+                const Bp = boardSolEx1.create('point', [2, -2], { name: "B'", size: 3, color: '#27ae60', fixed: true });
+                const Cp = boardSolEx1.create('point', [0, -3], { name: "C'", size: 3, color: '#8e44ad', fixed: true });
+                boardSolEx1.create('line', [Ap, Cp], { strokeWidth: 1.5, strokeColor: '#e67e22', dash: 1 });
+            }
+
+            // Observe language changes
+            const observer = new MutationObserver(() => {
+                [boardRule1, boardEx1, boardSolEx1].forEach(b => {
+                    if (b) b.update();
+                });
+            });
+            observer.observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
+        });
+    </script>
+
+    <!-- TRANSLATION OBJECT (full trilingual) -->
+    <script>
+        const translations = {
+            ar: {
+                page_title: "التناظر المركزي و الاستقامة - رياضيات السنة الثامنة أساسي",
+                print_header: "السنة الثامنة أساسي - الهندسة - الدرس 1 - الجزء 3 - ج",
+                site_header: "Educational Dashboard - Mathematics",
+                back_to_index: "← العودة للفهرس",
+                nav_badge: "الدرس 1 | الجزء 3 | ج",
+                next_lesson: "التالي ←",
+                language_label: "اللغة",
+                lang_ar: "العربية",
+                lang_en: "English",
+                lang_fr: "Français",
+                print_label: "اختر القسم للطباعة:",
+                print_all: "الدرس كاملاً",
+                print_rules: "القواعد",
+                print_exercises: "التمارين",
+                print_problems: "المسائل",
+                print_solutions: "الحلول",
+                print_button: "🖨️ طباعة",
+                module_tag: "📘 الهندسة | الدرس 1 | الجزء 3 | ج",
+                lesson_title: "التناظر المركزي و الاستقامة",
+                lesson_subtitle: "حفظ الاستقامة والترتيب والمنتصف بالتناظر المركزي",
+                rules_title: "القواعد",
+                rules_subtitle: "خصائص التناظر المركزي المتعلقة بالاستقامة",
+                rule1_title: "قاعدة 1: حفظ الاستقامة",
+                rule1_text: "التناظر المركزي يحافظ على الاستقامة: إذا كانت A و B و C ثلاث نقط على استقامة واحدة، فإن صورها A' و B' و C' تكون أيضاً على استقامة واحدة.",
+                rule1_example: "إذا كانت A و B و C تنتمي إلى نفس المستقيم (d)، فإن A' و B' و C' تنتمي إلى مستقيم واحد (d').",
+                rule1_caption: "اسحب النقطة A أو B أو C أو المركز O لترى أن الاستقامة محفوظة",
+                rule2_title: "قاعدة 2: حفظ الترتيب",
+                rule2_text: "التناظر المركزي يحافظ على الترتيب: إذا كانت B بين A و C، فإن B' تكون بين A' و C'.",
+                rule2_example: "إذا كان \\(AB = 3\\text{ cm}\\) و \\(BC = 2\\text{ cm}\\) مع B بين A و C، فإن \\(A'B' = 3\\text{ cm}\\) و \\(B'C' = 2\\text{ cm}\\) و B' بين A' و C'.",
+                rule3_title: "قاعدة 3: حفظ المنتصف",
+                rule3_text: "التناظر المركزي يحافظ على المنتصف: إذا كانت M منتصف القطعة [AB]، فإن صورتها M' تكون منتصف القطعة [A'B'].",
+                rule3_example: "إذا كانت M منتصف [AB]، فإن M' منتصف [A'B']، و \\(A'M' = M'B'\\).",
+                graph_legend: "الاستقامة محفوظة: A'B'C' على استقامة واحدة",
+                exercises_title: "تمارين",
+                exercises_subtitle: "تمرّن على حفظ الاستقامة والترتيب والمنتصف",
+                exercise1_q: "النقط A و B و C على استقامة واحدة. أوجد صورها A' و B' و C' بالنسبة إلى المركز O. لاحظ أن الاستقامة محفوظة.",
+                exercise1_caption: "اسحب النقاط أو أدخل إحداثياتها.",
+                exercise2_q: "إذا كانت A(1, 2) و B(2, 4) و C(3, 6) على استقامة واحدة، و O(0, 0)، فأوجد A' و B' و C' وتحقّق من أن الاستقامة محفوظة.",
+                exercise3_q: "لتكن A(0, 0) و B(4, 2). النقطة M منتصف [AB]. إذا كان O(1, 1)، أثبت أن M' منتصف [A'B'].",
+                exercise4_q: "أجب بصحيح أو خطأ مع التعليل: إذا كانت A و B و C على استقامة واحدة وكان B بين A و C، فإن B' تكون بين A' و C'.",
+                answer_placeholder: "اكتب إجابتك هنا...",
+                check_btn: "تحقق",
+                reset_btn: "إعادة",
+                correct_msg: "أحسنت! إجابة صحيحة.",
+                incorrect_msg: "حاول مرة أخرى.",
+                points_coords_display: "\\(A(-2, 1)\\) | \\(B(0, 2)\\) | \\(C(2, 3)\\) | \\(O(1, 0)\\)",
+                coord_label_A_prime: "\\(A'\\):",
+                coord_label_B_prime: "\\(B'\\):",
+                coord_label_C_prime: "\\(C'\\):",
+                coord_label_x: "x:",
+                coord_label_y: "y:",
+                apply_coords_btn: "تعيين",
+                invalid_coords: "يرجى إدخال قيم صحيحة للإحداثيات.",
+                problems_title: "مسائل",
+                problems_subtitle: "مسائل تطبيقية على الاستقامة بالتناظر المركزي",
+                problem1_title: "🛣️ مسألة 1: الطريق والقرى",
+                problem1_text: "ثلاث قرى A و B و C على استقامة واحدة على طول طريق، بحيث B بين A و C، و \\(AB = 3\\text{ km}\\) و \\(BC = 4\\text{ km}\\). أرادت السلطة المحلية تعيين مواقع جديدة A' و B' و C' متناظرة بالنسبة إلى نقطة O تمثل مركز المنطقة. أثبت أن A' و B' و C' على استقامة واحدة، وأن B' بين A' و C'، ثم احسب A'C'.",
+                problem2_title: "📐 مسألة 2: تصميم هندسي",
+                problem2_text: "في تصميم هندسي، القطعة [AB] طولها \\(8\\text{ cm}\\)، و M منتصفها. أراد المصمم إنشاء A' و B' و M' متناظرة بالنسبة إلى نقطة O. أثبت أن M' منتصف [A'B']، ثم احسب A'M'.",
+                problem3_title: "🎯 مسألة 3: القطع المستقيمة المتوازية",
+                problem3_text: "إذا كان A و B نقطتين مختلفتين و A' و B' صورتاهما بالتناظر المركزي الذي مركزه O، أثبت أن \\((AB) \\parallel (A'B')\\). (إرشاد: استعمل أن التناظر المركزي يحافظ على الاستقامة والمسافات).",
+                solutions_title: "حلول",
+                solutions_subtitle: "الحلول المفصلة خطوة بخطوة",
+                solutions_exercises_heading: "📝 حلول التمارين",
+                solutions_problems_heading: "🧩 حلول المسائل",
+                sol_ex1_q: "التمرين 1 — صور النقاط A و B و C:",
+                sol_ex1_answer: "A'(4, -1) | B'(2, -2) | C'(0, -3).",
+                sol_ex2_q: "التمرين 2 — صور A و B و C بالنسبة إلى O:",
+                sol_ex2_answer: "A'(-1, -2) | B'(-2, -4) | C'(-3, -6). النقاط على استقامة واحدة.",
+                sol_ex3_q: "التمرين 3 — حفظ المنتصف:",
+                sol_ex3_answer: "M(2, 1) و M'(0, 1). M' منتصف [A'B'].",
+                sol_ex4_q: "التمرين 4 — صحيح أم خطأ:",
+                sol_ex4_answer: "صحيح. التناظر المركزي يحافظ على الاستقامة والترتيب، إذن B' بين A' و C'.",
+                sol_prob1_q: "المسألة 1 — الطريق والقرى:",
+                sol_prob2_q: "المسألة 2 — تصميم هندسي:",
+                sol_prob3_q: "المسألة 3 — القطع المستقيمة المتوازية:",
+                sol_prob1_answer: "A' و B' و C' على استقامة واحدة، B' بين A' و C'، و \\(A'C' = 7\\text{ km}\\).",
+                sol_prob2_answer: "M' منتصف [A'B']، و \\(A'M' = 4\\text{ cm}\\).",
+                sol_prob3_answer: "\\((AB) \\parallel (A'B')\\).",
+                step_line_1: "الخطوة 1:",
+                step_line_2: "الخطوة 2:",
+                step_line_3: "الخطوة 3:",
+                step_line_4: "الخطوة 4:",
+                step_ex1_1: "نستعمل الصيغة M' = 2O - M مع O(1, 0).",
+                step_ex1_2: "A' = 2(1, 0) - (-2, 1) = (2 + 2, 0 - 1) = (4, -1).",
+                step_ex1_3: "B' = 2(1, 0) - (0, 2) = (2, -2) و C' = 2(1, 0) - (2, 3) = (0, -3).",
+                step_ex1_4: "نتحقّق من الاستقامة: ميل A'B' = (-2-(-1))/(2-4) = 0.5، وميل B'C' = (-3-(-2))/(0-2) = 0.5. الميلان متساويان إذن A' و B' و C' على استقامة واحدة.",
+                step_ex2_1: "O(0, 0)، إذن M' = -M.",
+                step_ex2_2: "A'(-1, -2)، B'(-2, -4)، C'(-3, -6).",
+                step_ex2_3: "التحقق من الاستقامة: ميل A'B' = (-4-(-2))/(-2-(-1)) = 2 وميل B'C' = (-6-(-4))/(-3-(-2)) = 2. إذن النقاط على استقامة واحدة.",
+                step_ex3_1: "M منتصف [AB] إذن M = ((0+4)/2, (0+2)/2) = (2, 1).",
+                step_ex3_2: "A' = 2(1, 1) - (0, 0) = (2, 2) و B' = 2(1, 1) - (4, 2) = (-2, 0).",
+                step_ex3_3: "منتصف [A'B'] هو ((2-2)/2, (2+0)/2) = (0, 1) = M'. إذن M' منتصف [A'B'].",
+                step_prob1_1: "بما أن A و B و C على استقامة واحدة، فحسب قاعدة حفظ الاستقامة، A' و B' و C' على استقامة واحدة.",
+                step_prob1_2: "حسب حفظ الترتيب، بما أن B بين A و C فإن B' بين A' و C'.",
+                step_prob1_3: "حسب حفظ المسافات، A'B' = AB = 3 km و B'C' = BC = 4 km، إذن A'C' = 3 + 4 = 7 km.",
+                step_prob2_1: "M منتصف [AB]، وحسب قاعدة حفظ المنتصف فإن M' منتصف [A'B'].",
+                step_prob2_2: "حسب حفظ المسافات، A'B' = AB = 8 cm. وبما أن M' المنتصف فإن A'M' = A'B'/2 = 4 cm.",
+                step_prob3_1: "بما أن A و B نقطتان مختلفتان، فإن (AB) مستقيم. صورة هذا المستقيم بالتناظر المركزي هي المستقيم (A'B').",
+                step_prob3_2: "التناظر المركزي يحول كل مستقيم لا يشمل المركز إلى مستقيم يوازيه. وبما أن O ليس بالضرورة على (AB)، فإن (A'B') يوازي (AB)، وإذا كان O ينتمي إلى (AB) فإن (A'B') = (AB).",
+                cm_unit: "cm",
+                footer_dev: "معلومات المطوّر",
+                footer_dev_name: "طور بواسطة: ماجري زياد",
+                footer_hosting: "الاستضافة: Github, Netlify, Supabase",
+                footer_links: "روابط",
+                footer_contact: "اتصل بنا",
+                footer_policies: "السياسات",
+                footer_version: "الإصدار",
+                footer_version_num: "الإصدار: 0.0.2",
+                footer_rights: "جميع الحقوق محفوظة © 2025",
+                print_footer_dev: "طور بواسطة: ماجري زياد",
+                print_footer_version: "الإصدار: 0.0.2",
+                print_footer_page: "عنوان الصفحة: maths_y8_geo_module2_lesson1_sub3.html"
+            },
+            en: {
+                page_title: "Central Symmetry and Collinearity - Math Year 8",
+                print_header: "Year 8 – Geometry – Lesson 1 – Part 3 – c",
+                site_header: "Educational Dashboard - Mathematics",
+                back_to_index: "← Back to Index",
+                nav_badge: "Lesson 1 | Part 3 | c",
+                next_lesson: "Next →",
+                language_label: "Language",
+                lang_ar: "العربية",
+                lang_en: "English",
+                lang_fr: "Français",
+                print_label: "Select section to print:",
+                print_all: "Full lesson",
+                print_rules: "Rules",
+                print_exercises: "Exercises",
+                print_problems: "Problems",
+                print_solutions: "Solutions",
+                print_button: "🖨️ Print",
+                module_tag: "📘 Geometry | Lesson 1 | Part 3 | c",
+                lesson_title: "Central Symmetry and Collinearity",
+                lesson_subtitle: "Preservation of collinearity, order, and midpoint under central symmetry",
+                rules_title: "Rules",
+                rules_subtitle: "Properties of central symmetry related to collinearity",
+                rule1_title: "Rule 1: Collinearity is preserved",
+                rule1_text: "Central symmetry preserves collinearity: if A, B, C are three collinear points, then their images A', B', C' are also collinear.",
+                rule1_example: "If A, B, C belong to the same line (d), then A', B', C' belong to a single line (d').",
+                rule1_caption: "Drag point A or B or C or the center O to see that collinearity is preserved",
+                rule2_title: "Rule 2: Order is preserved",
+                rule2_text: "Central symmetry preserves order: if B is between A and C, then B' is between A' and C'.",
+                rule2_example: "If \\(AB = 3\\text{ cm}\\) and \\(BC = 2\\text{ cm}\\) with B between A and C, then \\(A'B' = 3\\text{ cm}\\), \\(B'C' = 2\\text{ cm}\\), and B' is between A' and C'.",
+                rule3_title: "Rule 3: Midpoint is preserved",
+                rule3_text: "Central symmetry preserves midpoints: if M is the midpoint of [AB], then its image M' is the midpoint of [A'B'].",
+                rule3_example: "If M is the midpoint of [AB], then M' is the midpoint of [A'B'], and \\(A'M' = M'B'\\).",
+                graph_legend: "Collinearity is preserved: A', B', C' are collinear",
+                exercises_title: "Exercises",
+                exercises_subtitle: "Practice preservation of collinearity, order, and midpoint",
+                exercise1_q: "Points A, B, C are collinear. Find their images A', B', C' with respect to center O. Note that collinearity is preserved.",
+                exercise1_caption: "Drag the points or enter their coordinates.",
+                exercise2_q: "If A(1, 2), B(2, 4), C(3, 6) are collinear, and O(0, 0), find A', B', C' and verify that collinearity is preserved.",
+                exercise3_q: "Let A(0, 0), B(4, 2). Point M is the midpoint of [AB]. If O(1, 1), prove that M' is the midpoint of [A'B'].",
+                exercise4_q: "Answer true or false with justification: if A, B, C are collinear with B between A and C, then B' is between A' and C'.",
+                answer_placeholder: "Write your answer here...",
+                check_btn: "Check",
+                reset_btn: "Reset",
+                correct_msg: "Well done! Correct answer.",
+                incorrect_msg: "Try again.",
+                points_coords_display: "\\(A(-2, 1)\\) | \\(B(0, 2)\\) | \\(C(2, 3)\\) | \\(O(1, 0)\\)",
+                coord_label_A_prime: "\\(A'\\):",
+                coord_label_B_prime: "\\(B'\\):",
+                coord_label_C_prime: "\\(C'\\):",
+                coord_label_x: "x:",
+                coord_label_y: "y:",
+                apply_coords_btn: "Apply",
+                invalid_coords: "Please enter valid coordinates.",
+                problems_title: "Problems",
+                problems_subtitle: "Applied problems on collinearity under central symmetry",
+                problem1_title: "🛣️ Problem 1: The road and the villages",
+                problem1_text: "Three villages A, B, C lie on a straight road, with B between A and C, and \\(AB = 3\\text{ km}\\), \\(BC = 4\\text{ km}\\). Local authorities want to assign new locations A', B', C' symmetric with respect to a point O representing the region's center. Prove that A', B', C' are collinear, that B' is between A' and C', and compute A'C'.",
+                problem2_title: "📐 Problem 2: Geometric design",
+                problem2_text: "In a geometric design, segment [AB] has length \\(8\\text{ cm}\\), and M is its midpoint. The designer wants to create A', B', M' symmetric with respect to a point O. Prove that M' is the midpoint of [A'B'], then compute A'M'.",
+                problem3_title: "🎯 Problem 3: Parallel segments",
+                problem3_text: "If A and B are two distinct points and A', B' their images under the central symmetry with center O, prove that \\((AB) \\parallel (A'B')\\). (Hint: use the fact that central symmetry preserves collinearity and distances).",
+                solutions_title: "Solutions",
+                solutions_subtitle: "Detailed step-by-step solutions",
+                solutions_exercises_heading: "📝 Exercise Solutions",
+                solutions_problems_heading: "🧩 Problem Solutions",
+                sol_ex1_q: "Exercise 1 — Images of A, B, C:",
+                sol_ex1_answer: "A'(4, -1) | B'(2, -2) | C'(0, -3).",
+                sol_ex2_q: "Exercise 2 — Images of A, B, C with respect to O:",
+                sol_ex2_answer: "A'(-1, -2) | B'(-2, -4) | C'(-3, -6). Points are collinear.",
+                sol_ex3_q: "Exercise 3 — Midpoint preservation:",
+                sol_ex3_answer: "M(2, 1) and M'(0, 1). M' is the midpoint of [A'B'].",
+                sol_ex4_q: "Exercise 4 — True or false:",
+                sol_ex4_answer: "True. Central symmetry preserves collinearity and order, so B' is between A' and C'.",
+                sol_prob1_q: "Problem 1 — The road and the villages:",
+                sol_prob2_q: "Problem 2 — Geometric design:",
+                sol_prob3_q: "Problem 3 — Parallel segments:",
+                sol_prob1_answer: "A', B', C' are collinear, B' is between A' and C', and \\(A'C' = 7\\text{ km}\\).",
+                sol_prob2_answer: "M' is the midpoint of [A'B'], and \\(A'M' = 4\\text{ cm}\\).",
+                sol_prob3_answer: "\\((AB) \\parallel (A'B')\\).",
+                step_line_1: "Step 1:",
+                step_line_2: "Step 2:",
+                step_line_3: "Step 3:",
+                step_line_4: "Step 4:",
+                step_ex1_1: "Use the formula M' = 2O - M with O(1, 0).",
+                step_ex1_2: "A' = 2(1, 0) - (-2, 1) = (2 + 2, 0 - 1) = (4, -1).",
+                step_ex1_3: "B' = 2(1, 0) - (0, 2) = (2, -2) and C' = 2(1, 0) - (2, 3) = (0, -3).",
+                step_ex1_4: "Verify collinearity: slope A'B' = (-2-(-1))/(2-4) = 0.5, slope B'C' = (-3-(-2))/(0-2) = 0.5. Equal slopes, so A', B', C' are collinear.",
+                step_ex2_1: "O(0, 0), so M' = -M.",
+                step_ex2_2: "A'(-1, -2), B'(-2, -4), C'(-3, -6).",
+                step_ex2_3: "Verify: slope A'B' = (-4-(-2))/(-2-(-1)) = 2, slope B'C' = (-6-(-4))/(-3-(-2)) = 2. Points are collinear.",
+                step_ex3_1: "M is the midpoint of [AB], so M = ((0+4)/2, (0+2)/2) = (2, 1).",
+                step_ex3_2: "A' = 2(1, 1) - (0, 0) = (2, 2) and B' = 2(1, 1) - (4, 2) = (-2, 0).",
+                step_ex3_3: "Midpoint of [A'B'] = ((2-2)/2, (2+0)/2) = (0, 1) = M'. So M' is the midpoint of [A'B'].",
+                step_prob1_1: "Since A, B, C are collinear, by the collinearity preservation rule, A', B', C' are collinear.",
+                step_prob1_2: "By order preservation, since B is between A and C, B' is between A' and C'.",
+                step_prob1_3: "By distance preservation, A'B' = AB = 3 km and B'C' = BC = 4 km, so A'C' = 3 + 4 = 7 km.",
+                step_prob2_1: "M is the midpoint of [AB], so by midpoint preservation, M' is the midpoint of [A'B'].",
+                step_prob2_2: "By distance preservation, A'B' = AB = 8 cm. Since M' is the midpoint, A'M' = A'B'/2 = 4 cm.",
+                step_prob3_1: "Since A and B are distinct, (AB) is a line. Its image under central symmetry is the line (A'B').",
+                step_prob3_2: "Central symmetry maps every line not containing the center to a parallel line. Since O is not necessarily on (AB), (A'B') is parallel to (AB); if O lies on (AB), then (A'B') = (AB).",
+                cm_unit: "cm",
+                footer_dev: "Developer Info",
+                footer_dev_name: "Developed by: Majri Zied",
+                footer_hosting: "Hosting: Github, Netlify, Supabase",
+                footer_links: "Links",
+                footer_contact: "Contact us",
+                footer_policies: "Policies",
+                footer_version: "Version",
+                footer_version_num: "Version: 0.0.2",
+                footer_rights: "All rights reserved © 2025",
+                print_footer_dev: "Developed by: Majri Zied",
+                print_footer_version: "Version: 0.0.2",
+                print_footer_page: "Page address: maths_y8_geo_module2_lesson1_sub3.html"
+            },
+            fr: {
+                page_title: "Symétrie centrale et alignement - Math 8ème année",
+                print_header: "8ème année – Géométrie – Leçon 1 – Partie 3 – c",
+                site_header: "Educational Dashboard - Mathematics",
+                back_to_index: "← Retour à l'index",
+                nav_badge: "Leçon 1 | Partie 3 | c",
+                next_lesson: "Suivant →",
+                language_label: "Langue",
+                lang_ar: "العربية",
+                lang_en: "English",
+                lang_fr: "Français",
+                print_label: "Choisir la section à imprimer :",
+                print_all: "Leçon complète",
+                print_rules: "Règles",
+                print_exercises: "Exercices",
+                print_problems: "Problèmes",
+                print_solutions: "Solutions",
+                print_button: "🖨️ Imprimer",
+                module_tag: "📘 Géométrie | Leçon 1 | Partie 3 | c",
+                lesson_title: "Symétrie centrale et alignement",
+                lesson_subtitle: "Conservation de l'alignement, de l'ordre et du milieu par la symétrie centrale",
+                rules_title: "Règles",
+                rules_subtitle: "Propriétés de la symétrie centrale liées à l'alignement",
+                rule1_title: "Règle 1 : Conservation de l'alignement",
+                rule1_text: "La symétrie centrale conserve l'alignement : si A, B, C sont trois points alignés, alors leurs images A', B', C' sont également alignées.",
+                rule1_example: "Si A, B, C appartiennent à la même droite (d), alors A', B', C' appartiennent à une même droite (d').",
+                rule1_caption: "Faites glisser le point A ou B ou C ou le centre O pour voir que l'alignement est conservé",
+                rule2_title: "Règle 2 : Conservation de l'ordre",
+                rule2_text: "La symétrie centrale conserve l'ordre : si B est entre A et C, alors B' est entre A' et C'.",
+                rule2_example: "Si \\(AB = 3\\text{ cm}\\) et \\(BC = 2\\text{ cm}\\) avec B entre A et C, alors \\(A'B' = 3\\text{ cm}\\), \\(B'C' = 2\\text{ cm}\\), et B' est entre A' et C'.",
+                rule3_title: "Règle 3 : Conservation du milieu",
+                rule3_text: "La symétrie centrale conserve les milieux : si M est le milieu de [AB], alors son image M' est le milieu de [A'B'].",
+                rule3_example: "Si M est le milieu de [AB], alors M' est le milieu de [A'B'], et \\(A'M' = M'B'\\).",
+                graph_legend: "L'alignement est conservé : A', B', C' sont alignés",
+                exercises_title: "Exercices",
+                exercises_subtitle: "Entraînez-vous sur la conservation de l'alignement, de l'ordre et du milieu",
+                exercise1_q: "Les points A, B, C sont alignés. Trouvez leurs images A', B', C' par rapport au centre O. Notez que l'alignement est conservé.",
+                exercise1_caption: "Faites glisser les points ou entrez leurs coordonnées.",
+                exercise2_q: "Si A(1, 2), B(2, 4), C(3, 6) sont alignés, et O(0, 0), trouvez A', B', C' et vérifiez que l'alignement est conservé.",
+                exercise3_q: "Soient A(0, 0), B(4, 2). Le point M est le milieu de [AB]. Si O(1, 1), prouvez que M' est le milieu de [A'B'].",
+                exercise4_q: "Répondez vrai ou faux avec justification : si A, B, C sont alignés avec B entre A et C, alors B' est entre A' et C'.",
+                answer_placeholder: "Écrivez votre réponse ici...",
+                check_btn: "Vérifier",
+                reset_btn: "Réinitialiser",
+                correct_msg: "Bravo ! Bonne réponse.",
+                incorrect_msg: "Essayez encore.",
+                points_coords_display: "\\(A(-2, 1)\\) | \\(B(0, 2)\\) | \\(C(2, 3)\\) | \\(O(1, 0)\\)",
+                coord_label_A_prime: "\\(A'\\) :",
+                coord_label_B_prime: "\\(B'\\) :",
+                coord_label_C_prime: "\\(C'\\) :",
+                coord_label_x: "x :",
+                coord_label_y: "y :",
+                apply_coords_btn: "Appliquer",
+                invalid_coords: "Veuillez entrer des coordonnées valides.",
+                problems_title: "Problèmes",
+                problems_subtitle: "Problèmes appliqués sur l'alignement par symétrie centrale",
+                problem1_title: "🛣️ Problème 1 : La route et les villages",
+                problem1_text: "Trois villages A, B, C sont alignés le long d'une route, avec B entre A et C, et \\(AB = 3\\text{ km}\\), \\(BC = 4\\text{ km}\\). Les autorités locales veulent attribuer de nouveaux emplacements A', B', C' symétriques par rapport à un point O représentant le centre de la région. Prouvez que A', B', C' sont alignés, que B' est entre A' et C', puis calculez A'C'.",
+                problem2_title: "📐 Problème 2 : Conception géométrique",
+                problem2_text: "Dans une conception géométrique, le segment [AB] a une longueur de \\(8\\text{ cm}\\), et M est son milieu. Le concepteur veut créer A', B', M' symétriques par rapport à un point O. Prouvez que M' est le milieu de [A'B'], puis calculez A'M'.",
+                problem3_title: "🎯 Problème 3 : Segments parallèles",
+                problem3_text: "Si A et B sont deux points distincts et A', B' leurs images par la symétrie centrale de centre O, prouvez que \\((AB) \\parallel (A'B')\\). (Indication : utilisez le fait que la symétrie centrale conserve l'alignement et les distances).",
+                solutions_title: "Solutions",
+                solutions_subtitle: "Solutions détaillées étape par étape",
+                solutions_exercises_heading: "📝 Solutions des exercices",
+                solutions_problems_heading: "🧩 Solutions des problèmes",
+                sol_ex1_q: "Exercice 1 — Images de A, B, C :",
+                sol_ex1_answer: "A'(4, -1) | B'(2, -2) | C'(0, -3).",
+                sol_ex2_q: "Exercice 2 — Images de A, B, C par rapport à O :",
+                sol_ex2_answer: "A'(-1, -2) | B'(-2, -4) | C'(-3, -6). Points alignés.",
+                sol_ex3_q: "Exercice 3 — Conservation du milieu :",
+                sol_ex3_answer: "M(2, 1) et M'(0, 1). M' est le milieu de [A'B'].",
+                sol_ex4_q: "Exercice 4 — Vrai ou faux :",
+                sol_ex4_answer: "Vrai. La symétrie centrale conserve l'alignement et l'ordre, donc B' est entre A' et C'.",
+                sol_prob1_q: "Problème 1 — La route et les villages :",
+                sol_prob2_q: "Problème 2 — Conception géométrique :",
+                sol_prob3_q: "Problème 3 — Segments parallèles :",
+                sol_prob1_answer: "A', B', C' sont alignés, B' est entre A' et C', et \\(A'C' = 7\\text{ km}\\).",
+                sol_prob2_answer: "M' est le milieu de [A'B'], et \\(A'M' = 4\\text{ cm}\\).",
+                sol_prob3_answer: "\\((AB) \\parallel (A'B')\\).",
+                step_line_1: "Étape 1 :",
+                step_line_2: "Étape 2 :",
+                step_line_3: "Étape 3 :",
+                step_line_4: "Étape 4 :",
+                step_ex1_1: "Utiliser la formule M' = 2O - M avec O(1, 0).",
+                step_ex1_2: "A' = 2(1, 0) - (-2, 1) = (2 + 2, 0 - 1) = (4, -1).",
+                step_ex1_3: "B' = 2(1, 0) - (0, 2) = (2, -2) et C' = 2(1, 0) - (2, 3) = (0, -3).",
+                step_ex1_4: "Vérifier l'alignement : pente A'B' = (-2-(-1))/(2-4) = 0,5 ; pente B'C' = (-3-(-2))/(0-2) = 0,5. Pentes égales, donc A', B', C' sont alignés.",
+                step_ex2_1: "O(0, 0), donc M' = -M.",
+                step_ex2_2: "A'(-1, -2), B'(-2, -4), C'(-3, -6).",
+                step_ex2_3: "Vérification : pente A'B' = (-4-(-2))/(-2-(-1)) = 2 ; pente B'C' = (-6-(-4))/(-3-(-2)) = 2. Points alignés.",
+                step_ex3_1: "M est le milieu de [AB], donc M = ((0+4)/2, (0+2)/2) = (2, 1).",
+                step_ex3_2: "A' = 2(1, 1) - (0, 0) = (2, 2) et B' = 2(1, 1) - (4, 2) = (-2, 0).",
+                step_ex3_3: "Milieu de [A'B'] = ((2-2)/2, (2+0)/2) = (0, 1) = M'. Donc M' est le milieu de [A'B'].",
+                step_prob1_1: "Puisque A, B, C sont alignés, par la règle de conservation de l'alignement, A', B', C' sont alignés.",
+                step_prob1_2: "Par conservation de l'ordre, puisque B est entre A et C, B' est entre A' et C'.",
+                step_prob1_3: "Par conservation des distances, A'B' = AB = 3 km et B'C' = BC = 4 km, donc A'C' = 3 + 4 = 7 km.",
+                step_prob2_1: "M est le milieu de [AB], donc par conservation du milieu, M' est le milieu de [A'B'].",
+                step_prob2_2: "Par conservation des distances, A'B' = AB = 8 cm. Puisque M' est le milieu, A'M' = A'B'/2 = 4 cm.",
+                step_prob3_1: "Puisque A et B sont distincts, (AB) est une droite. Son image par symétrie centrale est la droite (A'B').",
+                step_prob3_2: "La symétrie centrale transforme toute droite ne contenant pas le centre en une droite parallèle. Puisque O n'est pas nécessairement sur (AB), (A'B') est parallèle à (AB) ; si O est sur (AB), alors (A'B') = (AB).",
+                cm_unit: "cm",
+                footer_dev: "Informations du développeur",
+                footer_dev_name: "Développé par : Majri Zied",
+                footer_hosting: "Hébergement : Github, Netlify, Supabase",
+                footer_links: "Liens",
+                footer_contact: "Contactez-nous",
+                footer_policies: "Politiques",
+                footer_version: "Version",
+                footer_version_num: "Version : 0.0.2",
+                footer_rights: "Tous droits réservés © 2025",
+                print_footer_dev: "Développé par : Majri Zied",
+                print_footer_version: "Version : 0.0.2",
+                print_footer_page: "Adresse de la page : maths_y8_geo_module2_lesson1_sub3.html"
+            }
+        };
+    </script>
+</body>
+</html>

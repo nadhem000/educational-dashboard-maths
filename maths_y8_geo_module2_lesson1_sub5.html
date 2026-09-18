@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="page_title">مناظر نصف مستقيم - رياضيات السنة الثامنة أساسي</title>
+
+    <!-- External Stylesheets -->
+    <link rel="stylesheet" href="maths_shared.css">
+    <link rel="stylesheet" href="maths_lessons.css">
+
+    <!-- KaTeX -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+
+    <!-- JSXGraph -->
+    <script src="https://cdn.jsdelivr.net/npm/jsxgraph@1.4.0/distrib/jsxgraphcore.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jsxgraph@1.4.0/distrib/jsxgraph.css">
+
+    <script src="maths_lessons.js" defer></script>
+
+    <style>
+        .rule-diagram, .exercise-diagram {
+            margin: 1rem 0;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 0.5rem;
+            background: var(--card-bg);
+        }
+        .diagram-caption {
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-top: 0.3rem;
+            font-style: italic;
+        }
+        .math, .katex, .katex-display {
+            direction: ltr !important;
+            unicode-bidi: isolate;
+        }
+        .example-box, .solution-step-math {
+            direction: rtl !important;
+            text-align: right !important;
+            unicode-bidi: normal !important;
+            white-space: normal !important;
+            overflow-wrap: break-word;
+            word-break: break-word;
+        }
+        .drawing-board {
+            width: 100%;
+            max-width: 500px;
+            height: 300px;
+            margin: 0 auto 0.5rem auto;
+        }
+        .board-controls {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: center;
+            margin-top: 0.5rem;
+        }
+        .board-btn {
+            padding: 0.4rem 1rem;
+            background: var(--secondary);
+            color: var(--white);
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        .board-btn:hover {
+            background: var(--primary);
+        }
+        .check-result {
+            text-align: center;
+            font-weight: 700;
+            margin-top: 0.5rem;
+            min-height: 1.5em;
+        }
+        .check-result.correct { color: var(--success); }
+        .check-result.incorrect { color: var(--error); }
+        .solution-diagram {
+            width: 100%;
+            max-width: 350px;
+            height: 200px;
+            margin: 0 auto;
+        }
+        .coord-input-group {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 0.8rem;
+            flex-wrap: wrap;
+        }
+        .coord-input-group label {
+            font-weight: 600;
+            margin-left: 0.5rem;
+        }
+        .coord-input {
+            width: 70px;
+            padding: 0.3rem;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            text-align: center;
+            font-family: var(--mono);
+        }
+        .coord-display {
+            background: var(--bg-alt);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <main>
+            <!-- Print-only header -->
+            <div class="print-header" data-i18n="print_header">السنة الثامنة أساسي - الهندسة - الدرس 1 - الجزء 5 - هـ</div>
+
+            <!-- Site Header -->
+            <div class="site-header">
+                <div class="header-icon">
+                    <img src="assets/icons/icon-152x152.png" alt="أيقونة الموقع">
+                </div>
+                <h1 data-i18n="site_header">Educational Dashboard - Mathematics</h1>
+            </div>
+
+            <!-- Top Navigation -->
+            <nav class="top-nav">
+                <a href="maths_y8.html" class="nav-link" data-i18n="back_to_index">← العودة للفهرس</a>
+                <span class="nav-badge" data-i18n="nav_badge">الدرس 1 | الجزء 5 | هـ</span>
+                <a href="maths_y8_geo_module2_lesson1_sub6.html" class="nav-link" data-i18n="next_lesson">التالي ←</a>
+            </nav>
+
+            <!-- Print Controls -->
+            <div class="print-controls">
+                <label for="print-section" data-i18n="print_label">اختر القسم للطباعة:</label>
+                <select id="print-section" name="print-section">
+                    <option value="all" data-i18n="print_all">الدرس كاملاً</option>
+                    <option value="rules" data-i18n="print_rules">القواعد</option>
+                    <option value="exercises" data-i18n="print_exercises">التمارين</option>
+                    <option value="problems" data-i18n="print_problems">المسائل</option>
+                    <option value="solutions" data-i18n="print_solutions">الحلول</option>
+                </select>
+                <button class="print-button" onclick="printSelected()" data-i18n="print_button">🖨️ طباعة</button>
+                <button id="theme-toggle" class="theme-toggle" aria-label="تبديل الوضع الليلي/النهاري">
+                    <span class="theme-icon">🌙</span>
+                </button>
+
+                <!-- Language Selector -->
+                <div class="language-selector">
+                    <label for="language-select" class="sr-only" data-i18n="language_label">اللغة</label>
+                    <select id="language-select" name="language-select">
+                        <option value="ar" data-i18n="lang_ar">العربية</option>
+                        <option value="en" data-i18n="lang_en">English</option>
+                        <option value="fr" data-i18n="lang_fr">Français</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Lesson Header -->
+            <header class="lesson-header">
+                <span class="module-tag" data-i18n="module_tag">📘 الهندسة | الدرس 1 | الجزء 5 | هـ</span>
+                <h1 class="lesson-title" data-i18n="lesson_title">مناظر نصف مستقيم</h1>
+                <p class="lesson-subtitle" data-i18n="lesson_subtitle">صورة نصف مستقيم بالتناظر المركزي وحالاته</p>
+            </header>
+
+            <!-- Section 1: Rules -->
+            <div class="section" id="rules-section">
+                <div class="section-header" onclick="toggleSection('rules-body', 'rules-toggle')" role="button"
+                     tabindex="0" aria-expanded="true" aria-controls="rules-body"
+                     onkeydown="if(event.key==='Enter'||event.key===' ') toggleSection('rules-body', 'rules-toggle')">
+                    <div class="section-icon rules-icon">📐</div>
+                    <div class="section-title">
+                        <h2 data-i18n="rules_title">القواعد</h2>
+                        <p data-i18n="rules_subtitle">صورة نصف مستقيم بالتناظر المركزي</p>
+                    </div>
+                    <span class="section-toggle open" id="rules-toggle">▼</span>
+                </div>
+                <div class="section-body" id="rules-body">
+                    <!-- Rule 1: Definition -->
+                    <div class="rule-card">
+                        <div class="rule-title" data-i18n="rule1_title">قاعدة 1: تعريف</div>
+                        <div class="rule-text" data-i18n="rule1_text">
+                            صورة نصف المستقيم \([AB)\) بالتناظر المركزي الذي مركزه \(O\) هي نصف المستقيم \([A'B')\) حيث \(A'\) و \(B'\) هما صورتا \(A\) و \(B\) على التوالي. نقول إن نصف المستقيم \([AB)\) يحوَّل إلى نصف المستقيم \([A'B')\).
+                        </div>
+                        <div class="example-box" data-i18n="rule1_example">
+                            إذا كان \(A' = 2O - A\) و \(B' = 2O - B\)، فإن \([A'B')\) هو صورة \([AB)\) بالتناظر المركزي الذي مركزه \(O\).
+                        </div>
+                        <div class="rule-diagram">
+                            <div id="diagram-rule1" class="jxgbox" style="width:100%; max-width:500px; height:300px;"></div>
+                            <div class="diagram-caption" data-i18n="rule1_caption">اسحب النقطة A أو B أو المركز O لترى أن [A'B') هي صورة [AB)</div>
+                        </div>
+                    </div>
+
+                    <!-- Rule 2: Parallelism preserved -->
+                    <div class="rule-card">
+                        <div class="rule-title" data-i18n="rule2_title">قاعدة 2: حفظ الاتجاه</div>
+                        <div class="rule-text" data-i18n="rule2_text">
+                            صورة نصف المستقيم \([AB)\) هي نصف مستقيم <strong>يوازي</strong> \([AB)\)، وبنفس الاتجاه من \(A'\) نحو \(B'\). بعبارة أخرى: \((A'B') \parallel (AB)\).
+                        </div>
+                        <div class="example-box" data-i18n="rule2_example">
+                            إذا كان \([AB) \parallel [CD)\)، فإن صورتهما \([A'B') \parallel [C'D')\).
+                        </div>
+                    </div>
+
+                    <!-- Rule 3: Special case (ray through O) -->
+                    <div class="rule-card">
+                        <div class="rule-title" data-i18n="rule3_title">قاعدة 3: حالة خاصة</div>
+                        <div class="rule-text" data-i18n="rule3_text">
+                            إذا كان نصف المستقيم \([AB)\) يشمل مركز التناظر \(O\) (أي \(O\) تنتمي إلى نصف المستقيم)، فإن صورته \([A'B')\) تكون <strong>على المستقيم نفسه</strong> وبالاتجاه المعاكس. وبصفة خاصة:
+                            <ul>
+                                <li>إذا كان نصف المستقيم يبدأ من \(O\)، أي \([OA)\)، فإن صورته هي نصف المستقيم المعاكس \([OA')\) حيث \(A' = 2O - A\).</li>
+                                <li>المستقيمان \((AB)\) و \((A'B')\) منطبقان.</li>
+                            </ul>
+                        </div>
+                        <div class="example-box" data-i18n="rule3_example">
+                            إذا كانت \(A(2, 1)\) و \(O(0, 0)\)، فإن \([OA)\) لها نفس المستقيم \([OA')\) حيث \(A'(-2, -1)\)، وهما نصفا مستقيم متعاكسان.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 2: Exercises -->
+            <div class="section" id="exercises-section">
+                <div class="section-header" onclick="toggleSection('exercises-body', 'exercises-toggle')" role="button"
+                     tabindex="0" aria-expanded="true" aria-controls="exercises-body"
+                     onkeydown="if(event.key==='Enter'||event.key===' ') toggleSection('exercises-body', 'exercises-toggle')">
+                    <div class="section-icon exercises-icon">✏️</div>
+                    <div class="section-title">
+                        <h2 data-i18n="exercises_title">تمارين</h2>
+                        <p data-i18n="exercises_subtitle">تمرّن على إيجاد صورة نصف مستقيم بالتناظر المركزي</p>
+                    </div>
+                    <span class="section-toggle open" id="exercises-toggle">▼</span>
+                </div>
+                <div class="section-body" id="exercises-body">
+                    <!-- Exercise 1: Interactive -->
+                    <div class="exercise-item">
+                        <div class="exercise-question">
+                            <span class="exercise-number">1</span>
+                            <span data-i18n="exercise1_q">نصف المستقيم \([AB)\) محدد بـ \(A(-2, 1)\) و \(B(1, 2)\)، والمركز \(O(0, 0)\). أنشئ صورة \([AB)\) بالنسبة إلى \(O\) بإدخال إحداثيات \(A'\) و \(B'\).</span>
+                        </div>
+                        <div class="coord-display" data-i18n="ex1_coords_display">
+                            \(A(-2, 1)\) | \(B(1, 2)\) | \(O(0, 0)\)
+                        </div>
+                        <div class="exercise-diagram">
+                            <div id="exercise1-board" class="jxgbox drawing-board"></div>
+                            <div class="board-controls">
+                                <button class="board-btn" onclick="checkEx1()" data-i18n="check_btn">تحقق</button>
+                                <button class="board-btn" onclick="resetEx1()" data-i18n="reset_btn">إعادة</button>
+                            </div>
+                            <div class="coord-input-group">
+                                <span data-i18n="coord_label_A_prime">\(A'\):</span>
+                                <label for="ex1-ax" data-i18n="coord_label_x">x:</label>
+                                <input type="number" id="ex1-ax" class="coord-input" step="any" value="2" dir="ltr">
+                                <label for="ex1-ay" data-i18n="coord_label_y">y:</label>
+                                <input type="number" id="ex1-ay" class="coord-input" step="any" value="-1" dir="ltr">
+                            </div>
+                            <div class="coord-input-group">
+                                <span data-i18n="coord_label_B_prime">\(B'\):</span>
+                                <label for="ex1-bx" data-i18n="coord_label_x">x:</label>
+                                <input type="number" id="ex1-bx" class="coord-input" step="any" value="-1" dir="ltr">
+                                <label for="ex1-by" data-i18n="coord_label_y">y:</label>
+                                <input type="number" id="ex1-by" class="coord-input" step="any" value="-2" dir="ltr">
+                            </div>
+                            <button class="board-btn" onclick="applyCoordsEx1()" data-i18n="apply_coords_btn">تعيين</button>
+                            <div id="ex1-result" class="check-result"></div>
+                            <div class="diagram-caption" data-i18n="exercise1_caption">اسحب النقطتين أو أدخل إحداثياتهما.</div>
+                        </div>
+                    </div>
+
+                    <!-- Exercise 2: Ray starting at O -->
+                    <div class="exercise-item">
+                        <div class="exercise-question">
+                            <span class="exercise-number">2</span>
+                            <span data-i18n="exercise2_q">نصف المستقيم \([OA)\) حيث \(O(1, 1)\) و \(A(3, 2)\). ما هي صورة \([OA)\) بالنسبة إلى \(O\)؟ بيّن أنها نصف مستقيم معاكس لـ \([OA)\).</span>
+                        </div>
+                        <textarea id="answer-ex2" name="answer-ex2" class="answer-textarea" placeholder="اكتب إجابتك هنا..." data-i18n-placeholder="answer_placeholder"></textarea>
+                    </div>
+
+                    <!-- Exercise 3: Parallel ray -->
+                    <div class="exercise-item">
+                        <div class="exercise-question">
+                            <span class="exercise-number">3</span>
+                            <span data-i18n="exercise3_q">نصف المستقيم \([AB)\) لا يشمل النقطة \(O\). أثبت أن صورته \([A'B')\) نصف مستقيم يوازي \([AB)\).</span>
+                        </div>
+                        <textarea id="answer-ex3" name="answer-ex3" class="answer-textarea" placeholder="اكتب إجابتك هنا..." data-i18n-placeholder="answer_placeholder"></textarea>
+                    </div>
+
+                    <!-- Exercise 4: True/False -->
+                    <div class="exercise-item">
+                        <div class="exercise-question">
+                            <span class="exercise-number">4</span>
+                            <span data-i18n="exercise4_q">أجب بصحيح أو خطأ مع التعليل: إذا كان نصف المستقيم \([OA)\) يبدأ من المركز \(O\)، فإن صورته \([OA')\) منطبقة على \([OA)\).</span>
+                        </div>
+                        <textarea id="answer-ex4" name="answer-ex4" class="answer-textarea" placeholder="اكتب إجابتك هنا..." data-i18n-placeholder="answer_placeholder"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 3: Problems -->
+            <div class="section" id="problems-section">
+                <div class="section-header" onclick="toggleSection('problems-body', 'problems-toggle')" role="button"
+                     tabindex="0" aria-expanded="true" aria-controls="problems-body"
+                     onkeydown="if(event.key==='Enter'||event.key===' ') toggleSection('problems-body', 'problems-toggle')">
+                    <div class="section-icon problems-icon">🧩</div>
+                    <div class="section-title">
+                        <h2 data-i18n="problems_title">مسائل</h2>
+                        <p data-i18n="problems_subtitle">مسائل تطبيقية على صورة نصف مستقيم</p>
+                    </div>
+                    <span class="section-toggle open" id="problems-toggle">▼</span>
+                </div>
+                <div class="section-body" id="problems-body">
+                    <div class="problem-card">
+                        <div class="problem-title" data-i18n="problem1_title">🚤 مسألة 1: القارب في القناة</div>
+                        <div class="problem-text" data-i18n="problem1_text">
+                            يتحرّك قارب على قناة مستقيمة نصفها \([AB)\) انطلاقاً من النقطة \(A\) نحو النقطة \(B\)، ومركز الميناء هو \(O\). أراد مدير الميناء تحديد مسار ثانٍ \([A'B')\) متناظر مع \([AB)\) بالنسبة إلى \(O\). بيّن أن \([A'B')\) يوازي \([AB)\)، واذكر خطوات إنشائه عملياً.
+                        </div>
+                    </div>
+                    <div class="problem-card">
+                        <div class="problem-title" data-i18n="problem2_title">💡 مسألة 2: الشعاع الضوئي</div>
+                        <div class="problem-text" data-i18n="problem2_text">
+                            شعاع ضوئي ينطلق من نقطة \(S(2, 3)\) ويمرّ بنقطة \(P(4, 5)\). إذا كان مركز التناظر هو \(O(0, 0)\)، ما هو مسار الشعاع المنعكس \([S'P')\)؟ وما العلاقة بين اتجاهي \([SP)\) و \([S'P')\)؟
+                        </div>
+                    </div>
+                    <div class="problem-card">
+                        <div class="problem-title" data-i18n="problem3_title">🧭 مسألة 3: قرص دوّار</div>
+                        <div class="problem-text" data-i18n="problem3_text">
+                            في لعبة قرص دوّار، مؤشر مثبّت عند نقطة \(O\). يمثّل نصف المستقيم \([OA)\) اتجاه المؤشر الأول. صمّم اللاعب نصف مستقيم ثانٍ \([OA')\) متناظراً مع \([OA)\) بالنسبة إلى \(O\). أثبت أن \([OA')\) و \([OA)\) متعاكسان على المستقيم نفسه، وحدّد الاتجاه الذي يشير إليه \([OA')\) إذا كانت \(A(1, 2)\).
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 4: Solutions -->
+            <div class="section" id="solutions-section">
+                <div class="section-header" onclick="toggleSection('solutions-body', 'solutions-toggle')" role="button"
+                     tabindex="0" aria-expanded="true" aria-controls="solutions-body"
+                     onkeydown="if(event.key==='Enter'||event.key===' ') toggleSection('solutions-body', 'solutions-toggle')">
+                    <div class="section-icon solutions-icon">✅</div>
+                    <div class="section-title">
+                        <h2 data-i18n="solutions_title">حلول</h2>
+                        <p data-i18n="solutions_subtitle">الحلول المفصلة خطوة بخطوة</p>
+                    </div>
+                    <span class="section-toggle open" id="solutions-toggle">▼</span>
+                </div>
+                <div class="section-body" id="solutions-body">
+                    <div style="margin-bottom: 1.5rem;">
+                        <h3 data-i18n="solutions_exercises_heading">📝 حلول التمارين</h3>
+                        <!-- Solution Exercise 1 -->
+                        <div class="solution-item">
+                            <div class="solution-question" data-i18n="sol_ex1_q">التمرين 1 — صورة نصف المستقيم [AB):</div>
+                            <div class="solution-answer-rtl">
+                                <span data-i18n="sol_ex1_answer">\(A'(2, -1)\) و \(B'(-1, -2)\)، ونصف المستقيم \([A'B')\) يوازي \([AB)\).</span>
+                            </div>
+                            <div class="solution-steps">
+                                <ol>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_line_1">الخطوة 1:</span> <span class="solution-step-math" data-i18n="step_ex1_1">بما أن \(O(0, 0)\)، فإن الصورة تُحسب بالعلاقة \(M' = -M\).</span></span></li>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_line_2">الخطوة 2:</span> <span class="solution-step-math" data-i18n="step_ex1_2">\(A' = -A = (2, -1)\) و \(B' = -B = (-1, -2)\).</span></span></li>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_line_3">الخطوة 3:</span> <span class="solution-step-math" data-i18n="step_ex1_3">ميل \([AB)\) = \(\dfrac{2-1}{1-(-2)} = \dfrac{1}{3}\)، وميل \([A'B')\) = \(\dfrac{-2-(-1)}{-1-2} = \dfrac{1}{3}\). الميلان متساويان إذن \([A'B') \parallel [AB)\).</span></span></li>
+                                </ol>
+                            </div>
+                            <div class="solution-diagram">
+                                <div id="solution-ex1-board" class="jxgbox" style="width:100%; height:200px;"></div>
+                            </div>
+                        </div>
+                        <!-- Solution Exercise 2 -->
+                        <div class="solution-item">
+                            <div class="solution-question" data-i18n="sol_ex2_q">التمرين 2 — نصف مستقيم يبدأ من المركز:</div>
+                            <div class="solution-answer-rtl">
+                                <span data-i18n="sol_ex2_answer">صورة \([OA)\) هي \([OA')\) حيث \(A'(-1, 0)\)، وهي نصف مستقيم معاكس لـ \([OA)\) على المستقيم نفسه.</span>
+                            </div>
+                            <div class="solution-steps">
+                                <ol>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_line_1">الخطوة 1:</span> <span class="solution-step-math" data-i18n="step_ex2_1">نحسب \(A' = 2O - A = 2(1, 1) - (3, 2) = (2 - 3, 2 - 2) = (-1, 0)\).</span></span></li>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_line_2">الخطوة 2:</span> <span class="solution-step-math" data-i18n="step_ex2_2">بما أن \(O\) هي أصل \([OA)\) وتبقى ثابتة، فإن صورة \([OA)\) هي \([OA')\).</span></span></li>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_line_3">الخطوة 3:</span> <span class="solution-step-math" data-i18n="step_ex2_3">المستقيم \((OA')\) هو نفسه \((OA)\)، لكن \([OA')\) يتجه في الجهة المقابلة، إذن \([OA)\) و \([OA')\) متعاكسان.</span></span></li>
+                                </ol>
+                            </div>
+                        </div>
+                        <!-- Solution Exercise 3 -->
+                        <div class="solution-item">
+                            <div class="solution-question" data-i18n="sol_ex3_q">التمرين 3 — نصف مستقيم لا يشمل المركز:</div>
+                            <div class="solution-answer-rtl">
+                                <span data-i18n="sol_ex3_answer">\([A'B') \parallel [AB)\).</span>
+                            </div>
+                            <div class="solution-steps">
+                                <ol>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_line_1">الخطوة 1:</span> <span class="solution-step-math" data-i18n="step_ex3_1">بما أن \([AB)\) يشمل النقطتين \(A\) و \(B\)، فإن صورته \([A'B')\) تشمل \(A'\) و \(B'\).</span></span></li>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_line_2">الخطوة 2:</span> <span class="solution-step-math" data-i18n="step_ex3_2">المستقيم \((AB)\) لا يشمل \(O\)، إذن حسب قاعدة صورة مستقيم، \((A'B') \parallel (AB)\).</span></span></li>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_line_3">الخطوة 3:</span> <span class="solution-step-math" data-i18n="step_ex3_3">وبما أن اتجاه \([A'B')\) من \(A'\) نحو \(B'\) يحافظ على الاتجاه (كما في قاعدة 2)، فإن \([A'B') \parallel [AB)\).</span></span></li>
+                                </ol>
+                            </div>
+                        </div>
+                        <!-- Solution Exercise 4 -->
+                        <div class="solution-item">
+                            <div class="solution-question" data-i18n="sol_ex4_q">التمرين 4 — صحيح أم خطأ:</div>
+                            <div class="solution-answer-rtl">
+                                <span data-i18n="sol_ex4_answer">خطأ. الصورة \([OA')\) لها المستقيم نفسه لكنها معاكسة لـ \([OA)\)، لا منطبقة عليها.</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 data-i18n="solutions_problems_heading">🧩 حلول المسائل</h3>
+                        <!-- Solution Problem 1 -->
+                        <div class="solution-item">
+                            <div class="solution-question" data-i18n="sol_prob1_q">المسألة 1 — القارب في القناة:</div>
+                            <div class="solution-answer-rtl">
+                                <span data-i18n="sol_prob1_answer">\([A'B') \parallel [AB)\)، وننشئه ببناء \(A'\) و \(B'\) بالتناظر المركزي.</span>
+                            </div>
+                            <div class="solution-steps">
+                                <ol>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_line_1">الخطوة 1:</span> <span class="solution-step-math" data-i18n="step_prob1_1">ننشئ صورة \(A\) وهي \(A' = 2O - A\)، وصورة \(B\) وهي \(B' = 2O - B\).</span></span></li>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_line_2">الخطوة 2:</span> <span class="solution-step-math" data-i18n="step_prob1_2">نرسم نصف المستقيم \([A'B')\)، وهو صورة \([AB)\) بالتناظر المركزي الذي مركزه \(O\).</span></span></li>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_line_3">الخطوة 3:</span> <span class="solution-step-math" data-i18n="step_prob1_3">بما أن \((AB)\) لا يشمل \(O\)، فحسب قاعدة صورة مستقيم: \((A'B') \parallel (AB)\)، وبالتالي \([A'B') \parallel [AB)\).</span></span></li>
+                                </ol>
+                            </div>
+                        </div>
+                        <!-- Solution Problem 2 -->
+                        <div class="solution-item">
+                            <div class="solution-question" data-i18n="sol_prob2_q">المسألة 2 — الشعاع الضوئي:</div>
+                            <div class="solution-answer-rtl">
+                                <span data-i18n="sol_prob2_answer">\(S'(-2, -3)\) و \(P'(-4, -5)\)، و \([S'P') \parallel [SP)\) لكن باتجاه من \(S'\) نحو \(P'\).</span>
+                            </div>
+                            <div class="solution-steps">
+                                <ol>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_line_1">الخطوة 1:</span> <span class="solution-step-math" data-i18n="step_prob2_1">\(O(0, 0)\)، إذن \(M' = -M\): \(S'( -2, -3)\) و \(P'(-4, -5)\).</span></span></li>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_line_2">الخطوة 2:</span> <span class="solution-step-math" data-i18n="step_prob2_2">ميل \([SP)\) = \(\dfrac{5 - 3}{4 - 2} = 1\)، وميل \([S'P')\) = \(\dfrac{-5 - (-3)}{-4 - (-2)} = 1\). إذن \([S'P') \parallel [SP)\).</span></span></li>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_line_3">الخطوة 3:</span> <span class="solution-step-math" data-i18n="step_prob2_3">نصف المستقيم \([S'P')\) يتجه من \(S'\) نحو \(P'\)، وهو الاتجاه الموازي لاتجاه \([SP)\) من \(S\) نحو \(P\).</span></span></li>
+                                </ol>
+                            </div>
+                        </div>
+                        <!-- Solution Problem 3 -->
+                        <div class="solution-item">
+                            <div class="solution-question" data-i18n="sol_prob3_q">المسألة 3 — قرص دوّار:</div>
+                            <div class="solution-answer-rtl">
+                                <span data-i18n="sol_prob3_answer">\([OA')\) معاكس لـ \([OA)\) على المستقيم نفسه، ويشير نحو \(A'(-1, -2)\).</span>
+                            </div>
+                            <div class="solution-steps">
+                                <ol>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_line_1">الخطوة 1:</span> <span class="solution-step-math" data-i18n="step_prob3_1">\(A' = 2O - A = -(1, 2) = (-1, -2)\).</span></span></li>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_line_2">الخطوة 2:</span> <span class="solution-step-math" data-i18n="step_prob3_2">بما أن \([OA)\) تبدأ من المركز \(O\)، فحسب قاعدة الحالة الخاصة، صورتها \([OA')\) على المستقيم نفسه وباتجاه معاكس.</span></span></li>
+                                    <li><span class="solution-step-line"><span class="solution-step-label" data-i18n="step_line_3">الخطوة 3:</span> <span class="solution-step-math" data-i18n="step_prob3_3">إذن \([OA')\) يشير نحو \(A'(-1, -2)\)، بعكس اتجاه \([OA)\) الذي يشير نحو \(A(1, 2)\).</span></span></li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="site-footer">
+            <div class="footer-col">
+                <h4 data-i18n="footer_dev">معلومات المطوّر</h4>
+                <p data-i18n="footer_dev_name">طور بواسطة: ماجري زياد</p>
+                <p data-i18n="footer_hosting">الاستضافة: Github, Netlify, Supabase</p>
+            </div>
+            <div class="footer-col">
+                <h4 data-i18n="footer_links">روابط</h4>
+                <a href="#" data-i18n="footer_contact">اتصل بنا</a>
+                <a href="#" data-i18n="footer_policies">السياسات</a>
+            </div>
+            <div class="footer-col">
+                <h4 data-i18n="footer_version">الإصدار</h4>
+                <p data-i18n="footer_version_num">الإصدار: 0.0.2</p>
+                <p data-i18n="footer_rights">جميع الحقوق محفوظة &copy; 2025</p>
+            </div>
+        </footer>
+
+        <!-- Print-only custom footer -->
+        <div class="print-footer">
+            <p data-i18n="print_footer_dev">طور بواسطة: ماجري زياد</p>
+            <p data-i18n="print_footer_version">الإصدار: 0.0.2</p>
+            <p data-i18n="print_footer_page">عنوان الصفحة: maths_y8_geo_module2_lesson1_sub5.html</p>
+        </div>
+    </div>
+
+    <!-- JSXGraph Diagrams and Interactive Exercises -->
+    <script>
+        function t(key) {
+            const lang = document.documentElement.lang || 'ar';
+            return (translations[lang] && translations[lang][key]) || key;
+        }
+
+        // Helper: create coordinate grid (O, I, J)
+        function createCoordinateGrid(board, options = {}) {
+            board.create('axis', [[0,0], [1,0]], { name: 'x', withLabel: true, label: { position: 'rt', offset: [-10, 10] } });
+            board.create('axis', [[0,0], [0,1]], { name: 'y', withLabel: true, label: { position: 'rt', offset: [10, -10] } });
+            board.create('point', [0,0], { name: 'O', size: 2, color: '#333', fixed: true });
+            board.create('point', [1,0], { name: 'I', size: 2, color: '#333', fixed: true });
+            board.create('point', [0,1], { name: 'J', size: 2, color: '#333', fixed: true });
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // ---------- Rule 1: Image of a ray (interactive) ----------
+            const boardRule1 = initJSXGraph('diagram-rule1', {
+                boundingbox: [-6, 6, 6, -6], axis: false, showNavigation: false, showCopyright: false
+            });
+            if (boardRule1) {
+                createCoordinateGrid(boardRule1);
+
+                // Center O (draggable)
+                const O = boardRule1.create('point', [0, 0], { name: 'O', size: 4, color: '#3498db' });
+
+                // Ray starting at A passing through B
+                const A = boardRule1.create('point', [-2, 1], { name: 'A', size: 3, color: '#e74c3c' });
+                const B = boardRule1.create('point', [1, 2], { name: 'B', size: 3, color: '#e74c3c' });
+
+                // Ray [AB) — use a line restricted visually via a long segment to B+
+                // We draw a segment from A to a far point beyond B to simulate the ray
+                const rayFar = boardRule1.create('point', [
+                    function() { return A.X() + 4*(B.X()-A.X()); },
+                    function() { return A.Y() + 4*(B.Y()-A.Y()); }
+                ], { visible: false, fixed: true });
+                boardRule1.create('segment', [A, rayFar], { strokeWidth: 2, strokeColor: '#e74c3c' });
+                boardRule1.create('arrow', [B, rayFar], { strokeWidth: 2, strokeColor: '#e74c3c' });
+
+                // Images A' = 2O - A, B' = 2O - B
+                const A_prime = boardRule1.create('point', [
+                    function() { return 2*O.X() - A.X(); },
+                    function() { return 2*O.Y() - A.Y(); }
+                ], { name: "A'", size: 3, color: '#2ecc71', fixed: true });
+                const B_prime = boardRule1.create('point', [
+                    function() { return 2*O.X() - B.X(); },
+                    function() { return 2*O.Y() - B.Y(); }
+                ], { name: "B'", size: 3, color: '#2ecc71', fixed: true });
+
+                const rayFarPrime = boardRule1.create('point', [
+                    function() { return A_prime.X() + 4*(B_prime.X()-A_prime.X()); },
+                    function() { return A_prime.Y() + 4*(B_prime.Y()-A_prime.Y()); }
+                ], { visible: false, fixed: true });
+                boardRule1.create('segment', [A_prime, rayFarPrime], { strokeWidth: 2, strokeColor: '#2ecc71', dash: 2 });
+                boardRule1.create('arrow', [B_prime, rayFarPrime], { strokeWidth: 2, strokeColor: '#2ecc71', dash: 2 });
+
+                // Segments [AA'] and [BB']
+                boardRule1.create('segment', [A, A_prime], { strokeWidth: 1, strokeColor: '#95a5a6', dash: 3 });
+                boardRule1.create('segment', [B, B_prime], { strokeWidth: 1, strokeColor: '#95a5a6', dash: 3 });
+
+                // Legend
+                boardRule1.create('text', [-5.5, 5.3, () => t('graph_legend')], { fontSize: 13, color: '#1a5276' });
+            }
+
+            // ---------- Exercise 1: Interactive ----------
+            const boardEx1 = initJSXGraph('exercise1-board', {
+                boundingbox: [-6, 6, 6, -6], axis: false, showNavigation: false, showCopyright: false
+            });
+            if (boardEx1) {
+                createCoordinateGrid(boardEx1);
+
+                const Oex = boardEx1.create('point', [0, 0], { name: 'O', size: 4, color: '#3498db', fixed: true });
+
+                const Aex = boardEx1.create('point', [-2, 1], { name: 'A', size: 3, color: '#e74c3c', fixed: true });
+                const Bex = boardEx1.create('point', [1, 2], { name: 'B', size: 3, color: '#e74c3c', fixed: true });
+
+                const rayFar = boardEx1.create('point', [
+                    function() { return Aex.X() + 4*(Bex.X()-Aex.X()); },
+                    function() { return Aex.Y() + 4*(Bex.Y()-Aex.Y()); }
+                ], { visible: false, fixed: true });
+                boardEx1.create('segment', [Aex, rayFar], { strokeWidth: 2, strokeColor: '#e74c3c' });
+                boardEx1.create('arrow', [Bex, rayFar], { strokeWidth: 2, strokeColor: '#e74c3c' });
+
+                const A_user = boardEx1.create('point', [2, -1], { name: "A'?", size: 3, color: '#f39c12' });
+                const B_user = boardEx1.create('point', [-1, -2], { name: "B'?", size: 3, color: '#f39c12' });
+
+                const rayFarPrime = boardEx1.create('point', [
+                    function() { return A_user.X() + 4*(B_user.X()-A_user.X()); },
+                    function() { return A_user.Y() + 4*(B_user.Y()-A_user.Y()); }
+                ], { visible: false, fixed: true });
+                boardEx1.create('segment', [A_user, rayFarPrime], { strokeWidth: 2, strokeColor: '#f39c12', dash: 2 });
+                boardEx1.create('arrow', [B_user, rayFarPrime], { strokeWidth: 2, strokeColor: '#f39c12', dash: 2 });
+
+                function expectedImage(M) {
+                    return [2*Oex.X() - M.X(), 2*Oex.Y() - M.Y()];
+                }
+
+                window.checkEx1 = function() {
+                    const expA = expectedImage(Aex);
+                    const expB = expectedImage(Bex);
+                    const userPts = [A_user, B_user];
+                    const expPts = [expA, expB];
+                    let allCorrect = true;
+                    for (let i = 0; i < 2; i++) {
+                        const dist = Math.sqrt((userPts[i].X()-expPts[i][0])**2 + (userPts[i].Y()-expPts[i][1])**2);
+                        if (dist > 0.5) { allCorrect = false; break; }
+                    }
+                    const resultDiv = document.getElementById('ex1-result');
+                    if (allCorrect) {
+                        resultDiv.textContent = t('correct_msg');
+                        resultDiv.className = 'check-result correct';
+                    } else {
+                        resultDiv.textContent = t('incorrect_msg');
+                        resultDiv.className = 'check-result incorrect';
+                    }
+                };
+                window.resetEx1 = function() {
+                    A_user.moveTo([2, -1]);
+                    B_user.moveTo([-1, -2]);
+                    document.getElementById('ex1-result').textContent = '';
+                    document.getElementById('ex1-ax').value = 2;
+                    document.getElementById('ex1-ay').value = -1;
+                    document.getElementById('ex1-bx').value = -1;
+                    document.getElementById('ex1-by').value = -2;
+                };
+                window.applyCoordsEx1 = function() {
+                    const ax = parseFloat(document.getElementById('ex1-ax').value);
+                    const ay = parseFloat(document.getElementById('ex1-ay').value);
+                    const bx = parseFloat(document.getElementById('ex1-bx').value);
+                    const by = parseFloat(document.getElementById('ex1-by').value);
+                    if ([ax, ay, bx, by].some(isNaN)) {
+                        alert(t('invalid_coords'));
+                        return;
+                    }
+                    A_user.moveTo([ax, ay]);
+                    B_user.moveTo([bx, by]);
+                    document.getElementById('ex1-result').textContent = '';
+                };
+            }
+
+            // ---------- Solution diagram for Exercise 1 (static) ----------
+            const boardSolEx1 = initJSXGraph('solution-ex1-board', {
+                boundingbox: [-5, 5, 5, -5], axis: false, showNavigation: false, showCopyright: false
+            });
+            if (boardSolEx1) {
+                createCoordinateGrid(boardSolEx1);
+                const O = boardSolEx1.create('point', [0, 0], { name: 'O', size: 3, color: '#3498db', fixed: true });
+                const A = boardSolEx1.create('point', [-2, 1], { name: 'A', size: 3, color: '#e74c3c', fixed: true });
+                const B = boardSolEx1.create('point', [1, 2], { name: 'B', size: 3, color: '#e74c3c', fixed: true });
+                const rFar = boardSolEx1.create('point', [A.X() + 4*(B.X()-A.X()), A.Y() + 4*(B.Y()-A.Y())], { visible: false, fixed: true });
+                boardSolEx1.create('segment', [A, rFar], { strokeWidth: 2, strokeColor: '#e74c3c' });
+                boardSolEx1.create('arrow', [B, rFar], { strokeWidth: 2, strokeColor: '#e74c3c' });
+
+                const Ap = boardSolEx1.create('point', [2, -1], { name: "A'", size: 3, color: '#2ecc71', fixed: true });
+                const Bp = boardSolEx1.create('point', [-1, -2], { name: "B'", size: 3, color: '#2ecc71', fixed: true });
+                const rFarP = boardSolEx1.create('point', [Ap.X() + 4*(Bp.X()-Ap.X()), Ap.Y() + 4*(Bp.Y()-Ap.Y())], { visible: false, fixed: true });
+                boardSolEx1.create('segment', [Ap, rFarP], { strokeWidth: 2, strokeColor: '#2ecc71', dash: 2 });
+                boardSolEx1.create('arrow', [Bp, rFarP], { strokeWidth: 2, strokeColor: '#2ecc71', dash: 2 });
+
+                boardSolEx1.create('segment', [A, Ap], { strokeWidth: 1, strokeColor: '#95a5a6', dash: 3 });
+                boardSolEx1.create('segment', [B, Bp], { strokeWidth: 1, strokeColor: '#95a5a6', dash: 3 });
+            }
+
+            // Observe language changes
+            const observer = new MutationObserver(() => {
+                [boardRule1, boardEx1, boardSolEx1].forEach(b => {
+                    if (b) b.update();
+                });
+            });
+            observer.observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
+        });
+    </script>
+
+    <!-- TRANSLATION OBJECT (full trilingual) -->
+    <script>
+        const translations = {
+            ar: {
+                page_title: "مناظر نصف مستقيم - رياضيات السنة الثامنة أساسي",
+                print_header: "السنة الثامنة أساسي - الهندسة - الدرس 1 - الجزء 5 - هـ",
+                site_header: "Educational Dashboard - Mathematics",
+                back_to_index: "← العودة للفهرس",
+                nav_badge: "الدرس 1 | الجزء 5 | هـ",
+                next_lesson: "التالي ←",
+                language_label: "اللغة",
+                lang_ar: "العربية",
+                lang_en: "English",
+                lang_fr: "Français",
+                print_label: "اختر القسم للطباعة:",
+                print_all: "الدرس كاملاً",
+                print_rules: "القواعد",
+                print_exercises: "التمارين",
+                print_problems: "المسائل",
+                print_solutions: "الحلول",
+                print_button: "🖨️ طباعة",
+                module_tag: "📘 الهندسة | الدرس 1 | الجزء 5 | هـ",
+                lesson_title: "مناظر نصف مستقيم",
+                lesson_subtitle: "صورة نصف مستقيم بالتناظر المركزي وحالاته",
+                rules_title: "القواعد",
+                rules_subtitle: "صورة نصف مستقيم بالتناظر المركزي",
+                rule1_title: "قاعدة 1: تعريف",
+                rule1_text: "صورة نصف المستقيم [AB) بالتناظر المركزي الذي مركزه O هي نصف المستقيم [A'B') حيث A' و B' هما صورتا A و B على التوالي.",
+                rule1_example: "إذا كان A' = 2O - A و B' = 2O - B، فإن [A'B') هو صورة [AB) بالتناظر المركزي الذي مركزه O.",
+                rule1_caption: "اسحب النقطة A أو B أو المركز O لترى أن [A'B') هي صورة [AB)",
+                rule2_title: "قاعدة 2: حفظ الاتجاه",
+                rule2_text: "صورة نصف المستقيم [AB) هي نصف مستقيم يوازي [AB)، وبنفس الاتجاه من A' نحو B'. بعبارة أخرى: (A'B') يوازي (AB).",
+                rule2_example: "إذا كان [AB) يوازي [CD)، فإن صورتهما [A'B') و [C'D') متوازيان.",
+                rule3_title: "قاعدة 3: حالة خاصة",
+                rule3_text: "إذا كان نصف المستقيم [AB) يشمل مركز التناظر O (أي O تنتمي إلى نصف المستقيم)، فإن صورته [A'B') تكون على المستقيم نفسه وبالاتجاه المعاكس. وبصفة خاصة: إذا كان نصف المستقيم يبدأ من O، أي [OA)، فإن صورته هي نصف المستقيم المعاكس [OA') حيث A' = 2O - A، والمستقيمان (AB) و (A'B') منطبقان.",
+                rule3_example: "إذا كانت A(2, 1) و O(0, 0)، فإن [OA) لها نفس المستقيم [OA') حيث A'(-2, -1)، وهما نصفا مستقيم متعاكسان.",
+                graph_legend: "الأحمر [AB)، الأخضر [A'B') صورتها بالتناظر المركزي",
+                exercises_title: "تمارين",
+                exercises_subtitle: "تمرّن على إيجاد صورة نصف مستقيم بالتناظر المركزي",
+                exercise1_q: "نصف المستقيم [AB) محدد بـ A(-2, 1) و B(1, 2)، والمركز O(0, 0). أنشئ صورة [AB) بالنسبة إلى O بإدخال إحداثيات A' و B'.",
+                exercise1_caption: "اسحب النقطتين أو أدخل إحداثياتهما.",
+                exercise2_q: "نصف المستقيم [OA) حيث O(1, 1) و A(3, 2). ما هي صورة [OA) بالنسبة إلى O؟ بيّن أنها نصف مستقيم معاكس لـ [OA).",
+                exercise3_q: "نصف المستقيم [AB) لا يشمل النقطة O. أثبت أن صورته [A'B') نصف مستقيم يوازي [AB).",
+                exercise4_q: "أجب بصحيح أو خطأ مع التعليل: إذا كان نصف المستقيم [OA) يبدأ من المركز O، فإن صورته [OA') منطبقة على [OA).",
+                answer_placeholder: "اكتب إجابتك هنا...",
+                check_btn: "تحقق",
+                reset_btn: "إعادة",
+                correct_msg: "أحسنت! إجابة صحيحة.",
+                incorrect_msg: "حاول مرة أخرى.",
+                ex1_coords_display: "\\(A(-2, 1)\\) | \\(B(1, 2)\\) | \\(O(0, 0)\\)",
+                coord_label_A_prime: "\\(A'\\):",
+                coord_label_B_prime: "\\(B'\\):",
+                coord_label_x: "x:",
+                coord_label_y: "y:",
+                apply_coords_btn: "تعيين",
+                invalid_coords: "يرجى إدخال قيم صحيحة للإحداثيات.",
+                problems_title: "مسائل",
+                problems_subtitle: "مسائل تطبيقية على صورة نصف مستقيم",
+                problem1_title: "🚤 مسألة 1: القارب في القناة",
+                problem1_text: "يتحرّك قارب على قناة مستقيمة نصفها [AB) انطلاقاً من النقطة A نحو النقطة B، ومركز الميناء هو O. أراد مدير الميناء تحديد مسار ثانٍ [A'B') متناظر مع [AB) بالنسبة إلى O. بيّن أن [A'B') يوازي [AB)، واذكر خطوات إنشائه عملياً.",
+                problem2_title: "💡 مسألة 2: الشعاع الضوئي",
+                problem2_text: "شعاع ضوئي ينطلق من نقطة S(2, 3) ويمرّ بنقطة P(4, 5). إذا كان مركز التناظر هو O(0, 0)، ما هو مسار الشعاع المنعكس [S'P')؟ وما العلاقة بين اتجاهي [SP) و [S'P')؟",
+                problem3_title: "🧭 مسألة 3: قرص دوّار",
+                problem3_text: "في لعبة قرص دوّار، مؤشر مثبّت عند نقطة O. يمثّل نصف المستقيم [OA) اتجاه المؤشر الأول. صمّم اللاعب نصف مستقيم ثانٍ [OA') متناظراً مع [OA) بالنسبة إلى O. أثبت أن [OA') و [OA) متعاكسان على المستقيم نفسه، وحدّد الاتجاه الذي يشير إليه [OA') إذا كانت A(1, 2).",
+                solutions_title: "حلول",
+                solutions_subtitle: "الحلول المفصلة خطوة بخطوة",
+                solutions_exercises_heading: "📝 حلول التمارين",
+                solutions_problems_heading: "🧩 حلول المسائل",
+                sol_ex1_q: "التمرين 1 — صورة نصف المستقيم [AB):",
+                sol_ex1_answer: "A'(2, -1) و B'(-1, -2)، ونصف المستقيم [A'B') يوازي [AB).",
+                sol_ex2_q: "التمرين 2 — نصف مستقيم يبدأ من المركز:",
+                sol_ex2_answer: "صورة [OA) هي [OA') حيث A'(-1, 0)، وهي نصف مستقيم معاكس لـ [OA) على المستقيم نفسه.",
+                sol_ex3_q: "التمرين 3 — نصف مستقيم لا يشمل المركز:",
+                sol_ex3_answer: "[A'B') يوازي [AB).",
+                sol_ex4_q: "التمرين 4 — صحيح أم خطأ:",
+                sol_ex4_answer: "خطأ. الصورة [OA') لها المستقيم نفسه لكنها معاكسة لـ [OA)، لا منطبقة عليها.",
+                sol_prob1_q: "المسألة 1 — القارب في القناة:",
+                sol_prob2_q: "المسألة 2 — الشعاع الضوئي:",
+                sol_prob3_q: "المسألة 3 — قرص دوّار:",
+                sol_prob1_answer: "[A'B') يوازي [AB)، وننشئه ببناء A' و B' بالتناظر المركزي.",
+                sol_prob2_answer: "S'(-2, -3) و P'(-4, -5)، و [S'P') يوازي [SP) لكن باتجاه من S' نحو P'.",
+                sol_prob3_answer: "[OA') معاكس لـ [OA) على المستقيم نفسه، ويشير نحو A'(-1, -2).",
+                step_line_1: "الخطوة 1:",
+                step_line_2: "الخطوة 2:",
+                step_line_3: "الخطوة 3:",
+                step_ex1_1: "بما أن O(0, 0)، فإن الصورة تُحسب بالعلاقة M' = -M.",
+                step_ex1_2: "A' = -A = (2, -1) و B' = -B = (-1, -2).",
+                step_ex1_3: "ميل [AB) = (2-1)/(1-(-2)) = 1/3، وميل [A'B') = (-2-(-1))/(-1-2) = 1/3. الميلان متساويان إذن [A'B') يوازي [AB).",
+                step_ex2_1: "نحسب A' = 2O - A = 2(1, 1) - (3, 2) = (-1, 0).",
+                step_ex2_2: "بما أن O هي أصل [OA) وتبقى ثابتة، فإن صورة [OA) هي [OA').",
+                step_ex2_3: "المستقيم (OA') هو نفسه (OA)، لكن [OA') يتجه في الجهة المقابلة، إذن [OA) و [OA') متعاكسان.",
+                step_ex3_1: "بما أن [AB) يشمل النقطتين A و B، فإن صورته [A'B') تشمل A' و B'.",
+                step_ex3_2: "المستقيم (AB) لا يشمل O، إذن حسب قاعدة صورة مستقيم، (A'B') يوازي (AB).",
+                step_ex3_3: "وبما أن اتجاه [A'B') من A' نحو B' يحافظ على الاتجاه، فإن [A'B') يوازي [AB).",
+                step_prob1_1: "ننشئ صورة A وهي A' = 2O - A، وصورة B وهي B' = 2O - B.",
+                step_prob1_2: "نرسم نصف المستقيم [A'B')، وهو صورة [AB) بالتناظر المركزي الذي مركزه O.",
+                step_prob1_3: "بما أن (AB) لا يشمل O، فحسب قاعدة صورة مستقيم: (A'B') يوازي (AB)، وبالتالي [A'B') يوازي [AB).",
+                step_prob2_1: "O(0, 0)، إذن M' = -M: S'(-2, -3) و P'(-4, -5).",
+                step_prob2_2: "ميل [SP) = (5 - 3)/(4 - 2) = 1، وميل [S'P') = (-5 - (-3))/(-4 - (-2)) = 1. إذن [S'P') يوازي [SP).",
+                step_prob2_3: "نصف المستقيم [S'P') يتجه من S' نحو P'، وهو الاتجاه الموازي لاتجاه [SP) من S نحو P.",
+                step_prob3_1: "A' = 2O - A = -(1, 2) = (-1, -2).",
+                step_prob3_2: "بما أن [OA) تبدأ من المركز O، فحسب قاعدة الحالة الخاصة، صورتها [OA') على المستقيم نفسه وباتجاه معاكس.",
+                step_prob3_3: "إذن [OA') يشير نحو A'(-1, -2)، بعكس اتجاه [OA) الذي يشير نحو A(1, 2).",
+                cm_unit: "cm",
+                footer_dev: "معلومات المطوّر",
+                footer_dev_name: "طور بواسطة: ماجري زياد",
+                footer_hosting: "الاستضافة: Github, Netlify, Supabase",
+                footer_links: "روابط",
+                footer_contact: "اتصل بنا",
+                footer_policies: "السياسات",
+                footer_version: "الإصدار",
+                footer_version_num: "الإصدار: 0.0.2",
+                footer_rights: "جميع الحقوق محفوظة © 2025",
+                print_footer_dev: "طور بواسطة: ماجري زياد",
+                print_footer_version: "الإصدار: 0.0.2",
+                print_footer_page: "عنوان الصفحة: maths_y8_geo_module2_lesson1_sub5.html"
+            },
+            en: {
+                page_title: "Image of a Ray under Central Symmetry - Math Year 8",
+                print_header: "Year 8 – Geometry – Lesson 1 – Part 5 – e",
+                site_header: "Educational Dashboard - Mathematics",
+                back_to_index: "← Back to Index",
+                nav_badge: "Lesson 1 | Part 5 | e",
+                next_lesson: "Next →",
+                language_label: "Language",
+                lang_ar: "العربية",
+                lang_en: "English",
+                lang_fr: "Français",
+                print_label: "Select section to print:",
+                print_all: "Full lesson",
+                print_rules: "Rules",
+                print_exercises: "Exercises",
+                print_problems: "Problems",
+                print_solutions: "Solutions",
+                print_button: "🖨️ Print",
+                module_tag: "📘 Geometry | Lesson 1 | Part 5 | e",
+                lesson_title: "Image of a Ray under Central Symmetry",
+                lesson_subtitle: "Image of a ray under central symmetry and its cases",
+                rules_title: "Rules",
+                rules_subtitle: "Image of a ray under central symmetry",
+                rule1_title: "Rule 1: Definition",
+                rule1_text: "The image of ray [AB) under central symmetry with center O is ray [A'B') where A' and B' are the images of A and B respectively.",
+                rule1_example: "If A' = 2O - A and B' = 2O - B, then [A'B') is the image of [AB) under central symmetry with center O.",
+                rule1_caption: "Drag point A or B or the center O to see that [A'B') is the image of [AB)",
+                rule2_title: "Rule 2: Direction is preserved",
+                rule2_text: "The image of ray [AB) is a ray parallel to [AB), with the same direction from A' towards B'. In other words: (A'B') is parallel to (AB).",
+                rule2_example: "If [AB) is parallel to [CD), their images [A'B') and [C'D') are parallel.",
+                rule3_title: "Rule 3: Special case",
+                rule3_text: "If ray [AB) contains the center of symmetry O (i.e., O belongs to the ray), its image [A'B') lies on the same line with opposite direction. In particular: if the ray starts at O, i.e., [OA), its image is the opposite ray [OA') where A' = 2O - A, and the lines (AB) and (A'B') coincide.",
+                rule3_example: "If A(2, 1) and O(0, 0), then [OA) has the same line as [OA') where A'(-2, -1), and they are opposite rays.",
+                graph_legend: "Red [AB), green [A'B') its image under central symmetry",
+                exercises_title: "Exercises",
+                exercises_subtitle: "Practice finding the image of a ray under central symmetry",
+                exercise1_q: "Ray [AB) is defined by A(-2, 1) and B(1, 2), with center O(0, 0). Construct the image of [AB) with respect to O by entering the coordinates of A' and B'.",
+                exercise1_caption: "Drag the points or enter their coordinates.",
+                exercise2_q: "Ray [OA) with O(1, 1) and A(3, 2). What is the image of [OA) with respect to O? Show that it is the opposite ray of [OA).",
+                exercise3_q: "Ray [AB) does not contain point O. Prove that its image [A'B') is a ray parallel to [AB).",
+                exercise4_q: "Answer true or false with justification: if ray [OA) starts at center O, its image [OA') coincides with [OA).",
+                answer_placeholder: "Write your answer here...",
+                check_btn: "Check",
+                reset_btn: "Reset",
+                correct_msg: "Well done! Correct answer.",
+                incorrect_msg: "Try again.",
+                ex1_coords_display: "\\(A(-2, 1)\\) | \\(B(1, 2)\\) | \\(O(0, 0)\\)",
+                coord_label_A_prime: "\\(A'\\):",
+                coord_label_B_prime: "\\(B'\\):",
+                coord_label_x: "x:",
+                coord_label_y: "y:",
+                apply_coords_btn: "Apply",
+                invalid_coords: "Please enter valid coordinates.",
+                problems_title: "Problems",
+                problems_subtitle: "Applied problems on the image of a ray",
+                problem1_title: "🚤 Problem 1: Boat in the canal",
+                problem1_text: "A boat moves along a straight canal as the ray [AB) starting at A towards B, with the harbor center O. The harbor manager wants to define a second path [A'B') symmetric to [AB) with respect to O. Show that [A'B') is parallel to [AB), and describe how to construct it in practice.",
+                problem2_title: "💡 Problem 2: Light ray",
+                problem2_text: "A light ray starts at S(2, 3) and passes through P(4, 5). If the center of symmetry is O(0, 0), what is the path of the reflected ray [S'P')? What is the relationship between the directions of [SP) and [S'P')?",
+                problem3_title: "🧭 Problem 3: Spinning wheel",
+                problem3_text: "In a spinning wheel game, an indicator is fixed at point O. Ray [OA) represents the direction of the first indicator. The player draws a second ray [OA') symmetric to [OA) with respect to O. Prove that [OA') and [OA) are opposite on the same line, and determine the direction [OA') points to if A(1, 2).",
+                solutions_title: "Solutions",
+                solutions_subtitle: "Detailed step-by-step solutions",
+                solutions_exercises_heading: "📝 Exercise Solutions",
+                solutions_problems_heading: "🧩 Problem Solutions",
+                sol_ex1_q: "Exercise 1 — Image of ray [AB):",
+                sol_ex1_answer: "A'(2, -1) and B'(-1, -2), and ray [A'B') is parallel to [AB).",
+                sol_ex2_q: "Exercise 2 — Ray starting at center:",
+                sol_ex2_answer: "The image of [OA) is [OA') with A'(-1, 0), an opposite ray of [OA) on the same line.",
+                sol_ex3_q: "Exercise 3 — Ray not containing the center:",
+                sol_ex3_answer: "[A'B') is parallel to [AB).",
+                sol_ex4_q: "Exercise 4 — True or false:",
+                sol_ex4_answer: "False. The image [OA') shares the same line as [OA) but is opposite, not coincident.",
+                sol_prob1_q: "Problem 1 — Boat in the canal:",
+                sol_prob2_q: "Problem 2 — Light ray:",
+                sol_prob3_q: "Problem 3 — Spinning wheel:",
+                sol_prob1_answer: "[A'B') is parallel to [AB), constructed by building A' and B' under central symmetry.",
+                sol_prob2_answer: "S'(-2, -3) and P'(-4, -5), and [S'P') is parallel to [SP) but directed from S' towards P'.",
+                sol_prob3_answer: "[OA') is opposite to [OA) on the same line, pointing towards A'(-1, -2).",
+                step_line_1: "Step 1:",
+                step_line_2: "Step 2:",
+                step_line_3: "Step 3:",
+                step_ex1_1: "Since O(0, 0), the image is computed by M' = -M.",
+                step_ex1_2: "A' = -A = (2, -1) and B' = -B = (-1, -2).",
+                step_ex1_3: "Slope of [AB) = (2-1)/(1-(-2)) = 1/3, slope of [A'B') = (-2-(-1))/(-1-2) = 1/3. Equal slopes, so [A'B') is parallel to [AB).",
+                step_ex2_1: "Compute A' = 2O - A = 2(1, 1) - (3, 2) = (-1, 0).",
+                step_ex2_2: "Since O is the origin of [OA) and stays fixed, the image of [OA) is [OA').",
+                step_ex2_3: "The line (OA') is the same as (OA), but [OA') points the opposite way, so [OA) and [OA') are opposite rays.",
+                step_ex3_1: "Since [AB) contains A and B, its image [A'B') contains A' and B'.",
+                step_ex3_2: "Line (AB) does not contain O, so by the line-image rule, (A'B') is parallel to (AB).",
+                step_ex3_3: "And since the direction of [A'B') from A' to B' preserves the original direction, [A'B') is parallel to [AB).",
+                step_prob1_1: "Construct the image of A as A' = 2O - A, and of B as B' = 2O - B.",
+                step_prob1_2: "Draw ray [A'B'), the image of [AB) under central symmetry with center O.",
+                step_prob1_3: "Since (AB) does not contain O, by the line-image rule: (A'B') is parallel to (AB), hence [A'B') is parallel to [AB).",
+                step_prob2_1: "O(0, 0), so M' = -M: S'(-2, -3) and P'(-4, -5).",
+                step_prob2_2: "Slope of [SP) = (5 - 3)/(4 - 2) = 1, slope of [S'P') = (-5 - (-3))/(-4 - (-2)) = 1. So [S'P') is parallel to [SP).",
+                step_prob2_3: "Ray [S'P') is directed from S' towards P', the direction parallel to [SP) from S towards P.",
+                step_prob3_1: "A' = 2O - A = -(1, 2) = (-1, -2).",
+                step_prob3_2: "Since [OA) starts at center O, by the special case rule, its image [OA') lies on the same line with opposite direction.",
+                step_prob3_3: "So [OA') points towards A'(-1, -2), opposite to [OA) which points towards A(1, 2).",
+                cm_unit: "cm",
+                footer_dev: "Developer Info",
+                footer_dev_name: "Developed by: Majri Zied",
+                footer_hosting: "Hosting: Github, Netlify, Supabase",
+                footer_links: "Links",
+                footer_contact: "Contact us",
+                footer_policies: "Policies",
+                footer_version: "Version",
+                footer_version_num: "Version: 0.0.2",
+                footer_rights: "All rights reserved © 2025",
+                print_footer_dev: "Developed by: Majri Zied",
+                print_footer_version: "Version: 0.0.2",
+                print_footer_page: "Page address: maths_y8_geo_module2_lesson1_sub5.html"
+            },
+            fr: {
+                page_title: "Image d'un rayon par symétrie centrale - Math 8ème année",
+                print_header: "8ème année – Géométrie – Leçon 1 – Partie 5 – e",
+                site_header: "Educational Dashboard - Mathematics",
+                back_to_index: "← Retour à l'index",
+                nav_badge: "Leçon 1 | Partie 5 | e",
+                next_lesson: "Suivant →",
+                language_label: "Langue",
+                lang_ar: "العربية",
+                lang_en: "English",
+                lang_fr: "Français",
+                print_label: "Choisir la section à imprimer :",
+                print_all: "Leçon complète",
+                print_rules: "Règles",
+                print_exercises: "Exercices",
+                print_problems: "Problèmes",
+                print_solutions: "Solutions",
+                print_button: "🖨️ Imprimer",
+                module_tag: "📘 Géométrie | Leçon 1 | Partie 5 | e",
+                lesson_title: "Image d'un rayon par symétrie centrale",
+                lesson_subtitle: "Image d'un rayon par symétrie centrale et ses cas",
+                rules_title: "Règles",
+                rules_subtitle: "Image d'un rayon par symétrie centrale",
+                rule1_title: "Règle 1 : Définition",
+                rule1_text: "L'image du rayon [AB) par la symétrie centrale de centre O est le rayon [A'B') où A' et B' sont les images de A et B respectivement.",
+                rule1_example: "Si A' = 2O - A et B' = 2O - B, alors [A'B') est l'image de [AB) par la symétrie centrale de centre O.",
+                rule1_caption: "Faites glisser le point A ou B ou le centre O pour voir que [A'B') est l'image de [AB)",
+                rule2_title: "Règle 2 : Direction conservée",
+                rule2_text: "L'image du rayon [AB) est un rayon parallèle à [AB), avec la même direction de A' vers B'. Autrement dit : (A'B') est parallèle à (AB).",
+                rule2_example: "Si [AB) est parallèle à [CD), leurs images [A'B') et [C'D') sont parallèles.",
+                rule3_title: "Règle 3 : Cas particulier",
+                rule3_text: "Si le rayon [AB) contient le centre de symétrie O (c'est-à-dire O appartient au rayon), son image [A'B') se trouve sur la même droite avec une direction opposée. En particulier : si le rayon part de O, soit [OA), son image est le rayon opposé [OA') où A' = 2O - A, et les droites (AB) et (A'B') coïncident.",
+                rule3_example: "Si A(2, 1) et O(0, 0), alors [OA) a la même droite que [OA') avec A'(-2, -1), et ce sont des rayons opposés.",
+                graph_legend: "Rouge [AB), vert [A'B') son image par symétrie centrale",
+                exercises_title: "Exercices",
+                exercises_subtitle: "Entraînez-vous à trouver l'image d'un rayon par symétrie centrale",
+                exercise1_q: "Le rayon [AB) est défini par A(-2, 1) et B(1, 2), avec O(0, 0). Construisez l'image de [AB) par rapport à O en saisissant les coordonnées de A' et B'.",
+                exercise1_caption: "Faites glisser les points ou entrez leurs coordonnées.",
+                exercise2_q: "Rayon [OA) avec O(1, 1) et A(3, 2). Quelle est l'image de [OA) par rapport à O ? Montrez qu'il s'agit du rayon opposé à [OA).",
+                exercise3_q: "Le rayon [AB) ne contient pas le point O. Prouvez que son image [A'B') est un rayon parallèle à [AB).",
+                exercise4_q: "Répondez vrai ou faux avec justification : si le rayon [OA) part du centre O, son image [OA') coïncide avec [OA).",
+                answer_placeholder: "Écrivez votre réponse ici...",
+                check_btn: "Vérifier",
+                reset_btn: "Réinitialiser",
+                correct_msg: "Bravo ! Bonne réponse.",
+                incorrect_msg: "Essayez encore.",
+                ex1_coords_display: "\\(A(-2, 1)\\) | \\(B(1, 2)\\) | \\(O(0, 0)\\)",
+                coord_label_A_prime: "\\(A'\\) :",
+                coord_label_B_prime: "\\(B'\\) :",
+                coord_label_x: "x :",
+                coord_label_y: "y :",
+                apply_coords_btn: "Appliquer",
+                invalid_coords: "Veuillez entrer des coordonnées valides.",
+                problems_title: "Problèmes",
+                problems_subtitle: "Problèmes appliqués sur l'image d'un rayon",
+                problem1_title: "🚤 Problème 1 : Bateau dans le canal",
+                problem1_text: "Un bateau se déplace le long d'un canal rectiligne selon le rayon [AB) partant de A vers B, avec le centre du port O. Le gestionnaire veut définir un second trajet [A'B') symétrique de [AB) par rapport à O. Montrez que [A'B') est parallèle à [AB), et décrivez comment le construire en pratique.",
+                problem2_title: "💡 Problème 2 : Rayon lumineux",
+                problem2_text: "Un rayon lumineux part de S(2, 3) et passe par P(4, 5). Si le centre de symétrie est O(0, 0), quel est le trajet du rayon réfléchi [S'P') ? Quelle est la relation entre les directions de [SP) et [S'P') ?",
+                problem3_title: "🧭 Problème 3 : Roue tournante",
+                problem3_text: "Dans un jeu de roue tournante, un indicateur est fixé au point O. Le rayon [OA) représente la direction du premier indicateur. Le joueur dessine un second rayon [OA') symétrique de [OA) par rapport à O. Prouvez que [OA') et [OA) sont opposés sur la même droite, et déterminez la direction vers laquelle [OA') pointe si A(1, 2).",
+                solutions_title: "Solutions",
+                solutions_subtitle: "Solutions détaillées étape par étape",
+                solutions_exercises_heading: "📝 Solutions des exercices",
+                solutions_problems_heading: "🧩 Solutions des problèmes",
+                sol_ex1_q: "Exercice 1 — Image du rayon [AB) :",
+                sol_ex1_answer: "A'(2, -1) et B'(-1, -2), et [A'B') est parallèle à [AB).",
+                sol_ex2_q: "Exercice 2 — Rayon partant du centre :",
+                sol_ex2_answer: "L'image de [OA) est [OA') avec A'(-1, 0), rayon opposé à [OA) sur la même droite.",
+                sol_ex3_q: "Exercice 3 — Rayon ne contenant pas le centre :",
+                sol_ex3_answer: "[A'B') est parallèle à [AB).",
+                sol_ex4_q: "Exercice 4 — Vrai ou faux :",
+                sol_ex4_answer: "Faux. L'image [OA') partage la même droite que [OA) mais est opposée, pas confondue.",
+                sol_prob1_q: "Problème 1 — Bateau dans le canal :",
+                sol_prob2_q: "Problème 2 — Rayon lumineux :",
+                sol_prob3_q: "Problème 3 — Roue tournante :",
+                sol_prob1_answer: "[A'B') est parallèle à [AB), construit en déterminant A' et B' par symétrie centrale.",
+                sol_prob2_answer: "S'(-2, -3) et P'(-4, -5), et [S'P') est parallèle à [SP) mais dirigé de S' vers P'.",
+                sol_prob3_answer: "[OA') est opposé à [OA) sur la même droite, pointant vers A'(-1, -2).",
+                step_line_1: "Étape 1 :",
+                step_line_2: "Étape 2 :",
+                step_line_3: "Étape 3 :",
+                step_ex1_1: "Puisque O(0, 0), l'image se calcule par M' = -M.",
+                step_ex1_2: "A' = -A = (2, -1) et B' = -B = (-1, -2).",
+                step_ex1_3: "Pente de [AB) = (2-1)/(1-(-2)) = 1/3, pente de [A'B') = (-2-(-1))/(-1-2) = 1/3. Pentes égales, donc [A'B') est parallèle à [AB).",
+                step_ex2_1: "Calculer A' = 2O - A = 2(1, 1) - (3, 2) = (-1, 0).",
+                step_ex2_2: "Puisque O est l'origine de [OA) et reste fixe, l'image de [OA) est [OA').",
+                step_ex2_3: "La droite (OA') est la même que (OA), mais [OA') pointe en sens opposé, donc [OA) et [OA') sont opposés.",
+                step_ex3_1: "Puisque [AB) contient A et B, son image [A'B') contient A' et B'.",
+                step_ex3_2: "La droite (AB) ne contient pas O, donc par la règle de l'image d'une droite, (A'B') est parallèle à (AB).",
+                step_ex3_3: "Et puisque la direction de [A'B') de A' vers B' conserve la direction initiale, [A'B') est parallèle à [AB).",
+                step_prob1_1: "Construire l'image de A comme A' = 2O - A, et de B comme B' = 2O - B.",
+                step_prob1_2: "Tracer le rayon [A'B'), image de [AB) par la symétrie centrale de centre O.",
+                step_prob1_3: "Puisque (AB) ne contient pas O, par la règle de l'image d'une droite : (A'B') est parallèle à (AB), donc [A'B') est parallèle à [AB).",
+                step_prob2_1: "O(0, 0), donc M' = -M : S'(-2, -3) et P'(-4, -5).",
+                step_prob2_2: "Pente de [SP) = (5 - 3)/(4 - 2) = 1, pente de [S'P') = (-5 - (-3))/(-4 - (-2)) = 1. Donc [S'P') est parallèle à [SP).",
+                step_prob2_3: "Le rayon [S'P') est dirigé de S' vers P', direction parallèle à [SP) de S vers P.",
+                step_prob3_1: "A' = 2O - A = -(1, 2) = (-1, -2).",
+                step_prob3_2: "Puisque [OA) part du centre O, par la règle du cas particulier, son image [OA') se trouve sur la même droite avec une direction opposée.",
+                step_prob3_3: "Donc [OA') pointe vers A'(-1, -2), opposé à [OA) qui pointe vers A(1, 2).",
+                cm_unit: "cm",
+                footer_dev: "Informations du développeur",
+                footer_dev_name: "Développé par : Majri Zied",
+                footer_hosting: "Hébergement : Github, Netlify, Supabase",
+                footer_links: "Liens",
+                footer_contact: "Contactez-nous",
+                footer_policies: "Politiques",
+                footer_version: "Version",
+                footer_version_num: "Version : 0.0.2",
+                footer_rights: "Tous droits réservés © 2025",
+                print_footer_dev: "Développé par : Majri Zied",
+                print_footer_version: "Version : 0.0.2",
+                print_footer_page: "Adresse de la page : maths_y8_geo_module2_lesson1_sub5.html"
+            }
+        };
+    </script>
+</body>
+</html>

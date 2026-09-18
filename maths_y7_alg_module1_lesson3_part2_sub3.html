@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="page_title">الأعداد الأولية - رياضيات السنة السابعة أساسي</title>
+
+    <!-- External Stylesheets -->
+    <link rel="stylesheet" href="maths_shared.css">
+    <link rel="stylesheet" href="maths_lessons.css">
+
+    <!-- KaTeX -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+
+    <!-- JSXGraph -->
+    <script src="https://cdn.jsdelivr.net/npm/jsxgraph@1.4.0/distrib/jsxgraphcore.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jsxgraph@1.4.0/distrib/jsxgraph.css">
+
+    <!-- External Script -->
+    <script src="maths_lessons.js" defer></script>
+</head>
+<body>
+    <div class="container">
+        <main>
+            <!-- Print-only header -->
+            <div class="print-header" data-i18n="print_header">السنة السابعة أساسي - الوحدة الأولى - الدرس الثالث - الجزء 2 - ج</div>
+
+            <!-- Site Header -->
+            <div class="site-header">
+                <div class="header-icon">
+                    <img src="assets/icons/icon-152x152.png" alt="أيقونة الموقع">
+                </div>
+                <h1 data-i18n="site_header">Educational Dashboard - Mathematics</h1>
+            </div>
+
+            <!-- Top Navigation -->
+            <nav class="top-nav">
+                <a href="maths_y7.html" class="nav-link" data-i18n="back_to_index">← العودة للفهرس</a>
+                <span class="nav-badge" data-i18n="nav_badge">الدرس 3 | جزء 2 | ج</span>
+                <a href="maths_y7_alg_module1_lesson3_part3_sub1.html" class="nav-link" data-i18n="next_part">التالي ←</a>
+            </nav>
+
+            <!-- Print Controls -->
+            <div class="print-controls">
+                <label for="print-section" data-i18n="print_label">اختر القسم للطباعة:</label>
+                <select id="print-section" name="print-section">
+                    <option value="all" data-i18n="print_all">الدرس كاملاً</option>
+                    <option value="rules" data-i18n="print_rules">القواعد</option>
+                    <option value="exercises" data-i18n="print_exercises">التمارين</option>
+                    <option value="problems" data-i18n="print_problems">المسائل</option>
+                    <option value="solutions" data-i18n="print_solutions">الحلول</option>
+                </select>
+                <button class="print-button" onclick="printSelected()" data-i18n="print_button">🖨️ طباعة</button>
+                <button id="theme-toggle" class="theme-toggle" aria-label="تبديل الوضع الليلي/النهاري">
+                    <span class="theme-icon">🌙</span>
+                </button>
+
+                <!-- Language Selector -->
+                <div class="language-selector">
+                    <label for="language-select" class="sr-only" data-i18n="language_label">اللغة</label>
+                    <select id="language-select" name="language-select">
+                        <option value="ar" data-i18n="lang_ar">العربية</option>
+                        <option value="en" data-i18n="lang_en">English</option>
+                        <option value="fr" data-i18n="lang_fr">Français</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Lesson Header -->
+            <header class="lesson-header">
+                <span class="module-tag" data-i18n="module_tag">📘 الجبر والحساب | الدرس 3 | الجزء 2 | ج</span>
+                <h1 class="lesson-title" data-i18n="lesson_title">الأعداد الأولية</h1>
+                <p class="lesson-subtitle" data-i18n="lesson_subtitle">التعرف على الأعداد الأولية وتمييزها عن غيرها</p>
+            </header>
+
+            <!-- Section 1: Rules -->
+            <div class="section" id="rules-section">
+                <div class="section-header" onclick="toggleSection('rules-body', 'rules-toggle')" role="button"
+                     tabindex="0" aria-expanded="true" aria-controls="rules-body"
+                     onkeydown="if(event.key==='Enter'||event.key===' ') toggleSection('rules-body', 'rules-toggle')">
+                    <div class="section-icon rules-icon">📐</div>
+                    <div class="section-title">
+                        <h2 data-i18n="rules_title">القواعد</h2>
+                        <p data-i18n="rules_subtitle">مبادئ تمييز الأعداد الأولية</p>
+                    </div>
+                    <span class="section-toggle open" id="rules-toggle">▼</span>
+                </div>
+                <div class="section-body" id="rules-body">
+                    <div class="rule-card">
+                        <div class="rule-title" data-i18n="rule1_title">قاعدة 1: تعريف العدد الأولي</div>
+                        <div class="rule-text" data-i18n="rule1_text">العدد الأولي هو عدد طبيعي أكبر من \(1\) لا يقبل القسمة إلا على \(1\) وعلى نفسه فقط. أي له قاسمان بالضبط.</div>
+                        <div class="example-box" data-i18n="rule1_example">\(7\) عدد أولي لأن قواسمه \(1\) و \(7\) فقط.</div>
+                    </div>
+                    <div class="rule-card">
+                        <div class="rule-title" data-i18n="rule2_title">قاعدة 2: الأعداد غير الأولية</div>
+                        <div class="rule-text" data-i18n="rule2_text">العدد \(1\) ليس عددًا أوليًا لأن له قاسمًا واحدًا فقط. الأعداد المركبة هي الأعداد الطبيعية الأكبر من \(1\) والتي لها أكثر من قاسمين.</div>
+                        <div class="example-box" data-i18n="rule2_example">\(6\) ليس أوليًا لأن قواسمه \(1, 2, 3, 6\) (أربعة قواسم).</div>
+                    </div>
+                    <div class="rule-card">
+                        <div class="rule-title" data-i18n="rule3_title">قاعدة 3: غربال إراتوستينس</div>
+                        <div class="rule-text" data-i18n="rule3_text">طريقة قديمة لإيجاد الأعداد الأولية حتى عدد معين: نبدأ من \(2\) ونشطب كل مضاعفاته، ثم ننتقل إلى العدد التالي غير المشطوب ونكرر العملية.</div>
+                        <div class="example-box" data-i18n="rule3_example">لإيجاد الأولية حتى \(10\): \(2, 3, 5, 7\).</div>
+                    </div>
+                    <div class="rule-card">
+                        <div class="rule-title" data-i18n="rule4_title">قاعدة 4: اختبار أولية عدد</div>
+                        <div class="rule-text" data-i18n="rule4_text">لاختبار عدد \(n\) هل هو أولي، نحاول قسمته على الأعداد الأولية الأصغر من أو تساوي \(\sqrt{n}\). إذا لم يقبل القسمة على أي منها فهو أولي.</div>
+                        <div class="example-box" data-i18n="rule4_example">لاختبار \(29\): \(\sqrt{29} \approx 5.4\)، نختبر القسمة على \(2, 3, 5\) ولا يقبل، إذن \(29\) أولي.</div>
+                    </div>
+
+                    <!-- Interactive diagram: Prime number line -->
+                    <div style="margin-top:1.5rem; text-align:center;">
+                        <h3 data-i18n="graph_title" style="margin-bottom:0.5rem;">رسم توضيحي: الأعداد الأولية حتى 20</h3>
+                        <p data-i18n="graph_subtitle">الأعداد الأولية مميزة باللون الأحمر</p>
+                        <div id="prime-demo" class="jxgbox" style="width:100%; max-width:600px; height:200px; margin:0 auto;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 2: Exercises -->
+            <div class="section" id="exercises-section">
+                <div class="section-header" onclick="toggleSection('exercises-body', 'exercises-toggle')" role="button"
+                     tabindex="0" aria-expanded="true" aria-controls="exercises-body"
+                     onkeydown="if(event.key==='Enter'||event.key===' ') toggleSection('exercises-body', 'exercises-toggle')">
+                    <div class="section-icon exercises-icon">✏️</div>
+                    <div class="section-title">
+                        <h2 data-i18n="exercises_title">تمارين</h2>
+                        <p data-i18n="exercises_subtitle">تدرب على التعرف على الأعداد الأولية</p>
+                    </div>
+                    <span class="section-toggle open" id="exercises-toggle">▼</span>
+                </div>
+                <div class="section-body" id="exercises-body">
+                    <!-- Exercise 1 -->
+                    <div class="exercise-item">
+                        <div class="exercise-question">
+                            <span class="exercise-number">1</span>
+                            <span data-i18n="exercise1_q">حدد من بين الأعداد التالية الأولية:</span>
+                        </div>
+                        <div class="exercise-sub"><span class="sub-math">\(4, 7, 9, 11, 15, 17, 21\)</span></div>
+                        <textarea id="answer-ex1" name="answer-ex1" class="answer-textarea" placeholder="اكتب إجابتك هنا..." data-i18n-placeholder="answer_placeholder"></textarea>
+                        <div class="exercise-hint" data-i18n="exercise1_hint">💡 تذكر: العدد الأولي له قاسمان فقط.</div>
+                    </div>
+                    <!-- Exercise 2 -->
+                    <div class="exercise-item">
+                        <div class="exercise-question">
+                            <span class="exercise-number">2</span>
+                            <span data-i18n="exercise2_q">أكمل: الأعداد الأولية الأصغر من \(10\) هي: \(\dots\)</span>
+                        </div>
+                        <textarea id="answer-ex2" name="answer-ex2" class="answer-textarea" placeholder="اكتب إجابتك هنا..." data-i18n-placeholder="answer_placeholder"></textarea>
+                    </div>
+                    <!-- Exercise 3 -->
+                    <div class="exercise-item">
+                        <div class="exercise-question">
+                            <span class="exercise-number">3</span>
+                            <span data-i18n="exercise3_q">أي من الأعداد التالية أولي؟ \(23\)، \(27\)، \(29\)، \(31\)، \(33\)، \(37\)</span>
+                        </div>
+                        <textarea id="answer-ex3" name="answer-ex3" class="answer-textarea" placeholder="اكتب إجابتك هنا..." data-i18n-placeholder="answer_placeholder"></textarea>
+                    </div>
+                    <!-- Exercise 4 -->
+                    <div class="exercise-item">
+                        <div class="exercise-question">
+                            <span class="exercise-number">4</span>
+                            <span data-i18n="exercise4_q">اذكر جميع الأعداد الأولية بين \(10\) و \(20\).</span>
+                        </div>
+                        <textarea id="answer-ex4" name="answer-ex4" class="answer-textarea" placeholder="اكتب إجابتك هنا..." data-i18n-placeholder="answer_placeholder"></textarea>
+                    </div>
+                    <!-- Exercise 5 -->
+                    <div class="exercise-item">
+                        <div class="exercise-question">
+                            <span class="exercise-number">5</span>
+                            <span data-i18n="exercise5_q">هل \(1\) عدد أولي؟ وضّح إجابتك.</span>
+                        </div>
+                        <textarea id="answer-ex5" name="answer-ex5" class="answer-textarea" placeholder="اكتب إجابتك هنا..." data-i18n-placeholder="answer_placeholder"></textarea>
+                    </div>
+                    <!-- Exercise 6 -->
+                    <div class="exercise-item">
+                        <div class="exercise-question">
+                            <span class="exercise-number">6</span>
+                            <span data-i18n="exercise6_q">استعمل غربال إراتوستينس لاستخراج جميع الأعداد الأولية الأصغر من \(30\).</span>
+                        </div>
+                        <textarea id="answer-ex6" name="answer-ex6" class="answer-textarea" placeholder="اكتب إجابتك هنا..." data-i18n-placeholder="answer_placeholder"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 3: Problems -->
+            <div class="section" id="problems-section">
+                <div class="section-header" onclick="toggleSection('problems-body', 'problems-toggle')" role="button"
+                     tabindex="0" aria-expanded="true" aria-controls="problems-body"
+                     onkeydown="if(event.key==='Enter'||event.key===' ') toggleSection('problems-body', 'problems-toggle')">
+                    <div class="section-icon problems-icon">🧩</div>
+                    <div class="section-title">
+                        <h2 data-i18n="problems_title">مسائل</h2>
+                        <p data-i18n="problems_subtitle">مسائل تطبيقية على الأعداد الأولية</p>
+                    </div>
+                    <span class="section-toggle open" id="problems-toggle">▼</span>
+                </div>
+                <div class="section-body" id="problems-body">
+                    <div class="problem-card">
+                        <div class="problem-title" data-i18n="problem1_title">🔐 مسألة 1: الأرقام السرية</div>
+                        <div class="problem-text" data-i18n="problem1_text">يريد خالد اختيار رقم سري مكون من عددين أوليين أصغر من \(20\). ما هي جميع الأزواج الممكنة إذا كان الرقمان مختلفين؟</div>
+                    </div>
+                    <div class="problem-card">
+                        <div class="problem-title" data-i18n="problem2_title">📅 مسألة 2: تواريخ أولية</div>
+                        <div class="problem-text" data-i18n="problem2_text">في شهر واحد، أيام الشهر التي يكون تاريخها عددًا أوليًا تكون عطلاً. إذا كان الشهر \(30\) يومًا، فكم عدد أيام العطل في هذا الشهر؟</div>
+                    </div>
+                    <div class="problem-card">
+                        <div class="problem-title" data-i18n="problem3_title">🏆 مسألة 3: مسابقة رياضيات</div>
+                        <div class="problem-text" data-i18n="problem3_text">في مسابقة، رقم المشترك يكون مقبولاً إذا كان عددًا أوليًا بين \(40\) و \(50\). ما هي الأرقام المقبولة؟</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 4: Solutions -->
+            <div class="section" id="solutions-section">
+                <div class="section-header" onclick="toggleSection('solutions-body', 'solutions-toggle')" role="button"
+                     tabindex="0" aria-expanded="true" aria-controls="solutions-body"
+                     onkeydown="if(event.key==='Enter'||event.key===' ') toggleSection('solutions-body', 'solutions-toggle')">
+                    <div class="section-icon solutions-icon">✅</div>
+                    <div class="section-title">
+                        <h2 data-i18n="solutions_title">حلول</h2>
+                        <p data-i18n="solutions_subtitle">الحلول الكاملة لجميع التمارين والمسائل</p>
+                    </div>
+                    <span class="section-toggle open" id="solutions-toggle">▼</span>
+                </div>
+                <div class="section-body" id="solutions-body">
+                    <div style="margin-bottom: 1.5rem;">
+                        <h3 data-i18n="solutions_exercises_heading">📝 حلول التمارين</h3>
+                        <!-- Exercise 1 -->
+                        <div class="solution-item">
+                            <div class="solution-question" data-i18n="sol_ex1_q">التمرين 1:</div>
+                            <div class="solution-answer-rtl" data-i18n="sol_ex1_answer">الأعداد الأولية: \(7, 11, 17\)</div>
+                            <div class="solution-steps">
+                                <ol>
+                                    <li><span class="solution-step-math" data-i18n="sol_ex1_step1">\(4 = 2 \times 2\) ليس أوليًا.</span></li>
+                                    <li><span class="solution-step-math" data-i18n="sol_ex1_step2">\(7\) أولي.</span></li>
+                                    <li><span class="solution-step-math" data-i18n="sol_ex1_step3">\(9 = 3 \times 3\) ليس أوليًا.</span></li>
+                                    <li><span class="solution-step-math" data-i18n="sol_ex1_step4">\(11\) أولي.</span></li>
+                                    <li><span class="solution-step-math" data-i18n="sol_ex1_step5">\(15 = 3 \times 5\) ليس أوليًا.</span></li>
+                                    <li><span class="solution-step-math" data-i18n="sol_ex1_step6">\(17\) أولي.</span></li>
+                                    <li><span class="solution-step-math" data-i18n="sol_ex1_step7">\(21 = 3 \times 7\) ليس أوليًا.</span></li>
+                                </ol>
+                            </div>
+                        </div>
+                        <!-- Exercise 2 -->
+                        <div class="solution-item">
+                            <div class="solution-question" data-i18n="sol_ex2_q">التمرين 2:</div>
+                            <div class="solution-answer-rtl" data-i18n="sol_ex2_answer">\(2, 3, 5, 7\)</div>
+                        </div>
+                        <!-- Exercise 3 -->
+                        <div class="solution-item">
+                            <div class="solution-question" data-i18n="sol_ex3_q">التمرين 3:</div>
+                            <div class="solution-answer-rtl" data-i18n="sol_ex3_answer">الأعداد الأولية: \(23, 29, 31, 37\)</div>
+                            <div class="solution-steps">
+                                <ol>
+                                    <li><span class="solution-step-math" data-i18n="sol_ex3_step1">\(23\) أولي (لا يقبل القسمة على أي عدد حتى \(\sqrt{23} \approx 4.8\)).</span></li>
+                                    <li><span class="solution-step-math" data-i18n="sol_ex3_step2">\(27 = 3 \times 9\) ليس أوليًا.</span></li>
+                                    <li><span class="solution-step-math" data-i18n="sol_ex3_step3">\(29\) أولي.</span></li>
+                                    <li><span class="solution-step-math" data-i18n="sol_ex3_step4">\(31\) أولي.</span></li>
+                                    <li><span class="solution-step-math" data-i18n="sol_ex3_step5">\(33 = 3 \times 11\) ليس أوليًا.</span></li>
+                                    <li><span class="solution-step-math" data-i18n="sol_ex3_step6">\(37\) أولي.</span></li>
+                                </ol>
+                            </div>
+                        </div>
+                        <!-- Exercise 4 -->
+                        <div class="solution-item">
+                            <div class="solution-question" data-i18n="sol_ex4_q">التمرين 4:</div>
+                            <div class="solution-answer-rtl" data-i18n="sol_ex4_answer">\(11, 13, 17, 19\)</div>
+                        </div>
+                        <!-- Exercise 5 -->
+                        <div class="solution-item">
+                            <div class="solution-question" data-i18n="sol_ex5_q">التمرين 5:</div>
+                            <div class="solution-answer-rtl" data-i18n="sol_ex5_answer">لا، \(1\) ليس عددًا أوليًا لأن له قاسمًا واحدًا فقط وهو نفسه.</div>
+                        </div>
+                        <!-- Exercise 6 -->
+                        <div class="solution-item">
+                            <div class="solution-question" data-i18n="sol_ex6_q">التمرين 6:</div>
+                            <div class="solution-answer-rtl" data-i18n="sol_ex6_answer">الأعداد الأولية الأصغر من \(30\): \(2, 3, 5, 7, 11, 13, 17, 19, 23, 29\)</div>
+                            <div class="solution-steps">
+                                <ol>
+                                    <li><span class="solution-step-math" data-i18n="sol_ex6_step1">نبدأ بـ \(2\) ونشطب مضاعفاته.</span></li>
+                                    <li><span class="solution-step-math" data-i18n="sol_ex6_step2">التالي غير المشطوب \(3\)، نشطب مضاعفاته.</span></li>
+                                    <li><span class="solution-step-math" data-i18n="sol_ex6_step3">نكرر مع \(5\) و \(7\) ونحصل على القائمة أعلاه.</span></li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 data-i18n="solutions_problems_heading">🧩 حلول المسائل</h3>
+                        <!-- Problem 1 -->
+                        <div class="solution-item">
+                            <div class="solution-question" data-i18n="sol_prob1_q">المسألة 1:</div>
+                            <div class="solution-answer-rtl" data-i18n="sol_prob1_answer">الأعداد الأولية الأصغر من \(20\): \(2, 3, 5, 7, 11, 13, 17, 19\). الأزواج المختلفة كثيرة، مثلاً: \((2,3), (2,5), \dots, (17,19)\).</div>
+                            <div class="solution-steps">
+                                <ol>
+                                    <li><span class="solution-step-math" data-i18n="sol_prob1_step1">عدد الأزواج = \( \binom{8}{2} = 28 \) زوجًا.</span></li>
+                                </ol>
+                            </div>
+                        </div>
+                        <!-- Problem 2 -->
+                        <div class="solution-item">
+                            <div class="solution-question" data-i18n="sol_prob2_q">المسألة 2:</div>
+                            <div class="solution-answer-rtl" data-i18n="sol_prob2_answer">أيام العطل: \(2, 3, 5, 7, 11, 13, 17, 19, 23, 29\) ⇒ \(10\) أيام.</div>
+                            <div class="solution-steps">
+                                <ol>
+                                    <li><span class="solution-step-math" data-i18n="sol_prob2_step1">نعد الأعداد الأولية بين \(1\) و \(30\): \(2,3,5,7,11,13,17,19,23,29\).</span></li>
+                                </ol>
+                            </div>
+                        </div>
+                        <!-- Problem 3 -->
+                        <div class="solution-item">
+                            <div class="solution-question" data-i18n="sol_prob3_q">المسألة 3:</div>
+                            <div class="solution-answer-rtl" data-i18n="sol_prob3_answer">الأرقام المقبولة: \(41, 43, 47\)</div>
+                            <div class="solution-steps">
+                                <ol>
+                                    <li><span class="solution-step-math" data-i18n="sol_prob3_step1">نفحص الأعداد بين \(40\) و \(50\): \(41\) أولي، \(43\) أولي، \(47\) أولي.</span></li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="site-footer">
+            <div class="footer-col">
+                <h4 data-i18n="footer_dev">معلومات المطوّر</h4>
+                <p data-i18n="footer_dev_name">طور بواسطة: ماجري زياد</p>
+                <p data-i18n="footer_hosting">الاستضافة: Github, Netlify, Supabase</p>
+            </div>
+            <div class="footer-col">
+                <h4 data-i18n="footer_links">روابط</h4>
+                <a href="#" data-i18n="footer_contact">اتصل بنا</a>
+                <a href="#" data-i18n="footer_policies">السياسات</a>
+            </div>
+            <div class="footer-col">
+                <h4 data-i18n="footer_version">الإصدار</h4>
+                <p data-i18n="footer_version_num">الإصدار: 0.0.2</p>
+                <p data-i18n="footer_rights">جميع الحقوق محفوظة &copy; 2025</p>
+            </div>
+        </footer>
+
+        <!-- Print-only custom footer -->
+        <div class="print-footer">
+            <p data-i18n="print_footer_dev">طور بواسطة: ماجري زياد</p>
+            <p data-i18n="print_footer_version">الإصدار: 0.0.2</p>
+            <p data-i18n="print_footer_page">عنوان الصفحة: maths_y7_alg_module1_lesson3_part2_sub3.html</p>
+        </div>
+    </div>
+
+    <!-- JSXGraph: Prime number line -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const board = initJSXGraph('prime-demo', {
+                boundingbox: [0, 2, 21, -1],
+                axis: false,
+                showNavigation: false,
+                showCopyright: false
+            });
+            if (board) {
+                board.create('axis', [[0, 0], [21, 0]], {
+                    ticks: { visible: true, minorTicks: false, ticksDistance: 1,
+                             label: { fontSize: 12, color: '#34495e' } },
+                    strokeColor: '#34495e',
+                    strokeWidth: 1,
+                    name: ''
+                });
+
+                const primes = [2,3,5,7,11,13,17,19];
+                for (let n = 1; n <= 20; n++) {
+                    let color = '#7f8c8d'; // non-prime
+                    let size = 2;
+                    if (primes.includes(n)) {
+                        color = '#e74c3c';
+                        size = 4;
+                    }
+                    board.create('point', [n, 0], {
+                        name: String(n),
+                        size: size,
+                        color: color,
+                        fixed: true,
+                        withLabel: true,
+                        label: { offset: [-5, -12], fontSize: 12, color: color }
+                    });
+                }
+
+                board.create('text', [10, 1.5, () => {
+                    const lang = document.documentElement.lang || 'ar';
+                    if (lang === 'ar') return 'الأعداد الأولية حتى 20';
+                    if (lang === 'fr') return 'Nombres premiers jusqu’à 20';
+                    return 'Prime numbers up to 20';
+                }], { fontSize: 16, color: '#8e44ad', anchorX: 'middle' });
+
+                const observer = new MutationObserver(() => board.update());
+                observer.observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
+            }
+        });
+    </script>
+
+    <!-- Inline Translation Object -->
+    <script>
+        const translations = {
+            ar: {
+                page_title: "الأعداد الأولية - رياضيات السنة السابعة أساسي",
+                print_header: "السنة السابعة أساسي - الوحدة الأولى - الدرس الثالث - الجزء 2 - ج",
+                site_header: "Educational Dashboard - Mathematics",
+                back_to_index: "← العودة للفهرس",
+                nav_badge: "الدرس 3 | جزء 2 | ج",
+                next_part: "التالي ←",
+                language_label: "اللغة",
+                lang_ar: "العربية",
+                lang_en: "English",
+                lang_fr: "Français",
+                print_label: "اختر القسم للطباعة:",
+                print_all: "الدرس كاملاً",
+                print_rules: "القواعد",
+                print_exercises: "التمارين",
+                print_problems: "المسائل",
+                print_solutions: "الحلول",
+                print_button: "🖨️ طباعة",
+                module_tag: "📘 الجبر والحساب | الدرس 3 | الجزء 2 | ج",
+                lesson_title: "الأعداد الأولية",
+                lesson_subtitle: "التعرف على الأعداد الأولية وتمييزها عن غيرها",
+                rules_title: "القواعد",
+                rules_subtitle: "مبادئ تمييز الأعداد الأولية",
+                rule1_title: "قاعدة 1: تعريف العدد الأولي",
+                rule1_text: "العدد الأولي هو عدد طبيعي أكبر من \\(1\\) لا يقبل القسمة إلا على \\(1\\) وعلى نفسه فقط. أي له قاسمان بالضبط.",
+                rule1_example: "\\(7\\) عدد أولي لأن قواسمه \\(1\\) و \\(7\\) فقط.",
+                rule2_title: "قاعدة 2: الأعداد غير الأولية",
+                rule2_text: "العدد \\(1\\) ليس عددًا أوليًا لأن له قاسمًا واحدًا فقط. الأعداد المركبة هي الأعداد الطبيعية الأكبر من \\(1\\) والتي لها أكثر من قاسمين.",
+                rule2_example: "\\(6\\) ليس أوليًا لأن قواسمه \\(1, 2, 3, 6\\) (أربعة قواسم).",
+                rule3_title: "قاعدة 3: غربال إراتوستينس",
+                rule3_text: "طريقة قديمة لإيجاد الأعداد الأولية حتى عدد معين: نبدأ من \\(2\\) ونشطب كل مضاعفاته، ثم ننتقل إلى العدد التالي غير المشطوب ونكرر العملية.",
+                rule3_example: "لإيجاد الأولية حتى \\(10\\): \\(2, 3, 5, 7\\).",
+                rule4_title: "قاعدة 4: اختبار أولية عدد",
+                rule4_text: "لاختبار عدد \\(n\\) هل هو أولي، نحاول قسمته على الأعداد الأولية الأصغر من أو تساوي \\(\\sqrt{n}\\). إذا لم يقبل القسمة على أي منها فهو أولي.",
+                rule4_example: "لاختبار \\(29\\): \\(\\sqrt{29} \\approx 5.4\\)، نختبر القسمة على \\(2, 3, 5\\) ولا يقبل، إذن \\(29\\) أولي.",
+                graph_title: "رسم توضيحي: الأعداد الأولية حتى 20",
+                graph_subtitle: "الأعداد الأولية مميزة باللون الأحمر",
+                exercises_title: "تمارين",
+                exercises_subtitle: "تدرب على التعرف على الأعداد الأولية",
+                exercise1_q: "حدد من بين الأعداد التالية الأولية:",
+                exercise1_hint: "💡 تذكر: العدد الأولي له قاسمان فقط.",
+                exercise2_q: "أكمل: الأعداد الأولية الأصغر من \\(10\\) هي: \\(\\dots\\)",
+                exercise3_q: "أي من الأعداد التالية أولي؟ \\(23\\)، \\(27\\)، \\(29\\)، \\(31\\)، \\(33\\)، \\(37\\)",
+                exercise4_q: "اذكر جميع الأعداد الأولية بين \\(10\\) و \\(20\\).",
+                exercise5_q: "هل \\(1\\) عدد أولي؟ وضّح إجابتك.",
+                exercise6_q: "استعمل غربال إراتوستينس لاستخراج جميع الأعداد الأولية الأصغر من \\(30\\).",
+                answer_placeholder: "اكتب إجابتك هنا...",
+                problems_title: "مسائل",
+                problems_subtitle: "مسائل تطبيقية على الأعداد الأولية",
+                problem1_title: "🔐 مسألة 1: الأرقام السرية",
+                problem1_text: "يريد خالد اختيار رقم سري مكون من عددين أوليين أصغر من \\(20\\). ما هي جميع الأزواج الممكنة إذا كان الرقمان مختلفين؟",
+                problem2_title: "📅 مسألة 2: تواريخ أولية",
+                problem2_text: "في شهر واحد، أيام الشهر التي يكون تاريخها عددًا أوليًا تكون عطلاً. إذا كان الشهر \\(30\\) يومًا، فكم عدد أيام العطل في هذا الشهر؟",
+                problem3_title: "🏆 مسألة 3: مسابقة رياضيات",
+                problem3_text: "في مسابقة، رقم المشترك يكون مقبولاً إذا كان عددًا أوليًا بين \\(40\\) و \\(50\\). ما هي الأرقام المقبولة؟",
+                solutions_title: "حلول",
+                solutions_subtitle: "الحلول الكاملة لجميع التمارين والمسائل",
+                solutions_exercises_heading: "📝 حلول التمارين",
+                solutions_problems_heading: "🧩 حلول المسائل",
+                sol_ex1_q: "التمرين 1:",
+                sol_ex1_answer: "الأعداد الأولية: \\(7, 11, 17\\)",
+                sol_ex1_step1: "\\(4 = 2 \\times 2\\) ليس أوليًا.",
+                sol_ex1_step2: "\\(7\\) أولي.",
+                sol_ex1_step3: "\\(9 = 3 \\times 3\\) ليس أوليًا.",
+                sol_ex1_step4: "\\(11\\) أولي.",
+                sol_ex1_step5: "\\(15 = 3 \\times 5\\) ليس أوليًا.",
+                sol_ex1_step6: "\\(17\\) أولي.",
+                sol_ex1_step7: "\\(21 = 3 \\times 7\\) ليس أوليًا.",
+                sol_ex2_q: "التمرين 2:",
+                sol_ex2_answer: "\\(2, 3, 5, 7\\)",
+                sol_ex3_q: "التمرين 3:",
+                sol_ex3_answer: "الأعداد الأولية: \\(23, 29, 31, 37\\)",
+                sol_ex3_step1: "\\(23\\) أولي (لا يقبل القسمة على أي عدد حتى \\(\\sqrt{23} \\approx 4.8\\)).",
+                sol_ex3_step2: "\\(27 = 3 \\times 9\\) ليس أوليًا.",
+                sol_ex3_step3: "\\(29\\) أولي.",
+                sol_ex3_step4: "\\(31\\) أولي.",
+                sol_ex3_step5: "\\(33 = 3 \\times 11\\) ليس أوليًا.",
+                sol_ex3_step6: "\\(37\\) أولي.",
+                sol_ex4_q: "التمرين 4:",
+                sol_ex4_answer: "\\(11, 13, 17, 19\\)",
+                sol_ex5_q: "التمرين 5:",
+                sol_ex5_answer: "لا، \\(1\\) ليس عددًا أوليًا لأن له قاسمًا واحدًا فقط وهو نفسه.",
+                sol_ex6_q: "التمرين 6:",
+                sol_ex6_answer: "الأعداد الأولية الأصغر من \\(30\\): \\(2, 3, 5, 7, 11, 13, 17, 19, 23, 29\\)",
+                sol_ex6_step1: "نبدأ بـ \\(2\\) ونشطب مضاعفاته.",
+                sol_ex6_step2: "التالي غير المشطوب \\(3\\)، نشطب مضاعفاته.",
+                sol_ex6_step3: "نكرر مع \\(5\\) و \\(7\\) ونحصل على القائمة أعلاه.",
+                sol_prob1_q: "المسألة 1:",
+                sol_prob1_answer: "الأعداد الأولية الأصغر من \\(20\\): \\(2, 3, 5, 7, 11, 13, 17, 19\\). الأزواج المختلفة كثيرة، مثلاً: \\((2,3), (2,5), \\dots, (17,19)\\).",
+                sol_prob1_step1: "عدد الأزواج = \\( \\binom{8}{2} = 28 \\) زوجًا.",
+                sol_prob2_q: "المسألة 2:",
+                sol_prob2_answer: "أيام العطل: \\(2, 3, 5, 7, 11, 13, 17, 19, 23, 29\\) ⇒ \\(10\\) أيام.",
+                sol_prob2_step1: "نعد الأعداد الأولية بين \\(1\\) و \\(30\\): \\(2,3,5,7,11,13,17,19,23,29\\).",
+                sol_prob3_q: "المسألة 3:",
+                sol_prob3_answer: "الأرقام المقبولة: \\(41, 43, 47\\)",
+                sol_prob3_step1: "نفحص الأعداد بين \\(40\\) و \\(50\\): \\(41\\) أولي، \\(43\\) أولي، \\(47\\) أولي.",
+                sub_label_a: "أ)",
+                sub_label_b: "ب)",
+                sub_label_c: "ج)",
+                sub_label_d: "د)",
+                footer_dev: "معلومات المطوّر",
+                footer_dev_name: "طور بواسطة: ماجري زياد",
+                footer_hosting: "الاستضافة: Github, Netlify, Supabase",
+                footer_links: "روابط",
+                footer_contact: "اتصل بنا",
+                footer_policies: "السياسات",
+                footer_version: "الإصدار",
+                footer_version_num: "الإصدار: 0.0.2",
+                footer_rights: "جميع الحقوق محفوظة © 2025",
+                print_footer_dev: "طور بواسطة: ماجري زياد",
+                print_footer_version: "الإصدار: 0.0.2",
+                print_footer_page: "عنوان الصفحة: maths_y7_alg_module1_lesson3_part2_sub3.html"
+            },
+            en: {
+                page_title: "Prime Numbers - Math Year 7",
+                print_header: "Year 7 – Unit 1 – Lesson 3 – Part 2 – c",
+                site_header: "Educational Dashboard - Mathematics",
+                back_to_index: "← Back to Index",
+                nav_badge: "Lesson 3 | Part 2 | c",
+                next_part: "Next →",
+                language_label: "Language",
+                lang_ar: "العربية",
+                lang_en: "English",
+                lang_fr: "Français",
+                print_label: "Select section to print:",
+                print_all: "Full lesson",
+                print_rules: "Rules",
+                print_exercises: "Exercises",
+                print_problems: "Problems",
+                print_solutions: "Solutions",
+                print_button: "🖨️ Print",
+                module_tag: "📘 Algebra & Arithmetic | Lesson 3 | Part 2 | c",
+                lesson_title: "Prime Numbers",
+                lesson_subtitle: "Recognizing prime numbers and distinguishing them from others",
+                rules_title: "Rules",
+                rules_subtitle: "Principles for distinguishing prime numbers",
+                rule1_title: "Rule 1: Definition of a prime number",
+                rule1_text: "A prime number is a natural number greater than \\(1\\) that is divisible only by \\(1\\) and itself. That is, it has exactly two divisors.",
+                rule1_example: "\\(7\\) is prime because its divisors are only \\(1\\) and \\(7\\).",
+                rule2_title: "Rule 2: Non-prime numbers",
+                rule2_text: "\\(1\\) is not a prime number because it has only one divisor. Composite numbers are natural numbers greater than \\(1\\) that have more than two divisors.",
+                rule2_example: "\\(6\\) is not prime because its divisors are \\(1, 2, 3, 6\\) (four divisors).",
+                rule3_title: "Rule 3: Sieve of Eratosthenes",
+                rule3_text: "An ancient method for finding prime numbers up to a given number: start with \\(2\\) and cross out all its multiples, then move to the next uncrossed number and repeat.",
+                rule3_example: "To find primes up to \\(10\\): \\(2, 3, 5, 7\\).",
+                rule4_title: "Rule 4: Testing primality",
+                rule4_text: "To test whether a number \\(n\\) is prime, try dividing it by prime numbers less than or equal to \\(\\sqrt{n}\\). If it is not divisible by any of them, it is prime.",
+                rule4_example: "To test \\(29\\): \\(\\sqrt{29} \\approx 5.4\\), test divisibility by \\(2, 3, 5\\), it is not divisible, so \\(29\\) is prime.",
+                graph_title: "Illustration: Prime numbers up to 20",
+                graph_subtitle: "Prime numbers are highlighted in red",
+                exercises_title: "Exercises",
+                exercises_subtitle: "Practice recognizing prime numbers",
+                exercise1_q: "Identify which of the following numbers are prime:",
+                exercise1_hint: "💡 Remember: a prime number has exactly two divisors.",
+                exercise2_q: "Complete: prime numbers less than \\(10\\) are: \\(\\dots\\)",
+                exercise3_q: "Which of the following numbers is prime? \\(23\\), \\(27\\), \\(29\\), \\(31\\), \\(33\\), \\(37\\)",
+                exercise4_q: "List all prime numbers between \\(10\\) and \\(20\\).",
+                exercise5_q: "Is \\(1\\) a prime number? Explain your answer.",
+                exercise6_q: "Use the Sieve of Eratosthenes to extract all prime numbers less than \\(30\\).",
+                answer_placeholder: "Write your answer here...",
+                problems_title: "Problems",
+                problems_subtitle: "Applied problems on prime numbers",
+                problem1_title: "🔐 Problem 1: Secret codes",
+                problem1_text: "Khaled wants to choose a secret code made of two different prime numbers less than \\(20\\). What are all the possible pairs?",
+                problem2_title: "📅 Problem 2: Prime dates",
+                problem2_text: "In a certain month, the days with prime-number dates are holidays. If the month has \\(30\\) days, how many holidays are in that month?",
+                problem3_title: "🏆 Problem 3: Math competition",
+                problem3_text: "In a competition, a participant's number is accepted if it is a prime number between \\(40\\) and \\(50\\). What are the accepted numbers?",
+                solutions_title: "Solutions",
+                solutions_subtitle: "Complete solutions for all exercises and problems",
+                solutions_exercises_heading: "📝 Exercise Solutions",
+                solutions_problems_heading: "🧩 Problem Solutions",
+                sol_ex1_q: "Exercise 1:",
+                sol_ex1_answer: "Prime numbers: \\(7, 11, 17\\)",
+                sol_ex1_step1: "\\(4 = 2 \\times 2\\) is not prime.",
+                sol_ex1_step2: "\\(7\\) is prime.",
+                sol_ex1_step3: "\\(9 = 3 \\times 3\\) is not prime.",
+                sol_ex1_step4: "\\(11\\) is prime.",
+                sol_ex1_step5: "\\(15 = 3 \\times 5\\) is not prime.",
+                sol_ex1_step6: "\\(17\\) is prime.",
+                sol_ex1_step7: "\\(21 = 3 \\times 7\\) is not prime.",
+                sol_ex2_q: "Exercise 2:",
+                sol_ex2_answer: "\\(2, 3, 5, 7\\)",
+                sol_ex3_q: "Exercise 3:",
+                sol_ex3_answer: "Prime numbers: \\(23, 29, 31, 37\\)",
+                sol_ex3_step1: "\\(23\\) is prime (not divisible by any number up to \\(\\sqrt{23} \\approx 4.8\\)).",
+                sol_ex3_step2: "\\(27 = 3 \\times 9\\) is not prime.",
+                sol_ex3_step3: "\\(29\\) is prime.",
+                sol_ex3_step4: "\\(31\\) is prime.",
+                sol_ex3_step5: "\\(33 = 3 \\times 11\\) is not prime.",
+                sol_ex3_step6: "\\(37\\) is prime.",
+                sol_ex4_q: "Exercise 4:",
+                sol_ex4_answer: "\\(11, 13, 17, 19\\)",
+                sol_ex5_q: "Exercise 5:",
+                sol_ex5_answer: "No, \\(1\\) is not a prime number because it has only one divisor, itself.",
+                sol_ex6_q: "Exercise 6:",
+                sol_ex6_answer: "Prime numbers less than \\(30\\): \\(2, 3, 5, 7, 11, 13, 17, 19, 23, 29\\)",
+                sol_ex6_step1: "Start with \\(2\\) and cross out its multiples.",
+                sol_ex6_step2: "Next uncrossed is \\(3\\), cross out its multiples.",
+                sol_ex6_step3: "Repeat with \\(5\\) and \\(7\\) to obtain the list above.",
+                sol_prob1_q: "Problem 1:",
+                sol_prob1_answer: "Prime numbers less than \\(20\\): \\(2, 3, 5, 7, 11, 13, 17, 19\\). Many different pairs, e.g., \\((2,3), (2,5), \\dots, (17,19)\\).",
+                sol_prob1_step1: "Number of pairs = \\( \\binom{8}{2} = 28 \\) pairs.",
+                sol_prob2_q: "Problem 2:",
+                sol_prob2_answer: "Holiday days: \\(2, 3, 5, 7, 11, 13, 17, 19, 23, 29\\) ⇒ \\(10\\) days.",
+                sol_prob2_step1: "Count prime numbers between \\(1\\) and \\(30\\): \\(2,3,5,7,11,13,17,19,23,29\\).",
+                sol_prob3_q: "Problem 3:",
+                sol_prob3_answer: "Accepted numbers: \\(41, 43, 47\\)",
+                sol_prob3_step1: "Check numbers between \\(40\\) and \\(50\\): \\(41\\) is prime, \\(43\\) is prime, \\(47\\) is prime.",
+                sub_label_a: "a)",
+                sub_label_b: "b)",
+                sub_label_c: "c)",
+                sub_label_d: "d)",
+                footer_dev: "Developer Info",
+                footer_dev_name: "Developed by: Majri Zied",
+                footer_hosting: "Hosting: Github, Netlify, Supabase",
+                footer_links: "Links",
+                footer_contact: "Contact us",
+                footer_policies: "Policies",
+                footer_version: "Version",
+                footer_version_num: "Version: 0.0.2",
+                footer_rights: "All rights reserved © 2025",
+                print_footer_dev: "Developed by: Majri Zied",
+                print_footer_version: "Version: 0.0.2",
+                print_footer_page: "Page address: maths_y7_alg_module1_lesson3_part2_sub3.html"
+            },
+            fr: {
+                page_title: "Nombres premiers - Math 7ème année",
+                print_header: "7ème année – Unité 1 – Leçon 3 – Partie 2 – c",
+                site_header: "Educational Dashboard - Mathematics",
+                back_to_index: "← Retour à l'index",
+                nav_badge: "Leçon 3 | Partie 2 | c",
+                next_part: "Suivant →",
+                language_label: "Langue",
+                lang_ar: "العربية",
+                lang_en: "English",
+                lang_fr: "Français",
+                print_label: "Choisir la section à imprimer :",
+                print_all: "Leçon complète",
+                print_rules: "Règles",
+                print_exercises: "Exercices",
+                print_problems: "Problèmes",
+                print_solutions: "Solutions",
+                print_button: "🖨️ Imprimer",
+                module_tag: "📘 Algèbre et arithmétique | Leçon 3 | Partie 2 | c",
+                lesson_title: "Nombres premiers",
+                lesson_subtitle: "Reconnaître les nombres premiers et les distinguer des autres",
+                rules_title: "Règles",
+                rules_subtitle: "Principes pour distinguer les nombres premiers",
+                rule1_title: "Règle 1 : Définition d'un nombre premier",
+                rule1_text: "Un nombre premier est un entier naturel supérieur à \\(1\\) qui n'est divisible que par \\(1\\) et lui-même. C'est-à-dire qu'il a exactement deux diviseurs.",
+                rule1_example: "\\(7\\) est premier car ses seuls diviseurs sont \\(1\\) et \\(7\\).",
+                rule2_title: "Règle 2 : Nombres non premiers",
+                rule2_text: "\\(1\\) n'est pas un nombre premier car il n'a qu'un seul diviseur. Les nombres composés sont les entiers naturels supérieurs à \\(1\\) qui ont plus de deux diviseurs.",
+                rule2_example: "\\(6\\) n'est pas premier car ses diviseurs sont \\(1, 2, 3, 6\\) (quatre diviseurs).",
+                rule3_title: "Règle 3 : Crible d'Ératosthène",
+                rule3_text: "Méthode ancienne pour trouver les nombres premiers jusqu'à un nombre donné : commencer par \\(2\\) et barrer tous ses multiples, puis passer au nombre suivant non barré et répéter.",
+                rule3_example: "Pour trouver les premiers jusqu'à \\(10\\) : \\(2, 3, 5, 7\\).",
+                rule4_title: "Règle 4 : Test de primalité",
+                rule4_text: "Pour tester si un nombre \\(n\\) est premier, essayez de le diviser par les nombres premiers inférieurs ou égaux à \\(\\sqrt{n}\\). S'il n'est divisible par aucun d'eux, il est premier.",
+                rule4_example: "Pour tester \\(29\\) : \\(\\sqrt{29} \\approx 5.4\\), testez la divisibilité par \\(2, 3, 5\\), il n'est pas divisible, donc \\(29\\) est premier.",
+                graph_title: "Illustration : Nombres premiers jusqu'à 20",
+                graph_subtitle: "Les nombres premiers sont en rouge",
+                exercises_title: "Exercices",
+                exercises_subtitle: "Entraînez-vous à reconnaître les nombres premiers",
+                exercise1_q: "Identifiez parmi les nombres suivants ceux qui sont premiers :",
+                exercise1_hint: "💡 Rappelez-vous : un nombre premier a exactement deux diviseurs.",
+                exercise2_q: "Complétez : les nombres premiers inférieurs à \\(10\\) sont : \\(\\dots\\)",
+                exercise3_q: "Lequel des nombres suivants est premier ? \\(23\\), \\(27\\), \\(29\\), \\(31\\), \\(33\\), \\(37\\)",
+                exercise4_q: "Énumérez tous les nombres premiers entre \\(10\\) et \\(20\\).",
+                exercise5_q: "\\(1\\) est-il un nombre premier ? Expliquez votre réponse.",
+                exercise6_q: "Utilisez le crible d'Ératosthène pour extraire tous les nombres premiers inférieurs à \\(30\\).",
+                answer_placeholder: "Écrivez votre réponse ici...",
+                problems_title: "Problèmes",
+                problems_subtitle: "Problèmes appliqués sur les nombres premiers",
+                problem1_title: "🔐 Problème 1 : Codes secrets",
+                problem1_text: "Khaled veut choisir un code secret composé de deux nombres premiers différents inférieurs à \\(20\\). Quelles sont toutes les paires possibles ?",
+                problem2_title: "📅 Problème 2 : Dates premières",
+                problem2_text: "Dans un certain mois, les jours dont la date est un nombre premier sont fériés. Si le mois compte \\(30\\) jours, combien de jours fériés y a-t-il ?",
+                problem3_title: "🏆 Problème 3 : Concours de mathématiques",
+                problem3_text: "Dans un concours, le numéro d'un participant est accepté s'il est un nombre premier entre \\(40\\) et \\(50\\). Quels sont les numéros acceptés ?",
+                solutions_title: "Solutions",
+                solutions_subtitle: "Solutions complètes pour tous les exercices et problèmes",
+                solutions_exercises_heading: "📝 Solutions des exercices",
+                solutions_problems_heading: "🧩 Solutions des problèmes",
+                sol_ex1_q: "Exercice 1 :",
+                sol_ex1_answer: "Nombres premiers : \\(7, 11, 17\\)",
+                sol_ex1_step1: "\\(4 = 2 \\times 2\\) n'est pas premier.",
+                sol_ex1_step2: "\\(7\\) est premier.",
+                sol_ex1_step3: "\\(9 = 3 \\times 3\\) n'est pas premier.",
+                sol_ex1_step4: "\\(11\\) est premier.",
+                sol_ex1_step5: "\\(15 = 3 \\times 5\\) n'est pas premier.",
+                sol_ex1_step6: "\\(17\\) est premier.",
+                sol_ex1_step7: "\\(21 = 3 \\times 7\\) n'est pas premier.",
+                sol_ex2_q: "Exercice 2 :",
+                sol_ex2_answer: "\\(2, 3, 5, 7\\)",
+                sol_ex3_q: "Exercice 3 :",
+                sol_ex3_answer: "Nombres premiers : \\(23, 29, 31, 37\\)",
+                sol_ex3_step1: "\\(23\\) est premier (pas divisible par aucun nombre jusqu'à \\(\\sqrt{23} \\approx 4.8\\)).",
+                sol_ex3_step2: "\\(27 = 3 \\times 9\\) n'est pas premier.",
+                sol_ex3_step3: "\\(29\\) est premier.",
+                sol_ex3_step4: "\\(31\\) est premier.",
+                sol_ex3_step5: "\\(33 = 3 \\times 11\\) n'est pas premier.",
+                sol_ex3_step6: "\\(37\\) est premier.",
+                sol_ex4_q: "Exercice 4 :",
+                sol_ex4_answer: "\\(11, 13, 17, 19\\)",
+                sol_ex5_q: "Exercice 5 :",
+                sol_ex5_answer: "Non, \\(1\\) n'est pas un nombre premier car il n'a qu'un seul diviseur, lui-même.",
+                sol_ex6_q: "Exercice 6 :",
+                sol_ex6_answer: "Nombres premiers inférieurs à \\(30\\) : \\(2, 3, 5, 7, 11, 13, 17, 19, 23, 29\\)",
+                sol_ex6_step1: "Commencer par \\(2\\) et barrer ses multiples.",
+                sol_ex6_step2: "Le suivant non barré est \\(3\\), barrer ses multiples.",
+                sol_ex6_step3: "Répéter avec \\(5\\) et \\(7\\) pour obtenir la liste ci-dessus.",
+                sol_prob1_q: "Problème 1 :",
+                sol_prob1_answer: "Nombres premiers inférieurs à \\(20\\) : \\(2, 3, 5, 7, 11, 13, 17, 19\\). De nombreuses paires différentes, par ex. \\((2,3), (2,5), \\dots, (17,19)\\).",
+                sol_prob1_step1: "Nombre de paires = \\( \\binom{8}{2} = 28 \\) paires.",
+                sol_prob2_q: "Problème 2 :",
+                sol_prob2_answer: "Jours fériés : \\(2, 3, 5, 7, 11, 13, 17, 19, 23, 29\\) ⇒ \\(10\\) jours.",
+                sol_prob2_step1: "Compter les nombres premiers entre \\(1\\) et \\(30\\) : \\(2,3,5,7,11,13,17,19,23,29\\).",
+                sol_prob3_q: "Problème 3 :",
+                sol_prob3_answer: "Numéros acceptés : \\(41, 43, 47\\)",
+                sol_prob3_step1: "Vérifier les nombres entre \\(40\\) et \\(50\\) : \\(41\\) est premier, \\(43\\) est premier, \\(47\\) est premier.",
+                sub_label_a: "a)",
+                sub_label_b: "b)",
+                sub_label_c: "c)",
+                sub_label_d: "d)",
+                footer_dev: "Informations du développeur",
+                footer_dev_name: "Développé par : Majri Zied",
+                footer_hosting: "Hébergement : Github, Netlify, Supabase",
+                footer_links: "Liens",
+                footer_contact: "Contactez-nous",
+                footer_policies: "Politiques",
+                footer_version: "Version",
+                footer_version_num: "Version : 0.0.2",
+                footer_rights: "Tous droits réservés © 2025",
+                print_footer_dev: "Développé par : Majri Zied",
+                print_footer_version: "Version : 0.0.2",
+                print_footer_page: "Adresse de la page : maths_y7_alg_module1_lesson3_part2_sub3.html"
+            }
+        };
+    </script>
+</body>
+</html>

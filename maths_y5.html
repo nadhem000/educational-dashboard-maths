@@ -1,0 +1,1745 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>فهرس دروس الرياضيات - السنة الخامسة</title>
+
+    <!-- External Stylesheets -->
+    <link rel="stylesheet" href="maths_shared.css">
+    <link rel="stylesheet" href="maths_programs.css">
+
+    <!-- Additional styles for nested lesson/part/sub-part structure and multiple period modules -->
+    <style>
+        .lesson-group {
+            border-top: 1px solid var(--border);
+        }
+        .lesson-group-header {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary);
+            padding: 1rem 2rem 0.5rem 2rem;
+            margin: 0;
+        }
+        .subpart-list {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 0.5rem 0;
+        }
+        .subpart-item {
+            border-top: 1px dashed var(--border);
+        }
+        .subpart-link {
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            padding: 0.6rem 2rem 0.6rem 3rem;
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: background var(--transition), color var(--transition), padding-right var(--transition);
+        }
+        .subpart-link:hover {
+            background: var(--hover);
+            color: var(--secondary);
+            padding-right: 3.2rem;
+        }
+        .subpart-number {
+            width: 28px;
+            height: 28px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 700;
+            flex-shrink: 0;
+            color: var(--white);
+        }
+        /* Colors for different module types */
+        .review-num.subpart-number { background: linear-gradient(135deg, #82e0aa, #27ae60); }
+        .period1-num.subpart-number { background: linear-gradient(135deg, #5dade2, #2e86c1); }
+        .period2-num.subpart-number { background: linear-gradient(135deg, #f0b27a, #e67e22); }
+        .period3-num.subpart-number { background: linear-gradient(135deg, #a569bd, #8e44ad); }
+        .period4-num.subpart-number { background: linear-gradient(135deg, #f1948a, #e74c3c); }
+        .period5-num.subpart-number { background: linear-gradient(135deg, #73c6b6, #1abc9c); }
+
+        .review-module .module-header { background: linear-gradient(135deg, #2ecc71, #27ae60); }
+        .period1-module .module-header { background: linear-gradient(135deg, #3498db, #2980b9); }
+        .period2-module .module-header { background: linear-gradient(135deg, #e67e22, #d35400); }
+        .period3-module .module-header { background: linear-gradient(135deg, #8e44ad, #6c3483); }
+        .period4-module .module-header { background: linear-gradient(135deg, #e74c3c, #c0392b); }
+        .period5-module .module-header { background: linear-gradient(135deg, #1abc9c, #16a085); }
+
+        .review-icon { color: #27ae60; }
+        .period1-icon { color: #2e86c1; }
+        .period2-icon { color: #e67e22; }
+        .period3-icon { color: #8e44ad; }
+        .period4-icon { color: #e74c3c; }
+        .period5-icon { color: #1abc9c; }
+
+        /* Print-specific for period modules */
+        @media print {
+            body.print-review .module-card:not(.review-module) { display: none; }
+            body.print-period1 .module-card:not(.period1-module) { display: none; }
+            body.print-period2 .module-card:not(.period2-module) { display: none; }
+            body.print-period3 .module-card:not(.period3-module) { display: none; }
+            body.print-period4 .module-card:not(.period4-module) { display: none; }
+            body.print-period5 .module-card:not(.period5-module) { display: none; }
+        }
+
+        @media (max-width: 640px) {
+            .lesson-group-header { padding-left: 1.2rem; padding-right: 1.2rem; font-size: 1.1rem; }
+            .subpart-link { padding-left: 2rem; padding-right: 2rem; font-size: 0.9rem; }
+            .subpart-link:hover { padding-right: 2.2rem; }
+        }
+    </style>
+
+    <!-- External Script -->
+    <script src="maths_programs.js" defer></script>
+</head>
+<body>
+    <div class="container">
+
+        <!-- Print-only header -->
+        <div class="print-header" data-i18n="print_header">فهرس دروس الرياضيات — السنة الخامسة أساسي</div>
+
+        <!-- Site Header -->
+        <div class="site-header">
+            <div class="header-icon">
+                <img src="assets/icons/icon-152x152.png" alt="أيقونة الموقع">
+            </div>
+            <h1 data-i18n="site_header">Educational Dashboard - Mathematics</h1>
+        </div>
+
+        <!-- Top Navigation -->
+        <nav class="top-nav">
+            <a href="index.html" class="nav-link" data-i18n="home_link">🏠 الرئيسية</a>
+            <span class="nav-badge" data-i18n="nav_badge">📚 فهرس الدروس</span>
+            <a href="maths_y5_review_sub1.html" class="nav-link" data-i18n="first_lesson_link">الدرس الأول ←</a>
+        </nav>
+
+        <!-- Print Controls -->
+        <div class="print-controls">
+            <label for="print-section" data-i18n="print_label">اختر القسم للطباعة:</label>
+            <select id="print-section">
+                <option value="all" data-i18n="print_all">الفهرس كاملاً</option>
+                <option value="review" data-i18n="print_review">المراجعة فقط</option>
+                <option value="period1" data-i18n="print_period1">الفترة الأولى</option>
+                <option value="period2" data-i18n="print_period2">الفترة الثانية</option>
+                <option value="period3" data-i18n="print_period3">الفترة الثالثة</option>
+                <option value="period4" data-i18n="print_period4">الفترة الرابعة</option>
+                <option value="period5" data-i18n="print_period5">الفترة الخامسة</option>
+            </select>
+            <button class="print-button" onclick="printSelected()" data-i18n="print_button">🖨️ طباعة</button>
+            <button id="theme-toggle" class="theme-toggle" aria-label="تبديل الوضع الليلي/النهاري">
+                <span class="theme-icon">🌙</span>
+            </button>
+
+            <!-- Language Selector -->
+            <div class="language-selector">
+                <label for="language-select" class="sr-only" data-i18n="language_label">اللغة</label>
+                <select id="language-select">
+                    <option value="ar" data-i18n="lang_ar">العربية</option>
+                    <option value="en" data-i18n="lang_en">English</option>
+                    <option value="fr" data-i18n="lang_fr">Français</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Page Header -->
+        <header class="page-header">
+            <span class="badge" data-i18n="badge">📐 السنة الخامسة أساسي</span>
+            <h1 data-i18n="page_heading">فهرس دروس الرياضيات</h1>
+            <p class="subtitle" data-i18n="page_subtitle">جميع دروس الفترات — اضغط على أي درس للانتقال إليه</p>
+        </header>
+
+        <!-- ================= REVIEW MODULE ================= -->
+        <div class="module-card review-module" id="review-module-card">
+            <div class="module-header" onclick="toggleModule('reviewModule')" role="button" tabindex="0"
+                 aria-expanded="true" aria-controls="reviewModule"
+                 onkeydown="if(event.key==='Enter'||event.key===' ') toggleModule('reviewModule')">
+                <div class="module-icon review-icon">🔁</div>
+                <div class="module-title-group">
+                    <h2 data-i18n="review_title">مراجعة</h2>
+                    <span class="module-count" data-i18n="review_count">5 دروس</span>
+                </div>
+                <span class="module-toggle open" id="reviewToggle">▼</span>
+            </div>
+            <ul class="lesson-list expanded" id="reviewModule">
+                <!-- Lesson 1 -->
+                <li class="lesson-group">
+                    <h3 class="lesson-group-header" data-i18n="rev_lesson1_title">1. الأعداد ذات 6 أرقام</h3>
+                    <ul class="subpart-list">
+                        <li class="subpart-item"><a href="maths_y5_review_sub1.html" class="subpart-link"><span class="subpart-number review-num">a</span><span class="subpart-text" data-i18n="rev_l1_sub_a">العدد بلسان القلم</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_review_sub2.html" class="subpart-link"><span class="subpart-number review-num">b</span><span class="subpart-text" data-i18n="rev_l1_sub_b">العدد بالأرقام</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_review_sub3.html" class="subpart-link"><span class="subpart-number review-num">c</span><span class="subpart-text" data-i18n="rev_l1_sub_c">أصغر عدد</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_review_sub4.html" class="subpart-link"><span class="subpart-number review-num">d</span><span class="subpart-text" data-i18n="rev_l1_sub_d">أكبر عدد</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_review_sub5.html" class="subpart-link"><span class="subpart-number review-num">e</span><span class="subpart-text" data-i18n="rev_l1_sub_e">عدد المئات</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_review_sub6.html" class="subpart-link"><span class="subpart-number review-num">f</span><span class="subpart-text" data-i18n="rev_l1_sub_f">عدد العشرات</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_review_sub7.html" class="subpart-link"><span class="subpart-number review-num">g</span><span class="subpart-text" data-i18n="rev_l1_sub_g">مقارنة عددين ذات 6 أرقام</span></a></li>
+                    </ul>
+                </li>
+                <!-- Lesson 2 -->
+                <li class="lesson-group">
+                    <h3 class="lesson-group-header" data-i18n="rev_lesson2_title">2. أوظّف الجمع والطّرح والضّرب</h3>
+                    <ul class="subpart-list">
+                        <li class="subpart-item"><a href="maths_y5_review_sub8.html" class="subpart-link"><span class="subpart-number review-num">a</span><span class="subpart-text" data-i18n="rev_l2_sub_a">عمليّة الجمع</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_review_sub9.html" class="subpart-link"><span class="subpart-number review-num">b</span><span class="subpart-text" data-i18n="rev_l2_sub_b">عمليّة الضّرب</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_review_sub10.html" class="subpart-link"><span class="subpart-number review-num">c</span><span class="subpart-text" data-i18n="rev_l2_sub_c">عمليّة الطّرح</span></a></li>
+                    </ul>
+                </li>
+                <!-- Lesson 3 -->
+                <li class="lesson-group">
+                    <h3 class="lesson-group-header" data-i18n="rev_lesson3_title">3. مضاعفات عدد صحيح طبيعي</h3>
+                    <ul class="subpart-list">
+                        <li class="subpart-item"><a href="maths_y5_review_sub11.html" class="subpart-link"><span class="subpart-number review-num">a</span><span class="subpart-text" data-i18n="rev_l3_sub_a">عدد مضاعف لعدد اخر</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_review_sub12.html" class="subpart-link"><span class="subpart-number review-num">b</span><span class="subpart-text" data-i18n="rev_l3_sub_b">عناصر مجموعة</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_review_sub13.html" class="subpart-link"><span class="subpart-number review-num">c</span><span class="subpart-text" data-i18n="rev_l3_sub_c">مضاعفات عدد</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_review_sub14.html" class="subpart-link"><span class="subpart-number review-num">d</span><span class="subpart-text" data-i18n="rev_l3_sub_d">المضاعفات المشتركة لعددين</span></a></li>
+                    </ul>
+                </li>
+                <!-- Lesson 4 -->
+                <li class="lesson-group">
+                    <h3 class="lesson-group-header" data-i18n="rev_lesson4_title">4. القسمة على عدد ذي رقم واحد</h3>
+                    <ul class="subpart-list">
+                        <li class="subpart-item"><a href="maths_y5_review_sub15.html" class="subpart-link"><span class="subpart-number review-num">a</span><span class="subpart-text" data-i18n="rev_l4_sub_a">القاسم</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_review_sub16.html" class="subpart-link"><span class="subpart-number review-num">b</span><span class="subpart-text" data-i18n="rev_l4_sub_b">المقسوم</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_review_sub17.html" class="subpart-link"><span class="subpart-number review-num">c</span><span class="subpart-text" data-i18n="rev_l4_sub_c">باقي القسة</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_review_sub18.html" class="subpart-link"><span class="subpart-number review-num">d</span><span class="subpart-text" data-i18n="rev_l4_sub_d">عدد ذي رقم واحد</span></a></li>
+                    </ul>
+                </li>
+                <!-- Lesson 5 -->
+                <li class="lesson-group">
+                    <h3 class="lesson-group-header" data-i18n="rev_lesson5_title">5. قيس مساحة كلّ من المستطيل والمربّع</h3>
+                    <ul class="subpart-list">
+                        <li class="subpart-item"><a href="maths_y5_review_sub19.html" class="subpart-link"><span class="subpart-number review-num">a</span><span class="subpart-text" data-i18n="rev_l5_sub_a">مساحة مربّع</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_review_sub20.html" class="subpart-link"><span class="subpart-number review-num">b</span><span class="subpart-text" data-i18n="rev_l5_sub_b">مساحة مستطيل</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_review_sub21.html" class="subpart-link"><span class="subpart-number review-num">c</span><span class="subpart-text" data-i18n="rev_l5_sub_c">محيط مربّع</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_review_sub22.html" class="subpart-link"><span class="subpart-number review-num">d</span><span class="subpart-text" data-i18n="rev_l5_sub_d">محيط مستطيل</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_review_sub23.html" class="subpart-link"><span class="subpart-number review-num">e</span><span class="subpart-text" data-i18n="rev_l5_sub_e">قيس الطّول</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_review_sub24.html" class="subpart-link"><span class="subpart-number review-num">f</span><span class="subpart-text" data-i18n="rev_l5_sub_f">قيس العرض</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_review_sub25.html" class="subpart-link"><span class="subpart-number review-num">g</span><span class="subpart-text" data-i18n="rev_l5_sub_g">قيس الضّلع</span></a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <!-- ================= PERIOD 1 MODULE ================= -->
+        <div class="module-card period1-module" id="period1-module-card">
+            <div class="module-header" onclick="toggleModule('period1Module')" role="button" tabindex="0"
+                 aria-expanded="true" aria-controls="period1Module"
+                 onkeydown="if(event.key==='Enter'||event.key===' ') toggleModule('period1Module')">
+                <div class="module-icon period1-icon">📘</div>
+                <div class="module-title-group">
+                    <h2 data-i18n="period1_title">الفترة الأولى</h2>
+                    <span class="module-count" data-i18n="period1_count">6 دروس</span>
+                </div>
+                <span class="module-toggle open" id="period1Toggle">▼</span>
+            </div>
+            <ul class="lesson-list expanded" id="period1Module">
+                <!-- Lesson 1 -->
+                <li class="lesson-group">
+                    <h3 class="lesson-group-header" data-i18n="p1_lesson1_title">1. أكوّن الأعداد ذات 7 أرقام فأكثر وأكتبها</h3>
+                    <ul class="subpart-list">
+                        <li class="subpart-item"><a href="maths_y5_p1_l1_sub1.html" class="subpart-link"><span class="subpart-number period1-num">a</span><span class="subpart-text" data-i18n="p1_l1_sub_a">كتابة</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p1_l1_sub2.html" class="subpart-link"><span class="subpart-number period1-num">b</span><span class="subpart-text" data-i18n="p1_l1_sub_b">قراءة</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p1_l1_sub3.html" class="subpart-link"><span class="subpart-number period1-num">c</span><span class="subpart-text" data-i18n="p1_l1_sub_c">تكوين</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p1_l1_sub4.html" class="subpart-link"><span class="subpart-number period1-num">d</span><span class="subpart-text" data-i18n="p1_l1_sub_d">العدد بلسان القلم</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p1_l1_sub5.html" class="subpart-link"><span class="subpart-number period1-num">e</span><span class="subpart-text" data-i18n="p1_l1_sub_e">العدد بالحروف</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p1_l1_sub6.html" class="subpart-link"><span class="subpart-number period1-num">f</span><span class="subpart-text" data-i18n="p1_l1_sub_f">الوحدات البسيطة</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p1_l1_sub7.html" class="subpart-link"><span class="subpart-number period1-num">g</span><span class="subpart-text" data-i18n="p1_l1_sub_g">الالاف</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p1_l1_sub8.html" class="subpart-link"><span class="subpart-number period1-num">h</span><span class="subpart-text" data-i18n="p1_l1_sub_h">الملايين</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p1_l1_sub9.html" class="subpart-link"><span class="subpart-number period1-num">i</span><span class="subpart-text" data-i18n="p1_l1_sub_i">المليارات</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p1_l1_sub10.html" class="subpart-link"><span class="subpart-number period1-num">j</span><span class="subpart-text" data-i18n="p1_l1_sub_j">رقم منزلة عدد</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p1_l1_sub11.html" class="subpart-link"><span class="subpart-number period1-num">k</span><span class="subpart-text" data-i18n="p1_l1_sub_k">عدد</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p1_l1_sub12.html" class="subpart-link"><span class="subpart-number period1-num">l</span><span class="subpart-text" data-i18n="p1_l1_sub_l">وحدات عدد</span></a></li>
+                    </ul>
+                </li>
+                <!-- Lesson 2 -->
+                <li class="lesson-group">
+                    <h3 class="lesson-group-header" data-i18n="p1_lesson2_title">2. أحدّد احداثيّات عقدة على الشّبكة</h3>
+                    <ul class="subpart-list">
+                        <li class="subpart-item"><a href="maths_y5_p1_l2_sub1.html" class="subpart-link"><span class="subpart-number period1-num">a</span><span class="subpart-text" data-i18n="p1_l2_sub_a">الفاصلة</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p1_l2_sub2.html" class="subpart-link"><span class="subpart-number period1-num">b</span><span class="subpart-text" data-i18n="p1_l2_sub_b">التّرتيبة</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p1_l2_sub3.html" class="subpart-link"><span class="subpart-number period1-num">c</span><span class="subpart-text" data-i18n="p1_l2_sub_c">إحداثيات عقد</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p1_l2_sub4.html" class="subpart-link"><span class="subpart-number period1-num">d</span><span class="subpart-text" data-i18n="p1_l2_sub_d">شبكة</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p1_l2_sub5.html" class="subpart-link"><span class="subpart-number period1-num">e</span><span class="subpart-text" data-i18n="p1_l2_sub_e">أمام</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p1_l2_sub6.html" class="subpart-link"><span class="subpart-number period1-num">f</span><span class="subpart-text" data-i18n="p1_l2_sub_f">وراء</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p1_l2_sub7.html" class="subpart-link"><span class="subpart-number period1-num">g</span><span class="subpart-text" data-i18n="p1_l2_sub_g">يمين</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p1_l2_sub8.html" class="subpart-link"><span class="subpart-number period1-num">h</span><span class="subpart-text" data-i18n="p1_l2_sub_h">شمال</span></a></li>
+                    </ul>
+                </li>
+                <!-- Lesson 3 -->
+                <li class="lesson-group">
+                    <h3 class="lesson-group-header" data-i18n="p1_lesson3_title">3. أفكّك الأعداد ذات 7 أرقام فاكثر وأركّبها</h3>
+                    <ul class="subpart-list">
+                        <li class="subpart-item"><a href="maths_y5_p1_l3_sub1.html" class="subpart-link"><span class="subpart-number period1-num">a</span><span class="subpart-text" data-i18n="p1_l3_sub_a">الصّيغة القانونيّة</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p1_l3_sub2.html" class="subpart-link"><span class="subpart-number period1-num">b</span><span class="subpart-text" data-i18n="p1_l3_sub_b">عدد في صيغة جمعيّة</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p1_l3_sub3.html" class="subpart-link"><span class="subpart-number period1-num">c</span><span class="subpart-text" data-i18n="p1_l3_sub_c">عدد في صيغة طرحيّة</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p1_l3_sub4.html" class="subpart-link"><span class="subpart-number period1-num">d</span><span class="subpart-text" data-i18n="p1_l3_sub_d">رقم منزلة عدد</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p1_l3_sub5.html" class="subpart-link"><span class="subpart-number period1-num">e</span><span class="subpart-text" data-i18n="p1_l3_sub_e">عدد</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p1_l3_sub6.html" class="subpart-link"><span class="subpart-number period1-num">f</span><span class="subpart-text" data-i18n="p1_l3_sub_f">وحدات عدد</span></a></li>
+                    </ul>
+                </li>
+                <!-- Lesson 4 -->
+                <li class="lesson-group">
+                    <h3 class="lesson-group-header" data-i18n="p1_lesson4_title">4. أقارن الأعداد ذات 7 أرقام فأكثر وأرتّبها</h3>
+                    <ul class="subpart-list">
+                        <li class="subpart-item"><a href="maths_y5_p1_l4_sub1.html" class="subpart-link"><span class="subpart-number period1-num">a</span><span class="subpart-text" data-i18n="p1_l4_sub_a">مقارنه عددين</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p1_l4_sub2.html" class="subpart-link"><span class="subpart-number period1-num">b</span><span class="subpart-text" data-i18n="p1_l4_sub_b">أكبر من</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p1_l4_sub3.html" class="subpart-link"><span class="subpart-number period1-num">c</span><span class="subpart-text" data-i18n="p1_l4_sub_c">أصغر من</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p1_l4_sub4.html" class="subpart-link"><span class="subpart-number period1-num">d</span><span class="subpart-text" data-i18n="p1_l4_sub_d">يساوي</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p1_l4_sub5.html" class="subpart-link"><span class="subpart-number period1-num">e</span><span class="subpart-text" data-i18n="p1_l4_sub_e">ترتيب تصاعدي</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p1_l4_sub6.html" class="subpart-link"><span class="subpart-number period1-num">f</span><span class="subpart-text" data-i18n="p1_l4_sub_f">ترتيب تنازلي</span></a></li>
+                    </ul>
+                </li>
+                <!-- Lesson 5 -->
+                <li class="lesson-group">
+                    <h3 class="lesson-group-header" data-i18n="p1_lesson5_title">5. أرسم صورة شكل على شبكة باستعمال التّناظر المحوري</h3>
+                    <ul class="subpart-list">
+                        <li class="subpart-item"><a href="maths_y5_p1_l5_sub1.html" class="subpart-link"><span class="subpart-number period1-num">a</span><span class="subpart-text" data-i18n="p1_l5_sub_a">نقطتان متناظرتان</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p1_l5_sub2.html" class="subpart-link"><span class="subpart-number period1-num">b</span><span class="subpart-text" data-i18n="p1_l5_sub_b">محور الّتناظر</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p1_l5_sub3.html" class="subpart-link"><span class="subpart-number period1-num">c</span><span class="subpart-text" data-i18n="p1_l5_sub_c">محور أفقي</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p1_l5_sub4.html" class="subpart-link"><span class="subpart-number period1-num">d</span><span class="subpart-text" data-i18n="p1_l5_sub_d">محور عمودي</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p1_l5_sub5.html" class="subpart-link"><span class="subpart-number period1-num">e</span><span class="subpart-text" data-i18n="p1_l5_sub_e">احداثيّات عقدة</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p1_l5_sub6.html" class="subpart-link"><span class="subpart-number period1-num">f</span><span class="subpart-text" data-i18n="p1_l5_sub_f">صورة الشّكل</span></a></li>
+                    </ul>
+                </li>
+                <!-- Lesson 6 -->
+                <li class="lesson-group">
+                    <h3 class="lesson-group-header" data-i18n="p1_lesson6_title">6. أوظّف الجمع والطّرح والضّرب على الأعداد الصّحيحة الطّبيعيّة</h3>
+                    <ul class="subpart-list">
+                        <li class="subpart-item"><a href="maths_y5_p1_l6_sub1.html" class="subpart-link"><span class="subpart-number period1-num">a</span><span class="subpart-text" data-i18n="p1_l6_sub_a">مجموع عددين</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p1_l6_sub2.html" class="subpart-link"><span class="subpart-number period1-num">b</span><span class="subpart-text" data-i18n="p1_l6_sub_b">الفارق بين عددين</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p1_l6_sub3.html" class="subpart-link"><span class="subpart-number period1-num">c</span><span class="subpart-text" data-i18n="p1_l6_sub_c">جذاء عددين</span></a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <!-- ================= PERIOD 2 MODULE ================= -->
+        <div class="module-card period2-module" id="period2-module-card">
+            <div class="module-header" onclick="toggleModule('period2Module')" role="button" tabindex="0"
+                 aria-expanded="true" aria-controls="period2Module"
+                 onkeydown="if(event.key==='Enter'||event.key===' ') toggleModule('period2Module')">
+                <div class="module-icon period2-icon">📗</div>
+                <div class="module-title-group">
+                    <h2 data-i18n="period2_title">الفترة الثانية</h2>
+                    <span class="module-count" data-i18n="period2_count">8 دروس</span>
+                </div>
+                <span class="module-toggle open" id="period2Toggle">▼</span>
+            </div>
+            <ul class="lesson-list expanded" id="period2Module">
+                <!-- Lesson 1 -->
+                <li class="lesson-group">
+                    <h3 class="lesson-group-header" data-i18n="p2_lesson1_title">1. أوظّف القسمة على الأعداد الصّحيحة الطّبيعيّة</h3>
+                    <ul class="subpart-list">
+                        <li class="subpart-item"><a href="maths_y5_p2_l1_sub1.html" class="subpart-link"><span class="subpart-number period2-num">a</span><span class="subpart-text" data-i18n="p2_l1_sub_a">المقسوم</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p2_l1_sub2.html" class="subpart-link"><span class="subpart-number period2-num">b</span><span class="subpart-text" data-i18n="p2_l1_sub_b">القاسم</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p2_l1_sub3.html" class="subpart-link"><span class="subpart-number period2-num">c</span><span class="subpart-text" data-i18n="p2_l1_sub_c">خارج القسمة</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p2_l1_sub4.html" class="subpart-link"><span class="subpart-number period2-num">d</span><span class="subpart-text" data-i18n="p2_l1_sub_d">الباقي</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p2_l1_sub5.html" class="subpart-link"><span class="subpart-number period2-num">e</span><span class="subpart-text" data-i18n="p2_l1_sub_e">قسمة مستوفاة</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p2_l1_sub6.html" class="subpart-link"><span class="subpart-number period2-num">f</span><span class="subpart-text" data-i18n="p2_l1_sub_f">قسمه إقليديّة</span></a></li>
+                    </ul>
+                </li>
+                <!-- Lesson 2 -->
+                <li class="lesson-group">
+                    <h3 class="lesson-group-header" data-i18n="p2_lesson2_title">2. أنجز عمليّة القسمة على عدد ذي رقمين</h3>
+                    <ul class="subpart-list">
+                        <li class="subpart-item"><a href="maths_y5_p2_l2_sub1.html" class="subpart-link"><span class="subpart-number period2-num">a</span><span class="subpart-text" data-i18n="p2_l2_sub_a">القاسم</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p2_l2_sub2.html" class="subpart-link"><span class="subpart-number period2-num">b</span><span class="subpart-text" data-i18n="p2_l2_sub_b">المقسوم</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p2_l2_sub3.html" class="subpart-link"><span class="subpart-number period2-num">c</span><span class="subpart-text" data-i18n="p2_l2_sub_c">خارج القسمة</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p2_l2_sub4.html" class="subpart-link"><span class="subpart-number period2-num">d</span><span class="subpart-text" data-i18n="p2_l2_sub_d">الباقي</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p2_l2_sub5.html" class="subpart-link"><span class="subpart-number period2-num">e</span><span class="subpart-text" data-i18n="p2_l2_sub_e">القاسم</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p2_l2_sub6.html" class="subpart-link"><span class="subpart-number period2-num">f</span><span class="subpart-text" data-i18n="p2_l2_sub_f">عدد ذي رقمين</span></a></li>
+                    </ul>
+                </li>
+                <!-- Lesson 3 -->
+                <li class="lesson-group">
+                    <h3 class="lesson-group-header" data-i18n="p2_lesson3_title">3. أتصرّف في وحدات قيس الكتل</h3>
+                    <ul class="subpart-list">
+                        <li class="subpart-item"><a href="maths_y5_p2_l3_sub1.html" class="subpart-link"><span class="subpart-number period2-num">a</span><span class="subpart-text" data-i18n="p2_l3_sub_a">مضاعفات الكيلوغرام</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p2_l3_sub2.html" class="subpart-link"><span class="subpart-number period2-num">b</span><span class="subpart-text" data-i18n="p2_l3_sub_b">عشرات الكغ</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p2_l3_sub3.html" class="subpart-link"><span class="subpart-number period2-num">c</span><span class="subpart-text" data-i18n="p2_l3_sub_c">قنطار</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p2_l3_sub4.html" class="subpart-link"><span class="subpart-number period2-num">d</span><span class="subpart-text" data-i18n="p2_l3_sub_d">طنّ</span></a></li>
+                    </ul>
+                </li>
+                <!-- Lesson 4 -->
+                <li class="lesson-group">
+                    <h3 class="lesson-group-header" data-i18n="p2_lesson4_title">4. أتعرّف الدّائرة والقرص الدّائري</h3>
+                    <ul class="subpart-list">
+                        <li class="subpart-item"><a href="maths_y5_p2_l4_sub1.html" class="subpart-link"><span class="subpart-number period2-num">a</span><span class="subpart-text" data-i18n="p2_l4_sub_a">الدّائرة</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p2_l4_sub2.html" class="subpart-link"><span class="subpart-number period2-num">b</span><span class="subpart-text" data-i18n="p2_l4_sub_b">مركز الدّائرة</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p2_l4_sub3.html" class="subpart-link"><span class="subpart-number period2-num">c</span><span class="subpart-text" data-i18n="p2_l4_sub_c">القرص</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p2_l4_sub4.html" class="subpart-link"><span class="subpart-number period2-num">d</span><span class="subpart-text" data-i18n="p2_l4_sub_d">الدّائري</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p2_l4_sub5.html" class="subpart-link"><span class="subpart-number period2-num">e</span><span class="subpart-text" data-i18n="p2_l4_sub_e">شعاع الدّائرة</span></a></li>
+                    </ul>
+                </li>
+                <!-- Lesson 5 -->
+                <li class="lesson-group">
+                    <h3 class="lesson-group-header" data-i18n="p2_lesson5_title">5. أرسم الموسّط العمودي لقطعة مستقيم</h3>
+                    <ul class="subpart-list">
+                        <li class="subpart-item"><a href="maths_y5_p2_l5_sub1.html" class="subpart-link"><span class="subpart-number period2-num">a</span><span class="subpart-text" data-i18n="p2_l5_sub_a">قطعة المستقيم</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p2_l5_sub2.html" class="subpart-link"><span class="subpart-number period2-num">b</span><span class="subpart-text" data-i18n="p2_l5_sub_b">منتصف قطعة مستقيم</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p2_l5_sub3.html" class="subpart-link"><span class="subpart-number period2-num">c</span><span class="subpart-text" data-i18n="p2_l5_sub_c">مستقيم عمودي</span></a></li>
+                    </ul>
+                </li>
+                <!-- Lesson 6 -->
+                <li class="lesson-group">
+                    <h3 class="lesson-group-header" data-i18n="p2_lesson6_title">6. أنجز عمليّة القسمة على عدد ذي 3 أرقام فأكثر</h3>
+                    <ul class="subpart-list">
+                        <li class="subpart-item"><a href="maths_y5_p2_l6_sub1.html" class="subpart-link"><span class="subpart-number period2-num">a</span><span class="subpart-text" data-i18n="p2_l6_sub_a">القسمه المستوفاة</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p2_l6_sub2.html" class="subpart-link"><span class="subpart-number period2-num">b</span><span class="subpart-text" data-i18n="p2_l6_sub_b">القسمة الإقليدية</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p2_l6_sub3.html" class="subpart-link"><span class="subpart-number period2-num">c</span><span class="subpart-text" data-i18n="p2_l6_sub_c">القاسم</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p2_l6_sub4.html" class="subpart-link"><span class="subpart-number period2-num">d</span><span class="subpart-text" data-i18n="p2_l6_sub_d">عدد ذي ثلاثة أرقام</span></a></li>
+                    </ul>
+                </li>
+                <!-- Lesson 7 -->
+                <li class="lesson-group">
+                    <h3 class="lesson-group-header" data-i18n="p2_lesson7_title">7. أوظّف الدّائرة في البناءات الهندسيّة</h3>
+                    <ul class="subpart-list">
+                        <li class="subpart-item"><a href="maths_y5_p2_l7_sub1.html" class="subpart-link"><span class="subpart-number period2-num">a</span><span class="subpart-text" data-i18n="p2_l7_sub_a">الدّائرة</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p2_l7_sub2.html" class="subpart-link"><span class="subpart-number period2-num">b</span><span class="subpart-text" data-i18n="p2_l7_sub_b">مركز الدّائرة</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p2_l7_sub3.html" class="subpart-link"><span class="subpart-number period2-num">c</span><span class="subpart-text" data-i18n="p2_l7_sub_c">القرص</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p2_l7_sub4.html" class="subpart-link"><span class="subpart-number period2-num">d</span><span class="subpart-text" data-i18n="p2_l7_sub_d">الدّائري</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p2_l7_sub5.html" class="subpart-link"><span class="subpart-number period2-num">e</span><span class="subpart-text" data-i18n="p2_l7_sub_e">شعاع الدّائرة</span></a></li>
+                    </ul>
+                </li>
+                <!-- Lesson 8 -->
+                <li class="lesson-group">
+                    <h3 class="lesson-group-header" data-i18n="p2_lesson8_title">8. أرسم المستقيمات المتعامدة والمستقيمات المتوازية</h3>
+                    <ul class="subpart-list">
+                        <li class="subpart-item"><a href="maths_y5_p2_l8_sub1.html" class="subpart-link"><span class="subpart-number period2-num">a</span><span class="subpart-text" data-i18n="p2_l8_sub_a">بناء المستقيمات</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p2_l8_sub2.html" class="subpart-link"><span class="subpart-number period2-num">b</span><span class="subpart-text" data-i18n="p2_l8_sub_b">مستقيمان متعامدان</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p2_l8_sub3.html" class="subpart-link"><span class="subpart-number period2-num">c</span><span class="subpart-text" data-i18n="p2_l8_sub_c">مستقيمان متوازيان</span></a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <!-- ================= PERIOD 3 MODULE ================= -->
+        <div class="module-card period3-module" id="period3-module-card">
+            <div class="module-header" onclick="toggleModule('period3Module')" role="button" tabindex="0"
+                 aria-expanded="true" aria-controls="period3Module"
+                 onkeydown="if(event.key==='Enter'||event.key===' ') toggleModule('period3Module')">
+                <div class="module-icon period3-icon">📙</div>
+                <div class="module-title-group">
+                    <h2 data-i18n="period3_title">الفترة الثالثة</h2>
+                    <span class="module-count" data-i18n="period3_count">7 دروس</span>
+                </div>
+                <span class="module-toggle open" id="period3Toggle">▼</span>
+            </div>
+            <ul class="lesson-list expanded" id="period3Module">
+                <!-- Lesson 1 -->
+                <li class="lesson-group">
+                    <h3 class="lesson-group-header" data-i18n="p3_lesson1_title">1. أتعرّف سلسلتين من الأعداد الصّحيحة الطّبيعيّة المتناسبة طردا</h3>
+                    <ul class="subpart-list">
+                        <li class="subpart-item"><a href="maths_y5_p3_l1_sub1.html" class="subpart-link"><span class="subpart-number period3-num">a</span><span class="subpart-text" data-i18n="p3_l1_sub_a">سلسلتان من الأعداد</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p3_l1_sub2.html" class="subpart-link"><span class="subpart-number period3-num">b</span><span class="subpart-text" data-i18n="p3_l1_sub_b">متناسبان طردا</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p3_l1_sub3.html" class="subpart-link"><span class="subpart-number period3-num">c</span><span class="subpart-text" data-i18n="p3_l1_sub_c">عامل التّناسب</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p3_l1_sub4.html" class="subpart-link"><span class="subpart-number period3-num">d</span><span class="subpart-text" data-i18n="p3_l1_sub_d">الرّابع التناسبي</span></a></li>
+                    </ul>
+                </li>
+                <!-- Lesson 2 -->
+                <li class="lesson-group">
+                    <h3 class="lesson-group-header" data-i18n="p3_lesson2_title">2. أكوّن الأعداد الكسريّة وأكتبها</h3>
+                    <ul class="subpart-list">
+                        <li class="subpart-item"><a href="maths_y5_p3_l2_sub1.html" class="subpart-link"><span class="subpart-number period3-num">a</span><span class="subpart-text" data-i18n="p3_l2_sub_a">عدد كسري</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p3_l2_sub2.html" class="subpart-link"><span class="subpart-number period3-num">b</span><span class="subpart-text" data-i18n="p3_l2_sub_b">بسط</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p3_l2_sub3.html" class="subpart-link"><span class="subpart-number period3-num">c</span><span class="subpart-text" data-i18n="p3_l2_sub_c">مقام</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p3_l2_sub4.html" class="subpart-link"><span class="subpart-number period3-num">d</span><span class="subpart-text" data-i18n="p3_l2_sub_d">خطّ عدد كسري</span></a></li>
+                    </ul>
+                </li>
+                <!-- Lesson 3 -->
+                <li class="lesson-group">
+                    <h3 class="lesson-group-header" data-i18n="p3_lesson3_title">3. أتصرّف في وحدات قيس المساحات : المتر المربّع وأجزائه</h3>
+                    <ul class="subpart-list">
+                        <li class="subpart-item"><a href="maths_y5_p3_l3_sub1.html" class="subpart-link"><span class="subpart-number period3-num">a</span><span class="subpart-text" data-i18n="p3_l3_sub_a">المتر المربّع</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p3_l3_sub2.html" class="subpart-link"><span class="subpart-number period3-num">b</span><span class="subpart-text" data-i18n="p3_l3_sub_b">جدول وحدات قيس المساحة</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p3_l3_sub3.html" class="subpart-link"><span class="subpart-number period3-num">c</span><span class="subpart-text" data-i18n="p3_l3_sub_c">ديسيمتر مربّع</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p3_l3_sub4.html" class="subpart-link"><span class="subpart-number period3-num">d</span><span class="subpart-text" data-i18n="p3_l3_sub_d">صنتيمتر مربّع</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p3_l3_sub5.html" class="subpart-link"><span class="subpart-number period3-num">e</span><span class="subpart-text" data-i18n="p3_l3_sub_e">ملّيمتر مربّع</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p3_l3_sub6.html" class="subpart-link"><span class="subpart-number period3-num">f</span><span class="subpart-text" data-i18n="p3_l3_sub_f">كل وحدة تكبر الأصغر منها ب 100 مرّة</span></a></li>
+                    </ul>
+                </li>
+                <!-- Lesson 4 -->
+                <li class="lesson-group">
+                    <h3 class="lesson-group-header" data-i18n="p3_lesson4_title">4. أتصرّف في وحدات قيس المساحات : المتر المربّع ومضاعفاته</h3>
+                    <ul class="subpart-list">
+                        <li class="subpart-item"><a href="maths_y5_p3_l4_sub1.html" class="subpart-link"><span class="subpart-number period3-num">a</span><span class="subpart-text" data-i18n="p3_l4_sub_a">المت المربّع</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p3_l4_sub2.html" class="subpart-link"><span class="subpart-number period3-num">b</span><span class="subpart-text" data-i18n="p3_l4_sub_b">وحدة أساسيّة تقيس المساحة</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p3_l4_sub3.html" class="subpart-link"><span class="subpart-number period3-num">c</span><span class="subpart-text" data-i18n="p3_l4_sub_c">مضاعفات المتر المربّع</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p3_l4_sub4.html" class="subpart-link"><span class="subpart-number period3-num">d</span><span class="subpart-text" data-i18n="p3_l4_sub_d">دكم مربّع</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p3_l4_sub5.html" class="subpart-link"><span class="subpart-number period3-num">e</span><span class="subpart-text" data-i18n="p3_l4_sub_e">هم مربّع</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p3_l4_sub6.html" class="subpart-link"><span class="subpart-number period3-num">f</span><span class="subpart-text" data-i18n="p3_l4_sub_f">كيلومتر مربّع</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p3_l4_sub7.html" class="subpart-link"><span class="subpart-number period3-num">g</span><span class="subpart-text" data-i18n="p3_l4_sub_g">الوحدة تكبر الأصغر منها ب 100 مرّة</span></a></li>
+                    </ul>
+                </li>
+                <!-- Lesson 5 -->
+                <li class="lesson-group">
+                    <h3 class="lesson-group-header" data-i18n="p3_lesson5_title">5. أرسم الزوايا وأقيسها</h3>
+                    <ul class="subpart-list">
+                        <li class="subpart-item"><a href="maths_y5_p3_l5_sub1.html" class="subpart-link"><span class="subpart-number period3-num">a</span><span class="subpart-text" data-i18n="p3_l5_sub_a">الزّاوية القائمة</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p3_l5_sub2.html" class="subpart-link"><span class="subpart-number period3-num">b</span><span class="subpart-text" data-i18n="p3_l5_sub_b">الزّاوية الحادّة</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p3_l5_sub3.html" class="subpart-link"><span class="subpart-number period3-num">c</span><span class="subpart-text" data-i18n="p3_l5_sub_c">الزّاوية المنفرجة</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p3_l5_sub4.html" class="subpart-link"><span class="subpart-number period3-num">d</span><span class="subpart-text" data-i18n="p3_l5_sub_d">الزّاوية المنبسطة</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p3_l5_sub5.html" class="subpart-link"><span class="subpart-number period3-num">e</span><span class="subpart-text" data-i18n="p3_l5_sub_e">الزّاويتان المتتامّتان</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p3_l5_sub6.html" class="subpart-link"><span class="subpart-number period3-num">f</span><span class="subpart-text" data-i18n="p3_l5_sub_f">الزّاويتان المتكاملتان</span></a></li>
+                    </ul>
+                </li>
+                <!-- Lesson 6 -->
+                <li class="lesson-group">
+                    <h3 class="lesson-group-header" data-i18n="p3_lesson6_title">6. أرسم نصف الزّاوية</h3>
+                    <ul class="subpart-list">
+                        <li class="subpart-item"><a href="maths_y5_p3_l6_sub1.html" class="subpart-link"><span class="subpart-number period3-num">a</span><span class="subpart-text" data-i18n="p3_l6_sub_a">منصّف الزّاوية</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p3_l6_sub2.html" class="subpart-link"><span class="subpart-number period3-num">b</span><span class="subpart-text" data-i18n="p3_l6_sub_b">رسم رأس الزّاوية</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p3_l6_sub3.html" class="subpart-link"><span class="subpart-number period3-num">c</span><span class="subpart-text" data-i18n="p3_l6_sub_c">وحدات قيس المساحة الفلاحيّة</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p3_l6_sub4.html" class="subpart-link"><span class="subpart-number period3-num">d</span><span class="subpart-text" data-i18n="p3_l6_sub_d">الموسّط العمودي لقطعة مستقيم</span></a></li>
+                    </ul>
+                </li>
+                <!-- Lesson 7 -->
+                <li class="lesson-group">
+                    <h3 class="lesson-group-header" data-i18n="p3_lesson7_title">7. أتصرّف في وحدات القيس الفلاحيّة</h3>
+                    <ul class="subpart-list">
+                        <li class="subpart-item"><a href="maths_y5_p3_l7_sub1.html" class="subpart-link"><span class="subpart-number period3-num">a</span><span class="subpart-text" data-i18n="p3_l7_sub_a">الار</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p3_l7_sub2.html" class="subpart-link"><span class="subpart-number period3-num">b</span><span class="subpart-text" data-i18n="p3_l7_sub_b">الصار</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p3_l7_sub3.html" class="subpart-link"><span class="subpart-number period3-num">c</span><span class="subpart-text" data-i18n="p3_l7_sub_c">الهكتار</span></a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <!-- ================= PERIOD 4 MODULE ================= -->
+        <div class="module-card period4-module" id="period4-module-card">
+            <div class="module-header" onclick="toggleModule('period4Module')" role="button" tabindex="0"
+                 aria-expanded="true" aria-controls="period4Module"
+                 onkeydown="if(event.key==='Enter'||event.key===' ') toggleModule('period4Module')">
+                <div class="module-icon period4-icon">📕</div>
+                <div class="module-title-group">
+                    <h2 data-i18n="period4_title">الفترة الرابعة</h2>
+                    <span class="module-count" data-i18n="period4_count">6 دروس</span>
+                </div>
+                <span class="module-toggle open" id="period4Toggle">▼</span>
+            </div>
+            <ul class="lesson-list expanded" id="period4Module">
+                <!-- Lesson 1 -->
+                <li class="lesson-group">
+                    <h3 class="lesson-group-header" data-i18n="p4_lesson1_title">1. أكوّن الأعداد العشريّة وأكتبها وأقرأها</h3>
+                    <ul class="subpart-list">
+                        <li class="subpart-item"><a href="maths_y5_p4_l1_sub1.html" class="subpart-link"><span class="subpart-number period4-num">a</span><span class="subpart-text" data-i18n="p4_l1_sub_a">عدد عشري</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p4_l1_sub2.html" class="subpart-link"><span class="subpart-number period4-num">b</span><span class="subpart-text" data-i18n="p4_l1_sub_b">جزء صحيح</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p4_l1_sub3.html" class="subpart-link"><span class="subpart-number period4-num">c</span><span class="subpart-text" data-i18n="p4_l1_sub_c">جزء عشري</span></a></li>
+                    </ul>
+                </li>
+                <!-- Lesson 2 -->
+                <li class="lesson-group">
+                    <h3 class="lesson-group-header" data-i18n="p4_lesson2_title">2. أفكّك الأعداد العشريّة وأركّبها وأقارن الأعداد العشريّة وأرتّبها</h3>
+                    <ul class="subpart-list">
+                        <li class="subpart-item"><a href="maths_y5_p4_l2_sub1.html" class="subpart-link"><span class="subpart-number period4-num">a</span><span class="subpart-text" data-i18n="p4_l2_sub_a">عدد عشري</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p4_l2_sub2.html" class="subpart-link"><span class="subpart-number period4-num">b</span><span class="subpart-text" data-i18n="p4_l2_sub_b">جزء صحيح</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p4_l2_sub3.html" class="subpart-link"><span class="subpart-number period4-num">c</span><span class="subpart-text" data-i18n="p4_l2_sub_c">جزء عشري</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p4_l2_sub4.html" class="subpart-link"><span class="subpart-number period4-num">d</span><span class="subpart-text" data-i18n="p4_l2_sub_d">رقم الأعشار</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p4_l2_sub5.html" class="subpart-link"><span class="subpart-number period4-num">e</span><span class="subpart-text" data-i18n="p4_l2_sub_e">رقم منزلة الأجزاء المائويّة</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p4_l2_sub6.html" class="subpart-link"><span class="subpart-number period4-num">f</span><span class="subpart-text" data-i18n="p4_l2_sub_f">رقم منزلة الأجزاء الألفيّة</span></a></li>
+                    </ul>
+                </li>
+                <!-- Lesson 3 -->
+                <li class="lesson-group">
+                    <h3 class="lesson-group-header" data-i18n="p4_lesson3_title">3. أتصرّف في الأعداد العشريّة</h3>
+                    <ul class="subpart-list">
+                        <li class="subpart-item"><a href="maths_y5_p4_l3_sub1.html" class="subpart-link"><span class="subpart-number period4-num">a</span><span class="subpart-text" data-i18n="p4_l3_sub_a">عدد عشري</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p4_l3_sub2.html" class="subpart-link"><span class="subpart-number period4-num">b</span><span class="subpart-text" data-i18n="p4_l3_sub_b">جزء صحيح</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p4_l3_sub3.html" class="subpart-link"><span class="subpart-number period4-num">c</span><span class="subpart-text" data-i18n="p4_l3_sub_c">جزء عشري</span></a></li>
+                    </ul>
+                </li>
+                <!-- Lesson 4 -->
+                <li class="lesson-group">
+                    <h3 class="lesson-group-header" data-i18n="p4_lesson4_title">4. أجمع الأعداد العشريّة وأطرحها</h3>
+                    <ul class="subpart-list">
+                        <li class="subpart-item"><a href="maths_y5_p4_l4_sub1.html" class="subpart-link"><span class="subpart-number period4-num">a</span><span class="subpart-text" data-i18n="p4_l4_sub_a">الفرق بين عددين عشريين</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p4_l4_sub2.html" class="subpart-link"><span class="subpart-number period4-num">b</span><span class="subpart-text" data-i18n="p4_l4_sub_b">مجموع عددين</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p4_l4_sub3.html" class="subpart-link"><span class="subpart-number period4-num">c</span><span class="subpart-text" data-i18n="p4_l4_sub_c">عشريين</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p4_l4_sub4.html" class="subpart-link"><span class="subpart-number period4-num">d</span><span class="subpart-text" data-i18n="p4_l4_sub_d">جزء صحيح</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p4_l4_sub5.html" class="subpart-link"><span class="subpart-number period4-num">e</span><span class="subpart-text" data-i18n="p4_l4_sub_e">جزء عشري</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p4_l4_sub6.html" class="subpart-link"><span class="subpart-number period4-num">f</span><span class="subpart-text" data-i18n="p4_l4_sub_f">الأعشار</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p4_l4_sub7.html" class="subpart-link"><span class="subpart-number period4-num">g</span><span class="subpart-text" data-i18n="p4_l4_sub_g">الأجزاء المائويّة</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p4_l4_sub8.html" class="subpart-link"><span class="subpart-number period4-num">h</span><span class="subpart-text" data-i18n="p4_l4_sub_h">الأجزاء الألفيّة</span></a></li>
+                    </ul>
+                </li>
+                <!-- Lesson 5 -->
+                <li class="lesson-group">
+                    <h3 class="lesson-group-header" data-i18n="p4_lesson5_title">5. أتصرّف في وحدات قيس الزّمن : السّاعة الدّقيقة الثّانية</h3>
+                    <ul class="subpart-list">
+                        <li class="subpart-item"><a href="maths_y5_p4_l5_sub1.html" class="subpart-link"><span class="subpart-number period4-num">a</span><span class="subpart-text" data-i18n="p4_l5_sub_a">العلاقة بين السّاعة و الدّقيقة و الثّانية</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p4_l5_sub2.html" class="subpart-link"><span class="subpart-number period4-num">b</span><span class="subpart-text" data-i18n="p4_l5_sub_b">نصف الساعة</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p4_l5_sub3.html" class="subpart-link"><span class="subpart-number period4-num">c</span><span class="subpart-text" data-i18n="p4_l5_sub_c">ربع الساعة</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p4_l5_sub4.html" class="subpart-link"><span class="subpart-number period4-num">d</span><span class="subpart-text" data-i18n="p4_l5_sub_d">ثلث الساعة</span></a></li>
+                    </ul>
+                </li>
+                <!-- Lesson 6 -->
+                <li class="lesson-group">
+                    <h3 class="lesson-group-header" data-i18n="p4_lesson6_title">6. أجمع وأطرح الأعداد الّتي تقيس الزّمن</h3>
+                    <ul class="subpart-list">
+                        <li class="subpart-item"><a href="maths_y5_p4_l6_sub1.html" class="subpart-link"><span class="subpart-number period4-num">a</span><span class="subpart-text" data-i18n="p4_l6_sub_a">ساعة الوصول</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p4_l6_sub2.html" class="subpart-link"><span class="subpart-number period4-num">b</span><span class="subpart-text" data-i18n="p4_l6_sub_b">ساعة الإنطلاق</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p4_l6_sub3.html" class="subpart-link"><span class="subpart-number period4-num">c</span><span class="subpart-text" data-i18n="p4_l6_sub_c">الزّمن المستغرق</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p4_l6_sub4.html" class="subpart-link"><span class="subpart-number period4-num">d</span><span class="subpart-text" data-i18n="p4_l6_sub_d">مدّة السّير</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p4_l6_sub5.html" class="subpart-link"><span class="subpart-number period4-num">e</span><span class="subpart-text" data-i18n="p4_l6_sub_e">مدّة السّفر</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p4_l6_sub6.html" class="subpart-link"><span class="subpart-number period4-num">f</span><span class="subpart-text" data-i18n="p4_l6_sub_f">(فارغ)</span></a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <!-- ================= PERIOD 5 MODULE ================= -->
+        <div class="module-card period5-module" id="period5-module-card">
+            <div class="module-header" onclick="toggleModule('period5Module')" role="button" tabindex="0"
+                 aria-expanded="true" aria-controls="period5Module"
+                 onkeydown="if(event.key==='Enter'||event.key===' ') toggleModule('period5Module')">
+                <div class="module-icon period5-icon">📔</div>
+                <div class="module-title-group">
+                    <h2 data-i18n="period5_title">الفترة الخامسة</h2>
+                    <span class="module-count" data-i18n="period5_count">10 دروس</span>
+                </div>
+                <span class="module-toggle open" id="period5Toggle">▼</span>
+            </div>
+            <ul class="lesson-list expanded" id="period5Module">
+                <!-- Lesson 1 -->
+                <li class="lesson-group">
+                    <h3 class="lesson-group-header" data-i18n="p5_lesson1_title">1. أنجز عمليّة ضرب عدد عشري في اخر صحيح</h3>
+                    <ul class="subpart-list">
+                        <li class="subpart-item"><a href="maths_y5_p5_l1_sub1.html" class="subpart-link"><span class="subpart-number period5-num">a</span><span class="subpart-text" data-i18n="p5_l1_sub_a">عدد صحيح</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p5_l1_sub2.html" class="subpart-link"><span class="subpart-number period5-num">b</span><span class="subpart-text" data-i18n="p5_l1_sub_b">عدد عشري</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p5_l1_sub3.html" class="subpart-link"><span class="subpart-number period5-num">c</span><span class="subpart-text" data-i18n="p5_l1_sub_c">جزء صحيح</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p5_l1_sub4.html" class="subpart-link"><span class="subpart-number period5-num">d</span><span class="subpart-text" data-i18n="p5_l1_sub_d">جزء عشري</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p5_l1_sub5.html" class="subpart-link"><span class="subpart-number period5-num">e</span><span class="subpart-text" data-i18n="p5_l1_sub_e">فاصلة</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p5_l1_sub6.html" class="subpart-link"><span class="subpart-number period5-num">f</span><span class="subpart-text" data-i18n="p5_l1_sub_f">جذاء عددين</span></a></li>
+                    </ul>
+                </li>
+                <!-- Lesson 2 -->
+                <li class="lesson-group">
+                    <h3 class="lesson-group-header" data-i18n="p5_lesson2_title">2. أنجز عمليّة ضرب عدد عشري في اخر عشري</h3>
+                    <ul class="subpart-list">
+                        <li class="subpart-item"><a href="maths_y5_p5_l2_sub1.html" class="subpart-link"><span class="subpart-number period5-num">a</span><span class="subpart-text" data-i18n="p5_l2_sub_a">عدد عشري</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p5_l2_sub2.html" class="subpart-link"><span class="subpart-number period5-num">b</span><span class="subpart-text" data-i18n="p5_l2_sub_b">جزء صحيح</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p5_l2_sub3.html" class="subpart-link"><span class="subpart-number period5-num">c</span><span class="subpart-text" data-i18n="p5_l2_sub_c">جزء عشري</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p5_l2_sub4.html" class="subpart-link"><span class="subpart-number period5-num">d</span><span class="subpart-text" data-i18n="p5_l2_sub_d">فاصلة</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p5_l2_sub5.html" class="subpart-link"><span class="subpart-number period5-num">e</span><span class="subpart-text" data-i18n="p5_l2_sub_e">عدد الأرقام بعد الفاصل</span></a></li>
+                    </ul>
+                </li>
+                <!-- Lesson 3 -->
+                <li class="lesson-group">
+                    <h3 class="lesson-group-header" data-i18n="p5_lesson3_title">3. أنجز عمليّة الجمع والطّرح في مجموعة الأعداد العشريّة</h3>
+                    <ul class="subpart-list">
+                        <li class="subpart-item"><a href="maths_y5_p5_l3_sub1.html" class="subpart-link"><span class="subpart-number period5-num">a</span><span class="subpart-text" data-i18n="p5_l3_sub_a">الفرق بين عددين عشريين</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p5_l3_sub2.html" class="subpart-link"><span class="subpart-number period5-num">b</span><span class="subpart-text" data-i18n="p5_l3_sub_b">مجموع عددين</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p5_l3_sub3.html" class="subpart-link"><span class="subpart-number period5-num">c</span><span class="subpart-text" data-i18n="p5_l3_sub_c">عشريين</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p5_l3_sub4.html" class="subpart-link"><span class="subpart-number period5-num">d</span><span class="subpart-text" data-i18n="p5_l3_sub_d">جزء صحيح</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p5_l3_sub5.html" class="subpart-link"><span class="subpart-number period5-num">e</span><span class="subpart-text" data-i18n="p5_l3_sub_e">جزء عشري</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p5_l3_sub6.html" class="subpart-link"><span class="subpart-number period5-num">f</span><span class="subpart-text" data-i18n="p5_l3_sub_f">الأعشار</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p5_l3_sub7.html" class="subpart-link"><span class="subpart-number period5-num">g</span><span class="subpart-text" data-i18n="p5_l3_sub_g">الأجزاء المائويّة</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p5_l3_sub8.html" class="subpart-link"><span class="subpart-number period5-num">h</span><span class="subpart-text" data-i18n="p5_l3_sub_h">الأجزاء الألفيّة</span></a></li>
+                    </ul>
+                </li>
+                <!-- Lesson 4 -->
+                <li class="lesson-group">
+                    <h3 class="lesson-group-header" data-i18n="p5_lesson4_title">4. أقسم عددا عشريّا على عدد صحيح طبيعي</h3>
+                    <ul class="subpart-list">
+                        <li class="subpart-item"><a href="maths_y5_p5_l4_sub1.html" class="subpart-link"><span class="subpart-number period5-num">a</span><span class="subpart-text" data-i18n="p5_l4_sub_a">عدد عشري</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p5_l4_sub2.html" class="subpart-link"><span class="subpart-number period5-num">b</span><span class="subpart-text" data-i18n="p5_l4_sub_b">قاسم</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p5_l4_sub3.html" class="subpart-link"><span class="subpart-number period5-num">c</span><span class="subpart-text" data-i18n="p5_l4_sub_c">مقسوم</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p5_l4_sub4.html" class="subpart-link"><span class="subpart-number period5-num">d</span><span class="subpart-text" data-i18n="p5_l4_sub_d">خارج القسمة</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p5_l4_sub5.html" class="subpart-link"><span class="subpart-number period5-num">e</span><span class="subpart-text" data-i18n="p5_l4_sub_e">عدد صحيح</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p5_l4_sub6.html" class="subpart-link"><span class="subpart-number period5-num">f</span><span class="subpart-text" data-i18n="p5_l4_sub_f">الباقي</span></a></li>
+                    </ul>
+                </li>
+                <!-- Lesson 5 -->
+                <li class="lesson-group">
+                    <h3 class="lesson-group-header" data-i18n="p5_lesson5_title">5. أرسم كلا من المستطيل والمربّع استنادا إلى القطرين ومحاور التّناظر</h3>
+                    <ul class="subpart-list">
+                        <li class="subpart-item"><a href="maths_y5_p5_l5_sub1.html" class="subpart-link"><span class="subpart-number period5-num">a</span><span class="subpart-text" data-i18n="p5_l5_sub_a">قطرا المستطيل</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p5_l5_sub2.html" class="subpart-link"><span class="subpart-number period5-num">b</span><span class="subpart-text" data-i18n="p5_l5_sub_b">قطرا المربّع</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p5_l5_sub3.html" class="subpart-link"><span class="subpart-number period5-num">c</span><span class="subpart-text" data-i18n="p5_l5_sub_c">مركز المستطيل</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p5_l5_sub4.html" class="subpart-link"><span class="subpart-number period5-num">d</span><span class="subpart-text" data-i18n="p5_l5_sub_d">مركز المربّع</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p5_l5_sub5.html" class="subpart-link"><span class="subpart-number period5-num">e</span><span class="subpart-text" data-i18n="p5_l5_sub_e">الموسّطات العموديّة لأضلاع الرّباعيات</span></a></li>
+                    </ul>
+                </li>
+                <!-- Lesson 6 -->
+                <li class="lesson-group">
+                    <h3 class="lesson-group-header" data-i18n="p5_lesson6_title">6. أقسم عددا صحيحا طبيعيّا على عدد اخر صحيح طبيعي ( يكون الخارج عددا عشريّا )</h3>
+                    <ul class="subpart-list">
+                        <li class="subpart-item"><a href="maths_y5_p5_l6_sub1.html" class="subpart-link"><span class="subpart-number period5-num">a</span><span class="subpart-text" data-i18n="p5_l6_sub_a">تحويل عدد صحيح إلى عدد عشري</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p5_l6_sub2.html" class="subpart-link"><span class="subpart-number period5-num">b</span><span class="subpart-text" data-i18n="p5_l6_sub_b">المقسوم مضاعف للقاسم الخارج صحيح</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p5_l6_sub3.html" class="subpart-link"><span class="subpart-number period5-num">c</span><span class="subpart-text" data-i18n="p5_l6_sub_c">المقسوم غير مضاعف للقاسم المقسوم عدد عشري</span></a></li>
+                    </ul>
+                </li>
+                <!-- Lesson 7 -->
+                <li class="lesson-group">
+                    <h3 class="lesson-group-header" data-i18n="p5_lesson7_title">7. أنجز عمليّة قسمة قاسمها عدد عشري</h3>
+                    <ul class="subpart-list">
+                        <li class="subpart-item"><a href="maths_y5_p5_l7_sub1.html" class="subpart-link"><span class="subpart-number period5-num">a</span><span class="subpart-text" data-i18n="p5_l7_sub_a">ضرب القاسم و المقسوم في نفس العدد</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p5_l7_sub2.html" class="subpart-link"><span class="subpart-number period5-num">b</span><span class="subpart-text" data-i18n="p5_l7_sub_b">لا يتغيّر خارج القسمة</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p5_l7_sub3.html" class="subpart-link"><span class="subpart-number period5-num">c</span><span class="subpart-text" data-i18n="p5_l7_sub_c">تغيير القاسم من عدد عشري إلى صحيح</span></a></li>
+                    </ul>
+                </li>
+                <!-- Lesson 8 -->
+                <li class="lesson-group">
+                    <h3 class="lesson-group-header" data-i18n="p5_lesson8_title">8. أتعرّف المثلّثات وأرسمها</h3>
+                    <ul class="subpart-list">
+                        <li class="subpart-item"><a href="maths_y5_p5_l8_sub1.html" class="subpart-link"><span class="subpart-number period5-num">a</span><span class="subpart-text" data-i18n="p5_l8_sub_a">ثلاثي أضلاع</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p5_l8_sub2.html" class="subpart-link"><span class="subpart-number period5-num">b</span><span class="subpart-text" data-i18n="p5_l8_sub_b">مجموع أقيسة زوايا المثلّث</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p5_l8_sub3.html" class="subpart-link"><span class="subpart-number period5-num">c</span><span class="subpart-text" data-i18n="p5_l8_sub_c">مثلث متقايس الضّلعين</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p5_l8_sub4.html" class="subpart-link"><span class="subpart-number period5-num">d</span><span class="subpart-text" data-i18n="p5_l8_sub_d">مثلث متقليس الأضلاع</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p5_l8_sub5.html" class="subpart-link"><span class="subpart-number period5-num">e</span><span class="subpart-text" data-i18n="p5_l8_sub_e">مثلّث قائم</span></a></li>
+                    </ul>
+                </li>
+                <!-- Lesson 9 -->
+                <li class="lesson-group">
+                    <h3 class="lesson-group-header" data-i18n="p5_lesson9_title">9. أتعرّف ارتفاعات المثلّث وأرسمها</h3>
+                    <ul class="subpart-list">
+                        <li class="subpart-item"><a href="maths_y5_p5_l9_sub1.html" class="subpart-link"><span class="subpart-number period5-num">a</span><span class="subpart-text" data-i18n="p5_l9_sub_a">مستقيم عمودي على أحد الأضلاع</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p5_l9_sub2.html" class="subpart-link"><span class="subpart-number period5-num">b</span><span class="subpart-text" data-i18n="p5_l9_sub_b">يمرّمن الرّأس المقابلة للضلع</span></a></li>
+                    </ul>
+                </li>
+                <!-- Lesson 10 -->
+                <li class="lesson-group">
+                    <h3 class="lesson-group-header" data-i18n="p5_lesson10_title">10. أنجز عمليّة الضّرب على الأعداد الّتي تقيس الزّمن</h3>
+                    <ul class="subpart-list">
+                        <li class="subpart-item"><a href="maths_y5_p5_l10_sub1.html" class="subpart-link"><span class="subpart-number period5-num">a</span><span class="subpart-text" data-i18n="p5_l10_sub_a">السّاعة</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p5_l10_sub2.html" class="subpart-link"><span class="subpart-number period5-num">b</span><span class="subpart-text" data-i18n="p5_l10_sub_b">الدقيقة</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p5_l10_sub3.html" class="subpart-link"><span class="subpart-number period5-num">c</span><span class="subpart-text" data-i18n="p5_l10_sub_c">الثانيّة</span></a></li>
+                        <li class="subpart-item"><a href="maths_y5_p5_l10_sub4.html" class="subpart-link"><span class="subpart-number period5-num">d</span><span class="subpart-text" data-i18n="p5_l10_sub_d">عمليّة ضرب</span></a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Site Footer -->
+        <footer class="site-footer">
+            <div class="footer-col">
+                <h4 data-i18n="footer_dev">معلومات المطوّر</h4>
+                <p data-i18n="footer_dev_name">طور بواسطة: ماجري زياد</p>
+                <p data-i18n="footer_hosting">الاستضافة: Github, Netlify, Supabase</p>
+            </div>
+            <div class="footer-col">
+                <h4 data-i18n="footer_links">روابط</h4>
+                <a href="#" data-i18n="footer_contact">اتصل بنا</a>
+                <a href="#" data-i18n="footer_policies">السياسات</a>
+            </div>
+            <div class="footer-col">
+                <h4 data-i18n="footer_version">الإصدار</h4>
+                <p data-i18n="footer_version_num">الإصدار: 0.0.2</p>
+                <p data-i18n="footer_rights">جميع الحقوق محفوظة &copy; 2025</p>
+            </div>
+        </footer>
+
+        <!-- Print-only custom footer -->
+        <div class="print-footer">
+            <p data-i18n="print_footer_dev">طور بواسطة: ماجري زياد</p>
+            <p data-i18n="print_footer_version">الإصدار: 0.0.2</p>
+            <p data-i18n="print_footer_page">عنوان الصفحة: maths_y5.html</p>
+        </div>
+    </div>
+
+    <!-- Inline Translation Object with full trilingual support -->
+    <script>
+        const translations = {
+            ar: {
+                // Generic
+                page_title: "فهرس دروس الرياضيات - السنة الخامسة",
+                print_header: "فهرس دروس الرياضيات — السنة الخامسة أساسي",
+                site_header: "Educational Dashboard - Mathematics",
+                home_link: "🏠 الرئيسية",
+                nav_badge: "📚 فهرس الدروس",
+                first_lesson_link: "الدرس الأول ←",
+                language_label: "اللغة",
+                lang_ar: "العربية",
+                lang_en: "English",
+                lang_fr: "Français",
+                print_label: "اختر القسم للطباعة:",
+                print_all: "الفهرس كاملاً",
+                print_review: "المراجعة فقط",
+                print_period1: "الفترة الأولى",
+                print_period2: "الفترة الثانية",
+                print_period3: "الفترة الثالثة",
+                print_period4: "الفترة الرابعة",
+                print_period5: "الفترة الخامسة",
+                print_button: "🖨️ طباعة",
+                badge: "📐 السنة الخامسة أساسي",
+                page_heading: "فهرس دروس الرياضيات",
+                page_subtitle: "جميع دروس الفترات — اضغط على أي درس للانتقال إليه",
+                review_title: "مراجعة",
+                review_count: "5 دروس",
+                period1_title: "الفترة الأولى",
+                period1_count: "6 دروس",
+                period2_title: "الفترة الثانية",
+                period2_count: "8 دروس",
+                period3_title: "الفترة الثالثة",
+                period3_count: "7 دروس",
+                period4_title: "الفترة الرابعة",
+                period4_count: "6 دروس",
+                period5_title: "الفترة الخامسة",
+                period5_count: "10 دروس",
+                footer_dev: "معلومات المطوّر",
+                footer_dev_name: "طور بواسطة: ماجري زياد",
+                footer_hosting: "الاستضافة: Github, Netlify, Supabase",
+                footer_links: "روابط",
+                footer_contact: "اتصل بنا",
+                footer_policies: "السياسات",
+                footer_version: "الإصدار",
+                footer_version_num: "الإصدار: 0.0.2",
+                footer_rights: "جميع الحقوق محفوظة © 2025",
+                print_footer_dev: "طور بواسطة: ماجري زياد",
+                print_footer_version: "الإصدار: 0.0.2",
+                print_footer_page: "عنوان الصفحة: maths_y5.html",
+
+                // Review lessons
+                rev_lesson1_title: "1. الأعداد ذات 6 أرقام",
+                rev_l1_sub_a: "العدد بلسان القلم",
+                rev_l1_sub_b: "العدد بالأرقام",
+                rev_l1_sub_c: "أصغر عدد",
+                rev_l1_sub_d: "أكبر عدد",
+                rev_l1_sub_e: "عدد المئات",
+                rev_l1_sub_f: "عدد العشرات",
+                rev_l1_sub_g: "مقارنة عددين ذات 6 أرقام",
+                rev_lesson2_title: "2. أوظّف الجمع والطّرح والضّرب",
+                rev_l2_sub_a: "عمليّة الجمع",
+                rev_l2_sub_b: "عمليّة الضّرب",
+                rev_l2_sub_c: "عمليّة الطّرح",
+                rev_lesson3_title: "3. مضاعفات عدد صحيح طبيعي",
+                rev_l3_sub_a: "عدد مضاعف لعدد اخر",
+                rev_l3_sub_b: "عناصر مجموعة",
+                rev_l3_sub_c: "مضاعفات عدد",
+                rev_l3_sub_d: "المضاعفات المشتركة لعددين",
+                rev_lesson4_title: "4. القسمة على عدد ذي رقم واحد",
+                rev_l4_sub_a: "القاسم",
+                rev_l4_sub_b: "المقسوم",
+                rev_l4_sub_c: "باقي القسة",
+                rev_l4_sub_d: "عدد ذي رقم واحد",
+                rev_lesson5_title: "5. قيس مساحة كلّ من المستطيل والمربّع",
+                rev_l5_sub_a: "مساحة مربّع",
+                rev_l5_sub_b: "مساحة مستطيل",
+                rev_l5_sub_c: "محيط مربّع",
+                rev_l5_sub_d: "محيط مستطيل",
+                rev_l5_sub_e: "قيس الطّول",
+                rev_l5_sub_f: "قيس العرض",
+                rev_l5_sub_g: "قيس الضّلع",
+
+                // Period 1
+                p1_lesson1_title: "1. أكوّن الأعداد ذات 7 أرقام فأكثر وأكتبها",
+                p1_l1_sub_a: "كتابة",
+                p1_l1_sub_b: "قراءة",
+                p1_l1_sub_c: "تكوين",
+                p1_l1_sub_d: "العدد بلسان القلم",
+                p1_l1_sub_e: "العدد بالحروف",
+                p1_l1_sub_f: "الوحدات البسيطة",
+                p1_l1_sub_g: "الالاف",
+                p1_l1_sub_h: "الملايين",
+                p1_l1_sub_i: "المليارات",
+                p1_l1_sub_j: "رقم منزلة عدد",
+                p1_l1_sub_k: "عدد",
+                p1_l1_sub_l: "وحدات عدد",
+                p1_lesson2_title: "2. أحدّد احداثيّات عقدة على الشّبكة",
+                p1_l2_sub_a: "الفاصلة",
+                p1_l2_sub_b: "التّرتيبة",
+                p1_l2_sub_c: "إحداثيات عقد",
+                p1_l2_sub_d: "شبكة",
+                p1_l2_sub_e: "أمام",
+                p1_l2_sub_f: "وراء",
+                p1_l2_sub_g: "يمين",
+                p1_l2_sub_h: "شمال",
+                p1_lesson3_title: "3. أفكّك الأعداد ذات 7 أرقام فاكثر وأركّبها",
+                p1_l3_sub_a: "الصّيغة القانونيّة",
+                p1_l3_sub_b: "عدد في صيغة جمعيّة",
+                p1_l3_sub_c: "عدد في صيغة طرحيّة",
+                p1_l3_sub_d: "رقم منزلة عدد",
+                p1_l3_sub_e: "عدد",
+                p1_l3_sub_f: "وحدات عدد",
+                p1_lesson4_title: "4. أقارن الأعداد ذات 7 أرقام فأكثر وأرتّبها",
+                p1_l4_sub_a: "مقارنه عددين",
+                p1_l4_sub_b: "أكبر من",
+                p1_l4_sub_c: "أصغر من",
+                p1_l4_sub_d: "يساوي",
+                p1_l4_sub_e: "ترتيب تصاعدي",
+                p1_l4_sub_f: "ترتيب تنازلي",
+                p1_lesson5_title: "5. أرسم صورة شكل على شبكة باستعمال التّناظر المحوري",
+                p1_l5_sub_a: "نقطتان متناظرتان",
+                p1_l5_sub_b: "محور الّتناظر",
+                p1_l5_sub_c: "محور أفقي",
+                p1_l5_sub_d: "محور عمودي",
+                p1_l5_sub_e: "احداثيّات عقدة",
+                p1_l5_sub_f: "صورة الشّكل",
+                p1_lesson6_title: "6. أوظّف الجمع والطّرح والضّرب على الأعداد الصّحيحة الطّبيعيّة",
+                p1_l6_sub_a: "مجموع عددين",
+                p1_l6_sub_b: "الفارق بين عددين",
+                p1_l6_sub_c: "جذاء عددين",
+
+                // Period 2
+                p2_lesson1_title: "1. أوظّف القسمة على الأعداد الصّحيحة الطّبيعيّة",
+                p2_l1_sub_a: "المقسوم",
+                p2_l1_sub_b: "القاسم",
+                p2_l1_sub_c: "خارج القسمة",
+                p2_l1_sub_d: "الباقي",
+                p2_l1_sub_e: "قسمة مستوفاة",
+                p2_l1_sub_f: "قسمه إقليديّة",
+                p2_lesson2_title: "2. أنجز عمليّة القسمة على عدد ذي رقمين",
+                p2_l2_sub_a: "القاسم",
+                p2_l2_sub_b: "المقسوم",
+                p2_l2_sub_c: "خارج القسمة",
+                p2_l2_sub_d: "الباقي",
+                p2_l2_sub_e: "القاسم",
+                p2_l2_sub_f: "عدد ذي رقمين",
+                p2_lesson3_title: "3. أتصرّف في وحدات قيس الكتل",
+                p2_l3_sub_a: "مضاعفات الكيلوغرام",
+                p2_l3_sub_b: "عشرات الكغ",
+                p2_l3_sub_c: "قنطار",
+                p2_l3_sub_d: "طنّ",
+                p2_lesson4_title: "4. أتعرّف الدّائرة والقرص الدّائري",
+                p2_l4_sub_a: "الدّائرة",
+                p2_l4_sub_b: "مركز الدّائرة",
+                p2_l4_sub_c: "القرص",
+                p2_l4_sub_d: "الدّائري",
+                p2_l4_sub_e: "شعاع الدّائرة",
+                p2_lesson5_title: "5. أرسم الموسّط العمودي لقطعة مستقيم",
+                p2_l5_sub_a: "قطعة المستقيم",
+                p2_l5_sub_b: "منتصف قطعة مستقيم",
+                p2_l5_sub_c: "مستقيم عمودي",
+                p2_lesson6_title: "6. أنجز عمليّة القسمة على عدد ذي 3 أرقام فأكثر",
+                p2_l6_sub_a: "القسمه المستوفاة",
+                p2_l6_sub_b: "القسمة الإقليدية",
+                p2_l6_sub_c: "القاسم",
+                p2_l6_sub_d: "عدد ذي ثلاثة أرقام",
+                p2_lesson7_title: "7. أوظّف الدّائرة في البناءات الهندسيّة",
+                p2_l7_sub_a: "الدّائرة",
+                p2_l7_sub_b: "مركز الدّائرة",
+                p2_l7_sub_c: "القرص",
+                p2_l7_sub_d: "الدّائري",
+                p2_l7_sub_e: "شعاع الدّائرة",
+                p2_lesson8_title: "8. أرسم المستقيمات المتعامدة والمستقيمات المتوازية",
+                p2_l8_sub_a: "بناء المستقيمات",
+                p2_l8_sub_b: "مستقيمان متعامدان",
+                p2_l8_sub_c: "مستقيمان متوازيان",
+
+                // Period 3
+                p3_lesson1_title: "1. أتعرّف سلسلتين من الأعداد الصّحيحة الطّبيعيّة المتناسبة طردا",
+                p3_l1_sub_a: "سلسلتان من الأعداد",
+                p3_l1_sub_b: "متناسبان طردا",
+                p3_l1_sub_c: "عامل التّناسب",
+                p3_l1_sub_d: "الرّابع التناسبي",
+                p3_lesson2_title: "2. أكوّن الأعداد الكسريّة وأكتبها",
+                p3_l2_sub_a: "عدد كسري",
+                p3_l2_sub_b: "بسط",
+                p3_l2_sub_c: "مقام",
+                p3_l2_sub_d: "خطّ عدد كسري",
+                p3_lesson3_title: "3. أتصرّف في وحدات قيس المساحات : المتر المربّع وأجزائه",
+                p3_l3_sub_a: "المتر المربّع",
+                p3_l3_sub_b: "جدول وحدات قيس المساحة",
+                p3_l3_sub_c: "ديسيمتر مربّع",
+                p3_l3_sub_d: "صنتيمتر مربّع",
+                p3_l3_sub_e: "ملّيمتر مربّع",
+                p3_l3_sub_f: "كل وحدة تكبر الأصغر منها ب 100 مرّة",
+                p3_lesson4_title: "4. أتصرّف في وحدات قيس المساحات : المتر المربّع ومضاعفاته",
+                p3_l4_sub_a: "المت المربّع",
+                p3_l4_sub_b: "وحدة أساسيّة تقيس المساحة",
+                p3_l4_sub_c: "مضاعفات المتر المربّع",
+                p3_l4_sub_d: "دكم مربّع",
+                p3_l4_sub_e: "هم مربّع",
+                p3_l4_sub_f: "كيلومتر مربّع",
+                p3_l4_sub_g: "الوحدة تكبر الأصغر منها ب 100 مرّة",
+                p3_lesson5_title: "5. أرسم الزوايا وأقيسها",
+                p3_l5_sub_a: "الزّاوية القائمة",
+                p3_l5_sub_b: "الزّاوية الحادّة",
+                p3_l5_sub_c: "الزّاوية المنفرجة",
+                p3_l5_sub_d: "الزّاوية المنبسطة",
+                p3_l5_sub_e: "الزّاويتان المتتامّتان",
+                p3_l5_sub_f: "الزّاويتان المتكاملتان",
+                p3_lesson6_title: "6. أرسم نصف الزّاوية",
+                p3_l6_sub_a: "منصّف الزّاوية",
+                p3_l6_sub_b: "رسم رأس الزّاوية",
+                p3_l6_sub_c: "وحدات قيس المساحة الفلاحيّة",
+                p3_l6_sub_d: "الموسّط العمودي لقطعة مستقيم",
+                p3_lesson7_title: "7. أتصرّف في وحدات القيس الفلاحيّة",
+                p3_l7_sub_a: "الار",
+                p3_l7_sub_b: "الصار",
+                p3_l7_sub_c: "الهكتار",
+
+                // Period 4
+                p4_lesson1_title: "1. أكوّن الأعداد العشريّة وأكتبها وأقرأها",
+                p4_l1_sub_a: "عدد عشري",
+                p4_l1_sub_b: "جزء صحيح",
+                p4_l1_sub_c: "جزء عشري",
+                p4_lesson2_title: "2. أفكّك الأعداد العشريّة وأركّبها وأقارن الأعداد العشريّة وأرتّبها",
+                p4_l2_sub_a: "عدد عشري",
+                p4_l2_sub_b: "جزء صحيح",
+                p4_l2_sub_c: "جزء عشري",
+                p4_l2_sub_d: "رقم الأعشار",
+                p4_l2_sub_e: "رقم منزلة الأجزاء المائويّة",
+                p4_l2_sub_f: "رقم منزلة الأجزاء الألفيّة",
+                p4_lesson3_title: "3. أتصرّف في الأعداد العشريّة",
+                p4_l3_sub_a: "عدد عشري",
+                p4_l3_sub_b: "جزء صحيح",
+                p4_l3_sub_c: "جزء عشري",
+                p4_lesson4_title: "4. أجمع الأعداد العشريّة وأطرحها",
+                p4_l4_sub_a: "الفرق بين عددين عشريين",
+                p4_l4_sub_b: "مجموع عددين",
+                p4_l4_sub_c: "عشريين",
+                p4_l4_sub_d: "جزء صحيح",
+                p4_l4_sub_e: "جزء عشري",
+                p4_l4_sub_f: "الأعشار",
+                p4_l4_sub_g: "الأجزاء المائويّة",
+                p4_l4_sub_h: "الأجزاء الألفيّة",
+                p4_lesson5_title: "5. أتصرّف في وحدات قيس الزّمن : السّاعة الدّقيقة الثّانية",
+                p4_l5_sub_a: "العلاقة بين السّاعة و الدّقيقة و الثّانية",
+                p4_l5_sub_b: "نصف الساعة",
+                p4_l5_sub_c: "ربع الساعة",
+                p4_l5_sub_d: "ثلث الساعة",
+                p4_lesson6_title: "6. أجمع وأطرح الأعداد الّتي تقيس الزّمن",
+                p4_l6_sub_a: "ساعة الوصول",
+                p4_l6_sub_b: "ساعة الإنطلاق",
+                p4_l6_sub_c: "الزّمن المستغرق",
+                p4_l6_sub_d: "مدّة السّير",
+                p4_l6_sub_e: "مدّة السّفر",
+                p4_l6_sub_f: "(فارغ)",
+
+                // Period 5
+                p5_lesson1_title: "1. أنجز عمليّة ضرب عدد عشري في اخر صحيح",
+                p5_l1_sub_a: "عدد صحيح",
+                p5_l1_sub_b: "عدد عشري",
+                p5_l1_sub_c: "جزء صحيح",
+                p5_l1_sub_d: "جزء عشري",
+                p5_l1_sub_e: "فاصلة",
+                p5_l1_sub_f: "جذاء عددين",
+                p5_lesson2_title: "2. أنجز عمليّة ضرب عدد عشري في اخر عشري",
+                p5_l2_sub_a: "عدد عشري",
+                p5_l2_sub_b: "جزء صحيح",
+                p5_l2_sub_c: "جزء عشري",
+                p5_l2_sub_d: "فاصلة",
+                p5_l2_sub_e: "عدد الأرقام بعد الفاصل",
+                p5_lesson3_title: "3. أنجز عمليّة الجمع والطّرح في مجموعة الأعداد العشريّة",
+                p5_l3_sub_a: "الفرق بين عددين عشريين",
+                p5_l3_sub_b: "مجموع عددين",
+                p5_l3_sub_c: "عشريين",
+                p5_l3_sub_d: "جزء صحيح",
+                p5_l3_sub_e: "جزء عشري",
+                p5_l3_sub_f: "الأعشار",
+                p5_l3_sub_g: "الأجزاء المائويّة",
+                p5_l3_sub_h: "الأجزاء الألفيّة",
+                p5_lesson4_title: "4. أقسم عددا عشريّا على عدد صحيح طبيعي",
+                p5_l4_sub_a: "عدد عشري",
+                p5_l4_sub_b: "قاسم",
+                p5_l4_sub_c: "مقسوم",
+                p5_l4_sub_d: "خارج القسمة",
+                p5_l4_sub_e: "عدد صحيح",
+                p5_l4_sub_f: "الباقي",
+                p5_lesson5_title: "5. أرسم كلا من المستطيل والمربّع استنادا إلى القطرين ومحاور التّناظر",
+                p5_l5_sub_a: "قطرا المستطيل",
+                p5_l5_sub_b: "قطرا المربّع",
+                p5_l5_sub_c: "مركز المستطيل",
+                p5_l5_sub_d: "مركز المربّع",
+                p5_l5_sub_e: "الموسّطات العموديّة لأضلاع الرّباعيات",
+                p5_lesson6_title: "6. أقسم عددا صحيحا طبيعيّا على عدد اخر صحيح طبيعي ( يكون الخارج عددا عشريّا )",
+                p5_l6_sub_a: "تحويل عدد صحيح إلى عدد عشري",
+                p5_l6_sub_b: "المقسوم مضاعف للقاسم الخارج صحيح",
+                p5_l6_sub_c: "المقسوم غير مضاعف للقاسم المقسوم عدد عشري",
+                p5_lesson7_title: "7. أنجز عمليّة قسمة قاسمها عدد عشري",
+                p5_l7_sub_a: "ضرب القاسم و المقسوم في نفس العدد",
+                p5_l7_sub_b: "لا يتغيّر خارج القسمة",
+                p5_l7_sub_c: "تغيير القاسم من عدد عشري إلى صحيح",
+                p5_lesson8_title: "8. أتعرّف المثلّثات وأرسمها",
+                p5_l8_sub_a: "ثلاثي أضلاع",
+                p5_l8_sub_b: "مجموع أقيسة زوايا المثلّث",
+                p5_l8_sub_c: "مثلث متقايس الضّلعين",
+                p5_l8_sub_d: "مثلث متقليس الأضلاع",
+                p5_l8_sub_e: "مثلّث قائم",
+                p5_lesson9_title: "9. أتعرّف ارتفاعات المثلّث وأرسمها",
+                p5_l9_sub_a: "مستقيم عمودي على أحد الأضلاع",
+                p5_l9_sub_b: "يمرّمن الرّأس المقابلة للضلع",
+                p5_lesson10_title: "10. أنجز عمليّة الضّرب على الأعداد الّتي تقيس الزّمن",
+                p5_l10_sub_a: "السّاعة",
+                p5_l10_sub_b: "الدقيقة",
+                p5_l10_sub_c: "الثانيّة",
+                p5_l10_sub_d: "عمليّة ضرب"
+            },
+            en: {
+                // Generic
+                page_title: "Mathematics Lessons Index - Year 5",
+                print_header: "Mathematics Lessons Index — Year 5",
+                site_header: "Educational Dashboard - Mathematics",
+                home_link: "🏠 Home",
+                nav_badge: "📚 Lessons Index",
+                first_lesson_link: "First Lesson →",
+                language_label: "Language",
+                lang_ar: "العربية",
+                lang_en: "English",
+                lang_fr: "Français",
+                print_label: "Select section to print:",
+                print_all: "Full index",
+                print_review: "Review only",
+                print_period1: "Period 1",
+                print_period2: "Period 2",
+                print_period3: "Period 3",
+                print_period4: "Period 4",
+                print_period5: "Period 5",
+                print_button: "🖨️ Print",
+                badge: "📐 Year 5 Basic Education",
+                page_heading: "Mathematics Lessons Index",
+                page_subtitle: "All period lessons — click any lesson to open it",
+                review_title: "Review",
+                review_count: "5 lessons",
+                period1_title: "Period 1",
+                period1_count: "6 lessons",
+                period2_title: "Period 2",
+                period2_count: "8 lessons",
+                period3_title: "Period 3",
+                period3_count: "7 lessons",
+                period4_title: "Period 4",
+                period4_count: "6 lessons",
+                period5_title: "Period 5",
+                period5_count: "10 lessons",
+                footer_dev: "Developer Info",
+                footer_dev_name: "Developed by: Majri Zied",
+                footer_hosting: "Hosting: Github, Netlify, Supabase",
+                footer_links: "Links",
+                footer_contact: "Contact us",
+                footer_policies: "Policies",
+                footer_version: "Version",
+                footer_version_num: "Version: 0.0.2",
+                footer_rights: "All rights reserved © 2025",
+                print_footer_dev: "Developed by: Majri Zied",
+                print_footer_version: "Version: 0.0.2",
+                print_footer_page: "Page address: maths_y5.html",
+
+                // Review
+                rev_lesson1_title: "1. Numbers with 6 digits",
+                rev_l1_sub_a: "Number in words",
+                rev_l1_sub_b: "Number in digits",
+                rev_l1_sub_c: "Smallest number",
+                rev_l1_sub_d: "Largest number",
+                rev_l1_sub_e: "Number of hundreds",
+                rev_l1_sub_f: "Number of tens",
+                rev_l1_sub_g: "Comparing two 6-digit numbers",
+                rev_lesson2_title: "2. Use addition, subtraction and multiplication",
+                rev_l2_sub_a: "Addition operation",
+                rev_l2_sub_b: "Multiplication operation",
+                rev_l2_sub_c: "Subtraction operation",
+                rev_lesson3_title: "3. Multiples of a natural number",
+                rev_l3_sub_a: "A number multiple of another",
+                rev_l3_sub_b: "Elements of a set",
+                rev_l3_sub_c: "Multiples of a number",
+                rev_l3_sub_d: "Common multiples of two numbers",
+                rev_lesson4_title: "4. Division by a one-digit number",
+                rev_l4_sub_a: "Divisor",
+                rev_l4_sub_b: "Dividend",
+                rev_l4_sub_c: "Remainder",
+                rev_l4_sub_d: "One-digit number",
+                rev_lesson5_title: "5. Measure area of rectangle and square",
+                rev_l5_sub_a: "Area of a square",
+                rev_l5_sub_b: "Area of a rectangle",
+                rev_l5_sub_c: "Perimeter of a square",
+                rev_l5_sub_d: "Perimeter of a rectangle",
+                rev_l5_sub_e: "Measure of length",
+                rev_l5_sub_f: "Measure of width",
+                rev_l5_sub_g: "Measure of side",
+
+                // Period 1
+                p1_lesson1_title: "1. Form and write numbers with 7 or more digits",
+                p1_l1_sub_a: "Writing",
+                p1_l1_sub_b: "Reading",
+                p1_l1_sub_c: "Forming",
+                p1_l1_sub_d: "Number in words",
+                p1_l1_sub_e: "Number in letters",
+                p1_l1_sub_f: "Simple units",
+                p1_l1_sub_g: "Thousands",
+                p1_l1_sub_h: "Millions",
+                p1_l1_sub_i: "Billions",
+                p1_l1_sub_j: "Digit place value",
+                p1_l1_sub_k: "Number",
+                p1_l1_sub_l: "Units of a number",
+                p1_lesson2_title: "2. Determine coordinates of a point on a grid",
+                p1_l2_sub_a: "Abscissa",
+                p1_l2_sub_b: "Ordinate",
+                p1_l2_sub_c: "Coordinates of points",
+                p1_l2_sub_d: "Grid",
+                p1_l2_sub_e: "Front",
+                p1_l2_sub_f: "Behind",
+                p1_l2_sub_g: "Right",
+                p1_l2_sub_h: "Left",
+                p1_lesson3_title: "3. Decompose and recompose numbers with 7+ digits",
+                p1_l3_sub_a: "Standard form",
+                p1_l3_sub_b: "Additive form",
+                p1_l3_sub_c: "Subtractive form",
+                p1_l3_sub_d: "Digit place value",
+                p1_l3_sub_e: "Number",
+                p1_l3_sub_f: "Units of a number",
+                p1_lesson4_title: "4. Compare and order numbers with 7+ digits",
+                p1_l4_sub_a: "Comparing two numbers",
+                p1_l4_sub_b: "Greater than",
+                p1_l4_sub_c: "Less than",
+                p1_l4_sub_d: "Equal",
+                p1_l4_sub_e: "Ascending order",
+                p1_l4_sub_f: "Descending order",
+                p1_lesson5_title: "5. Draw a figure image on a grid using axial symmetry",
+                p1_l5_sub_a: "Two symmetrical points",
+                p1_l5_sub_b: "Axis of symmetry",
+                p1_l5_sub_c: "Horizontal axis",
+                p1_l5_sub_d: "Vertical axis",
+                p1_l5_sub_e: "Coordinates of a point",
+                p1_l5_sub_f: "Image of figure",
+                p1_lesson6_title: "6. Use addition, subtraction, multiplication on natural numbers",
+                p1_l6_sub_a: "Sum of two numbers",
+                p1_l6_sub_b: "Difference between two numbers",
+                p1_l6_sub_c: "Product of two numbers",
+
+                // Period 2
+                p2_lesson1_title: "1. Use division on natural numbers",
+                p2_l1_sub_a: "Dividend",
+                p2_l1_sub_b: "Divisor",
+                p2_l1_sub_c: "Quotient",
+                p2_l1_sub_d: "Remainder",
+                p2_l1_sub_e: "Exact division",
+                p2_l1_sub_f: "Euclidean division",
+                p2_lesson2_title: "2. Perform division by a two-digit number",
+                p2_l2_sub_a: "Divisor",
+                p2_l2_sub_b: "Dividend",
+                p2_l2_sub_c: "Quotient",
+                p2_l2_sub_d: "Remainder",
+                p2_l2_sub_e: "Divisor",
+                p2_l2_sub_f: "Two-digit number",
+                p2_lesson3_title: "3. Use units of mass",
+                p2_l3_sub_a: "Multiples of kilogram",
+                p2_l3_sub_b: "Tens of kg",
+                p2_l3_sub_c: "Quintal",
+                p2_l3_sub_d: "Ton",
+                p2_lesson4_title: "4. Recognize circle and circular disk",
+                p2_l4_sub_a: "Circle",
+                p2_l4_sub_b: "Center of circle",
+                p2_l4_sub_c: "Disk",
+                p2_l4_sub_d: "Circular",
+                p2_l4_sub_e: "Radius of circle",
+                p2_lesson5_title: "5. Draw perpendicular bisector of a segment",
+                p2_l5_sub_a: "Line segment",
+                p2_l5_sub_b: "Midpoint of segment",
+                p2_l5_sub_c: "Perpendicular line",
+                p2_lesson6_title: "6. Perform division by a 3+ digit number",
+                p2_l6_sub_a: "Exact division",
+                p2_l6_sub_b: "Euclidean division",
+                p2_l6_sub_c: "Divisor",
+                p2_l6_sub_d: "Three-digit number",
+                p2_lesson7_title: "7. Use circle in geometric constructions",
+                p2_l7_sub_a: "Circle",
+                p2_l7_sub_b: "Center of circle",
+                p2_l7_sub_c: "Disk",
+                p2_l7_sub_d: "Circular",
+                p2_l7_sub_e: "Radius",
+                p2_lesson8_title: "8. Draw perpendicular and parallel lines",
+                p2_l8_sub_a: "Construction of lines",
+                p2_l8_sub_b: "Two perpendicular lines",
+                p2_l8_sub_c: "Two parallel lines",
+
+                // Period 3
+                p3_lesson1_title: "1. Recognize two proportional sequences of natural numbers",
+                p3_l1_sub_a: "Two sequences of numbers",
+                p3_l1_sub_b: "Directly proportional",
+                p3_l1_sub_c: "Proportionality factor",
+                p3_l1_sub_d: "Fourth proportional",
+                p3_lesson2_title: "2. Form and write fractions",
+                p3_l2_sub_a: "Fraction",
+                p3_l2_sub_b: "Numerator",
+                p3_l2_sub_c: "Denominator",
+                p3_l2_sub_d: "Fraction bar",
+                p3_lesson3_title: "3. Use area units: square meter and its submultiples",
+                p3_l3_sub_a: "Square meter",
+                p3_l3_sub_b: "Area conversion table",
+                p3_l3_sub_c: "Square decimeter",
+                p3_l3_sub_d: "Square centimeter",
+                p3_l3_sub_e: "Square millimeter",
+                p3_l3_sub_f: "Each unit is 100 times larger than the next smaller",
+                p3_lesson4_title: "4. Use area units: square meter and its multiples",
+                p3_l4_sub_a: "Square meter",
+                p3_l4_sub_b: "Basic unit of area",
+                p3_l4_sub_c: "Multiples of square meter",
+                p3_l4_sub_d: "Square decameter",
+                p3_l4_sub_e: "Square hectometer",
+                p3_l4_sub_f: "Square kilometer",
+                p3_l4_sub_g: "Each unit is 100 times larger than the next smaller",
+                p3_lesson5_title: "5. Draw and measure angles",
+                p3_l5_sub_a: "Right angle",
+                p3_l5_sub_b: "Acute angle",
+                p3_l5_sub_c: "Obtuse angle",
+                p3_l5_sub_d: "Straight angle",
+                p3_l5_sub_e: "Complementary angles",
+                p3_l5_sub_f: "Supplementary angles",
+                p3_lesson6_title: "6. Draw half of an angle",
+                p3_l6_sub_a: "Angle bisector",
+                p3_l6_sub_b: "Draw vertex of angle",
+                p3_l6_sub_c: "Agricultural area units",
+                p3_l6_sub_d: "Perpendicular bisector of a segment",
+                p3_lesson7_title: "7. Use agricultural area units",
+                p3_l7_sub_a: "Are",
+                p3_l7_sub_b: "Centiare",
+                p3_l7_sub_c: "Hectare",
+
+                // Period 4
+                p4_lesson1_title: "1. Form, write and read decimal numbers",
+                p4_l1_sub_a: "Decimal number",
+                p4_l1_sub_b: "Integer part",
+                p4_l1_sub_c: "Decimal part",
+                p4_lesson2_title: "2. Decompose, recompose, compare and order decimals",
+                p4_l2_sub_a: "Decimal number",
+                p4_l2_sub_b: "Integer part",
+                p4_l2_sub_c: "Decimal part",
+                p4_l2_sub_d: "Tenths digit",
+                p4_l2_sub_e: "Hundredths digit",
+                p4_l2_sub_f: "Thousandths digit",
+                p4_lesson3_title: "3. Use decimal numbers",
+                p4_l3_sub_a: "Decimal number",
+                p4_l3_sub_b: "Integer part",
+                p4_l3_sub_c: "Decimal part",
+                p4_lesson4_title: "4. Add and subtract decimal numbers",
+                p4_l4_sub_a: "Difference between two decimals",
+                p4_l4_sub_b: "Sum of two numbers",
+                p4_l4_sub_c: "Decimals",
+                p4_l4_sub_d: "Integer part",
+                p4_l4_sub_e: "Decimal part",
+                p4_l4_sub_f: "Tenths",
+                p4_l4_sub_g: "Hundredths",
+                p4_l4_sub_h: "Thousandths",
+                p4_lesson5_title: "5. Use time units: hour, minute, second",
+                p4_l5_sub_a: "Relationship between hour, minute, second",
+                p4_l5_sub_b: "Half hour",
+                p4_l5_sub_c: "Quarter hour",
+                p4_l5_sub_d: "Third of an hour",
+                p4_lesson6_title: "6. Add and subtract time-measuring numbers",
+                p4_l6_sub_a: "Arrival time",
+                p4_l6_sub_b: "Departure time",
+                p4_l6_sub_c: "Elapsed time",
+                p4_l6_sub_d: "Duration of travel",
+                p4_l6_sub_e: "Duration of trip",
+                p4_l6_sub_f: "(empty)",
+
+                // Period 5
+                p5_lesson1_title: "1. Multiply a decimal by an integer",
+                p5_l1_sub_a: "Integer",
+                p5_l1_sub_b: "Decimal number",
+                p5_l1_sub_c: "Integer part",
+                p5_l1_sub_d: "Decimal part",
+                p5_l1_sub_e: "Decimal point",
+                p5_l1_sub_f: "Product of two numbers",
+                p5_lesson2_title: "2. Multiply a decimal by another decimal",
+                p5_l2_sub_a: "Decimal number",
+                p5_l2_sub_b: "Integer part",
+                p5_l2_sub_c: "Decimal part",
+                p5_l2_sub_d: "Decimal point",
+                p5_l2_sub_e: "Number of digits after decimal point",
+                p5_lesson3_title: "3. Add and subtract in decimal numbers set",
+                p5_l3_sub_a: "Difference between two decimals",
+                p5_l3_sub_b: "Sum of two numbers",
+                p5_l3_sub_c: "Decimals",
+                p5_l3_sub_d: "Integer part",
+                p5_l3_sub_e: "Decimal part",
+                p5_l3_sub_f: "Tenths",
+                p5_l3_sub_g: "Hundredths",
+                p5_l3_sub_h: "Thousandths",
+                p5_lesson4_title: "4. Divide a decimal by a natural integer",
+                p5_l4_sub_a: "Decimal number",
+                p5_l4_sub_b: "Divisor",
+                p5_l4_sub_c: "Dividend",
+                p5_l4_sub_d: "Quotient",
+                p5_l4_sub_e: "Integer",
+                p5_l4_sub_f: "Remainder",
+                p5_lesson5_title: "5. Draw rectangle and square using diagonals and axes of symmetry",
+                p5_l5_sub_a: "Diagonals of rectangle",
+                p5_l5_sub_b: "Diagonals of square",
+                p5_l5_sub_c: "Center of rectangle",
+                p5_l5_sub_d: "Center of square",
+                p5_l5_sub_e: "Perpendicular bisectors of sides of quadrilaterals",
+                p5_lesson6_title: "6. Divide a natural integer by another (result is decimal)",
+                p5_l6_sub_a: "Convert integer to decimal",
+                p5_l6_sub_b: "Dividend is multiple of divisor → integer quotient",
+                p5_l6_sub_c: "Dividend is not multiple → decimal quotient",
+                p5_lesson7_title: "7. Divide by a decimal divisor",
+                p5_l7_sub_a: "Multiply divisor and dividend by same number",
+                p5_l7_sub_b: "Quotient unchanged",
+                p5_l7_sub_c: "Change divisor from decimal to integer",
+                p5_lesson8_title: "8. Recognize and draw triangles",
+                p5_l8_sub_a: "Three sides",
+                p5_l8_sub_b: "Sum of angles in a triangle",
+                p5_l8_sub_c: "Isosceles triangle",
+                p5_l8_sub_d: "Equilateral triangle",
+                p5_l8_sub_e: "Right triangle",
+                p5_lesson9_title: "9. Recognize and draw altitudes of a triangle",
+                p5_l9_sub_a: "Perpendicular line to one side",
+                p5_l9_sub_b: "Passes through opposite vertex",
+                p5_lesson10_title: "10. Multiply numbers measuring time",
+                p5_l10_sub_a: "Hour",
+                p5_l10_sub_b: "Minute",
+                p5_l10_sub_c: "Second",
+                p5_l10_sub_d: "Multiplication operation"
+            },
+            fr: {
+                // Generic
+                page_title: "Index des cours de mathématiques - 5ème année",
+                print_header: "Index des cours de mathématiques — 5ème année",
+                site_header: "Educational Dashboard - Mathematics",
+                home_link: "🏠 Accueil",
+                nav_badge: "📚 Index des leçons",
+                first_lesson_link: "Première leçon →",
+                language_label: "Langue",
+                lang_ar: "العربية",
+                lang_en: "English",
+                lang_fr: "Français",
+                print_label: "Choisir la section à imprimer :",
+                print_all: "Index complet",
+                print_review: "Révision uniquement",
+                print_period1: "Période 1",
+                print_period2: "Période 2",
+                print_period3: "Période 3",
+                print_period4: "Période 4",
+                print_period5: "Période 5",
+                print_button: "🖨️ Imprimer",
+                badge: "📐 5ème année de base",
+                page_heading: "Index des leçons de mathématiques",
+                page_subtitle: "Toutes les leçons des périodes — cliquez sur une leçon pour l'ouvrir",
+                review_title: "Révision",
+                review_count: "5 leçons",
+                period1_title: "Période 1",
+                period1_count: "6 leçons",
+                period2_title: "Période 2",
+                period2_count: "8 leçons",
+                period3_title: "Période 3",
+                period3_count: "7 leçons",
+                period4_title: "Période 4",
+                period4_count: "6 leçons",
+                period5_title: "Période 5",
+                period5_count: "10 leçons",
+                footer_dev: "Informations du développeur",
+                footer_dev_name: "Développé par : Majri Zied",
+                footer_hosting: "Hébergement : Github, Netlify, Supabase",
+                footer_links: "Liens",
+                footer_contact: "Contactez-nous",
+                footer_policies: "Politiques",
+                footer_version: "Version",
+                footer_version_num: "Version : 0.0.2",
+                footer_rights: "Tous droits réservés © 2025",
+                print_footer_dev: "Développé par : Majri Zied",
+                print_footer_version: "Version : 0.0.2",
+                print_footer_page: "Adresse de la page : maths_y5.html",
+
+                // Review
+                rev_lesson1_title: "1. Nombres à 6 chiffres",
+                rev_l1_sub_a: "Nombre en lettres",
+                rev_l1_sub_b: "Nombre en chiffres",
+                rev_l1_sub_c: "Plus petit nombre",
+                rev_l1_sub_d: "Plus grand nombre",
+                rev_l1_sub_e: "Nombre de centaines",
+                rev_l1_sub_f: "Nombre de dizaines",
+                rev_l1_sub_g: "Comparer deux nombres à 6 chiffres",
+                rev_lesson2_title: "2. Utiliser l'addition, la soustraction et la multiplication",
+                rev_l2_sub_a: "Opération d'addition",
+                rev_l2_sub_b: "Opération de multiplication",
+                rev_l2_sub_c: "Opération de soustraction",
+                rev_lesson3_title: "3. Multiples d'un entier naturel",
+                rev_l3_sub_a: "Nombre multiple d'un autre",
+                rev_l3_sub_b: "Éléments d'un ensemble",
+                rev_l3_sub_c: "Multiples d'un nombre",
+                rev_l3_sub_d: "Multiples communs de deux nombres",
+                rev_lesson4_title: "4. Division par un nombre à un chiffre",
+                rev_l4_sub_a: "Diviseur",
+                rev_l4_sub_b: "Dividende",
+                rev_l4_sub_c: "Reste",
+                rev_l4_sub_d: "Nombre à un chiffre",
+                rev_lesson5_title: "5. Mesurer l'aire d'un rectangle et d'un carré",
+                rev_l5_sub_a: "Aire d'un carré",
+                rev_l5_sub_b: "Aire d'un rectangle",
+                rev_l5_sub_c: "Périmètre d'un carré",
+                rev_l5_sub_d: "Périmètre d'un rectangle",
+                rev_l5_sub_e: "Mesure de longueur",
+                rev_l5_sub_f: "Mesure de largeur",
+                rev_l5_sub_g: "Mesure de côté",
+
+                // Period 1
+                p1_lesson1_title: "1. Former et écrire des nombres à 7 chiffres ou plus",
+                p1_l1_sub_a: "Écriture",
+                p1_l1_sub_b: "Lecture",
+                p1_l1_sub_c: "Formation",
+                p1_l1_sub_d: "Nombre en lettres",
+                p1_l1_sub_e: "Nombre en mots",
+                p1_l1_sub_f: "Unités simples",
+                p1_l1_sub_g: "Milliers",
+                p1_l1_sub_h: "Millions",
+                p1_l1_sub_i: "Milliards",
+                p1_l1_sub_j: "Chiffre de position",
+                p1_l1_sub_k: "Nombre",
+                p1_l1_sub_l: "Unités d'un nombre",
+                p1_lesson2_title: "2. Déterminer les coordonnées d'un point sur un quadrillage",
+                p1_l2_sub_a: "Abscisse",
+                p1_l2_sub_b: "Ordonnée",
+                p1_l2_sub_c: "Coordonnées des points",
+                p1_l2_sub_d: "Quadrillage",
+                p1_l2_sub_e: "Devant",
+                p1_l2_sub_f: "Derrière",
+                p1_l2_sub_g: "Droite",
+                p1_l2_sub_h: "Gauche",
+                p1_lesson3_title: "3. Décomposer et recomposer des nombres à 7 chiffres et plus",
+                p1_l3_sub_a: "Forme canonique",
+                p1_l3_sub_b: "Forme additive",
+                p1_l3_sub_c: "Forme soustractive",
+                p1_l3_sub_d: "Chiffre de position",
+                p1_l3_sub_e: "Nombre",
+                p1_l3_sub_f: "Unités d'un nombre",
+                p1_lesson4_title: "4. Comparer et ordonner des nombres à 7 chiffres et plus",
+                p1_l4_sub_a: "Comparer deux nombres",
+                p1_l4_sub_b: "Supérieur à",
+                p1_l4_sub_c: "Inférieur à",
+                p1_l4_sub_d: "Égal",
+                p1_l4_sub_e: "Ordre croissant",
+                p1_l4_sub_f: "Ordre décroissant",
+                p1_lesson5_title: "5. Dessiner l'image d'une figure sur quadrillage par symétrie axiale",
+                p1_l5_sub_a: "Deux points symétriques",
+                p1_l5_sub_b: "Axe de symétrie",
+                p1_l5_sub_c: "Axe horizontal",
+                p1_l5_sub_d: "Axe vertical",
+                p1_l5_sub_e: "Coordonnées d'un point",
+                p1_l5_sub_f: "Image de la figure",
+                p1_lesson6_title: "6. Utiliser addition, soustraction, multiplication sur les entiers naturels",
+                p1_l6_sub_a: "Somme de deux nombres",
+                p1_l6_sub_b: "Différence entre deux nombres",
+                p1_l6_sub_c: "Produit de deux nombres",
+
+                // Period 2
+                p2_lesson1_title: "1. Utiliser la division sur les entiers naturels",
+                p2_l1_sub_a: "Dividende",
+                p2_l1_sub_b: "Diviseur",
+                p2_l1_sub_c: "Quotient",
+                p2_l1_sub_d: "Reste",
+                p2_l1_sub_e: "Division exacte",
+                p2_l1_sub_f: "Division euclidienne",
+                p2_lesson2_title: "2. Effectuer une division par un nombre à deux chiffres",
+                p2_l2_sub_a: "Diviseur",
+                p2_l2_sub_b: "Dividende",
+                p2_l2_sub_c: "Quotient",
+                p2_l2_sub_d: "Reste",
+                p2_l2_sub_e: "Diviseur",
+                p2_l2_sub_f: "Nombre à deux chiffres",
+                p2_lesson3_title: "3. Utiliser les unités de masse",
+                p2_l3_sub_a: "Multiples du kilogramme",
+                p2_l3_sub_b: "Dizaines de kg",
+                p2_l3_sub_c: "Quintal",
+                p2_l3_sub_d: "Tonne",
+                p2_lesson4_title: "4. Reconnaître le cercle et le disque",
+                p2_l4_sub_a: "Cercle",
+                p2_l4_sub_b: "Centre du cercle",
+                p2_l4_sub_c: "Disque",
+                p2_l4_sub_d: "Circulaire",
+                p2_l4_sub_e: "Rayon du cercle",
+                p2_lesson5_title: "5. Tracer la médiatrice d'un segment",
+                p2_l5_sub_a: "Segment de droite",
+                p2_l5_sub_b: "Milieu d'un segment",
+                p2_l5_sub_c: "Droite perpendiculaire",
+                p2_lesson6_title: "6. Effectuer une division par un nombre à 3 chiffres ou plus",
+                p2_l6_sub_a: "Division exacte",
+                p2_l6_sub_b: "Division euclidienne",
+                p2_l6_sub_c: "Diviseur",
+                p2_l6_sub_d: "Nombre à trois chiffres",
+                p2_lesson7_title: "7. Utiliser le cercle dans les constructions géométriques",
+                p2_l7_sub_a: "Cercle",
+                p2_l7_sub_b: "Centre du cercle",
+                p2_l7_sub_c: "Disque",
+                p2_l7_sub_d: "Circulaire",
+                p2_l7_sub_e: "Rayon",
+                p2_lesson8_title: "8. Tracer des droites perpendiculaires et parallèles",
+                p2_l8_sub_a: "Construction de droites",
+                p2_l8_sub_b: "Deux droites perpendiculaires",
+                p2_l8_sub_c: "Deux droites parallèles",
+
+                // Period 3
+                p3_lesson1_title: "1. Reconnaître deux suites de nombres proportionnelles",
+                p3_l1_sub_a: "Deux suites de nombres",
+                p3_l1_sub_b: "Directement proportionnelles",
+                p3_l1_sub_c: "Coefficient de proportionnalité",
+                p3_l1_sub_d: "Quatrième proportionnelle",
+                p3_lesson2_title: "2. Former et écrire des fractions",
+                p3_l2_sub_a: "Fraction",
+                p3_l2_sub_b: "Numérateur",
+                p3_l2_sub_c: "Dénominateur",
+                p3_l2_sub_d: "Barre de fraction",
+                p3_lesson3_title: "3. Unités d'aire : le mètre carré et ses sous-multiples",
+                p3_l3_sub_a: "Mètre carré",
+                p3_l3_sub_b: "Tableau de conversion d'aire",
+                p3_l3_sub_c: "Décimètre carré",
+                p3_l3_sub_d: "Centimètre carré",
+                p3_l3_sub_e: "Millimètre carré",
+                p3_l3_sub_f: "Chaque unité est 100 fois plus grande que la suivante",
+                p3_lesson4_title: "4. Unités d'aire : le mètre carré et ses multiples",
+                p3_l4_sub_a: "Mètre carré",
+                p3_l4_sub_b: "Unité de base d'aire",
+                p3_l4_sub_c: "Multiples du mètre carré",
+                p3_l4_sub_d: "Décamètre carré",
+                p3_l4_sub_e: "Hectomètre carré",
+                p3_l4_sub_f: "Kilomètre carré",
+                p3_l4_sub_g: "Chaque unité est 100 fois plus grande que la suivante",
+                p3_lesson5_title: "5. Tracer et mesurer des angles",
+                p3_l5_sub_a: "Angle droit",
+                p3_l5_sub_b: "Angle aigu",
+                p3_l5_sub_c: "Angle obtus",
+                p3_l5_sub_d: "Angle plat",
+                p3_l5_sub_e: "Angles complémentaires",
+                p3_l5_sub_f: "Angles supplémentaires",
+                p3_lesson6_title: "6. Tracer la moitié d'un angle",
+                p3_l6_sub_a: "Bissectrice d'un angle",
+                p3_l6_sub_b: "Tracer le sommet de l'angle",
+                p3_l6_sub_c: "Unités agraires",
+                p3_l6_sub_d: "Médiatrice d'un segment",
+                p3_lesson7_title: "7. Utiliser les unités agraires",
+                p3_l7_sub_a: "Are",
+                p3_l7_sub_b: "Centiare",
+                p3_l7_sub_c: "Hectare",
+
+                // Period 4
+                p4_lesson1_title: "1. Former, écrire et lire des nombres décimaux",
+                p4_l1_sub_a: "Nombre décimal",
+                p4_l1_sub_b: "Partie entière",
+                p4_l1_sub_c: "Partie décimale",
+                p4_lesson2_title: "2. Décomposer, recomposer, comparer et ordonner des décimaux",
+                p4_l2_sub_a: "Nombre décimal",
+                p4_l2_sub_b: "Partie entière",
+                p4_l2_sub_c: "Partie décimale",
+                p4_l2_sub_d: "Chiffre des dixièmes",
+                p4_l2_sub_e: "Chiffre des centièmes",
+                p4_l2_sub_f: "Chiffre des millièmes",
+                p4_lesson3_title: "3. Utiliser les nombres décimaux",
+                p4_l3_sub_a: "Nombre décimal",
+                p4_l3_sub_b: "Partie entière",
+                p4_l3_sub_c: "Partie décimale",
+                p4_lesson4_title: "4. Additionner et soustraire des nombres décimaux",
+                p4_l4_sub_a: "Différence entre deux décimaux",
+                p4_l4_sub_b: "Somme de deux nombres",
+                p4_l4_sub_c: "Décimaux",
+                p4_l4_sub_d: "Partie entière",
+                p4_l4_sub_e: "Partie décimale",
+                p4_l4_sub_f: "Dixièmes",
+                p4_l4_sub_g: "Centièmes",
+                p4_l4_sub_h: "Millièmes",
+                p4_lesson5_title: "5. Unités de temps : heure, minute, seconde",
+                p4_l5_sub_a: "Relation entre heure, minute, seconde",
+                p4_l5_sub_b: "Demi-heure",
+                p4_l5_sub_c: "Quart d'heure",
+                p4_l5_sub_d: "Tiers d'heure",
+                p4_lesson6_title: "6. Additionner et soustraire des durées",
+                p4_l6_sub_a: "Heure d'arrivée",
+                p4_l6_sub_b: "Heure de départ",
+                p4_l6_sub_c: "Temps écoulé",
+                p4_l6_sub_d: "Durée de marche",
+                p4_l6_sub_e: "Durée de voyage",
+                p4_l6_sub_f: "(vide)",
+
+                // Period 5
+                p5_lesson1_title: "1. Multiplier un nombre décimal par un entier",
+                p5_l1_sub_a: "Entier",
+                p5_l1_sub_b: "Nombre décimal",
+                p5_l1_sub_c: "Partie entière",
+                p5_l1_sub_d: "Partie décimale",
+                p5_l1_sub_e: "Virgule",
+                p5_l1_sub_f: "Produit de deux nombres",
+                p5_lesson2_title: "2. Multiplier un nombre décimal par un autre décimal",
+                p5_l2_sub_a: "Nombre décimal",
+                p5_l2_sub_b: "Partie entière",
+                p5_l2_sub_c: "Partie décimale",
+                p5_l2_sub_d: "Virgule",
+                p5_l2_sub_e: "Nombre de chiffres après la virgule",
+                p5_lesson3_title: "3. Additionner et soustraire dans l'ensemble des décimaux",
+                p5_l3_sub_a: "Différence entre deux décimaux",
+                p5_l3_sub_b: "Somme de deux nombres",
+                p5_l3_sub_c: "Décimaux",
+                p5_l3_sub_d: "Partie entière",
+                p5_l3_sub_e: "Partie décimale",
+                p5_l3_sub_f: "Dixièmes",
+                p5_l3_sub_g: "Centièmes",
+                p5_l3_sub_h: "Millièmes",
+                p5_lesson4_title: "4. Diviser un nombre décimal par un entier naturel",
+                p5_l4_sub_a: "Nombre décimal",
+                p5_l4_sub_b: "Diviseur",
+                p5_l4_sub_c: "Dividende",
+                p5_l4_sub_d: "Quotient",
+                p5_l4_sub_e: "Entier",
+                p5_l4_sub_f: "Reste",
+                p5_lesson5_title: "5. Tracer rectangle et carré à partir des diagonales et axes de symétrie",
+                p5_l5_sub_a: "Diagonales du rectangle",
+                p5_l5_sub_b: "Diagonales du carré",
+                p5_l5_sub_c: "Centre du rectangle",
+                p5_l5_sub_d: "Centre du carré",
+                p5_l5_sub_e: "Médiatrices des côtés des quadrilatères",
+                p5_lesson6_title: "6. Diviser un entier naturel par un autre (quotient décimal)",
+                p5_l6_sub_a: "Convertir un entier en décimal",
+                p5_l6_sub_b: "Dividende multiple du diviseur → quotient entier",
+                p5_l6_sub_c: "Dividende non multiple → quotient décimal",
+                p5_lesson7_title: "7. Effectuer une division avec un diviseur décimal",
+                p5_l7_sub_a: "Multiplier diviseur et dividende par le même nombre",
+                p5_l7_sub_b: "Le quotient ne change pas",
+                p5_l7_sub_c: "Changer le diviseur de décimal à entier",
+                p5_lesson8_title: "8. Reconnaître et tracer des triangles",
+                p5_l8_sub_a: "Trois côtés",
+                p5_l8_sub_b: "Somme des angles d'un triangle",
+                p5_l8_sub_c: "Triangle isocèle",
+                p5_l8_sub_d: "Triangle équilatéral",
+                p5_l8_sub_e: "Triangle rectangle",
+                p5_lesson9_title: "9. Reconnaître et tracer les hauteurs d'un triangle",
+                p5_l9_sub_a: "Droite perpendiculaire à un côté",
+                p5_l9_sub_b: "Passe par le sommet opposé",
+                p5_lesson10_title: "10. Multiplier des nombres mesurant le temps",
+                p5_l10_sub_a: "Heure",
+                p5_l10_sub_b: "Minute",
+                p5_l10_sub_c: "Seconde",
+                p5_l10_sub_d: "Opération de multiplication"
+            }
+        };
+    </script>
+
+    <!-- Override toggleModule and printSelected to support multiple period modules -->
+    <script>
+        // Override toggleModule (from maths_programs.js) to be generic.
+        window.toggleModule = function(moduleId) {
+            const list = document.getElementById(moduleId);
+            if (!list) return;
+            const header = list.closest('.module-card').querySelector('.module-header');
+            const toggleIcon = header.querySelector('.module-toggle');
+            const isExpanded = list.classList.contains('expanded');
+            if (isExpanded) {
+                list.classList.remove('expanded');
+                toggleIcon.classList.remove('open');
+                header.setAttribute('aria-expanded', 'false');
+            } else {
+                list.classList.add('expanded');
+                toggleIcon.classList.add('open');
+                header.setAttribute('aria-expanded', 'true');
+            }
+        };
+
+        // Override printSelected to handle period classes.
+        window.printSelected = function() {
+            const select = document.getElementById('print-section');
+            const value = select.value;
+            document.body.classList.remove(
+                'print-all','print-review','print-period1','print-period2',
+                'print-period3','print-period4','print-period5'
+            );
+            if (value === 'all') document.body.classList.add('print-all');
+            else if (value === 'review') document.body.classList.add('print-review');
+            else if (value === 'period1') document.body.classList.add('print-period1');
+            else if (value === 'period2') document.body.classList.add('print-period2');
+            else if (value === 'period3') document.body.classList.add('print-period3');
+            else if (value === 'period4') document.body.classList.add('print-period4');
+            else if (value === 'period5') document.body.classList.add('print-period5');
+            window.print();
+            setTimeout(() => {
+                document.body.classList.remove(
+                    'print-all','print-review','print-period1','print-period2',
+                    'print-period3','print-period4','print-period5'
+                );
+            }, 1000);
+        };
+    </script>
+</body>
+</html>
