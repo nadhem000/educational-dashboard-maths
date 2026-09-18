@@ -4,11 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>الرئيسية - فهرس دروس الرياضيات</title>
-
+    <!-- PWA: manifest + theme color -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#1a5276">
+    <link rel="icon" type="image/png" sizes="152x152" href="assets/icons/icon-152x152.png">
+    <link rel="apple-touch-icon" href="assets/icons/icon-152x152.png">
     <!-- External Stylesheets -->
     <link rel="stylesheet" href="maths_shared.css">
     <link rel="stylesheet" href="maths_programs.css">
-
     <!-- Index-specific styles -->
     <style>
         .year-cards {
@@ -57,14 +60,12 @@
             color: var(--text-faint);
             line-height: 1.5;
         }
-
         /* Color accents per year */
         .year-card.y5 { border-top: 4px solid #e74c3c; }
         .year-card.y6 { border-top: 4px solid #27ae60; }
         .year-card.y7 { border-top: 4px solid #8e44ad; }
         .year-card.y8 { border-top: 4px solid #e67e22; }
         .year-card.y9 { border-top: 4px solid #2980b9; }
-
         /* Responsive */
         @media (max-width: 640px) {
             .year-cards {
@@ -76,9 +77,18 @@
             .year-card { padding: 1.5rem 1rem; }
         }
     </style>
-
     <!-- External Script -->
     <script src="maths_programs.js" defer></script>
+    <!-- PWA: register service worker immediately (before JS injection) -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js', { scope: '/' })
+                    .then(reg => console.log('[PWA] SW registered (index):', reg.scope))
+                    .catch(err => console.warn('[PWA] SW registration failed:', err));
+            });
+        }
+    </script>
 </head>
 <body>
     <div class="container">
